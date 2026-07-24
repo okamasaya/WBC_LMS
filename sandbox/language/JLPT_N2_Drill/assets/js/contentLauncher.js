@@ -5,3 +5,7 @@ function launchContent() {
     window.location.href = file;
 
 }
+
+function restartDrill() {
+    window.location.href = "index.html";
+}
