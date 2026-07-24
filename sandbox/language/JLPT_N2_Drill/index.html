@@ -6,10 +6,13 @@ Module:
 JLPT N2 Random Selector
 
 Version:
-0.1.0
+0.1.1
 
 Description:
 Entry page that randomly selects a JLPT N2 drill.
+
+0.1.1
+Add random select on restart
 
 Author:
 Project School LMS
@@ -17,49 +20,23 @@ Project School LMS
 =========================================================
 -->
 
-
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="refresh" content="10">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>JLPT N2 Drill Random Selector</title>
 
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/randomSelector.js"></script>
+    <script src="assets/js/contentLauncher.js"></script>
+
     <script>
-
-        // -----------------------------
-        // JLPT N2 Random Selector
-        // Version 0.1
-        // -----------------------------
-
-        const drills = [
-
-            "jlpt_n2_drill_0.html",
-            "jlpt_n2_drill_1.html",
-            "jlpt_n2_drill_2.html",
-            "jlpt_n2_drill_3.html",
-            "jlpt_n2_drill_4.html",
-            "jlpt_n2_drill_5.html",
-            "jlpt_n2_drill_6.html",
-            "jlpt_n2_drill_7.html",
-            "jlpt_n2_drill_8.html",
-            "jlpt_n2_drill_9.html",
-            "jlpt_n2_drill_10.html"
-
-        ];
-
-        function randomJump() {
-
-            const randomIndex = Math.floor(Math.random() * drills.length);
-
-            window.location.href = drills[randomIndex];
-
-        }
-
-        window.onload = randomJump;
-
+        window.onload = launchContent;
     </script>
 
 </head>
@@ -71,4 +48,5 @@ Project School LMS
 <p>Random Drill is starting.</p>
 
 </body>
+
 </html>
