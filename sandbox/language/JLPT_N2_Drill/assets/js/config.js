@@ -1,14 +1,14 @@
 const CONFIG = {
     drillFiles: [
-        "JLPT_N2_Drill_0.html",
-        "JLPT_N2_Drill_1.html",
-        "JLPT_N2_Drill_2.html",
-        "JLPT_N2_Drill_3.html",
-        "JLPT_N2_Drill_4.html",
-        "JLPT_N2_Drill_5.html",
-        "JLPT_N2_Drill_7.html",
-        "JLPT_N2_Drill_8.html",
-        "JLPT_N2_Drill_9.html",
-        "JLPT_N2_Drill_10.html"
+        "jlpt_n2_drill_0.html",
+        "jlpt_n2_drill_1.html",
+        "jlpt_n2_drill_2.html",
+        "jlpt_n2_drill_3.html",
+        "jlpt_n2_drill_4.html",
+        "jlpt_n2_drill_5.html",
+        "jlpt_n2_drill_7.html",
+        "jlpt_n2_drill_8.html",
+        "jlpt_n2_drill_9.html",
+        "jlpt_n2_drill_10.html"
     ]
 };
