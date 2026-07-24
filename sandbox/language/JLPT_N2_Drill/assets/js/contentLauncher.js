@@ -1,3 +1,7 @@
-const file = selectRandomContent(CONFIG.drillFiles);
+function launchContent() {
 
-window.location.href = file;
+    const file = selectRandomContent(CONFIG.drillFiles);
+
+    window.location.href = file;
+
+}
