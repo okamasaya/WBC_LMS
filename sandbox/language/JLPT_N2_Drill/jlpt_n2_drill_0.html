@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JLPT N2 語彙(難しめ) 演習システム</title>
+    <title>JLPT N2 語彙 演習システム</title>
     <style>
         body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; }
         .container { max-width: 1000px; margin: 0 auto; display: flex; gap: 20px; }
@@ -57,12 +57,19 @@
         .palette-item.flagged::after { content: "🚩"; position: absolute; top: -6px; right: -4px; font-size: 10px; }
         .score-screen { display: none; width: 100%; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .score-num { text-align: center; font-size: 44px; font-weight: bold; color: #3182ce; margin: 20px 0; }
-        .review-item { background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left; font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif; }
+        .review-item { background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left; font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif; transition: all 0.3s ease; }
+        .review-item.unentered-comprehension { border: 2px solid #f59e0b !important; background-color: #fffbeb !important; }
         .review-q { font-weight: bold; margin-bottom: 8px; }
         .review-status-correct { color: #38a169; font-weight: bold; }
         .review-status-incorrect { color: #e53e3e; font-weight: bold; }
         .review-ans { font-size: 14px; margin: 4px 0; }
         .review-rationale { font-size: 14px; background: #fff; padding: 10px; border-radius: 4px; margin-top: 8px; border-left: 3px solid #3182ce; color: #4a5568; }
+        
+        .comp-btn { padding: 5px 10px; font-size: 12px; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff; cursor: pointer; margin-right: 4px; transition: all 0.2s; }
+        .comp-btn:hover { background: #e2e8f0; }
+        .comp-btn.selected { background: #2563eb; color: #fff; border-color: #1d4ed8; font-weight: bold; }
+        .comp-warning-tag { color: #d97706; font-weight: bold; font-size: 13px; margin-left: 10px; display: none; }
+
         .report-area { width: 100%; height: 220px; font-family: monospace; padding: 10px; box-sizing: border-box; margin-top: 15px; border-radius: 6px; border: 1px solid #cbd5e1; background: #f8fafc; }
         .toast { display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 12px 24px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 15px; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
         .action-btn-group { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
@@ -73,7 +80,7 @@
 <div id="toast-message" class="toast"></div>
 
 <div id="start-container" class="start-screen">
-    <div class="start-title" id="title-display">JLPT N2 語彙(難しめ) 演習システム</div>
+    <div class="start-title" id="title-display">JLPT N2 語彙 演習システム</div>
     <div class="start-info" id="description-display"></div>
     
     <div style="margin-bottom: 25px; text-align: center;">
@@ -140,28 +147,41 @@
 
 <div class="container" id="score-container" style="display: none;">
     <div class="score-screen" style="display: block;">
-        <h1>演習結果・レポート発表</h1>
+        <h1>演習結果</h1>
         <div class="score-num" id="final-score">0 / --</div>
-        <p style="text-align: center; color: #4a5568;">お疲れ様でした！結果の外部出力や、AIメンターへのレポート同期が可能です。</p>
-        
-        <div class="action-btn-group">
-            <button class="nav-btn" style="background-color: #2b6cb0; flex: 1; min-width: 180px; padding: 12px;" onclick="copyReport()">レポートをコピー</button>
-            <button class="nav-btn" style="background-color: #16a34a; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadExcelCSV()">統合結果CSV(GAS/Excel用)</button>
-            <button class="nav-btn" style="background-color: #0d9488; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadRDBAnswerLogCSV()">AnswerLog.csv (RDB用)</button>
-            <button class="nav-btn" style="background-color: #4f46e5; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadRDBSessionLogCSV()">SessionLog.csv (RDB用)</button>
-        </div>
-        
-        <textarea id="report-text" class="report-area" readonly></textarea>
 
-        <h2>正誤と解説の確認</h2>
+        <h2>正誤と解説の確認・理解度チェック</h2>
+        <p style="color: #4a5568; font-size: 14px;">解説を確認し、理解度ボタンを選択してください。</p>
         <div id="review-list"></div>
 
-        <button class="nav-btn" onclick="location.reload()" style="background-color: #718096; width: 100%; padding: 12px; margin-top: 20px;">もう一度最初から挑戦する</button>
+        <div style="margin-top: 40px; padding: 25px; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px;">
+            <h3 style="margin-top:0; color: #1e3a8a;">演習ログの確定とレポート出力</h3>
+            <p style="color: #4a5568; font-size: 14px; margin-bottom: 15px;">
+                解説の理解度選択が完了したら、以下のボタンを押して分析レポートおよび各種ログデータを確定生成してください。
+            </p>
+            
+            <button class="nav-btn" style="background-color: #1e3a8a; width: 100%; padding: 14px; font-size: 16px;" onclick="finalizeAndGenerateReport()">
+                📊 レポート・ログデータを確定して生成
+            </button>
+
+            <div id="output-section" style="display: none; margin-top: 25px;">
+                <div class="action-btn-group">
+                    <button class="nav-btn" style="background-color: #2b6cb0; flex: 1; min-width: 180px; padding: 12px;" onclick="copyReport()">AIレポートをコピー</button>
+                    <button class="nav-btn" style="background-color: #16a34a; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadExcelCSV()">統合結果CSV(GAS/Excel用)</button>
+                    <button class="nav-btn" style="background-color: #0d9488; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadRDBAnswerLogCSV()">AnswerLog.csv (RDB用)</button>
+                    <button class="nav-btn" style="background-color: #4f46e5; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadRDBSessionLogCSV()">SessionLog.csv (RDB用)</button>
+                </div>
+                
+                <textarea id="report-text" class="report-area" readonly></textarea>
+            </div>
+        </div>
+
+        <button class="nav-btn" onclick="restartDrill()" style="background-color: #718096; width: 100%; padding: 12px; margin-top: 25px;">もう一度最初から挑戦する</button>
     </div>
 </div>
 
 <script type="application/json" id="raw-config">{"mode":"practice","timeLimit":40,"layout":"normal"}</script>
-<script type="application/json" id="raw-questions">[{"id":"JLPT_N2_001","category":"【文字・語彙】漢字読み","question":"近年、この地域の技術開発には<u>著しい</u>進歩が見られる。","options":[{"text":"いちじるしい","isCorrect":true,"rationale":"「著（いちじ）じるしい」は「はっきりとわかるほど変化（へんか）が大きい」という意味（いみ）です。<br>「めざましい」も似（に）た意味（いみ）ですが、漢字（かんじ）の読（よ）み方（かた）として正（ただ）しいのは「いちじるしい」です。<br>「はなはだしい」や「くだくだしい」は違（ちが）う言葉（ことば）の読（よ）み方（かた）です。"},{"text":"めざましい","isCorrect":false,"rationale":"「著（いちじ）じるしい」は「はっきりとわかるほど変化（へんか）が大きい」という意味（いみ）です。<br>「めざましい」も似（に）た意味（いみ）ですが、漢字（かんじ）の読（よ）み方（かた）として正（ただ）しいのは「いちじるしい」です。<br>「はなはだしい」や「くだくだしい」は違（ちが）う言葉（ことば）の読（よ）み方（かた）です。"},{"text":"はなはだしい","isCorrect":false,"rationale":"「著（いちじ）じるしい」は「はっきりとわかるほど変化（へんか）が大きい」という意味（いみ）です。<br>「めざましい」も似（に）た意味（いみ）ですが、漢字（かんじ）の読（よ）み方（かた）として正（ただ）しいのは「いちじるしい」です。<br>「はなはだしい」や「くだくだしい」は違（ちが）う言葉（ことば）の読（よ）み方（かた）です。"},{"text":"くだくだしい","isCorrect":false,"rationale":"「著（いちじ）じるしい」は「はっきりとわかるほど変化（へんか）が大きい」という意味（いみ）です。<br>「めざましい」も似（に）た意味（いみ）ですが、漢字（かんじ）の読（よ）み方（かた）として正（ただ）しいのは「いちじるしい」です。<br>「はなはだしい」や「くだくだしい」は違（ちが）う言葉（ことば）の読（よ）み方（かた）です。"}]},{"id":"JLPT_N2_002","category":"【文字・語彙】表記","question":"台風の影響で、電車の運行が<u>みだれて</u>いる。","options":[{"text":"乱れて","isCorrect":true,"rationale":"「みだれて」の正（ただ）しい漢字（かんじ）は「乱（みだ）れて」です。「秩序（ちじょ）や順番（じゅんばん）が壊（こわ）れる」という意味（いみ）で使（つか）います。<br>「倒（たお）れて」は体（からだ）や建物（たてもの）が横（よこ）になること、「崩（くず）れて」は山（やま）や形（かたち）が壊（こわ）れること、「荒（あ）れて」は天気（てんき）や肌（はだ）の状態（じょうたい）が悪（わる）くなることです。"},{"text":"倒れて","isCorrect":false,"rationale":"「みだれて」の正（ただ）しい漢字（かんじ）は「乱（みだ）れて」です。「秩序（ちじょ）や順番（じゅんばん）が壊（こわ）れる」という意味（いみ）で使（つか）います。<br>「倒（たお）れて」は体（からだ）や建物（たてもの）が横（よこ）になること、「崩（くず）れて」は山（やま）や形（かたち）が壊（こわ）れること、「荒（あ）れて」は天気（てんき）や肌（はだ）の状態（じょうたい）が悪（わる）くなることです。"},{"text":"崩れて","isCorrect":false,"rationale":"「みだれて」の正（ただ）しい漢字（かんじ）は「乱（みだ）れて」です。「秩序（ちじょ）や順番（じゅんばん）が壊（こわ）れる」という意味（いみ）で使（つか）います。<br>「倒（たお）れて」は体（からだ）や建物（たてもの）が横（よこ）になること、「崩（くず）れて」は山（やま）や形（かたち）が壊（こわ）れること、「荒（あ）れて」は天気（てんき）や肌（はだ）の状態（じょうたい）が悪（わる）くなることです。"},{"text":"荒れて","isCorrect":false,"rationale":"「みだれて」の正（ただ）しい漢字（かんじ）は「乱（みだ）れて」です。「秩序（ちじょ）や順番（じゅんばん）が壊（こわ）れる」という意味（いみ）で使（つか）います。<br>「倒（たお）れて」は体（からだ）や建物（たてもの）が横（よこ）になること、「崩（くず）れて」は山（やま）や形（かたち）が壊（こわ）れること、「荒（あ）れて」は天気（てんき）や肌（はだ）の状態（じょうたい）が悪（わる）くなることです。"}]},{"id":"JLPT_N2_003","category":"【文字・語彙】語形成","question":"この商品は安全性が______されているのを確認しているため、安心して使えます。","options":[{"text":"確立","isCorrect":true,"rationale":"「安全性（あんぜんせい）が確認（かくにん）されている」という文脈（ぶんみゃく）に合（あ）うのは「確立（かくりつ）」です。「確立（かくりつ）」は「しっかりとした状態（じょうたい）を作（つく）ること」を表（あらわ）します。<br>「確立化（かくりつか）」という言葉（ことば）は不自然（ふしぜん）です。「再確認（さいかくにん）」や「未確認（みかくにん）」は後ろ（うしろ）の文（ぶん）「安心（あんしん）して使（つか）えます」と意味（いみ）がつながりません。"},{"text":"確立化","isCorrect":false,"rationale":"「安全性（あんぜんせい）が確認（かくにん）されている」という文脈（ぶんみゃく）に合（あ）うのは「確立（かくりつ）」です。「確立（かくりつ）」は「しっかりとした状態（じょうたい）を作（つく）ること」を表（あらわ）します。<br>「確立化（かくりつか）」という言葉（ことば）は不自然（ふしぜん）です。「再確認（さいかくにん）」や「未確認（みかくにん）」は後ろ（うしろ）の文（ぶん）「安心（あんしん）して使（つか）えます」と意味（いみ）がつながりません。"},{"text":"再確認","isCorrect":false,"rationale":"「安全性（あんぜんせい）が確認（かくにん）されている」という文脈（ぶんみゃく）に合（あ）うのは「確立（かくりつ）」です。「確立（かくりつ）」は「しっかりとした状態（じょうたい）を作（つく）ること」を表（あらわ）します。<br>「確立化（かくりつか）」という言葉（ことば）は不自然（ふしぜん）です。「再確認（さいかくにん）」や「未確認（みかくにん）」は後ろ（うしろ）の文（ぶん）「安心（あんしん）して使（つか）えます」と意味（いみ）がつながりません。"},{"text":"未確認","isCorrect":false,"rationale":"「安全性（あんぜんせい）が確認（かくにん）されている」という文脈（ぶんみゃく）に合（あ）うのは「確立（かくりつ）」です。「確立（かくりつ）」は「しっかりとした状態（じょうたい）を作（つく）ること」を表（あらわ）します。<br>「確立化（かくりつか）」という言葉（ことば）は不自然（ふしぜん）です。「再確認（さいかくにん）」や「未確認（みかくにん）」は後ろ（うしろ）の文（ぶん）「安心（あんしん）して使（つか）えます」と意味（いみ）がつながりません。"}]},{"id":"JLPT_N2_004","category":"【文字・語彙】文脈規定","question":"彼のあまりにも不躾な質問に、会場の空気は______と静まり返った。","options":[{"text":"シーン","isCorrect":true,"rationale":"「シーン」は「音（おと）がしなくて静（しず）かな様子（ようす）」を表（あらわ）す言葉（ことば）です。<br>「しんみり」は「心（こころ）が落ち着いて少し悲しい様子（ようす）」、「うっすら」は「少しだけ見えたり感じたりする様子（ようす）」、「うっかり」は「注意（ちゅうい）を忘（わす）れて失敗（しっぱい）する様子（ようす）」なので不適切（ふてきせつ）です。"},{"text":"しんみり","isCorrect":false,"rationale":"「シーン」は「音（おと）がしなくて静（しず）かな様子（ようす）」を表（あらわ）す言葉（ことば）です。<br>「しんみり」は「心（こころ）が落ち着いて少し悲しい様子（ようす）」、「うっすら」は「少しだけ見えたり感じたりする様子（ようす）」、「うっかり」は「注意（ちゅうい）を忘（わす）れて失敗（しっぱい）する様子（ようす）」なので不適切（ふてきせつ）です。"},{"text":"うっすら","isCorrect":false,"rationale":"「シーン」は「音（おと）がしなくて静（しず）かな様子（ようす）」を表（あらわ）す言葉（ことば）です。<br>「しんみり」は「心（こころ）が落ち着いて少し悲しい様子（ようす）」、「うっすら」は「少しだけ見えたり感じたりする様子（ようす）」、「うっかり」は「注意（ちゅうい）を忘（わす）れて失敗（しっぱい）する様子（ようす）」なので不適切（ふてきせつ）です。"},{"text":"うっかり","isCorrect":false,"rationale":"「シーン」は「音（おと）がしなくて静（しず）かな様子（ようす）」を表（あらわ）す言葉（ことば）です。<br>「しんみり」は「心（こころ）が落ち着いて少し悲しい様子（ようす）」、「うっすら」は「少しだけ見えたり感じたりする様子（ようす）」、「うっかり」は「注意（ちゅうい）を忘（わす）れて失敗（しっぱい）する様子（ようす）」なので不適切（ふてきせつ）です。"}]},{"id":"JLPT_N2_005","category":"【文字・語彙】言い換え類義","question":"今回の調査結果は、私たちの予想と<u>おのずと</u>一致した。","options":[{"text":"自然に","isCorrect":true,"rationale":"「おのずと」は「人（ひと）が何（なに）もしなくても、自然（しぜん）にそうなる様子（ようす）」を意味（いみ）します。したがって「自然（しぜん）に」が最も近い意味（いみ）です。<br>「急速（きゅうそく）に」はスピードが速いこと、「無理（むり）に」は力をかけること、「故意（こい）に」はわざと行うことを表（あらわ）すため間違いです。"},{"text":"急速に","isCorrect":false,"rationale":"「おのずと」は「人（ひと）が何（なに）もしなくても、自然（しぜん）にそうなる様子（ようす）」を意味（いみ）します。したがって「自然（しぜん）に」が最も近い意味（いみ）です。<br>「急速（きゅうそく）に」はスピードが速いこと、「無理（むり）に」は力をかけること、「故意（こい）に」はわざと行うことを表（あらわ）すため間違いです。"},{"text":"無理に","isCorrect":false,"rationale":"「おのずと」は「人（ひと）が何（なに）もしなくても、自然（しぜん）にそうなる様子（ようす）」を意味（いみ）します。したがって「自然（しぜん）に」が最も近い意味（いみ）です。<br>「急速（きゅうそく）に」はスピードが速いこと、「無理（むり）に」は力をかけること、「故意（こい）に」はわざと行うことを表（あらわ）すため間違いです。"},{"text":"故意に","isCorrect":false,"rationale":"「おのずと」は「人（ひと）が何（なに）もしなくても、自然（しぜん）にそうなる様子（ようす）」を意味（いみ）します。したがって「自然（しぜん）に」が最も近い意味（いみ）です。<br>「急速（きゅうそく）に」はスピードが速いこと、「無理（むり）に」は力をかけること、「故意（こい）に」はわざと行うことを表（あらわ）すため間違いです。"}]},{"id":"JLPT_N2_006","category":"【文字・語彙】用法","question":"「一筋」という言葉の使い方が最も適切なものを選びなさい。","options":[{"text":"彼女は卒業してから30年間、看護師一筋で働き続けている。","isCorrect":true,"rationale":"「一筋（ひとすじ）」は「ほかのことには目をくれず、1つのことだけを続ける様子（ようす）」を表（あらわ）します。そのため「看護師（かんごし）一筋（ひとすじ）」という使い方が正解（せいかい）です。<br>道（みち）の本数（ほんすう）には「1本（いっぽん）」、雨（あめ）には「急（きゅう）な雨（あめ）」、パンの数え方（かぞえかた）には「1切れ（ひときれ）」などを使（つか）います。"},{"text":"この道は一筋しかないので、絶対に迷うことはありません。","isCorrect":false,"rationale":"「一筋（ひとすじ）」は「ほかのことには目をくれず、1つのことだけを続ける様子（ようす）」を表（あらわ）します。そのため「看護師（かんごし）一筋（ひとすじ）」という使い方が正解（せいかい）です。<br>道（みち）の本数（ほんすう）には「1本（いっぽん）」、雨（あめ）には「急（きゅう）な雨（あめ）」、パンの数え方（かぞえかた）には「1切れ（ひときれ）」などを使（つか）います。"},{"text":"今朝は急に一筋の雨が降ってきたので驚いた。","isCorrect":false,"rationale":"「一筋（ひとすじ）」は「ほかのことには目をくれず、1つのことだけを続ける様子（ようす）」を表（あらわ）します。そのため「看護師（かんごし）一筋（ひとすじ）」という使い方が正解（せいかい）です。<br>道（みち）の本数（ほんすう）には「1本（いっぽん）」、雨（あめ）には「急（きゅう）な雨（あめ）」、パンの数え方（かぞえかた）には「1切れ（ひときれ）」などを使（つか）います。"},{"text":"お腹がすいていたので、パンを一筋だけ食べた。","isCorrect":false,"rationale":"「一筋（ひとすじ）」は「ほかのことには目をくれず、1つのことだけを続ける様子（ようす）」を表（あらわ）します。そのため「看護師（かんごし）一筋（ひとすじ）」という使い方が正解（せいかい）です。<br>道（みち）の本数（ほんすう）には「1本（いっぽん）」、雨（あめ）には「急（きゅう）な雨（あめ）」、パンの数え方（かぞえかた）には「1切れ（ひときれ）」などを使（つか）います。"}]},{"id":"JLPT_N2_007","category":"【文法】文法形式の判断","question":"患者の命を預かる立場として、小さなミスであっても______。","options":[{"text":"見過ごすわけにはいかない","isCorrect":true,"rationale":"「〜わけにはいかない」は「社会的（しゃかいてき）な立場（たちば）やルールから考えて、〜してはいけない」という意味（いみ）を表（あらわ）します。<br>「〜はずがない」や「〜わけがない」は「強い否定（ひてい）の推測（すいそく）」を表（あらわ）すため、不適切（ふてきせつ）です。「〜にちがいない」は「きっと〜だ」という確信（かくしん）を表（あらわ）します。"},{"text":"見過ごすはずがない","isCorrect":false,"rationale":"「〜わけにはいかない」は「社会的（しゃかいてき）な立場（たちば）やルールから考えて、〜してはいけない」という意味（いみ）を表（あらわ）します。<br>「〜はずがない」や「〜わけがない」は「強い否定（ひてい）の推測（すいそく）」を表（あらわ）すため、不適切（ふてきせつ）です。「〜にちがいない」は「きっと〜だ」という確信（かくしん）を表（あらわ）します。"},{"text":"見過ごすにちがいない","isCorrect":false,"rationale":"「〜わけにはいかない」は「社会的（しゃかいてき）な立場（たちば）やルールから考えて、〜してはいけない」という意味（いみ）を表（あらわ）します。<br>「〜はずがない」や「〜わけがない」は「強い否定（ひてい）の推測（すいそく）」を表（あらわ）すため、不適切（ふてきせつ）です。「〜にちがいない」は「きっと〜だ」という確信（かくしん）を表（あらわ）します。"},{"text":"見過ごすわけがない","isCorrect":false,"rationale":"「〜わけにはいかない」は「社会的（しゃかいてき）な立場（たちば）やルールから考えて、〜してはいけない」という意味（いみ）を表（あらわ）します。<br>「〜はずがない」や「〜わけがない」は「強い否定（ひてい）の推測（すいそく）」を表（あらわ）すため、不適切（ふてきせつ）です。「〜にちがいない」は「きっと〜だ」という確信（かくしん）を表（あらわ）します。"}]},{"id":"JLPT_N2_008","category":"【文法】文法形式の判断","question":"高い立場にある人間として、そのような軽率な言動は______。","options":[{"text":"あるまじきものだ","isCorrect":true,"rationale":"「〜まじき」は「立場（たちば）や道徳（どうとく）から考えて、あってはならない・してはいけない」という意味（いみ）を表（あらわ）します。「動詞（どうし）の辞書形（じしょけい）＋まじき」の形で使（つか）います。<br>「〜かねない」は「悪い結果（けっか）になる可能性がある」、「〜にすぎない」は「ただ〜だけだ」、「〜にたらない」は「価値（かち）がない」という意味（いみ）なので不適切（ふてきせつ）です。"},{"text":"ありかねないものだ","isCorrect":false,"rationale":"「〜まじき」は「立場（たちば）や道徳（どうとく）から考えて、あってはならない・してはいけない」という意味（いみ）を表（あらわ）します。「動詞（どうし）の辞書形（じしょけい）＋まじき」の形で使（つか）います。<br>「〜かねない」は「悪い結果（けっか）になる可能性がある」、「〜にすぎない」は「ただ〜だけだ」、「〜にたらない」は「価値（かち）がない」という意味（いみ）なので不適切（ふてきせつ）です。"},{"text":"あるにすぎないものだ","isCorrect":false,"rationale":"「〜まじき」は「立場（たちば）や道徳（どうとく）から考えて、あってはならない・してはいけない」という意味（いみ）を表（あらわ）します。「動詞（どうし）の辞書形（じしょけい）＋まじき」の形で使（つか）います。<br>「〜かねない」は「悪い結果（けっか）になる可能性がある」、「〜にすぎない」は「ただ〜だけだ」、「〜にたらない」は「価値（かち）がない」という意味（いみ）なので不適切（ふてきせつ）です。"},{"text":"あるにたらないものだ","isCorrect":false,"rationale":"「〜まじき」は「立場（たちば）や道徳（どうとく）から考えて、あってはならない・してはいけない」という意味（いみ）を表（あらわ）します。「動詞（どうし）の辞書形（じしょけい）＋まじき」の形で使（つか）います。<br>「〜かねない」は「悪い結果（けっか）になる可能性がある」、「〜にすぎない」は「ただ〜だけだ」、「〜にたらない」は「価値（かち）がない」という意味（いみ）なので不適切（ふてきせつ）です。"}]},{"id":"JLPT_N2_009","category":"【文法】文の組み立て","question":"失敗を恐れるあまり______ ______ __★__ ______ 挑戦することこそが大切だ。","options":[{"text":"行動しないよりは","isCorrect":false,"rationale":"正（ただ）しい順番（じゅんばん）は「たとえ 失敗（しっぱい）したとしても 結果（けっか）がどうあろうと 行動（こうどう）しないよりは」となります。したがって、★（3番目（ばんめ））に入る要素（ようそ）は「結果（けっか）がどうあろうと」です。<br>「たとえ〜としても」で仮定（かてい）を作り、「どうあろうと」で条件（じょうけん）を強（つよ）めています。"},{"text":"たとえ","isCorrect":false,"rationale":"正（ただ）しい順番（じゅんばん）は「たとえ 失敗（しっぱい）したとしても 結果（けっか）がどうあろうと 行動（こうどう）しないよりは」となります。したがって、★（3番目（ばんめ））に入る要素（ようそ）は「結果（けっか）がどうあろうと」です。<br>「たとえ〜としても」で仮定（かてい）を作り、「どうあろうと」で条件（じょうけん）を強（つよ）めています。"},{"text":"結果がどうあろうと","isCorrect":true,"rationale":"正（ただ）しい順番（じゅんばん）は「たとえ 失敗（しっぱい）したとしても 結果（けっか）がどうあろうと 行動（こうどう）しないよりは」となります。したがって、★（3番目（ばんめ））に入る要素（ようそ）は「結果（けっか）がどうあろうと」です。<br>「たとえ〜としても」で仮定（かてい）を作り、「どうあろうと」で条件（じょうけん）を強（つよ）めています。"},{"text":"失敗したとしても","isCorrect":false,"rationale":"正（ただ）しい順番（じゅんばん）は「たとえ 失敗（しっぱい）したとしても 結果（けっか）がどうあろうと 行動（こうどう）しないよりは」となります。したがって、★（3番目（ばんめ））に入る要素（ようそ）は「結果（けっか）がどうあろうと」です。<br>「たとえ〜としても」で仮定（かてい）を作り、「どうあろうと」で条件（じょうけん）を強（つよ）めています。"}]},{"id":"JLPT_N2_010","category":"【文法】文章の文法","question":"インターネットの普及により、誰でも世界中に向けて情報（ ______ ）時代になった。しかし、発言には責任を持たなければならない。","options":[{"text":"を発信し得る","isCorrect":true,"rationale":"「〜得（え）る」は「〜することができる（可能性（かのうせい）がある）」という意味（いみ）を表（あらわ）します。「動詞（どうし）のます形（けい）＋得（え）る」の形で接続（せつぞく）します。<br>「〜かねる」は「〜できない（難しい）」、「〜がちだ」は「よく〜という悪い状態（じょうたい）になる」、「〜つつある」は「今まさに〜変化（へんか）している」という意味（いみ）になり、文脈（ぶんみゃく）に合（あ）いません。"},{"text":"を発信しかねる","isCorrect":false,"rationale":"「〜得（え）る」は「〜することができる（可能性（かのうせい）がある）」という意味（いみ）を表（あらわ）します。「動詞（どうし）のます形（けい）＋得（え）る」の形で接続（せつぞく）します。<br>「〜かねる」は「〜できない（難しい）」、「〜がちだ」は「よく〜という悪い状態（じょうたい）になる」、「〜つつある」は「今まさに〜変化（へんか）している」という意味（いみ）になり、文脈（ぶんみゃく）に合（あ）いません。"},{"text":"を発信しがちだ","isCorrect":false,"rationale":"「〜得（え）る」は「〜することができる（可能性（かのうせい）がある）」という意味（いみ）を表（あらわ）します。「動詞（どうし）のます形（けい）＋得（え）る」の形で接続（せつぞく）します。<br>「〜かねる」は「〜できない（難しい）」、「〜がちだ」は「よく〜という悪い状態（じょうたい）になる」、「〜つつある」は「今まさに〜変化（へんか）している」という意味（いみ）になり、文脈（ぶんみゃく）に合（あ）いません。"},{"text":"を発信しつつある","isCorrect":false,"rationale":"「〜得（え）る」は「〜することができる（可能性（かのうせい）がある）」という意味（いみ）を表（あらわ）します。「動詞（どうし）のます形（けい）＋得（え）る」の形で接続（せつぞく）します。<br>「〜かねる」は「〜できない（難しい）」、「〜がちだ」は「よく〜という悪い状態（じょうたい）になる」、「〜つつある」は「今まさに〜変化（へんか）している」という意味（いみ）になり、文脈（ぶんみゃく）に合（あ）いません。"}]}]</script>
+<script type="application/json" id="raw-questions">[{"id":"JLPT_N2_001","category":"【文字・語彙】漢字読み","question":"危険を<u>免れる</u>ことができた。","options":[{"text":"まねかれる","isCorrect":false,"rationale":"「免れる」の正しい読み方は「まぬかれる」です。「招かれる（まねかれる）」や、濁音（だくおん：てんてん）がついた「まぬがれる」と間違（まちが）えやすいので注意（ちゅうい）してください。"},{"text":"まぬかれる","isCorrect":true,"rationale":"「免れる」の正しい読み方は「まぬかれる」です。「招かれる（まねかれる）」や、濁音（だくおん：てんてん）がついた「まぬがれる」と間違（まちが）えやすいので注意（ちゅうい）してください。"},{"text":"めんかれる","isCorrect":false,"rationale":"「免れる」の正しい読み方は「まぬかれる」です。「招かれる（まねかれる）」や、濁音（だくおん：てんてん）がついた「まぬがれる」と間違（まちが）えやすいので注意（ちゅうい）してください。"},{"text":"まぬがれる","isCorrect":false,"rationale":"「免れる」の正しい読み方は「まぬかれる」です。「招かれる（まねかれる）」や、濁音（だくおん：てんてん）がついた「まぬがれる」と間違（まちが）えやすいので注意（ちゅうい）してください。"}]},{"id":"JLPT_N2_002","category":"【文字・語彙】表記","question":"式典（しくてん）は<u>おごそか</u>な雰囲気（ふんいき）の中で行われた。","options":[{"text":"厳か","isCorrect":true,"rationale":"「おごそか」は漢字で「厳（おごそ）か」と書きます。<br>「華（はな）やか」、「淑（しと）やか」、「和（なご）やか」はすべて「〜やか」で終わる言葉（ことば）ですが、意味（いみ）が違（ちが）います。"},{"text":"華やか","isCorrect":false,"rationale":"「おごそか」は漢字で「厳（おごそ）か」と書きます。<br>「華（はな）やか」、「淑（しと）やか」、「和（なご）やか」はすべて「〜やか」で終わる言葉（ことば）ですが、意味（いみ）が違（ちが）います。"},{"text":"淑やか","isCorrect":false,"rationale":"「おごそか」は漢字で「厳（おごそ）か」と書きます。<br>「華（はな）やか」、「淑（しと）やか」、「和（なご）やか」はすべて「〜やか」で終わる言葉（ことば）ですが、意味（いみ）が違（ちが）います。"},{"text":"和やか","isCorrect":false,"rationale":"「おごそか」は漢字で「厳（おごそ）か」と書きます。<br>「華（はな）やか」、「淑（しと）やか」、「和（なご）やか」はすべて「〜やか」で終わる言葉（ことば）ですが、意味（いみ）が違（ちが）います。"}]},{"id":"JLPT_N2_003","category":"【文字・語彙】語形成","question":"新しい技術（ぎじゅつ）の導入（どうにゅう）により、作業（さぎょう）の______化が進んでいる。","options":[{"text":"省力","isCorrect":true,"rationale":"「省力化（しょうりょくか）」は、使う力（ちから）や人（ひと）の手（て）を減（へ）らすという意味（いみ）です。<br>「省略（しょうりゃく）」は途中のものをなくすこと、「節約（せつやく）」は無駄（むだ）に使わないこと、「削減（さくげん）」は数量（すうりょう）を減らすことで、どれも「〜化（か）」とは結（むす）びつきません。"},{"text":"省略","isCorrect":false,"rationale":"「省力化（しょうりょくか）」は、使う力（ちから）や人（ひと）の手（て）を減（へ）らすという意味（いみ）です。<br>「省略（しょうりゃく）」は途中のものをなくすこと、「節約（せつやく）」は無駄（むだ）に使わないこと、「削減（さくげん）」は数量（すうりょう）を減らすことで、どれも「〜化（か）」とは結（むす）びつきません。"},{"text":"節約","isCorrect":false,"rationale":"「省力化（しょうりょくか）」は、使う力（ちから）や人（ひと）の手（て）を減（へ）らすという意味（いみ）です。<br>「省略（しょうりゃく）」は途中のものをなくすこと、「節約（せつやく）」は無駄（むだ）に使わないこと、「削減（さくげん）」は数量（すうりょう）を減らすことで、どれも「〜化（か）」とは結（むす）びつきません。"},{"text":"削減","isCorrect":false,"rationale":"「省力化（しょうりょくか）」は、使う力（ちから）や人（ひと）の手（て）を減（へ）らすという意味（いみ）です。<br>「省略（しょうりゃく）」は途中のものをなくすこと、「節約（せつやく）」は無駄（むだ）に使わないこと、「削減（さくげん）」は数量（すうりょう）を減らすことで、どれも「〜化（か）」とは結（むす）びつきません。"}]},{"id":"JLPT_N2_004","category":"【文字・語彙】文脈規定","question":"何の計画（けいかく）も立てず、______時間を過ごしてしまったことを後悔（こうかい）している。","options":[{"text":"まんざら","isCorrect":false,"rationale":"「まんぜんと」は「目的（もくてき）や意識（いしき）を持たずに」という意味（いみ）です。<br>「まんざら」は「まんざら〜ない（完全に〜というわけではない）」の形で使います。<br>「まざまざと」は「目に見えるようにはっきりと」という意味です。<br>「まごまご」は「どうすればいいかわからず困る様子（ようす）」を表します。"},{"text":"まんぜんと","isCorrect":true,"rationale":"「まんぜんと」は「目的（もくてき）や意識（いしき）を持たずに」という意味（いみ）です。<br>「まんざら」は「まんざら〜ない（完全に〜というわけではない）」の形で使います。<br>「まざまざと」は「目に見えるようにはっきりと」という意味です。<br>「まごまご」は「どうすればいいかわからず困る様子（ようす）」を表します。"},{"text":"まざまざと","isCorrect":false,"rationale":"「まんぜんと」は「目的（もくてき）や意識（いしき）を持たずに」という意味（いみ）です。<br>「まんざら」は「まんざら〜ない（完全に〜というわけではない）」の形で使います。<br>「まざまざと」は「目に見えるようにはっきりと」という意味です。<br>「まごまご」は「どうすればいいかわからず困る様子（ようす）」を表します。"},{"text":"まごまごと","isCorrect":false,"rationale":"「まんぜんと」は「目的（もくてき）や意識（いしき）を持たずに」という意味（いみ）です。<br>「まんざら」は「まんざら〜ない（完全に〜というわけではない）」の形で使います。<br>「まざまざと」は「目に見えるようにはっきりと」という意味です。<br>「まごまご」は「どうすればいいかわからず困る様子（ようす）」を表します。"}]},{"id":"JLPT_N2_005","category":"【文字・語彙】言い換え類義","question":"長い交渉（こうしょう）の末、問題は<u>うやむや</u>になった。","options":[{"text":"完全に解決した","isCorrect":false,"rationale":"「うやむや」は「はっきりしない状態（じょうたい）」という意味（いみ）です。「あいまいのまま終わった」が最も近い意味になります。"},{"text":"あいまいのまま終わった","isCorrect":true,"rationale":"「うやむや」は「はっきりしない状態（じょうたい）」という意味（いみ）です。「あいまいのまま終わった」が最も近い意味になります。"},{"text":"急に悪化した","isCorrect":false,"rationale":"「うやむや」は「はっきりしない状態（じょうたい）」という意味（いみ）です。「あいまいのまま終わった」が最も近い意味になります。"},{"text":"順調に進んだ","isCorrect":false,"rationale":"「うやむや」は「はっきりしない状態（じょうたい）」という意味（いみ）です。「あいまいのまま終わった」が最も近い意味になります。"}]},{"id":"JLPT_N2_006","category":"【文字・語彙】用法","question":"「工面（くめん）」の使い方として最も適切なものを選びなさい。","options":[{"text":"必要な資金（しきん）を何とか工面して、新しい店を開いた。","isCorrect":true,"rationale":"「工面（くめん）」は「必要（ひつよう）なお金（かね）を何とかして準備（じゅんび）する」という意味（いみ）です。「資金（しきん）を工面する」「費用（ひよう）を工面する」という形で使います。時間やスケジュール、道具などには使いません。"},{"text":"スケジュールを工面して、旅行（りょこう）の予定（よてい）を立てた。","isCorrect":false,"rationale":"「工面（くめん）」は「必要（ひつよう）なお金（かね）を何とかして準備（じゅんび）する」という意味（いみ）です。「資金（しきん）を工面する」「費用（ひよう）を工面する」という形で使います。時間やスケジュール、道具などには使いません。"},{"text":"故障（こしょう）したパソコンを工面して、元通り（もとどおり）に直した。","isCorrect":false,"rationale":"「工面（くめん）」は「必要（ひつよう）なお金（かね）を何とかして準備（じゅんび）する」という意味（いみ）です。「資金（しきん）を工面する」「費用（ひよう）を工面する」という形で使います。時間やスケジュール、道具などには使いません。"},{"text":"部屋（へや）の模様替え（もようがえ）のために家具（かぐ）を工面した。","isCorrect":false,"rationale":"「工面（くめん）」は「必要（ひつよう）なお金（かね）を何とかして準備（じゅんび）する」という意味（いみ）です。「資金（しきん）を工面する」「費用（ひよう）を工面する」という形で使います。時間やスケジュール、道具などには使いません。"}]},{"id":"JLPT_N2_007","category":"【文字・語彙】用法","question":"「手際（てぎわ）」の使い方として最も適切なものを選びなさい。","options":[{"text":"彼は料理（りょうり）の手際がよく、あっという間に3品も作った。","isCorrect":true,"rationale":"「手際（てぎわ）」は「仕事（しごと）や作業（さぎょう）を処理（しょり）する手順（てじゅん）や手際の良さ」を表します。「手際がいい」「手際がわるい」という形でよく使います。技術（ぎじゅつ）の高さや商品の良さ、チームの強さには使いません。"},{"text":"練習（れんしゅう）を重ねたので、ピアノの手際がとても上がった。","isCorrect":false,"rationale":"「手際（てぎわ）」は「仕事（しごと）や作業（さぎょう）を処理（しょり）する手順（てじゅん）や手際の良さ」を表します。「手際がいい」「手際がわるい」という形でよく使います。技術（ぎじゅつ）の高さや商品の良さ、チームの強さには使いません。"},{"text":"この商品は手際が優（すが）れているので、世界中で人気がある。","isCorrect":false,"rationale":"「手際（てぎわ）」は「仕事（しごと）や作業（さぎょう）を処理（しょり）する手順（てじゅん）や手際の良さ」を表します。「手際がいい」「手際がわるい」という形でよく使います。技術（ぎじゅつ）の高さや商品の良さ、チームの強さには使いません。"},{"text":"相手（あいて）のチームは手際が強いので、勝つのは難しい。","isCorrect":false,"rationale":"「手際（てぎわ）」は「仕事（しごと）や作業（さぎょう）を処理（しょり）する手順（てじゅん）や手際の良さ」を表します。「手際がいい」「手際がわるい」という形でよく使います。技術（ぎじゅつ）の高さや商品の良さ、チームの強さには使いません。"}]},{"id":"JLPT_N2_008","category":"【文法】文法形式の判断","question":"プロの選手______、あのような簡単なミスをするとは信じられない。","options":[{"text":"とあって","isCorrect":false,"rationale":"「〜ともあろう者が」は「高い立場（たちば）にある人が、ふさわしくない悪い行動（こうどう）をした」という驚（おどろ）きや失望（しつぼう）を表す表現（ひょうげん）です。<br>「〜とあって」は「〜という特別な状況（じょうきょう）なので」という意味です。<br>「〜を皮切り（かわきり）に」は「〜をはじめとして」という意味です。<br>「〜たところで」は「〜しても無駄（むだ）だ」という意味です。"},{"text":"ともあろう者が","isCorrect":true,"rationale":"「〜ともあろう者が」は「高い立場（たちば）にある人が、ふさわしくない悪い行動（こうどう）をした」という驚（おどろ）きや失望（しつぼう）を表す表現（ひょうげん）です。<br>「〜とあって」は「〜という特別な状況（じょうきょう）なので」という意味です。<br>「〜を皮切り（かわきり）に」は「〜をはじめとして」という意味です。<br>「〜たところで」は「〜しても無駄（むだ）だ」という意味です。"},{"text":"を皮切りに","isCorrect":false,"rationale":"「〜ともあろう者が」は「高い立場（たちば）にある人が、ふさわしくない悪い行動（こうどう）をした」という驚（おどろ）きや失望（しつぼう）を表す表現（ひょうげん）です。<br>「〜とあって」は「〜という特別な状況（じょうきょう）なので」という意味です。<br>「〜を皮切り（かわきり）に」は「〜をはじめとして」という意味です。<br>「〜たところで」は「〜しても無駄（むだ）だ」という意味です。"},{"text":"たところで","isCorrect":false,"rationale":"「〜ともあろう者が」は「高い立場（たちば）にある人が、ふさわしくない悪い行動（こうどう）をした」という驚（おどろ）きや失望（しつぼう）を表す表現（ひょうげん）です。<br>「〜とあって」は「〜という特別な状況（じょうきょう）なので」という意味です。<br>「〜を皮切り（かわきり）に」は「〜をはじめとして」という意味です。<br>「〜たところで」は「〜しても無駄（むだ）だ」という意味です。"}]},{"id":"JLPT_N2_009","category":"【文法】文法形式の判断","question":"警察官（けいさつかん）として、不正（ふせい）を見逃（みのが）すような行為（こうい）は______。","options":[{"text":"あるまじきことだ","isCorrect":true,"rationale":"「〜あるまじき」は「立場（たちば）や職業（しょくぎょう）から考えて、絶対（ぜったい）にしてはいけない」という強い批判（ひはん）を表す表現（ひょうげん）です。<br>「〜ないわけにはいかない」は「〜しなければならない」という意味です。<br>「〜にすぎない」は「ただ〜だけだ」という意味です。<br>「〜かねない」は「悪い結果（けっか）になるかもしれない」という意味です。"},{"text":"ないわけにはいかない","isCorrect":false,"rationale":"「〜あるまじき」は「立場（たちば）や職業（しょくぎょう）から考えて、絶対（ぜったい）にしてはいけない」という強い批判（ひはん）を表す表現（ひょうげん）です。<br>「〜ないわけにはいかない」は「〜しなければならない」という意味です。<br>「〜にすぎない」は「ただ〜だけだ」という意味です。<br>「〜かねない」は「悪い結果（けっか）になるかもしれない」という意味です。"},{"text":"にすぎない","isCorrect":false,"rationale":"「〜あるまじき」は「立場（たちば）や職業（しょくぎょう）から考えて、絶対（ぜったい）にしてはいけない」という強い批判（ひはん）を表す表現（ひょうげん）です。<br>「〜ないわけにはいかない」は「〜しなければならない」という意味です。<br>「〜にすぎない」は「ただ〜だけだ」という意味です。<br>「〜かねない」は「悪い結果（けっか）になるかもしれない」という意味です。"},{"text":"かねない","isCorrect":false,"rationale":"「〜あるまじき」は「立場（たちば）や職業（しょくぎょう）から考えて、絶対（ぜったい）にしてはいけない」という強い批判（ひはん）を表す表現（ひょうげん）です。<br>「〜ないわけにはいかない」は「〜しなければならない」という意味です。<br>「〜にすぎない」は「ただ〜だけだ」という意味です。<br>「〜かねない」は「悪い結果（けっか）になるかもしれない」という意味です。"}]},{"id":"JLPT_N2_010","category":"【文法】文の組み立て","question":"社長は ______ ______ __★__ ______ 怒（いか）りをあらわにした。","options":[{"text":"言わんばかりの","isCorrect":false,"rationale":"正しい順番（じゅんばん）は「『出て行け』と（選択肢3）言わんばかりの（選択肢1）顔つきと（選択肢4）態度で（選択肢2）」となります。<br>「〜と言わんばかり」は「言葉には出さないが、まるで〜と言っているような」という意味（いみ）を表す表現（ひょうげん）です。3番目の★に入るのは「顔つきと」になります。"},{"text":"態度で","isCorrect":false,"rationale":"正しい順番（じゅんばん）は「『出て行け』と（選択肢3）言わんばかりの（選択肢1）顔つきと（選択肢4）態度で（選択肢2）」となります。<br>「〜と言わんばかり」は「言葉には出さないが、まるで〜と言っているような」という意味（いみ）を表す表現（ひょうげん）です。3番目の★に入るのは「顔つきと」になります。"},{"text":"「出て行け」と","isCorrect":false,"rationale":"正しい順番（じゅんばん）は「『出て行け』と（選択肢3）言わんばかりの（選択肢1）顔つきと（選択肢4）態度で（選択肢2）」となります。<br>「〜と言わんばかり」は「言葉には出さないが、まるで〜と言っているような」という意味（いみ）を表す表現（ひょうげん）です。3番目の★に入るのは「顔つきと」になります。"},{"text":"顔つきと","isCorrect":true,"rationale":"正しい順番（じゅんばん）は「『出て行け』と（選択肢3）言わんばかりの（選択肢1）顔つきと（選択肢4）態度で（選択肢2）」となります。<br>「〜と言わんばかり」は「言葉には出さないが、まるで〜と言っているような」という意味（いみ）を表す表現（ひょうげん）です。3番目の★に入るのは「顔つきと」になります。"}]}]</script>
 
 <script>
 const appConfig = JSON.parse(document.getElementById("raw-config").textContent);
@@ -500,7 +520,6 @@ function submitExam(isAuto = false) {
     document.getElementById('score-container').style.display = 'block';
     
     let finalScore = 0;
-    let reportDetails = "";
     let catStats = {};
     
     rawLogArray = [];
@@ -530,13 +549,14 @@ function submitExam(isAuto = false) {
         rawLogArray.push({
             logId: "LOG_" + Date.now() + "_" + (idx + 1),
             sessionId: sessionId,
-            questionOrder: idx + 1, 
+            questionOrder: idx + 1,
             questionId: question.id,
             answer: selectedIdx !== null ? (selectedIdx + 1).toString() : "未回答",
             correct: isCorrect ? "TRUE" : "FALSE",
             responseTimeMs: ansObj.elapsedTimeMs,
             answerTimeSec: parseFloat(secStr),
             confidence: ansObj.confidence,
+            explanationComprehension: "NULL",
             review: "FALSE",
             answerTime: ansObj.answerTimestamp || new Date().toISOString(),
             studentId: "STU-00123",
@@ -546,6 +566,7 @@ function submitExam(isAuto = false) {
 
         const item = document.createElement('div');
         item.className = 'review-item';
+        item.id = `review-item-${idx}`;
         const statusClass = isCorrect ? 'review-status-correct' : 'review-status-incorrect';
         const statusText = isCorrect ? '【正解】' : (selectedIdx === null ? '【未回答】' : '【不正解】');
         
@@ -558,22 +579,20 @@ function submitExam(isAuto = false) {
                     <input type="checkbox" class="review-flag-cb" data-idx="${idx}" onchange="syncReviewFlag(this)"> 🚩 この問題を後でもう一度解く (Review Flag)
                 </label>
             </div>
-            <div class="review-rationale"><strong>正解の解説:</strong><br>${correctOption ? formatText(correctOption.rationale) : '解説はありません。'}</div>
+            <div class="review-rationale">
+                <strong>正解の解説:</strong><br>${correctOption ? formatText(correctOption.rationale) : '解説はありません。'}
+                
+                <div style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed #cbd5e1; font-size: 13px;">
+                    <span style="font-weight: bold; color: #475569; margin-right: 8px;">解説の理解度:</span>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-3" onclick="setComprehension(${idx}, '3')">3. 理解できた</button>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-2" onclick="setComprehension(${idx}, '2')">2. だいたい理解できた</button>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-1" onclick="setComprehension(${idx}, '1')">1. まだ少し分からない</button>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-0" onclick="setComprehension(${idx}, '0')">0. 全然分からない</button>
+                    <span class="comp-warning-tag" id="comp-warn-${idx}">⚠️ 理解度が未選択です</span>
+                </div>
+            </div>
         `;
         reviewList.appendChild(item);
-
-        let userAnsText = selectedOption ? selectedOption.text : "（未回答）";
-        let correctAnsText = correctOption ? correctOption.text : "不明";
-        reportDetails += `[問${idx + 1}] ${isCorrect ? "◯ 正解" : "✕ 不正解"}\n`;
-        reportDetails += `・カテゴリ: ${categoryName}\n`;
-        reportDetails += `・問題文: ${question.question}\n`;
-        reportDetails += `・あなたの解答: ${userAnsText}\n`;
-        reportDetails += `・正解: ${correctAnsText}\n`;
-        reportDetails += `・回答時間: ${secStr}秒\n`;
-        if (appConfig.mode === "practice") {
-            reportDetails += `・自信度: ${ansObj.confidence}\n`;
-        }
-        reportDetails += `・解説: ${correctOption ? correctOption.rationale : "なし"}\n\n`;
     });
 
     document.getElementById('final-score').innerText = `${finalScore} / ${quizData.length} 問正解`;
@@ -585,7 +604,6 @@ function submitExam(isAuto = false) {
         let rate = catStats[cat].total > 0 ? Math.round((catStats[cat].correct / catStats[cat].total) * 100) : 0;
         reportBaseText += `· ${cat}: ${rate}% (${catStats[cat].correct}/${catStats[cat].total})\n`;
     }
-    reportBaseText += `\n■ 各問題の演習詳細（回答時間・自信度データ含む）\n${reportDetails}`;
 
     actualSummary = {
         sessionId: sessionId,
@@ -594,14 +612,12 @@ function submitExam(isAuto = false) {
         startTime: new Date(examStartTime).toISOString(),
         endTime: new Date(examEndTime).toISOString(),
         totalTimeSec: Math.floor(totalElapsedMs / 1000),
-        questionCount: quizData.length, 
+        questionCount: quizData.length,
         score: finalScore,
         correctCount: finalScore,
         wrongCount: quizData.length - finalScore,
         accuracy: scorePercent
     };
-
-    updateReportOutput();
 }
 
 function syncReviewFlag(checkbox) {
@@ -609,17 +625,107 @@ function syncReviewFlag(checkbox) {
     if (rawLogArray[idx]) {
         rawLogArray[idx].review = checkbox.checked ? "TRUE" : "FALSE";
     }
-    updateReportOutput();
 }
 
-function updateReportOutput() {
-    let finalPayload = `あなたは優秀なAIメンターです。以下に添付した私のCBT結果ログを、各設問の「正誤」「回答時間（思考時間）」「自信度」「出題順（集中力傾向）」の相関を含めて深く多角的に分析し、以下の3点を行ってください。\n\n`;
+function setComprehension(idx, level) {
+    if (!rawLogArray[idx]) return;
+
+    const strLevel = String(level);
+    if (rawLogArray[idx].explanationComprehension === strLevel) {
+        rawLogArray[idx].explanationComprehension = "NULL";
+    } else {
+        rawLogArray[idx].explanationComprehension = strLevel;
+    }
+
+    [0, 1, 2, 3].forEach(v => {
+        const btn = document.getElementById(`comp-btn-${idx}-${v}`);
+        if (btn) {
+            if (rawLogArray[idx].explanationComprehension === String(v)) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        }
+    });
+
+    
+    const reviewItem = document.getElementById(`review-item-${idx}`);
+    const warnTag = document.getElementById(`comp-warn-${idx}`);
+    if (reviewItem && warnTag) {
+        if (rawLogArray[idx].explanationComprehension !== "NULL") {
+            reviewItem.classList.remove('unentered-comprehension');
+            warnTag.style.display = "none";
+        }
+    }
+}
+
+async function finalizeAndGenerateReport() {
+    
+    const unenteredIndices = [];
+    rawLogArray.forEach((item, idx) => {
+        const reviewItem = document.getElementById(`review-item-${idx}`);
+        const warnTag = document.getElementById(`comp-warn-${idx}`);
+        
+        if (item.explanationComprehension === "NULL") {
+            unenteredIndices.push(idx + 1);
+            if (reviewItem) reviewItem.classList.add('unentered-comprehension');
+            if (warnTag) warnTag.style.display = "inline";
+        } else {
+            if (reviewItem) reviewItem.classList.remove('unentered-comprehension');
+            if (warnTag) warnTag.style.display = "none";
+        }
+    });
+
+    
+    if (unenteredIndices.length > 0) {
+        const qListStr = unenteredIndices.join(", ");
+        const proceed = confirm(
+            `【未入力の確認】\n以下の設問で「解説の理解度」が未選択です。\n\n対象: 問 ${qListStr}\n\nこのまま未入力の状態で確定・生成しますか？\n（[キャンセル] を押すと未入力の設問へ移動します）`
+        );
+
+        if (!proceed) {
+            const firstUnenteredIdx = unenteredIndices[0] - 1;
+            const targetElem = document.getElementById(`review-item-${firstUnenteredIdx}`);
+            if (targetElem) {
+                targetElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            showToast(`問 ${unenteredIndices[0]} の解説理解度を選択してください。`);
+            return; 
+        }
+    }
+
+    
+    buildReportPayloadText();
+    document.getElementById("output-section").style.display = "block";
+    showToast("レポートとログデータを確定・生成しました。");
+
+    document.getElementById("output-section").scrollIntoView({ behavior: 'smooth' });
+}
+
+function buildReportPayloadText() {
+    let finalPayload = `あなたは優秀なAIメンターです。以下に添付した私のCBT結果ログを、各設問の「正誤」「回答時間（思考時間）」「自信度」「解説の理解度」「出題順（集中力傾向）」の相関を含めて深く多角的に分析し、以下の3点を行ってください。\n\n`;
     finalPayload += `【対応依頼】\n`;
-    finalPayload += `1. 私の理解のボトルネックや傾向を客観的に品評してください。単なる正誤だけでなく、「時間をかけたのに間違えた深刻な課題」や「後半（QuestionOrderが大きい問題）での集中力低下による失点」を抽出・整理してください。\n`;
-    finalPayload += `2. 私が間違えた問題、および自信度が低く（2〜4）理解が不十分な問題の解説を、専門用語の補足を含めてさらに噛み砕いてCanvas上でレビューしてください。\n`;
+    finalPayload += `1. 私の理解のボトルネックや傾向を客観的に品評してください。単なる正誤だけでなく、「時間をかけたのに間違えた深刻な課題」や「解説を読んでも理解できていない（理解度0〜1）の項目」を抽出・整理してください。\n`;
+    finalPayload += `2. 私が間違えた問題、および解説理解度が低く（0〜1）理解が不十分な問題の解説を、専門用語の補足を含めてさらに噛み砕いてCanvas上でレビューしてください。\n`;
     finalPayload += `3. 私の弱点傾向を分析し、その克服に最適な新しい類似問題を3問作成し、私が回答できるようにCanvas上で出題してください。\n\n`;
     
-    finalPayload += `--- 以下、解答レポート ---\n` + reportBaseText;
+    let reportDetails = "";
+    rawLogArray.forEach((item, idx) => {
+        const q = quizData[idx];
+        const compMap = { "3": "3 (理解できた)", "2": "2 (だいたい理解できた)", "1": "1 (まだ少し分からない)", "0": "0 (全然分からない)", "NULL": "未入力" };
+        
+        reportDetails += `[問${idx + 1}] ${item.correct === "TRUE" ? "◯ 正解" : "✕ 不正解"}\n`;
+        reportDetails += `・カテゴリ: ${item.category}\n`;
+        reportDetails += `・問題文: ${q.question}\n`;
+        reportDetails += `・回答時間: ${item.answerTimeSec}秒\n`;
+        if (appConfig.mode === "practice") {
+            reportDetails += `・自信度: ${item.confidence}\n`;
+        }
+        reportDetails += `・解説理解度: ${compMap[item.explanationComprehension] || "未入力"}\n`;
+        reportDetails += `・要復習フラグ: ${item.review}\n\n`;
+    });
+
+    finalPayload += `--- 以下、解答レポート ---\n` + reportBaseText + `\n■ 各問題の演習詳細\n` + reportDetails;
     finalPayload += `\n\n=== SUMMARY_LOG ===\n${JSON.stringify(actualSummary)}`;
     finalPayload += `\n\n=== DRILL_RAW_LOG ===\n${JSON.stringify(rawLogArray)}`;
     
@@ -658,10 +764,10 @@ function downloadExcelCSV() {
     csvContent += `"${actualSummary.sessionId}","${actualSummary.studentId}","${actualSummary.mode}","${actualSummary.startTime}","${actualSummary.endTime}",${actualSummary.totalTimeSec},${actualSummary.questionCount},${actualSummary.score},${actualSummary.correctCount},${actualSummary.wrongCount},"${actualSummary.accuracy}%"\r\n\r\n`;
     
     csvContent += "=== Answer_Log (問題単位詳細) ===\r\n";
-    csvContent += "Log ID,Session ID,Question Order,Question ID,Answer,Correct,Response Time (ms),Confidence,Review,Answer Time\r\n";
+    csvContent += "Log ID,Session ID,Question Order,Question ID,Answer,Correct,Response Time (ms),Confidence,ExplanationComprehension,Review,Answer Time\r\n";
     
     rawLogArray.forEach(item => {
-        csvContent += `"${item.logId}","${item.sessionId}",${item.questionOrder},"${item.questionId}","${item.answer}",${item.correct},${item.responseTimeMs},${item.confidence === 'NULL' ? '' : item.confidence},"${item.review}","${item.answerTime}"\r\n`;
+        csvContent += `"${item.logId}","${item.sessionId}",${item.questionOrder},"${item.questionId}","${item.answer}",${item.correct},${item.responseTimeMs},${item.confidence === 'NULL' ? '' : item.confidence},${item.explanationComprehension === 'NULL' ? '' : item.explanationComprehension},"${item.review}","${item.answerTime}"\r\n`;
     });
     
     downloadFile(csvContent, `CBT_LOG_${actualSummary.sessionId}.csv`, "text/csv;charset=utf-8;");
@@ -671,9 +777,9 @@ function downloadExcelCSV() {
 function downloadRDBAnswerLogCSV() {
     if (rawLogArray.length === 0) return;
     
-    let csvContent = "LogID,SessionID,QuestionOrder,QuestionID,Answer,Correct,ResponseTime,ConfidenceLevel,AnswerTime\r\n";
+    let csvContent = "LogID,SessionID,QuestionOrder,QuestionID,Answer,Correct,ResponseTime,ConfidenceLevel,ExplanationComprehension,Review,AnswerTime\r\n";
     rawLogArray.forEach(item => {
-        csvContent += `"${item.logId}","${item.sessionId}",${item.questionOrder},"${item.questionId}","${item.answer}",${item.correct},${item.responseTimeMs},${item.confidence === 'NULL' ? '' : item.confidence},"${item.answerTime}"\r\n`;
+        csvContent += `"${item.logId}","${item.sessionId}",${item.questionOrder},"${item.questionId}","${item.answer}",${item.correct},${item.responseTimeMs},${item.confidence === 'NULL' ? '' : item.confidence},${item.explanationComprehension === 'NULL' ? '' : item.explanationComprehension},"${item.review}","${item.answerTime}"\r\n`;
     });
     
     downloadFile(csvContent, `AnswerLog_${actualSummary.sessionId}.csv`, "text/csv;charset=utf-8;");

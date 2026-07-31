@@ -57,17 +57,23 @@
         .palette-item.flagged::after { content: "🚩"; position: absolute; top: -6px; right: -4px; font-size: 10px; }
         .score-screen { display: none; width: 100%; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .score-num { text-align: center; font-size: 44px; font-weight: bold; color: #3182ce; margin: 20px 0; }
-        .review-item { background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left; font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif; }
+        .review-item { background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left; font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif; transition: all 0.3s ease; }
+        .review-item.unentered-comprehension { border: 2px solid #f59e0b !important; background-color: #fffbeb !important; }
         .review-q { font-weight: bold; margin-bottom: 8px; }
         .review-status-correct { color: #38a169; font-weight: bold; }
         .review-status-incorrect { color: #e53e3e; font-weight: bold; }
         .review-ans { font-size: 14px; margin: 4px 0; }
         .review-rationale { font-size: 14px; background: #fff; padding: 10px; border-radius: 4px; margin-top: 8px; border-left: 3px solid #3182ce; color: #4a5568; }
+        
+        .comp-btn { padding: 5px 10px; font-size: 12px; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff; cursor: pointer; margin-right: 4px; transition: all 0.2s; }
+        .comp-btn:hover { background: #e2e8f0; }
+        .comp-btn.selected { background: #2563eb; color: #fff; border-color: #1d4ed8; font-weight: bold; }
+        .comp-warning-tag { color: #d97706; font-weight: bold; font-size: 13px; margin-left: 10px; display: none; }
+
         .report-area { width: 100%; height: 220px; font-family: monospace; padding: 10px; box-sizing: border-box; margin-top: 15px; border-radius: 6px; border: 1px solid #cbd5e1; background: #f8fafc; }
         .toast { display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 12px 24px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 15px; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
         .action-btn-group { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
     </style>
-    <script src="assets/js/contentLauncher.js"></script>
 </head>
 <body>
 
@@ -141,28 +147,41 @@
 
 <div class="container" id="score-container" style="display: none;">
     <div class="score-screen" style="display: block;">
-        <h1>演習結果・レポート発表</h1>
+        <h1>演習結果</h1>
         <div class="score-num" id="final-score">0 / --</div>
-        <p style="text-align: center; color: #4a5568;">お疲れ様でした！結果の外部出力や、AIメンターへのレポート同期が可能です。</p>
-        
-        <div class="action-btn-group">
-            <button class="nav-btn" style="background-color: #2b6cb0; flex: 1; min-width: 180px; padding: 12px;" onclick="copyReport()">レポートをコピー</button>
-            <button class="nav-btn" style="background-color: #16a34a; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadExcelCSV()">統合結果CSV(GAS/Excel用)</button>
-            <button class="nav-btn" style="background-color: #0d9488; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadRDBAnswerLogCSV()">AnswerLog.csv (RDB用)</button>
-            <button class="nav-btn" style="background-color: #4f46e5; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadRDBSessionLogCSV()">SessionLog.csv (RDB用)</button>
-        </div>
-        
-        <textarea id="report-text" class="report-area" readonly></textarea>
 
-        <h2>正誤と解説の確認</h2>
+        <h2>正誤と解説の確認・理解度チェック</h2>
+        <p style="color: #4a5568; font-size: 14px;">解説を確認し、理解度ボタンを選択してください。</p>
         <div id="review-list"></div>
 
-        <button class="nav-btn" onclick="restartDrill()" style="background-color: #718096; width: 100%; padding: 12px; margin-top: 20px;">もう一度最初から挑戦する</button>
+        <div style="margin-top: 40px; padding: 25px; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px;">
+            <h3 style="margin-top:0; color: #1e3a8a;">演習ログの確定とレポート出力</h3>
+            <p style="color: #4a5568; font-size: 14px; margin-bottom: 15px;">
+                解説の理解度選択が完了したら、以下のボタンを押して分析レポートおよび各種ログデータを確定生成してください。
+            </p>
+            
+            <button class="nav-btn" style="background-color: #1e3a8a; width: 100%; padding: 14px; font-size: 16px;" onclick="finalizeAndGenerateReport()">
+                📊 レポート・ログデータを確定して生成
+            </button>
+
+            <div id="output-section" style="display: none; margin-top: 25px;">
+                <div class="action-btn-group">
+                    <button class="nav-btn" style="background-color: #2b6cb0; flex: 1; min-width: 180px; padding: 12px;" onclick="copyReport()">AIレポートをコピー</button>
+                    <button class="nav-btn" style="background-color: #16a34a; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadExcelCSV()">統合結果CSV(GAS/Excel用)</button>
+                    <button class="nav-btn" style="background-color: #0d9488; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadRDBAnswerLogCSV()">AnswerLog.csv (RDB用)</button>
+                    <button class="nav-btn" style="background-color: #4f46e5; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadRDBSessionLogCSV()">SessionLog.csv (RDB用)</button>
+                </div>
+                
+                <textarea id="report-text" class="report-area" readonly></textarea>
+            </div>
+        </div>
+
+        <button class="nav-btn" onclick="restartDrill()" style="background-color: #718096; width: 100%; padding: 12px; margin-top: 25px;">もう一度最初から挑戦する</button>
     </div>
 </div>
 
 <script type="application/json" id="raw-config">{"mode":"practice","timeLimit":40,"layout":"normal"}</script>
-<script type="application/json" id="raw-questions">[{"id":"JLPT_N2_001","category":"【文字・語彙】漢字読み","question":"今日の会議（かいぎ）に<u>参加</u>する。","options":[{"text":"さんか","isCorrect":true,"rationale":"「参加」の正しい読み方は「さんか」です。「参考（さんこう）」や「進化（しんか）」と間違（まちが）えないように気をつけましょう。"},{"text":"さんこう","isCorrect":false,"rationale":"「参加」の正しい読み方は「さんか」です。「参考（さんこう）」や「進化（しんか）」と間違（まちが）えないように気をつけましょう。"},{"text":"しんか","isCorrect":false,"rationale":"「参加」の正しい読み方は「さんか」です。「参考（さんこう）」や「進化（しんか）」と間違（まちが）えないように気をつけましょう。"},{"text":"せんか","isCorrect":false,"rationale":"「参加」の正しい読み方は「さんか」です。「参考（さんこう）」や「進化（しんか）」と間違（まちが）えないように気をつけましょう。"}]},{"id":"JLPT_N2_002","category":"【文字・語彙】表記","question":"会場（かいじょう）まで<u>あんない</u>してもらった。","options":[{"text":"案内","isCorrect":true,"rationale":"「あんない」は漢字（かんじ）で「案内（あんない）」と書きます。「安内」や「按内」という漢字（かんじ）は使いません。"},{"text":"安内","isCorrect":false,"rationale":"「あんない」は漢字（かんじ）で「案内（あんない）」と書きます。「安内」や「按内」という漢字（かんじ）は使いません。"},{"text":"按内","isCorrect":false,"rationale":"「あんない」は漢字（かんじ）で「案内（あんない）」と書きます。「安内」や「按内」という漢字（かんじ）は使いません。"},{"text":"案名","isCorrect":false,"rationale":"「あんない」は漢字（かんじ）で「案内（あんない）」と書きます。「安内」や「按内」という漢字（かんじ）は使いません。"}]},{"id":"JLPT_N2_003","category":"【文字・語彙】語形成","question":"この建物（たてもの）は、まだ______完成だ。","options":[{"text":"未","isCorrect":true,"rationale":"「未（み）」という接頭語（せっとうご）がついた「未完成（みかんせい）」は「まだ完成（かんせい）していないこと」を表（あらわ）します。「無完成」や「不完成」という言葉（ことば）はありません。"},{"text":"無","isCorrect":false,"rationale":"「未（み）」という接頭語（せっとうご）がついた「未完成（みかんせい）」は「まだ完成（かんせい）していないこと」を表（あらわ）します。「無完成」や「不完成」という言葉（ことば）はありません。"},{"text":"非","isCorrect":false,"rationale":"「未（み）」という接頭語（せっとうご）がついた「未完成（みかんせい）」は「まだ完成（かんせい）していないこと」を表（あらわ）します。「無完成」や「不完成」という言葉（ことば）はありません。"},{"text":"不","isCorrect":false,"rationale":"「未（み）」という接頭語（せっとうご）がついた「未完成（みかんせい）」は「まだ完成（かんせい）していないこと」を表（あらわ）します。「無完成」や「不完成」という言葉（ことば）はありません。"}]},{"id":"JLPT_N2_004","category":"【文字・語彙】文脈規定","question":"彼は______連絡（れんらく）すると言っていたので、待（ま）ってみよう。","options":[{"text":"必ず","isCorrect":true,"rationale":"「必ず（かならず）」は「何があってもきっと」という意味（いみ）です。<br>「すでに」はもう終わったこと、「けっして」「まったく」は否定（ひてい）の言葉と一緒に使います。"},{"text":"すでに","isCorrect":false,"rationale":"「必ず（かならず）」は「何があってもきっと」という意味（いみ）です。<br>「すでに」はもう終わったこと、「けっして」「まったく」は否定（ひてい）の言葉と一緒に使います。"},{"text":"けっして","isCorrect":false,"rationale":"「必ず（かならず）」は「何があってもきっと」という意味（いみ）です。<br>「すでに」はもう終わったこと、「けっして」「まったく」は否定（ひてい）の言葉と一緒に使います。"},{"text":"まったく","isCorrect":false,"rationale":"「必ず（かならず）」は「何があってもきっと」という意味（いみ）です。<br>「すでに」はもう終わったこと、「けっして」「まったく」は否定（ひてい）の言葉と一緒に使います。"}]},{"id":"JLPT_N2_005","category":"【文字・語彙】言い換え類義","question":"駅（えき）で<u>たまたま</u>昔（むかし）の友だちに会った。","options":[{"text":"偶然","isCorrect":true,"rationale":"「たまたま」は「思いがけず／計画（けいかく）していなくて」という意味（いみ）で、「偶然（ぐうぜん）」と同じ意味（いみ）になります。"},{"text":"突然","isCorrect":false,"rationale":"「たまたま」は「思いがけず／計画（けいかく）していなくて」という意味（いみ）で、「偶然（ぐうぜん）」と同じ意味（いみ）になります。"},{"text":"当然","isCorrect":false,"rationale":"「たまたま」は「思いがけず／計画（けいかく）していなくて」という意味（いみ）で、「偶然（ぐうぜん）」と同じ意味（いみ）になります。"},{"text":"自然","isCorrect":false,"rationale":"「たまたま」は「思いがけず／計画（けいかく）していなくて」という意味（いみ）で、「偶然（ぐうぜん）」と同じ意味（いみ）になります。"}]},{"id":"JLPT_N2_006","category":"【文字・語彙】用法","question":"「増加（ぞうか）」の使い方として最も適切なものを選びなさい。","options":[{"text":"この町（まち）では外国人（がいこくじん）観光客（かんこうきゃく）が急激（きゅうげき）に増加している。","isCorrect":true,"rationale":"「増加（ぞうか）」は「数（かず）や量（りょう）が増（ふ）えること」を表（あらわ）します。「観光客（かんこうきゃく）が増加する」「人口（じんこう）が増加する」という使い方（つかいかた）をします。個人（こじん）の体重（たいじゅう）や点数（てんすう）を増やすことには普通（ふつう）使いません。"},{"text":"背（せ）が高くなったので、体重（たいじゅう）を増加した。","isCorrect":false,"rationale":"「増加（ぞうか）」は「数（かず）や量（りょう）が増（ふ）えること」を表（あらわ）します。「観光客（かんこうきゃく）が増加する」「人口（じんこう）が増加する」という使い方（つかいかた）をします。個人（こじん）の体重（たいじゅう）や点数（てんすう）を増やすことには普通（ふつう）使いません。"},{"text":"テストの点数（てんすう）を増加するために、毎日勉強（べんきょう）する。","isCorrect":false,"rationale":"「増加（ぞうか）」は「数（かず）や量（りょう）が増（ふ）えること」を表（あらわ）します。「観光客（かんこうきゃく）が増加する」「人口（じんこう）が増加する」という使い方（つかいかた）をします。個人（こじん）の体重（たいじゅう）や点数（てんすう）を増やすことには普通（ふつう）使いません。"},{"text":"新しい服を買ったので、クローゼットの中身（なかみ）を増加した。","isCorrect":false,"rationale":"「増加（ぞうか）」は「数（かず）や量（りょう）が増（ふ）えること」を表（あらわ）します。「観光客（かんこうきゃく）が増加する」「人口（じんこう）が増加する」という使い方（つかいかた）をします。個人（こじん）の体重（たいじゅう）や点数（てんすう）を増やすことには普通（ふつう）使いません。"}]},{"id":"JLPT_N2_007","category":"【文法】文法形式の判断","question":"日本（にほん）の文化（ぶんか）______調（しら）べています。","options":[{"text":"について","isCorrect":true,"rationale":"「〜について」は「〜を対象（たいしょう）やテーマとして」という意味（いみ）を表（あらわ）します。<br>「〜にくらべて」は比較（ひかく）、「〜に沿（そ）って」は方針（ほうしん）に合わせること、「〜に伴（ともな）って」は一緒に変化することを表します。"},{"text":"にくらべて","isCorrect":false,"rationale":"「〜について」は「〜を対象（たいしょう）やテーマとして」という意味（いみ）を表（あらわ）します。<br>「〜にくらべて」は比較（ひかく）、「〜に沿（そ）って」は方針（ほうしん）に合わせること、「〜に伴（ともな）って」は一緒に変化することを表します。"},{"text":"に沿って","isCorrect":false,"rationale":"「〜について」は「〜を対象（たいしょう）やテーマとして」という意味（いみ）を表（あらわ）します。<br>「〜にくらべて」は比較（ひかく）、「〜に沿（そ）って」は方針（ほうしん）に合わせること、「〜に伴（ともな）って」は一緒に変化することを表します。"},{"text":"に伴って","isCorrect":false,"rationale":"「〜について」は「〜を対象（たいしょう）やテーマとして」という意味（いみ）を表（あらわ）します。<br>「〜にくらべて」は比較（ひかく）、「〜に沿（そ）って」は方針（ほうしん）に合わせること、「〜に伴（ともな）って」は一緒に変化することを表します。"}]},{"id":"JLPT_N2_008","category":"【文法】文法形式の判断","question":"健康（けんこう）の______、毎日（まいにち）運動（うんどう）をしています。","options":[{"text":"ために","isCorrect":true,"rationale":"「〜ために」は「目的（もくてき）」を表（あらわ）します。<br>「〜おかげで」は良い原因（げんいん）、「〜せいで」は悪い原因、「〜ついでに」は別の用事（ようじ）を一緒にする時に使います。"},{"text":"おかげで","isCorrect":false,"rationale":"「〜ために」は「目的（もくてき）」を表（あらわ）します。<br>「〜おかげで」は良い原因（げんいん）、「〜せいで」は悪い原因、「〜ついでに」は別の用事（ようじ）を一緒にする時に使います。"},{"text":"せいで","isCorrect":false,"rationale":"「〜ために」は「目的（もくてき）」を表（あらわ）します。<br>「〜おかげで」は良い原因（げんいん）、「〜せいで」は悪い原因、「〜ついでに」は別の用事（ようじ）を一緒にする時に使います。"},{"text":"ついでに","isCorrect":false,"rationale":"「〜ために」は「目的（もくてき）」を表（あらわ）します。<br>「〜おかげで」は良い原因（げんいん）、「〜せいで」は悪い原因、「〜ついでに」は別の用事（ようじ）を一緒にする時に使います。"}]},{"id":"JLPT_N2_009","category":"【文法】文法形式の判断","question":"彼は昨日（きのう）遅（おそ）くまで勉強（べんきょう）していたから、今日は眠（ねむ）い______だ。","options":[{"text":"はず","isCorrect":true,"rationale":"「〜はずだ」は「理由（りゆう）があって、きっと〜だろう」と推測（すいそく）するときに使（つか）います。<br>「〜わけだ」は事実（じじつ）の理由を納得するとき、「〜ことだ」「〜ものだ」は助言（じょげん）や一般的な傾向などを表します。"},{"text":"わけ","isCorrect":false,"rationale":"「〜はずだ」は「理由（りゆう）があって、きっと〜だろう」と推測（すいそく）するときに使（つか）います。<br>「〜わけだ」は事実（じじつ）の理由を納得するとき、「〜ことだ」「〜ものだ」は助言（じょげん）や一般的な傾向などを表します。"},{"text":"こと","isCorrect":false,"rationale":"「〜はずだ」は「理由（りゆう）があって、きっと〜だろう」と推測（すいそく）するときに使（つか）います。<br>「〜わけだ」は事実（じじつ）の理由を納得するとき、「〜ことだ」「〜ものだ」は助言（じょげん）や一般的な傾向などを表します。"},{"text":"もの","isCorrect":false,"rationale":"「〜はずだ」は「理由（りゆう）があって、きっと〜だろう」と推測（すいそく）するときに使（つか）います。<br>「〜わけだ」は事実（じじつ）の理由を納得するとき、「〜ことだ」「〜ものだ」は助言（じょげん）や一般的な傾向などを表します。"}]},{"id":"JLPT_N2_010","category":"【文法】文の組み立て","question":"彼は ______ ______ __★__ ______ 上手だ。","options":[{"text":"日本語","isCorrect":false,"rationale":"正しい順番（じゅんばん）は「日本語（選択肢1）が話せる（選択肢3）だけでなく（選択肢2）英語も（選択肢4）」となります。<br>「〜だけでなく〜も」は「〜のほかに、さらに〜も」という意味（いみ）を表（あらわ）す表現（ひょうげん）です。3番目の★に入るのは「だけでなく」になります。"},{"text":"だけでなく","isCorrect":true,"rationale":"正しい順番（じゅんばん）は「日本語（選択肢1）が話せる（選択肢3）だけでなく（選択肢2）英語も（選択肢4）」となります。<br>「〜だけでなく〜も」は「〜のほかに、さらに〜も」という意味（いみ）を表（あらわ）す表現（ひょうげん）です。3番目の★に入るのは「だけでなく」になります。"},{"text":"が話せる","isCorrect":false,"rationale":"正しい順番（じゅんばん）は「日本語（選択肢1）が話せる（選択肢3）だけでなく（選択肢2）英語も（選択肢4）」となります。<br>「〜だけでなく〜も」は「〜のほかに、さらに〜も」という意味（いみ）を表（あらわ）す表現（ひょうげん）です。3番目の★に入るのは「だけでなく」になります。"},{"text":"英語も","isCorrect":false,"rationale":"正しい順番（じゅんばん）は「日本語（選択肢1）が話せる（選択肢3）だけでなく（選択肢2）英語も（選択肢4）」となります。<br>「〜だけでなく〜も」は「〜のほかに、さらに〜も」という意味（いみ）を表（あらわ）す表現（ひょうげん）です。3番目の★に入るのは「だけでなく」になります。"}]}]</script>
+<script type="application/json" id="raw-questions">[{"id":"JLPT_N2_001","category":"【文字・語彙】漢字読み","question":"今日の会議（かいぎ）で重大な<u>決定</u>が行われた。","options":[{"text":"けってい","isCorrect":true,"rationale":"「決定」の正しい読み方は「けってい」です。「けつてい」などの促音（そくおん：小さい「つ」）の間違いに気をつけましょう。"},{"text":"けつてい","isCorrect":false,"rationale":"「決定」の正しい読み方は「けってい」です。「けつてい」などの促音（そくおん：小さい「つ」）の間違いに気をつけましょう。"},{"text":"けいでい","isCorrect":false,"rationale":"「決定」の正しい読み方は「けってい」です。「けつてい」などの促音（そくおん：小さい「つ」）の間違いに気をつけましょう。"},{"text":"けつでい","isCorrect":false,"rationale":"「決定」の正しい読み方は「けってい」です。「けつてい」などの促音（そくおん：小さい「つ」）の間違いに気をつけましょう。"}]},{"id":"JLPT_N2_002","category":"【文字・語彙】表記","question":"毎日の生活で<u>きろく</u>をつける。","options":[{"text":"記録","isCorrect":true,"rationale":"「きろく」は漢字（かんじ）で「記録（きろく）」と書きます。「緑（みどり）」などの形（かたち）が似（に）ている漢字に気をつけましょう。"},{"text":"紀緑","isCorrect":false,"rationale":"「きろく」は漢字（かんじ）で「記録（きろく）」と書きます。「緑（みどり）」などの形（かたち）が似（に）ている漢字に気をつけましょう。"},{"text":"記緑","isCorrect":false,"rationale":"「きろく」は漢字（かんじ）で「記録（きろく）」と書きます。「緑（みどり）」などの形（かたち）が似（に）ている漢字に気をつけましょう。"},{"text":"紀録","isCorrect":false,"rationale":"「きろく」は漢字（かんじ）で「記録（きろく）」と書きます。「緑（みどり）」などの形（かたち）が似（に）ている漢字に気をつけましょう。"}]},{"id":"JLPT_N2_003","category":"【文字・語彙】語形成","question":"この製品（せいひん）は安全______が高いため、人気がある。","options":[{"text":"性","isCorrect":true,"rationale":"「性（せい）」という接尾語（せつびご）がついた「安全性（あんぜんせい）」は「安全（あんぜん）である程度（ていど）」を表（あらわ）します。「安全化」や「安全感」という言葉（ことば）はありません。"},{"text":"化","isCorrect":false,"rationale":"「性（せい）」という接尾語（せつびご）がついた「安全性（あんぜんせい）」は「安全（あんぜん）である程度（ていど）」を表（あらわ）します。「安全化」や「安全感」という言葉（ことば）はありません。"},{"text":"感","isCorrect":false,"rationale":"「性（せい）」という接尾語（せつびご）がついた「安全性（あんぜんせい）」は「安全（あんぜん）である程度（ていど）」を表（あらわ）します。「安全化」や「安全感」という言葉（ことば）はありません。"},{"text":"風","isCorrect":false,"rationale":"「性（せい）」という接尾語（せつびご）がついた「安全性（あんぜんせい）」は「安全（あんぜん）である程度（ていど）」を表（あらわ）します。「安全化」や「安全感」という言葉（ことば）はありません。"}]},{"id":"JLPT_N2_004","category":"【文字・語彙】文脈規定","question":"長い時間をかけて勉強した結果、______試験（しけん）に合格（ごうかく）できた。","options":[{"text":"ついに","isCorrect":true,"rationale":"「ついに」は「長い努力（どりょく）や期待（きたい）のあとに、最終的（さいしゅうてき）に実現（じつげん）する様子（ようす）」を表（あらわ）します。<br>「ほとんど」は割合、「滅多（めった）に」「あまり」は打ち消しの表現と一緒に使います。"},{"text":"ほとんど","isCorrect":false,"rationale":"「ついに」は「長い努力（どりょく）や期待（きたい）のあとに、最終的（さいしゅうてき）に実現（じつげん）する様子（ようす）」を表（あらわ）します。<br>「ほとんど」は割合、「滅多（めった）に」「あまり」は打ち消しの表現と一緒に使います。"},{"text":"滅多に","isCorrect":false,"rationale":"「ついに」は「長い努力（どりょく）や期待（きたい）のあとに、最終的（さいしゅうてき）に実現（じつげん）する様子（ようす）」を表（あらわ）します。<br>「ほとんど」は割合、「滅多（めった）に」「あまり」は打ち消しの表現と一緒に使います。"},{"text":"あまり","isCorrect":false,"rationale":"「ついに」は「長い努力（どりょく）や期待（きたい）のあとに、最終的（さいしゅうてき）に実現（じつげん）する様子（ようす）」を表（あらわ）します。<br>「ほとんど」は割合、「滅多（めった）に」「あまり」は打ち消しの表現と一緒に使います。"}]},{"id":"JLPT_N2_005","category":"【文字・語彙】言い換え類義","question":"明日は<u>おそらく</u>雨が降るだろう。","options":[{"text":"たぶん","isCorrect":true,"rationale":"「おそらく」は「推測（すいそく）して〜だろうと思う様子（ようす）」を表（あらわ）し、「たぶん」と同じ意味（いみ）になります。"},{"text":"必ず","isCorrect":false,"rationale":"「おそらく」は「推測（すいそく）して〜だろうと思う様子（ようす）」を表（あらわ）し、「たぶん」と同じ意味（いみ）になります。"},{"text":"決して","isCorrect":false,"rationale":"「おそらく」は「推測（すいそく）して〜だろうと思う様子（ようす）」を表（あらわ）し、「たぶん」と同じ意味（いみ）になります。"},{"text":"つねに","isCorrect":false,"rationale":"「おそらく」は「推測（すいそく）して〜だろうと思う様子（ようす）」を表（あらわ）し、「たぶん」と同じ意味（いみ）になります。"}]},{"id":"JLPT_N2_006","category":"【文字・語彙】用法","question":"「集中（しゅうちゅう）」の使い方として最も適切なものを選びなさい。","options":[{"text":"静かな部屋で、目の前の勉強に集中した。","isCorrect":true,"rationale":"「集中（しゅうちゅう）」は「一つのことや場所に意識（いしき）や力を集めること」を表（あらわ）します。「勉強（べんきょう）に集中する」「仕事に集中する」という使い方（つかいかた）をします。遊ぶことや薬を飲むことには使いません。"},{"text":"友達と一緒に遊園地に行って集中した。","isCorrect":false,"rationale":"「集中（しゅうちゅう）」は「一つのことや場所に意識（いしき）や力を集めること」を表（あらわ）します。「勉強（べんきょう）に集中する」「仕事に集中する」という使い方（つかいかた）をします。遊ぶことや薬を飲むことには使いません。"},{"text":"風邪を引いたので、薬を飲んで集中した。","isCorrect":false,"rationale":"「集中（しゅうちゅう）」は「一つのことや場所に意識（いしき）や力を集めること」を表（あらわ）します。「勉強（べんきょう）に集中する」「仕事に集中する」という使い方（つかいかた）をします。遊ぶことや薬を飲むことには使いません。"},{"text":"新しい服を着て、気分を集中した。","isCorrect":false,"rationale":"「集中（しゅうちゅう）」は「一つのことや場所に意識（いしき）や力を集めること」を表（あらわ）します。「勉強（べんきょう）に集中する」「仕事に集中する」という使い方（つかいかた）をします。遊ぶことや薬を飲むことには使いません。"}]},{"id":"JLPT_N2_007","category":"【文法】文法形式の判断","question":"先生が丁寧に教えてくれた______、難しいテストに合格できました。","options":[{"text":"おかげで","isCorrect":true,"rationale":"「〜おかげで」は「良い結果（けっか）になった理由（りゆう）や原因（げんいん）」を表（あらわ）します。<br>「〜せいで」は悪い結果の理由、「〜ついでに」は別の用事を一緒にする時、「〜くせに」は不満や批判を表します。"},{"text":"せいで","isCorrect":false,"rationale":"「〜おかげで」は「良い結果（けっか）になった理由（りゆう）や原因（げんいん）」を表（あらわ）します。<br>「〜せいで」は悪い結果の理由、「〜ついでに」は別の用事を一緒にする時、「〜くせに」は不満や批判を表します。"},{"text":"ついでに","isCorrect":false,"rationale":"「〜おかげで」は「良い結果（けっか）になった理由（りゆう）や原因（げんいん）」を表（あらわ）します。<br>「〜せいで」は悪い結果の理由、「〜ついでに」は別の用事を一緒にする時、「〜くせに」は不満や批判を表します。"},{"text":"くせに","isCorrect":false,"rationale":"「〜おかげで」は「良い結果（けっか）になった理由（りゆう）や原因（げんいん）」を表（あらわ）します。<br>「〜せいで」は悪い結果の理由、「〜ついでに」は別の用事を一緒にする時、「〜くせに」は不満や批判を表します。"}]},{"id":"JLPT_N2_008","category":"【文法】文法形式の判断","question":"このテレビ番組は、若い人を______幅広い世代に人気がある。","options":[{"text":"はじめ","isCorrect":true,"rationale":"「〜をはじめ（として）」は「代表的（だいひょうてき）なものを一つ挙げて、ほかにもたくさんあること」を表（あらわ）します。<br>「〜にくらべて」は比較（ひかく）、「〜に沿（そ）って」は方針に合わせること、「〜に反（はん）して）は予想と反対であることを表します。"},{"text":"くらべて","isCorrect":false,"rationale":"「〜をはじめ（として）」は「代表的（だいひょうてき）なものを一つ挙げて、ほかにもたくさんあること」を表（あらわ）します。<br>「〜にくらべて」は比較（ひかく）、「〜に沿（そ）って」は方針に合わせること、「〜に反（はん）して）は予想と反対であることを表します。"},{"text":"沿って","isCorrect":false,"rationale":"「〜をはじめ（として）」は「代表的（だいひょうてき）なものを一つ挙げて、ほかにもたくさんあること」を表（あらわ）します。<br>「〜にくらべて」は比較（ひかく）、「〜に沿（そ）って」は方針に合わせること、「〜に反（はん）して）は予想と反対であることを表します。"},{"text":"反して","isCorrect":false,"rationale":"「〜をはじめ（として）」は「代表的（だいひょうてき）なものを一つ挙げて、ほかにもたくさんあること」を表（あらわ）します。<br>「〜にくらべて」は比較（ひかく）、「〜に沿（そ）って」は方針に合わせること、「〜に反（はん）して）は予想と反対であることを表します。"}]},{"id":"JLPT_N2_009","category":"【文法】文法形式の判断","question":"説明書（せつめいしょ）の______組み立てれば、誰でも簡単に作れます。","options":[{"text":"通りに","isCorrect":true,"rationale":"「〜通（とお）りに」は「その状態（じょうたい）や指示（しじ）と同じように」という意味（いみ）を表（あらわ）します。<br>「〜かわりに」は別のこと、「〜たびに」は毎回、「〜最中（さいちゅう）に」は〜している途中を表します。"},{"text":"かわりに","isCorrect":false,"rationale":"「〜通（とお）りに」は「その状態（じょうたい）や指示（しじ）と同じように」という意味（いみ）を表（あらわ）します。<br>「〜かわりに」は別のこと、「〜たびに」は毎回、「〜最中（さいちゅう）に」は〜している途中を表します。"},{"text":"たびに","isCorrect":false,"rationale":"「〜通（とお）りに」は「その状態（じょうたい）や指示（しじ）と同じように」という意味（いみ）を表（あらわ）します。<br>「〜かわりに」は別のこと、「〜たびに」は毎回、「〜最中（さいちゅう）に」は〜している途中を表します。"},{"text":"最中に","isCorrect":false,"rationale":"「〜通（とお）りに」は「その状態（じょうたい）や指示（しじ）と同じように」という意味（いみ）を表（あらわ）します。<br>「〜かわりに」は別のこと、「〜たびに」は毎回、「〜最中（さいちゅう）に」は〜している途中を表します。"}]},{"id":"JLPT_N2_010","category":"【文法】文の組み立て","question":"この地域は ______ ______ __★__ ______ 温かい。","options":[{"text":"通じて","isCorrect":false,"rationale":"正しい順番（じゅんばん）は「一年を（選択肢2）通じて（選択肢1）比較的に（選択肢4）気候が（選択肢3）」となります。<br>「〜を通じて」は「その期間の間ずっと」という意味（いみ）を表（あらわ）す表現（ひょうげん）です。3番目の★に入るのは「比較的に」になります。"},{"text":"一年を","isCorrect":false,"rationale":"正しい順番（じゅんばん）は「一年を（選択肢2）通じて（選択肢1）比較的に（選択肢4）気候が（選択肢3）」となります。<br>「〜を通じて」は「その期間の間ずっと」という意味（いみ）を表（あらわ）す表現（ひょうげん）です。3番目の★に入るのは「比較的に」になります。"},{"text":"気候が","isCorrect":false,"rationale":"正しい順番（じゅんばん）は「一年を（選択肢2）通じて（選択肢1）比較的に（選択肢4）気候が（選択肢3）」となります。<br>「〜を通じて」は「その期間の間ずっと」という意味（いみ）を表（あらわ）す表現（ひょうげん）です。3番目の★に入るのは「比較的に」になります。"},{"text":"比較的に","isCorrect":true,"rationale":"正しい順番（じゅんばん）は「一年を（選択肢2）通じて（選択肢1）比較的に（選択肢4）気候が（選択肢3）」となります。<br>「〜を通じて」は「その期間の間ずっと」という意味（いみ）を表（あらわ）す表現（ひょうげん）です。3番目の★に入るのは「比較的に」になります。"}]}]</script>
 
 <script>
 const appConfig = JSON.parse(document.getElementById("raw-config").textContent);
@@ -501,7 +520,6 @@ function submitExam(isAuto = false) {
     document.getElementById('score-container').style.display = 'block';
     
     let finalScore = 0;
-    let reportDetails = "";
     let catStats = {};
     
     rawLogArray = [];
@@ -531,13 +549,14 @@ function submitExam(isAuto = false) {
         rawLogArray.push({
             logId: "LOG_" + Date.now() + "_" + (idx + 1),
             sessionId: sessionId,
-            questionOrder: idx + 1, 
+            questionOrder: idx + 1,
             questionId: question.id,
             answer: selectedIdx !== null ? (selectedIdx + 1).toString() : "未回答",
             correct: isCorrect ? "TRUE" : "FALSE",
             responseTimeMs: ansObj.elapsedTimeMs,
             answerTimeSec: parseFloat(secStr),
             confidence: ansObj.confidence,
+            explanationComprehension: "NULL",
             review: "FALSE",
             answerTime: ansObj.answerTimestamp || new Date().toISOString(),
             studentId: "STU-00123",
@@ -547,6 +566,7 @@ function submitExam(isAuto = false) {
 
         const item = document.createElement('div');
         item.className = 'review-item';
+        item.id = `review-item-${idx}`;
         const statusClass = isCorrect ? 'review-status-correct' : 'review-status-incorrect';
         const statusText = isCorrect ? '【正解】' : (selectedIdx === null ? '【未回答】' : '【不正解】');
         
@@ -559,22 +579,20 @@ function submitExam(isAuto = false) {
                     <input type="checkbox" class="review-flag-cb" data-idx="${idx}" onchange="syncReviewFlag(this)"> 🚩 この問題を後でもう一度解く (Review Flag)
                 </label>
             </div>
-            <div class="review-rationale"><strong>正解の解説:</strong><br>${correctOption ? formatText(correctOption.rationale) : '解説はありません。'}</div>
+            <div class="review-rationale">
+                <strong>正解の解説:</strong><br>${correctOption ? formatText(correctOption.rationale) : '解説はありません。'}
+                
+                <div style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed #cbd5e1; font-size: 13px;">
+                    <span style="font-weight: bold; color: #475569; margin-right: 8px;">解説の理解度:</span>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-3" onclick="setComprehension(${idx}, '3')">3. 理解できた</button>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-2" onclick="setComprehension(${idx}, '2')">2. だいたい理解できた</button>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-1" onclick="setComprehension(${idx}, '1')">1. まだ少し分からない</button>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-0" onclick="setComprehension(${idx}, '0')">0. 全然分からない</button>
+                    <span class="comp-warning-tag" id="comp-warn-${idx}">⚠️ 理解度が未選択です</span>
+                </div>
+            </div>
         `;
         reviewList.appendChild(item);
-
-        let userAnsText = selectedOption ? selectedOption.text : "（未回答）";
-        let correctAnsText = correctOption ? correctOption.text : "不明";
-        reportDetails += `[問${idx + 1}] ${isCorrect ? "◯ 正解" : "✕ 不正解"}\n`;
-        reportDetails += `・カテゴリ: ${categoryName}\n`;
-        reportDetails += `・問題文: ${question.question}\n`;
-        reportDetails += `・あなたの解答: ${userAnsText}\n`;
-        reportDetails += `・正解: ${correctAnsText}\n`;
-        reportDetails += `・回答時間: ${secStr}秒\n`;
-        if (appConfig.mode === "practice") {
-            reportDetails += `・自信度: ${ansObj.confidence}\n`;
-        }
-        reportDetails += `・解説: ${correctOption ? correctOption.rationale : "なし"}\n\n`;
     });
 
     document.getElementById('final-score').innerText = `${finalScore} / ${quizData.length} 問正解`;
@@ -586,7 +604,6 @@ function submitExam(isAuto = false) {
         let rate = catStats[cat].total > 0 ? Math.round((catStats[cat].correct / catStats[cat].total) * 100) : 0;
         reportBaseText += `· ${cat}: ${rate}% (${catStats[cat].correct}/${catStats[cat].total})\n`;
     }
-    reportBaseText += `\n■ 各問題の演習詳細（回答時間・自信度データ含む）\n${reportDetails}`;
 
     actualSummary = {
         sessionId: sessionId,
@@ -595,14 +612,12 @@ function submitExam(isAuto = false) {
         startTime: new Date(examStartTime).toISOString(),
         endTime: new Date(examEndTime).toISOString(),
         totalTimeSec: Math.floor(totalElapsedMs / 1000),
-        questionCount: quizData.length, 
+        questionCount: quizData.length,
         score: finalScore,
         correctCount: finalScore,
         wrongCount: quizData.length - finalScore,
         accuracy: scorePercent
     };
-
-    updateReportOutput();
 }
 
 function syncReviewFlag(checkbox) {
@@ -610,17 +625,107 @@ function syncReviewFlag(checkbox) {
     if (rawLogArray[idx]) {
         rawLogArray[idx].review = checkbox.checked ? "TRUE" : "FALSE";
     }
-    updateReportOutput();
 }
 
-function updateReportOutput() {
-    let finalPayload = `あなたは優秀なAIメンターです。以下に添付した私のCBT結果ログを、各設問の「正誤」「回答時間（思考時間）」「自信度」「出題順（集中力傾向）」の相関を含めて深く多角的に分析し、以下の3点を行ってください。\n\n`;
+function setComprehension(idx, level) {
+    if (!rawLogArray[idx]) return;
+
+    const strLevel = String(level);
+    if (rawLogArray[idx].explanationComprehension === strLevel) {
+        rawLogArray[idx].explanationComprehension = "NULL";
+    } else {
+        rawLogArray[idx].explanationComprehension = strLevel;
+    }
+
+    [0, 1, 2, 3].forEach(v => {
+        const btn = document.getElementById(`comp-btn-${idx}-${v}`);
+        if (btn) {
+            if (rawLogArray[idx].explanationComprehension === String(v)) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        }
+    });
+
+    
+    const reviewItem = document.getElementById(`review-item-${idx}`);
+    const warnTag = document.getElementById(`comp-warn-${idx}`);
+    if (reviewItem && warnTag) {
+        if (rawLogArray[idx].explanationComprehension !== "NULL") {
+            reviewItem.classList.remove('unentered-comprehension');
+            warnTag.style.display = "none";
+        }
+    }
+}
+
+async function finalizeAndGenerateReport() {
+    
+    const unenteredIndices = [];
+    rawLogArray.forEach((item, idx) => {
+        const reviewItem = document.getElementById(`review-item-${idx}`);
+        const warnTag = document.getElementById(`comp-warn-${idx}`);
+        
+        if (item.explanationComprehension === "NULL") {
+            unenteredIndices.push(idx + 1);
+            if (reviewItem) reviewItem.classList.add('unentered-comprehension');
+            if (warnTag) warnTag.style.display = "inline";
+        } else {
+            if (reviewItem) reviewItem.classList.remove('unentered-comprehension');
+            if (warnTag) warnTag.style.display = "none";
+        }
+    });
+
+    
+    if (unenteredIndices.length > 0) {
+        const qListStr = unenteredIndices.join(", ");
+        const proceed = confirm(
+            `【未入力の確認】\n以下の設問で「解説の理解度」が未選択です。\n\n対象: 問 ${qListStr}\n\nこのまま未入力の状態で確定・生成しますか？\n（[キャンセル] を押すと未入力の設問へ移動します）`
+        );
+
+        if (!proceed) {
+            const firstUnenteredIdx = unenteredIndices[0] - 1;
+            const targetElem = document.getElementById(`review-item-${firstUnenteredIdx}`);
+            if (targetElem) {
+                targetElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            showToast(`問 ${unenteredIndices[0]} の解説理解度を選択してください。`);
+            return; 
+        }
+    }
+
+    
+    buildReportPayloadText();
+    document.getElementById("output-section").style.display = "block";
+    showToast("レポートとログデータを確定・生成しました。");
+
+    document.getElementById("output-section").scrollIntoView({ behavior: 'smooth' });
+}
+
+function buildReportPayloadText() {
+    let finalPayload = `あなたは優秀なAIメンターです。以下に添付した私のCBT結果ログを、各設問の「正誤」「回答時間（思考時間）」「自信度」「解説の理解度」「出題順（集中力傾向）」の相関を含めて深く多角的に分析し、以下の3点を行ってください。\n\n`;
     finalPayload += `【対応依頼】\n`;
-    finalPayload += `1. 私の理解のボトルネックや傾向を客観的に品評してください。単なる正誤だけでなく、「時間をかけたのに間違えた深刻な課題」や「後半（QuestionOrderが大きい問題）での集中力低下による失点」を抽出・整理してください。\n`;
-    finalPayload += `2. 私が間違えた問題、および自信度が低く（2〜4）理解が不十分な問題の解説を、専門用語の補足を含めてさらに噛み砕いてCanvas上でレビューしてください。\n`;
+    finalPayload += `1. 私の理解のボトルネックや傾向を客観的に品評してください。単なる正誤だけでなく、「時間をかけたのに間違えた深刻な課題」や「解説を読んでも理解できていない（理解度0〜1）の項目」を抽出・整理してください。\n`;
+    finalPayload += `2. 私が間違えた問題、および解説理解度が低く（0〜1）理解が不十分な問題の解説を、専門用語の補足を含めてさらに噛み砕いてCanvas上でレビューしてください。\n`;
     finalPayload += `3. 私の弱点傾向を分析し、その克服に最適な新しい類似問題を3問作成し、私が回答できるようにCanvas上で出題してください。\n\n`;
     
-    finalPayload += `--- 以下、解答レポート ---\n` + reportBaseText;
+    let reportDetails = "";
+    rawLogArray.forEach((item, idx) => {
+        const q = quizData[idx];
+        const compMap = { "3": "3 (理解できた)", "2": "2 (だいたい理解できた)", "1": "1 (まだ少し分からない)", "0": "0 (全然分からない)", "NULL": "未入力" };
+        
+        reportDetails += `[問${idx + 1}] ${item.correct === "TRUE" ? "◯ 正解" : "✕ 不正解"}\n`;
+        reportDetails += `・カテゴリ: ${item.category}\n`;
+        reportDetails += `・問題文: ${q.question}\n`;
+        reportDetails += `・回答時間: ${item.answerTimeSec}秒\n`;
+        if (appConfig.mode === "practice") {
+            reportDetails += `・自信度: ${item.confidence}\n`;
+        }
+        reportDetails += `・解説理解度: ${compMap[item.explanationComprehension] || "未入力"}\n`;
+        reportDetails += `・要復習フラグ: ${item.review}\n\n`;
+    });
+
+    finalPayload += `--- 以下、解答レポート ---\n` + reportBaseText + `\n■ 各問題の演習詳細\n` + reportDetails;
     finalPayload += `\n\n=== SUMMARY_LOG ===\n${JSON.stringify(actualSummary)}`;
     finalPayload += `\n\n=== DRILL_RAW_LOG ===\n${JSON.stringify(rawLogArray)}`;
     
@@ -659,10 +764,10 @@ function downloadExcelCSV() {
     csvContent += `"${actualSummary.sessionId}","${actualSummary.studentId}","${actualSummary.mode}","${actualSummary.startTime}","${actualSummary.endTime}",${actualSummary.totalTimeSec},${actualSummary.questionCount},${actualSummary.score},${actualSummary.correctCount},${actualSummary.wrongCount},"${actualSummary.accuracy}%"\r\n\r\n`;
     
     csvContent += "=== Answer_Log (問題単位詳細) ===\r\n";
-    csvContent += "Log ID,Session ID,Question Order,Question ID,Answer,Correct,Response Time (ms),Confidence,Review,Answer Time\r\n";
+    csvContent += "Log ID,Session ID,Question Order,Question ID,Answer,Correct,Response Time (ms),Confidence,ExplanationComprehension,Review,Answer Time\r\n";
     
     rawLogArray.forEach(item => {
-        csvContent += `"${item.logId}","${item.sessionId}",${item.questionOrder},"${item.questionId}","${item.answer}",${item.correct},${item.responseTimeMs},${item.confidence === 'NULL' ? '' : item.confidence},"${item.review}","${item.answerTime}"\r\n`;
+        csvContent += `"${item.logId}","${item.sessionId}",${item.questionOrder},"${item.questionId}","${item.answer}",${item.correct},${item.responseTimeMs},${item.confidence === 'NULL' ? '' : item.confidence},${item.explanationComprehension === 'NULL' ? '' : item.explanationComprehension},"${item.review}","${item.answerTime}"\r\n`;
     });
     
     downloadFile(csvContent, `CBT_LOG_${actualSummary.sessionId}.csv`, "text/csv;charset=utf-8;");
@@ -672,9 +777,9 @@ function downloadExcelCSV() {
 function downloadRDBAnswerLogCSV() {
     if (rawLogArray.length === 0) return;
     
-    let csvContent = "LogID,SessionID,QuestionOrder,QuestionID,Answer,Correct,ResponseTime,ConfidenceLevel,AnswerTime\r\n";
+    let csvContent = "LogID,SessionID,QuestionOrder,QuestionID,Answer,Correct,ResponseTime,ConfidenceLevel,ExplanationComprehension,Review,AnswerTime\r\n";
     rawLogArray.forEach(item => {
-        csvContent += `"${item.logId}","${item.sessionId}",${item.questionOrder},"${item.questionId}","${item.answer}",${item.correct},${item.responseTimeMs},${item.confidence === 'NULL' ? '' : item.confidence},"${item.answerTime}"\r\n`;
+        csvContent += `"${item.logId}","${item.sessionId}",${item.questionOrder},"${item.questionId}","${item.answer}",${item.correct},${item.responseTimeMs},${item.confidence === 'NULL' ? '' : item.confidence},${item.explanationComprehension === 'NULL' ? '' : item.explanationComprehension},"${item.review}","${item.answerTime}"\r\n`;
     });
     
     downloadFile(csvContent, `AnswerLog_${actualSummary.sessionId}.csv`, "text/csv;charset=utf-8;");
