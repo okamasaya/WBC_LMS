@@ -11,5 +11,6 @@ const CONFIG = {
         "it_passport_drill_8.html",
         "it_passport_drill_9.html",
         "it_passport_drill_10.html"
+        "it_passport_drill_11.html"
     ]
 };
