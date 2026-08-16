@@ -15,7 +15,7 @@ const CONFIG = {
     ],
 
     // new version
-    questionFile: ["./data/JLPT_LK_N2_Ch.json","./data/JLPT_LK_N2_Vo.json"],
+    questionFile: ["./data/JLPT_N2_LK_Ch.json","./data/JLPT_N2_LK_Vo.json"],
     questionCount: 20,
     randomQuestions: true
 
