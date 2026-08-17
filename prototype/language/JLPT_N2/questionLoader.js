@@ -21,6 +21,7 @@
  * Load JSON file
  * --------------------------------------------------------
  */
+/*
 async function loadQuestionData() {
 
     try {
@@ -55,23 +56,6 @@ async function loadQuestionData() {
         const jsonData = await response.json();
 
 
-        /*
-         * 次の2形式を許可
-         *
-         * 形式1
-         * [
-         *   {...},
-         *   {...}
-         * ]
-         *
-         * 形式2
-         * {
-         *   "questions": [
-         *      {...},
-         *      {...}
-         *   ]
-         * }
-         */
 
         let questionData;
 
@@ -120,7 +104,35 @@ async function loadQuestionData() {
     }
 
 }
+*/
 
+async function loadMultipleQuestionData(filePaths) {
+    try {
+        const dataList = await Promise.all(
+            filePaths.map(filePath => loadQuestionData(filePath))
+        );
+
+        // 複数JSONの問題配列を1つに結合
+        const allQuestions = dataList.flat();
+
+        console.log(
+            `[QuestionLoader] ${filePaths.length} files loaded`
+        );
+        console.log(
+            `[QuestionLoader] Total questions: ${allQuestions.length}`
+        );
+
+        return allQuestions;
+
+    } catch (error) {
+        console.error(
+            "[QuestionLoader] 複数JSON読込エラー:",
+            error
+        );
+
+        throw error;
+    }
+}
 
 /**
  * --------------------------------------------------------
