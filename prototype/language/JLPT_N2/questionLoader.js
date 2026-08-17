@@ -107,31 +107,24 @@ async function loadQuestionData() {
 */
 
 async function loadMultipleQuestionData(filePaths) {
+    console.log("[QuestionLoader] filePaths =", filePaths);
+    console.log("[QuestionLoader] CONFIG =", CONFIG);
     try {
         const dataList = await Promise.all(
             filePaths.map(filePath => loadQuestionData(filePath))
         );
 
-        // 複数JSONの問題配列を1つに結合
-        const allQuestions = dataList.flat();
-
-        console.log(
-            `[QuestionLoader] ${filePaths.length} files loaded`
-        );
-        console.log(
-            `[QuestionLoader] Total questions: ${allQuestions.length}`
-        );
-
-        return allQuestions;
+        return dataList.flat();
 
     } catch (error) {
         console.error(
             "[QuestionLoader] 複数JSON読込エラー:",
             error
         );
-
         throw error;
     }
+
+    
 }
 
 /**
@@ -492,9 +485,9 @@ async function createQuestionSet() {
         /// update 0818
         //const rawQuestions =
             //await loadQuestionData();
-        const questions = await loadMultipleQuestionData(
-            CONFIG.questionFiles
-        );
+            const questions = await loadMultipleQuestionData(
+                CONFIG.questionFiles
+            );
 
         if (rawQuestions.length === 0) {
 
