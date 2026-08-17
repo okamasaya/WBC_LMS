@@ -16,8 +16,7 @@ const CONFIG = {
 
     // new version
     questionFile: [
-        "./data/JLPT_N2_LK_Ch.json",
-        "./data/JLPT_N2_LK_Vo.json"
+        "./data/JLPT_N2_LK_Ch.json"
     ],
                   
     questionCount: 20,
