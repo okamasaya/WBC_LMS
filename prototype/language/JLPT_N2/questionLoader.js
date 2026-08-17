@@ -489,10 +489,12 @@ function convertQuestionFormat(question, index) {
 async function createQuestionSet() {
 
     try {
-
-        const rawQuestions =
-            await loadQuestionData();
-
+        /// update 0818
+        //const rawQuestions =
+            //await loadQuestionData();
+        const questions = await loadMultipleQuestionData(
+            CONFIG.questionFiles
+        );
 
         if (rawQuestions.length === 0) {
 
