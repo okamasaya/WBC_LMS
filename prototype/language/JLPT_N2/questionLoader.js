@@ -4,13 +4,39 @@
  * Question Loader
  *
  * Version:
- * 0.2.0
+ * 0.3.0
  *
  * Role:
- * - Load question JSON
- * - Validate question data
- * - Convert School-LMS standard format
- *   to Quiz Engine format
+ * - 1個または複数の問題JSONファイルを読み込む
+ * - 問題データを検証する
+ * - School-LMS標準形式からQuiz Engine形式へ変換する
+ *
+ * CONFIG設定例:
+ *
+ * // 複数JSONファイル
+ * questionFiles: [
+ *     "./data/drill001.json",
+ *     "./data/drill002.json"
+ * ]
+ *
+ * // 単一JSONファイル（従来形式）
+ * questionFile: "./data/drill001.json"
+ *
+ * 対応JSON形式:
+ *
+ * 1. pandas orient="records" 形式
+ * [
+ *     { ... },
+ *     { ... }
+ * ]
+ *
+ * 2. questionsプロパティ形式
+ * {
+ *     "questions": [
+ *         { ... },
+ *         { ... }
+ *     ]
+ * }
  *
  * ========================================================
  */
@@ -18,137 +44,356 @@
 
 /**
  * --------------------------------------------------------
- * Load JSON file
+ * 問題ファイル設定を配列形式へ統一する
  * --------------------------------------------------------
  */
-/*
-async function loadQuestionData() {
+function normalizeQuestionFilePaths(filePaths) {
 
-    try {
+    let normalizedPaths;
 
-        if (!CONFIG.questionFile) {
-            throw new Error(
-                "CONFIG.questionFile が設定されていません。"
-            );
+
+    /*
+     * 単一ファイル文字列の場合
+     */
+    if (typeof filePaths === "string") {
+
+        normalizedPaths = [filePaths];
+
+    /*
+     * 複数ファイル配列の場合
+     */
+    } else if (Array.isArray(filePaths)) {
+
+        normalizedPaths = filePaths;
+
+    } else {
+
+        throw new Error(
+            "問題ファイルの設定形式が正しくありません。"
+            + " CONFIG.questionFilesには配列を設定してください。"
+        );
+
+    }
+
+
+    if (normalizedPaths.length === 0) {
+
+        throw new Error(
+            "読み込む問題ファイルが設定されていません。"
+        );
+
+    }
+
+
+    return normalizedPaths.map(
+        (filePath, index) => {
+
+            if (
+                typeof filePath !== "string" ||
+                filePath.trim() === ""
+            ) {
+
+                throw new Error(
+                    `問題ファイル設定の${index + 1}件目が不正です。`
+                );
+
+            }
+
+
+            return filePath.trim();
+
         }
+    );
 
-        console.log(
-            "[QuestionLoader] Loading:",
+}
+
+
+/**
+ * --------------------------------------------------------
+ * CONFIGから問題ファイル一覧を取得する
+ *
+ * 優先順位:
+ *
+ * 1. CONFIG.questionFiles
+ * 2. CONFIG.questionFile
+ *
+ * questionFileは従来形式との互換性維持用
+ * --------------------------------------------------------
+ */
+function getConfiguredQuestionFilePaths() {
+
+    if (
+        typeof CONFIG === "undefined" ||
+        !CONFIG
+    ) {
+
+        throw new Error(
+            "CONFIGが読み込まれていません。"
+        );
+
+    }
+
+
+    /*
+     * 複数JSON設定を優先する
+     */
+    if (CONFIG.questionFiles !== undefined) {
+
+        return normalizeQuestionFilePaths(
+            CONFIG.questionFiles
+        );
+
+    }
+
+
+    /*
+     * 従来の単一JSON設定
+     */
+    if (CONFIG.questionFile !== undefined) {
+
+        return normalizeQuestionFilePaths(
             CONFIG.questionFile
         );
 
-        const response = await fetch(
-            CONFIG.questionFile,
+    }
+
+
+    throw new Error(
+        "CONFIG.questionFilesまたは"
+        + "CONFIG.questionFileが設定されていません。"
+    );
+
+}
+
+
+/**
+ * --------------------------------------------------------
+ * 1個のJSONファイルを読み込む
+ * --------------------------------------------------------
+ */
+async function loadQuestionData(filePath) {
+
+    console.log(
+        "[QuestionLoader] Loading:",
+        filePath
+    );
+
+
+    let response;
+
+
+    /*
+     * JSONファイル取得
+     */
+    try {
+
+        response = await fetch(
+            filePath,
             {
                 cache: "no-store"
             }
         );
 
-        if (!response.ok) {
-
-            throw new Error(
-                `問題ファイルを読み込めませんでした。`
-                + ` HTTP Status: ${response.status}`
-            );
-
-        }
-
-        const jsonData = await response.json();
-
-
-
-        let questionData;
-
-        if (Array.isArray(jsonData)) {
-
-            questionData = jsonData;
-
-        } else if (
-            jsonData &&
-            Array.isArray(jsonData.questions)
-        ) {
-
-            questionData = jsonData.questions;
-
-        } else {
-
-            throw new Error(
-                "JSONの形式が正しくありません。"
-                + " 配列、または questions 配列が必要です。"
-            );
-
-        }
-
-
-        console.log(
-            `[QuestionLoader] ${questionData.length}問を読み込みました。`
-        );
-
-        return questionData;
-
-
     } catch (error) {
 
-        console.error(
-            "[QuestionLoader] JSON読込エラー:",
-            error
+        throw new Error(
+            `${filePath}の取得に失敗しました。`
+            + ` ${error.message}`
         );
-
-        alert(
-            "問題データの読み込みに失敗しました。\n\n"
-            + error.message
-        );
-
-        return [];
 
     }
 
-}
-*/
 
-async function loadMultipleQuestionData(filePaths) {
-    console.log("[QuestionLoader] filePaths =", filePaths);
-    console.log("[QuestionLoader] CONFIG =", CONFIG);
-    try {
-        const dataList = await Promise.all(
-            filePaths.map(filePath => loadQuestionData(filePath))
+    /*
+     * HTTPエラー確認
+     */
+    if (!response.ok) {
+
+        throw new Error(
+            `${filePath}を読み込めませんでした。`
+            + ` HTTP Status: ${response.status}`
         );
 
-        return dataList.flat();
+    }
+
+
+    let jsonData;
+
+
+    /*
+     * JSON解析
+     */
+    try {
+
+        jsonData = await response.json();
 
     } catch (error) {
+
+        throw new Error(
+            `${filePath}のJSON解析に失敗しました。`
+            + ` ${error.message}`
+        );
+
+    }
+
+
+    let questionData;
+
+
+    /*
+     * pandas.to_json(
+     *     orient="records"
+     * )
+     *
+     * で作成された配列形式
+     */
+    if (Array.isArray(jsonData)) {
+
+        questionData = jsonData;
+
+    /*
+     * {
+     *     "questions": [...]
+     * }
+     *
+     * 形式
+     */
+    } else if (
+        jsonData &&
+        Array.isArray(jsonData.questions)
+    ) {
+
+        questionData = jsonData.questions;
+
+    } else {
+
+        throw new Error(
+            `${filePath}のJSON形式が正しくありません。`
+            + " 配列、またはquestions配列が必要です。"
+        );
+
+    }
+
+
+    console.log(
+        `[QuestionLoader] ${filePath}: `
+        + `${questionData.length}問を読み込みました。`
+    );
+
+
+    return questionData;
+
+}
+
+
+/**
+ * --------------------------------------------------------
+ * 複数JSONファイルを読み込み、1つの配列へ統合する
+ * --------------------------------------------------------
+ */
+async function loadMultipleQuestionData(filePaths) {
+
+    /*
+     * filePathsが文字列だった場合も
+     * 配列へ統一する
+     */
+    const normalizedPaths =
+        normalizeQuestionFilePaths(filePaths);
+
+
+    console.log(
+        "[QuestionLoader] 読込対象:",
+        normalizedPaths
+    );
+
+
+    try {
+
+        /*
+         * 全JSONファイルを並行して読み込む
+         */
+        const dataList = await Promise.all(
+
+            normalizedPaths.map(
+
+                filePath =>
+                    loadQuestionData(filePath)
+
+            )
+
+        );
+
+
+        /*
+         * [
+         *     [問題1, 問題2],
+         *     [問題3, 問題4]
+         * ]
+         *
+         * を
+         *
+         * [
+         *     問題1,
+         *     問題2,
+         *     問題3,
+         *     問題4
+         * ]
+         *
+         * へ変換する
+         */
+        const allQuestions =
+            dataList.flat();
+
+
+        console.log(
+            `[QuestionLoader] `
+            + `${normalizedPaths.length}ファイル、`
+            + `合計${allQuestions.length}問を統合しました。`
+        );
+
+
+        return allQuestions;
+
+    } catch (error) {
+
         console.error(
             "[QuestionLoader] 複数JSON読込エラー:",
             error
         );
+
+
         throw error;
+
     }
 
-    
 }
+
 
 /**
  * --------------------------------------------------------
- * Convert correct_answer to option number
+ * correct_answerを選択肢番号へ変換する
  *
- * Supported:
+ * 対応形式:
  *
  * 1 / 2 / 3 / 4
  * A / B / C / D
- * option_1 / option_2 / ...
- * option text itself
- *
+ * option_1 / option_2 / option_3 / option_4
+ * 選択肢の文章そのもの
  * --------------------------------------------------------
  */
 function getCorrectAnswerNumber(question) {
 
-    const value = question.correct_answer;
+    const value =
+        question.correct_answer;
+
 
     if (
         value === null ||
         value === undefined
     ) {
+
         return null;
+
     }
 
 
@@ -158,7 +403,7 @@ function getCorrectAnswerNumber(question) {
 
 
     /*
-     * 1 ～ 4
+     * 1～4
      */
     if (/^[1-4]$/.test(answer)) {
 
@@ -168,7 +413,7 @@ function getCorrectAnswerNumber(question) {
 
 
     /*
-     * A ～ D
+     * A～D
      */
     const alphabetMap = {
 
@@ -179,6 +424,7 @@ function getCorrectAnswerNumber(question) {
 
     };
 
+
     if (alphabetMap[answer]) {
 
         return alphabetMap[answer];
@@ -187,10 +433,11 @@ function getCorrectAnswerNumber(question) {
 
 
     /*
-     * option_1 ～ option_4
+     * option_1～option_4
      */
     const optionMatch =
         answer.match(/^OPTION_([1-4])$/);
+
 
     if (optionMatch) {
 
@@ -201,15 +448,17 @@ function getCorrectAnswerNumber(question) {
 
     /*
      * 正解選択肢の文章そのものが
-     * correct_answer に入っている場合
+     * correct_answerへ設定されている場合
      */
     for (let i = 1; i <= 4; i++) {
 
         const optionText =
             question[`option_${i}`];
 
+
         if (
             optionText !== undefined &&
+            optionText !== null &&
             String(optionText).trim() ===
             String(value).trim()
         ) {
@@ -228,12 +477,11 @@ function getCorrectAnswerNumber(question) {
 
 /**
  * --------------------------------------------------------
- * Generate category label
+ * カテゴリ表示文字列を生成する
  *
- * Example:
+ * 生成例:
  *
  * 【言語知識】語彙 > 用法
- *
  * --------------------------------------------------------
  */
 function buildCategoryLabel(question) {
@@ -243,10 +491,12 @@ function buildCategoryLabel(question) {
             ? String(question.category_lv1).trim()
             : "";
 
+
     const lv2 =
         question.category_lv2
             ? String(question.category_lv2).trim()
             : "";
+
 
     const lv3 =
         question.category_lv3
@@ -279,6 +529,7 @@ function buildCategoryLabel(question) {
 
         }
 
+
         label += lv3;
 
     }
@@ -298,31 +549,61 @@ function buildCategoryLabel(question) {
 
 /**
  * --------------------------------------------------------
- * Validate question
+ * 問題データを検証する
  * --------------------------------------------------------
  */
 function validateQuestion(question, index) {
 
-    const rowNumber = index + 1;
+    const rowNumber =
+        index + 1;
 
+
+    /*
+     * 問題データがオブジェクトか確認
+     */
+    if (
+        !question ||
+        typeof question !== "object" ||
+        Array.isArray(question)
+    ) {
+
+        throw new Error(
+            `${rowNumber}件目: `
+            + "問題データがオブジェクトではありません。"
+        );
+
+    }
+
+
+    /*
+     * question_id確認
+     */
     if (!question.question_id) {
 
         throw new Error(
-            `${rowNumber}件目: question_id がありません。`
+            `${rowNumber}件目: `
+            + "question_idがありません。"
         );
 
     }
 
 
+    /*
+     * question_text確認
+     */
     if (!question.question_text) {
 
         throw new Error(
-            `${question.question_id}: question_text がありません。`
+            `${question.question_id}: `
+            + "question_textがありません。"
         );
 
     }
 
 
+    /*
+     * option_1～option_4確認
+     */
     for (let i = 1; i <= 4; i++) {
 
         if (
@@ -332,7 +613,8 @@ function validateQuestion(question, index) {
         ) {
 
             throw new Error(
-                `${question.question_id}: option_${i} がありません。`
+                `${question.question_id}: `
+                + `option_${i}がありません。`
             );
 
         }
@@ -340,6 +622,9 @@ function validateQuestion(question, index) {
     }
 
 
+    /*
+     * correct_answer確認
+     */
     const correctAnswerNumber =
         getCorrectAnswerNumber(question);
 
@@ -348,7 +633,7 @@ function validateQuestion(question, index) {
 
         throw new Error(
             `${question.question_id}: `
-            + `correct_answer の値が不正です。`
+            + "correct_answerの値が不正です。"
             + ` value=${question.correct_answer}`
         );
 
@@ -362,14 +647,17 @@ function validateQuestion(question, index) {
 
 /**
  * --------------------------------------------------------
- * Convert School-LMS standard format
- * to current Quiz Engine format
+ * School-LMS標準形式から
+ * Quiz Engine形式へ変換する
  * --------------------------------------------------------
  */
 function convertQuestionFormat(question, index) {
 
     const correctAnswerNumber =
-        validateQuestion(question, index);
+        validateQuestion(
+            question,
+            index
+        );
 
 
     const explanation =
@@ -381,6 +669,9 @@ function convertQuestionFormat(question, index) {
     const options = [];
 
 
+    /*
+     * Quiz Engine用のoptions配列を作成する
+     */
     for (let i = 1; i <= 4; i++) {
 
         options.push({
@@ -400,21 +691,12 @@ function convertQuestionFormat(question, index) {
 
 
     /*
-     * 既存Quiz Engineが使用する形式
-     *
-     * id
-     * category
-     * question
-     * options[]
-     *
-     * を維持する。
-     *
-     * 同時に標準カラムも保持しておく。
+     * 既存Quiz Engine用カラムを維持しながら
+     * School-LMS標準カラムも保持する
      */
-
     return {
 
-        /* ===== Existing Engine ===== */
+        /* ===== Existing Quiz Engine ===== */
 
         id:
             String(question.question_id),
@@ -462,51 +744,69 @@ function convertQuestionFormat(question, index) {
 
 /**
  * --------------------------------------------------------
- * Create Question Set
+ * 問題セットを生成する
  *
- * 現段階では
- *
- * JSON読込
+ * CONFIG取得
+ *      ↓
+ * 複数JSON読込
+ *      ↓
+ * 問題配列統合
  *      ↓
  * Validation
  *      ↓
- * Engine形式へ変換
- *
- * のみ。
+ * Quiz Engine形式へ変換
  *
  * カテゴリフィルタ・問題数制限・ランダム抽選は
  * 現在のQuiz Engine側に任せる。
- *
  * --------------------------------------------------------
  */
 async function createQuestionSet() {
 
     try {
-        /// update 0818
-        //const rawQuestions =
-            //await loadQuestionData();
-            const questions = await loadMultipleQuestionData(
-                CONFIG.questionFiles
+
+        /*
+         * CONFIGから問題ファイル一覧を取得
+         */
+        const filePaths =
+            getConfiguredQuestionFilePaths();
+
+
+        /*
+         * 複数JSONを読み込み
+         */
+        const rawQuestions =
+            await loadMultipleQuestionData(
+                filePaths
             );
 
+
+        /*
+         * 問題が0件の場合
+         */
         if (rawQuestions.length === 0) {
 
             console.warn(
                 "[QuestionLoader] 問題が0件です。"
             );
 
+
             return [];
 
         }
 
 
+        /*
+         * Quiz Engine形式へ変換
+         */
         const convertedQuestions =
             rawQuestions.map(
+
                 (question, index) =>
                     convertQuestionFormat(
                         question,
                         index
                     )
+
             );
 
 
@@ -524,19 +824,26 @@ async function createQuestionSet() {
 
         return convertedQuestions;
 
-
     } catch (error) {
 
         console.error(
-            "[QuestionLoader] 問題変換エラー:",
+            "[QuestionLoader] 問題読込・変換エラー:",
             error
         );
 
 
-        alert(
-            "問題データの変換に失敗しました。\n\n"
-            + error.message
-        );
+        /*
+         * ブラウザ上で実行している場合のみ
+         * alertを表示する
+         */
+        if (typeof alert === "function") {
+
+            alert(
+                "問題データの読み込みまたは変換に失敗しました。\n\n"
+                + error.message
+            );
+
+        }
 
 
         return [];

@@ -1,6 +1,8 @@
 import pandas as pd
 
-file_name = "JLPT_N2_LK_Vo"
+
+# file_name = "JLPT_N2_LK_Vo"
+file_name = input("file name ?:")
 
 input = file_name + ".csv"
 output = file_name + ".json"
