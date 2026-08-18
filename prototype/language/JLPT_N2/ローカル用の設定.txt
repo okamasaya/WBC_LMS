@@ -1,0 +1,6 @@
+cd /home/oka/git/WBC_LMS
+python3 -m http.server 8000
+
+
+http://localhost:8000/prototype/language/JLPT_N2/Edit_drill.html
+
