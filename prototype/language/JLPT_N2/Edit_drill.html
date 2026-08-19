@@ -446,6 +446,105 @@ function resetCategorySelect(selectElement) {
 
 }
 
+/**
+ * Category Lv2・Lv3 表示順
+ */
+const CATEGORY_ORDER = {
+
+    lv2: {
+
+        "言語知識": [
+            "文字",
+            "語彙",
+            "文法"
+        ]
+
+    },
+
+    lv3: {
+
+        "言語知識": {
+            "文字": [
+                "漢字読み",
+                "表記"
+            ],
+ 
+            "語彙": [
+                "語形成",
+                "文脈規定",
+                "言い換え類義",
+                "用法"
+            ],
+
+            "文法": [
+                "文の文法1",
+                "文の文法2",
+                "文章の文法"
+            ]
+        }
+
+
+    }
+
+};
+
+
+/**
+ * 指定されたカテゴリ順で並べ替える
+ *
+ * 順序指定にないカテゴリは末尾へ追加する。
+ */
+function sortCategoriesByOrder(
+    categories,
+    preferredOrder
+) {
+
+    const orderMap = new Map(
+
+        preferredOrder.map(
+            (category, index) => [
+                category,
+                index
+            ]
+        )
+
+    );
+
+
+    return [...categories].sort(
+        (categoryA, categoryB) => {
+
+            const orderA =
+                orderMap.has(categoryA)
+                    ? orderMap.get(categoryA)
+                    : Number.MAX_SAFE_INTEGER;
+
+            const orderB =
+                orderMap.has(categoryB)
+                    ? orderMap.get(categoryB)
+                    : Number.MAX_SAFE_INTEGER;
+
+
+            if (orderA !== orderB) {
+
+                return orderA - orderB;
+
+            }
+
+
+            return categoryA.localeCompare(
+                categoryB,
+                "ja"
+            );
+
+        }
+    );
+
+}
+
+
+
+
 
 /**
  * Category Lv1 の候補を生成
@@ -553,10 +652,41 @@ function updateCategoryLv2Options() {
             );
 
 
+    //const uniqueCategories =
+    //    [...new Set(categories)]
+    //    .map(value => String(value).trim())
+    //    .sort();
+
+    /*
+     * カテゴリ名を文字列へ統一
+     */
+    const normalizedCategories =
+        categories.map(
+            value => String(value).trim()
+        );
+
+
+    /*
+     * 選択中のLv1に対応した
+     * Lv2の表示順を取得
+     */
+    const preferredOrder =
+        CATEGORY_ORDER.lv2[
+            lv1Select.value
+        ] || [];
+
+
+    /*
+     * 重複を除去し、指定順で並べ替える
+     */
     const uniqueCategories =
-        [...new Set(categories)]
-        .map(value => String(value).trim())
-        .sort();
+        sortCategoriesByOrder(
+
+            [...new Set(normalizedCategories)],
+
+            preferredOrder
+
+        );
 
 
     uniqueCategories.forEach(category => {
@@ -644,11 +774,52 @@ function updateCategoryLv3Options() {
             );
 
 
-    const uniqueCategories =
-        [...new Set(categories)]
-        .map(value => String(value).trim())
-        .sort();
+    //const uniqueCategories =
+    //    [...new Set(categories)]
+    //    .map(value => String(value).trim())
+    //    .sort();
 
+    
+    /*
+     * カテゴリ名を文字列へ統一
+     */
+    const normalizedCategories =
+        categories.map(
+            value => String(value).trim()
+        );
+
+
+    /*
+     * 選択中のLv1に対応する
+     * Lv3設定を取得
+     */
+    const lv3OrderByLv2 =
+        CATEGORY_ORDER.lv3[
+            lv1Select.value
+        ] || {};
+
+
+    /*
+     * 選択中のLv2に対応した
+     * Lv3の表示順を取得
+     */
+    const preferredOrder =
+        lv3OrderByLv2[
+            lv2Select.value
+        ] || [];
+
+
+    /*
+     * 重複を除去し、指定順で並べ替える
+     */
+    const uniqueCategories =
+        sortCategoriesByOrder(
+
+            [...new Set(normalizedCategories)],
+
+            preferredOrder
+
+        );
 
     uniqueCategories.forEach(category => {
 
