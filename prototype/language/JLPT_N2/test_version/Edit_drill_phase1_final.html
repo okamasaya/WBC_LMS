@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JLPT N2  演習システム</title>
+    <style>
+        /* =========================================================
+         * CBT LMS - STYLE SECTION
+         * Future split candidate: assets/css/cbt-drill.css
+         * ========================================================= */
+
+        /* --- Base Layout / Start Screen --- */
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; display: flex; gap: 20px; }
+        .start-screen { max-width: 600px; margin: 80px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; }
+        .start-title { font-size: 24px; font-weight: bold; margin-bottom: 20px; color: #1e3a8a; }
+        .start-info { background-color: #f8f9fa; padding: 20px; border-radius: 8px; text-align: left; margin-bottom: 30px; line-height: 1.8; color: #4a5568; }
+        .main-panel { flex: 3; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; }
+        .side-panel { flex: 1; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 15px; }
+
+        /* --- Question / Navigation UI --- */
+        .header-area { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; margin-bottom: 20px; }
+        h1 { font-size: 20px; color: #1a1a1a; margin: 0; }
+        .timer-display { font-size: 24px; font-weight: bold; color: #e53e3e; font-family: monospace; background: #fee2e2; padding: 4px 12px; border-radius: 6px; }
+        .category-tag { font-size: 14px; color: #1e3a8a; font-weight: bold; margin-bottom: 10px; }
+        .question-box { margin-top: 10px; }
+        .question { font-size: 18px; font-weight: bold; line-height: 1.6; margin-bottom: 25px; white-space: pre-wrap; font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif; }
+        
+        .option-btn { background-color: #f8f9fa; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; cursor: pointer; transition: all 0.2s ease; box-sizing: border-box; width: 100%; }
+        .option-btn:hover:not(:disabled) { background-color: #edf2f7; border-color: #cbd5e0; }
+        .option-btn.selected { background-color: #ebf8ff !important; border-color: #3182ce !important; color: #2b6cb0; font-weight: bold; }
+        .option-btn.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d; font-weight: bold; }
+        .option-btn.incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c; }
+
+        .options.layout-normal { display: flex; flex-direction: column; gap: 12px; }
+        .options.layout-normal .option-btn { display: flex; align-items: flex-start; gap: 14px; padding: 14px 20px; text-align: left; }
+        .options.layout-normal .option-num { background-color: #e2e8f0; color: #1e3a8a; padding: 2px 8px; border-radius: 4px; font-size: 14px; font-weight: bold; flex-shrink: 0; }
+        .options.layout-normal .option-text { flex-grow: 1; white-space: pre-wrap; font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif; }
+
+        .options.layout-grid { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); gap: 16px; width: 100%; aspect-ratio: 1 / 1; max-width: 600px; margin: 0 auto 25px auto; }
+        .options.layout-grid .option-btn { height: 100%; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; position: relative; padding: 45px 16px 16px 16px; text-align: left; }
+        .options.layout-grid .option-num { position: absolute; top: 12px; left: 12px; background-color: #1e3a8a; color: white; padding: 2px 8px; border-radius: 4px; font-size: 14px; font-weight: bold; }
+        .options.layout-grid .option-text { width: 100%; height: 100%; white-space: pre-wrap; font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif; overflow-y: auto; }
+
+
+        /* --- Confidence / Instant Feedback UI --- */
+        .confidence-panel { display: none; margin: 20px 0; padding: 20px; background-color: #fffde7; border: 2px dashed #fbc02d; border-radius: 8px; text-align: center; }
+        .confidence-title { font-weight: bold; margin-bottom: 12px; color: #f57f17; font-size: 15px; }
+        .confidence-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .conf-btn { padding: 10px; font-size: 14px; font-weight: bold; border: 2px solid #fbc02d; border-radius: 6px; background: white; cursor: pointer; transition: 0.2s; }
+        .conf-btn:hover { background: #fff9c4; }
+
+        .feedback-panel { margin-top: 20px; padding: 15px; border-radius: 6px; display: none; line-height: 1.6; white-space: pre-wrap; border-left: 4px solid #3182ce; background: #f8fafc; font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif; }
+        .control-box { display: flex; justify-content: space-between; margin-top: 40px; gap: 10px; }
+        .nav-btn { background-color: #718096; color: white; border: none; border-radius: 6px; padding: 12px 24px; font-size: 15px; font-weight: bold; cursor: pointer; }
+        .nav-btn:hover { background-color: #4a5568; }
+        .flag-btn { background-color: #fff; color: #dd6b20; border: 2px solid #dd6b20; border-radius: 6px; padding: 10px 15px; font-size: 15px; font-weight: bold; cursor: pointer; }
+        .flag-btn.flagged { background-color: #feebc8; }
+        .submit-btn { background-color: #e53e3e; color: white; padding: 14px; }
+        .submit-btn:hover { background-color: #c53030; }
+        .palette-title { font-weight: bold; font-size: 15px; color: #4a5568; }
+        .palette-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .palette-item { border: 1px solid #cbd5e0; border-radius: 4px; padding: 8px 0; text-align: center; font-size: 14px; font-weight: bold; cursor: pointer; background-color: #fff; position: relative; }
+        .palette-item.answered { background-color: #cbd5e0; color: #4a5568; }
+        .palette-item.current { border: 2px solid #3182ce; color: #3182ce; }
+        .palette-item.flagged::after { content: "🚩"; position: absolute; top: -6px; right: -4px; font-size: 10px; }
+
+        /* --- Result / Review UI --- */
+        .score-screen { display: none; width: 100%; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .score-num { text-align: center; font-size: 44px; font-weight: bold; color: #3182ce; margin: 20px 0 10px 0; }
+        
+         
+        .category-score-container { margin: 20px 0 30px 0; padding: 15px 20px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; }
+        .category-score-title { font-size: 15px; font-weight: bold; color: #1e293b; margin: 0 0 12px 0; border-bottom: 2px solid #cbd5e1; padding-bottom: 6px; }
+        .category-score-list { display: flex; flex-direction: column; gap: 8px; }
+        .category-score-card { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #ffffff; border-radius: 6px; border-left: 5px solid #94a3b8; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .category-score-card.pass { border-left-color: #16a34a; }
+        .category-score-card.warn { border-left-color: #dc2626; }
+        .category-name { font-weight: bold; font-size: 14px; color: #334155; }
+        .category-detail { font-size: 14px; color: #475569; display: flex; align-items: center; gap: 8px; }
+        .badge-pass { background: #dcfce7; color: #15803d; font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+        .badge-warn { background: #fee2e2; color: #b91c1c; font-size: 11px; padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+
+        .review-item { background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left; font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif; transition: all 0.3s ease; }
+        .review-item.unentered-comprehension { border: 2px solid #f59e0b !important; background-color: #fffbeb !important; }
+        .review-q { font-weight: bold; margin-bottom: 8px; }
+        .review-status-correct { color: #38a169; font-weight: bold; }
+        .review-status-incorrect { color: #e53e3e; font-weight: bold; }
+        .review-ans { font-size: 14px; margin: 4px 0; }
+        .review-rationale { font-size: 14px; background: #fff; padding: 10px; border-radius: 4px; margin-top: 8px; border-left: 3px solid #3182ce; color: #4a5568; }
+        
+        .comp-btn { padding: 5px 10px; font-size: 12px; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff; cursor: pointer; margin-right: 4px; transition: all 0.2s; }
+        .comp-btn:hover { background: #e2e8f0; }
+        .comp-btn.selected { background: #2563eb; color: #fff; border-color: #1d4ed8; font-weight: bold; }
+        .comp-warning-tag { color: #d97706; font-weight: bold; font-size: 13px; margin-left: 10px; display: none; }
+
+
+        /* --- Report / Export UI --- */
+        .report-area { width: 100%; height: 220px; font-family: monospace; padding: 10px; box-sizing: border-box; margin-top: 15px; border-radius: 6px; border: 1px solid #cbd5e1; background: #f8fafc; }
+        .toast { display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background-color: #333; color: #fff; padding: 12px 24px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 15px; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
+        .action-btn-group { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+    </style>
+    <script src="./config.js"></script>
+    <script src="./questionLoader.js"></script>
+
+    <script src="../../assets/js/randomSelector.js"></script>
+    <script src="./contentLauncher.js"></script>
+    
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<!-- =========================================================
+     SECTION: Start Screen
+     Future split candidate: start-screen.html
+     ========================================================= -->
+
+<div id="toast-message" class="toast"></div>
+
+<div id="start-container" class="start-screen">
+    <div class="start-title" id="title-display">JLPT N2 言語知識 演習システム</div>
+    <div class="start-info" id="description-display"></div>
+    
+    <div style="margin-bottom: 25px; text-align: center;">
+        <div style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0; display: inline-block; text-align: left; margin: 5px;">
+            <label for="question-count-select" style="font-weight: bold; margin-right: 10px; color: #475569;">出題問題数:</label>
+            <select id="question-count-select" style="padding: 8px 16px; font-size: 15px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; cursor: pointer;">
+                <option value="10" selected>10問</option>
+                <option value="30">30問</option>
+                <option value="50">50問</option>
+            </select>
+        </div>
+        <div id="category-select-container"
+             style="
+                background: #f8fafc;
+                padding: 15px;
+                border-radius: 6px;
+                border: 1px solid #e2e8f0;
+                display: none;
+                text-align: left;
+                margin: 5px;
+             ">
+
+             <!-- Category Lv1 -->
+             <div style="margin-bottom: 10px;">
+
+                 <label for="category-lv1-select"
+                        style="
+                              display: inline-block;
+                              width: 110px;
+                              font-weight: bold;
+                              color: #475569;
+                        ">
+                     カテゴリ Lv1:
+                </label>
+
+                <select id="category-lv1-select"
+                        style="
+                            padding: 8px 16px;
+                            font-size: 15px;
+                            border-radius: 6px;
+                            border: 1px solid #cbd5e1;
+                            background: white;
+                            cursor: pointer;
+                            min-width: 220px;
+                        ">
+
+                <option value="all" selected>
+                     全カテゴリ
+                </option>
+
+             </select>
+
+          </div>
+
+
+          <!-- Category Lv2 -->
+          <div style="margin-bottom: 10px;">
+
+              <label for="category-lv2-select"
+                     style="
+                          display: inline-block;
+                          width: 110px;
+                          font-weight: bold;
+                          color: #475569;
+                     ">
+                  カテゴリ Lv2:
+              </label>
+
+              <select id="category-lv2-select"
+                      disabled
+                      style="
+                           padding: 8px 16px;
+                           font-size: 15px;
+                           border-radius: 6px;
+                           border: 1px solid #cbd5e1;
+                           background: white;
+                           cursor: pointer;
+                           min-width: 220px;
+                      ">
+
+                  <option value="all" selected>
+                      全カテゴリ
+                  </option>
+
+              </select>
+
+          </div>
+
+
+          <!-- Category Lv3 -->
+          <div>
+
+             <label for="category-lv3-select"
+                    style="
+                         display: inline-block;
+                         width: 110px;
+                         font-weight: bold;
+                         color: #475569;
+                    ">
+                  カテゴリ Lv3:
+             </label>
+
+             <select id="category-lv3-select"
+                     disabled
+                     style="
+                         padding: 8px 16px;
+                         font-size: 15px;
+                         border-radius: 6px;
+                         border: 1px solid #cbd5e1;
+                         background: white;
+                         cursor: pointer;
+                         min-width: 220px;
+                     ">
+
+                 <option value="all" selected>
+                     全カテゴリ
+                 </option>
+
+             </select>
+
+          </div>
+
+          <!-- Difficulty -->
+          <div style="margin-top: 12px; margin-bottom: 10px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+              <label for="difficulty-select"
+                     style="display: inline-block; width: 110px; font-weight: bold; color: #475569;">
+                  難易度:
+              </label>
+              <select id="difficulty-select"
+                      style="padding: 8px 16px; font-size: 15px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; cursor: pointer; min-width: 220px;">
+                  <option value="all" selected>すべて</option>
+                  <option value="easy">易しい</option>
+                  <option value="hard">難しい</option>
+              </select>
+          </div>
+
+          <!-- Confidence Check -->
+          <div style="margin-top: 10px; padding: 10px 0 2px 0;">
+              <label for="use-confidence-checkbox"
+                     style="cursor: pointer; font-weight: bold; color: #475569;">
+                  <input type="checkbox" id="use-confidence-checkbox" checked>
+                  回答時に自信度を記録する
+              </label>
+              <div style="margin-top: 6px; font-size: 12px; color: #64748b; line-height: 1.6;">
+                  チェックを外すと、回答後すぐに正解と解説を表示します。
+              </div>
+          </div>
+
+       </div>
+
+
+
+    </div>
+    <button class="nav-btn submit-btn" style="width: 100%; font-size: 18px; background-color: #1e3a8a;" onclick="startExam()">演習を開始する</button>
+</div>
+
+<!-- =========================================================
+     SECTION: Exam Screen
+     Future split candidate: exam-screen.html
+     ========================================================= -->
+<div class="container" id="exam-container" style="display: none;">
+    <div class="main-panel">
+        <div class="header-area">
+            <h1 id="progress">問題 1 / --</h1>
+            <div class="timer-display" id="timer">00:00</div>
+        </div>
+
+        <div class="question-box">
+            <div id="category-display" class="category-tag">【カテゴリ】</div>
+            <div class="question" id="question-text">読み込み中...</div>
+            <div id="options-container"></div>
+            
+            <div id="confidence-panel" class="confidence-panel">
+                <div class="confidence-title">回答に対する自信度を4段階から選択してください</div>
+                <div class="confidence-grid">
+                    <button class="conf-btn" onclick="selectConfidence(1)">1. 自信がある</button>
+                    <button class="conf-btn" onclick="selectConfidence(2)">2. 少し自信がある</button>
+                    <button class="conf-btn" onclick="selectConfidence(3)">3. 怪しい</button>
+                    <button class="conf-btn" onclick="selectConfidence(4)">4. 直感！</button>
+                </div>
+            </div>
+
+            <div id="instant-feedback" class="feedback-panel"></div>
+        </div>
+
+        <div class="control-box">
+            <button class="nav-btn" onclick="prevQuestion()">前の問題へ</button>
+            <button class="flag-btn" id="flag-button" onclick="toggleFlag()">🚩 あとで確認</button>
+            <button class="nav-btn" id="next-button" onclick="nextQuestion()">次の問題へ</button>
+        </div>
+    </div>
+
+    <div class="side-panel" id="sidebar-panel">
+        <div class="palette-title">問題一覧</div>
+        <div class="palette-grid" id="palette-grid"></div>
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; width: 100%; margin: 10px 0;">
+        <button class="nav-btn submit-btn" id="finish-btn" style="width: 100%; margin: 0;" onclick="submitExam(false)">演習を終了して採点</button>
+    </div>
+</div>
+
+<!-- =========================================================
+     SECTION: Result / Review / Export Screen
+     Future split candidate: result-screen.html
+     ========================================================= -->
+<div class="container" id="score-container" style="display: none;">
+    <div class="score-screen" style="display: block;">
+        <h1>演習結果</h1>
+        <div class="score-num" id="final-score">0 / --</div>
+
+        
+        <div id="category-score-section" class="category-score-container" style="display: none;">
+            <h3 class="category-score-title">■ 分野別得点率（基準ライン: 30%）</h3>
+            <div id="category-score-list" class="category-score-list"></div>
+        </div>
+
+        <h2>正誤と解説の確認・理解度チェック</h2>
+        <p style="color: #4a5568; font-size: 14px;">解説を確認し、理解度ボタンを選択してください。</p>
+        <div id="review-list"></div>
+
+        <div style="margin-top: 40px; padding: 25px; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px;">
+            <h3 style="margin-top:0; color: #1e3a8a;">演習ログの確定とレポート出力</h3>
+            <p style="color: #4a5568; font-size: 14px; margin-bottom: 15px;">
+                解説の理解度選択が完了したら、以下のボタンを押して分析レポートおよび各種ログデータを確定生成してください。
+            </p>
+            
+            <button class="nav-btn" style="background-color: #1e3a8a; width: 100%; padding: 14px; font-size: 16px;" onclick="finalizeAndGenerateReport()">
+                📊 レポート・ログデータを確定して生成
+            </button>
+
+            <div id="output-section" style="display: none; margin-top: 25px;">
+                <div class="action-btn-group">
+                    <button class="nav-btn" style="background-color: #2b6cb0; flex: 1; min-width: 180px; padding: 12px;" onclick="copyReport()">AIレポートをコピー</button>
+                    <button class="nav-btn" style="background-color: #16a34a; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadExcelCSV()">統合結果CSV(GAS/Excel用)</button>
+                    <button class="nav-btn" style="background-color: #0d9488; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadRDBAnswerLogCSV()">AnswerLog.csv (RDB用)</button>
+                    <button class="nav-btn" style="background-color: #4f46e5; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadRDBSessionLogCSV()">SessionLog.csv (RDB用)</button>
+                </div>
+                
+                <textarea id="report-text" class="report-area" readonly></textarea>
+            </div>
+        </div>
+        <button
+               type="button"
+               onclick="window.location.reload();"
+               style="
+                   background-color: #CBD5E0;
+                   color: #1A202C;
+                   border: none;
+		   width: 100%;
+                   padding: 12px 24px;
+                   border-radius: 6px;
+                   cursor: pointer;
+                   "
+        >    もう一度最初から挑戦する
+        </button>
+
+    </div>
+</div>
+
+<script type="application/json" id="raw-config">{"mode":"practice","timeLimit":40,"layout":"normal","showCategoryScore":true}</script>
+
+<script>
+/* =========================================================
+ * CBT LMS - APPLICATION SCRIPT
+ * Section anchors are placed for future HTML / JS / CSS separation.
+ * ========================================================= */
+
+/* =========================================================
+ * SECTION 01: Application State / Configuration
+ * Future split candidate: assets/js/cbt-state.js
+ * ========================================================= */
+const appConfig = JSON.parse(
+	document.getElementById("raw-config").textContent
+);
+let originalQuizData = [];
+let quizData = [];
+let currentQuestionIndex = 0;
+let userAnswers = {}; 
+let flaggedQuestions = {};
+let timerInterval = null;
+let timeRemaining = 0;
+let examStartTime = 0;
+let examEndTime = 0;
+let qStartTime = 0; 
+let reportBaseText = "";
+let rawLogArray = [];
+let actualSummary = {};
+
+// Practice session options selected on the start screen.
+let useConfidence = true;
+let selectedDifficultyMode = "all";
+
+// TODO Phase 2 (Result Output redesign):
+// rawLogArray  -> QuestionResult-oriented structure
+// actualSummary -> Session-oriented structure
+
+/* =========================================================
+ * SECTION 02: Common Utilities
+ * Future split candidate: assets/js/cbt-utils.js
+ * ========================================================= */
+function showToast(message) {
+    const toast = document.getElementById("toast-message");
+    toast.innerText = message;
+    toast.style.display = "block";
+    setTimeout(() => { toast.style.opacity = "1"; }, 10);
+    setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => { toast.style.display = "none"; }, 300);
+    }, 2500);
+}
+
+function startExamTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            showToast("制限時間になりました。自動的に採点を行います。");
+            setTimeout(() => { submitExam(true); }, 1500);
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    document.getElementById("timer").innerText = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+function formatText(text) {
+    if (text === null || text === undefined || text === "") return "";
+    let escaped = String(text)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    
+    escaped = escaped.replace(/&lt;br\s*\/?&gt;/gi, "<br>")
+        .replace(/&lt;u&gt;/gi, "<u>").replace(/&lt;\/u&gt;/gi, "</u>")
+        .replace(/&lt;b&gt;/gi, "<b>").replace(/&lt;\/b&gt;/gi, "</b>")
+        .replace(/&lt;strong&gt;/gi, "<strong>").replace(/&lt;\/strong&gt;/gi, "</strong>")
+        .replace(/\n/g, "<br>");
+    return escaped;
+}
+
+
+function updatePracticeDescription() {
+    const description = document.getElementById("description-display");
+    const checkbox = document.getElementById("use-confidence-checkbox");
+    if (!description || appConfig.mode !== "practice") return;
+
+    const confidenceEnabled = checkbox ? checkbox.checked : true;
+    const answerFlowText = confidenceEnabled
+        ? "回答選択後に自信度を入力すると、その場で正解と解説が表示されます。"
+        : "回答すると、その場で正解と解説が表示されます。";
+
+    description.innerHTML =
+        "一問一答（Drill）形式の演習です。"
+        + answerFlowText
+        + "<br>"
+        + "カテゴリ・難易度・問題数を選んで演習できます。"
+        + "<br>"
+        + "（制限時間なし・解説を読む時間は回答時間に含みません）";
+}
+
+function filterQuestionsByDifficulty(questions, difficultyMode) {
+    const ranges = {
+        easy: { min: 1, max: 3 },
+        hard: { min: 3, max: 5 }
+    };
+
+    const range = ranges[difficultyMode];
+    if (!range) {
+        return questions;
+    }
+
+    let missingDifficultyCount = 0;
+
+    const filtered = questions.filter(question => {
+        const difficulty = Number(question.difficulty);
+
+        if (!Number.isFinite(difficulty)) {
+            missingDifficultyCount++;
+            return false;
+        }
+
+        return difficulty >= range.min
+            && difficulty <= range.max;
+    });
+
+    if (missingDifficultyCount > 0) {
+        console.warn(
+            "[ExamController] difficulty が未設定または数値ではない問題を除外しました。",
+            { missingDifficultyCount }
+        );
+    }
+
+    if (filtered.length === 0 && questions.length > 0) {
+        console.warn(
+            "[ExamController] 難易度条件に一致する問題がありません。question.difficulty の値も確認してください。",
+            { difficultyMode, sourceCount: questions.length }
+        );
+    }
+
+    return filtered;
+}
+
+
+/* =========================================================
+ * SECTION 03: Category Selector
+ * Future split candidate: assets/js/category-selector.js
+ * ========================================================= */
+
+/**
+ * ========================================================
+ * Category Selector
+ *
+ * Lv1
+ *   ↓
+ * Lv2
+ *   ↓
+ * Lv3
+ *
+ * ========================================================
+ */
+
+
+/**
+ * select の中身を初期化
+ */
+function resetCategorySelect(selectElement) {
+
+    selectElement.innerHTML = "";
+
+    const option = document.createElement("option");
+
+    option.value = "all";
+    option.textContent = "全カテゴリ";
+
+    selectElement.appendChild(option);
+
+}
+
+/**
+ * Category Lv2・Lv3 表示順
+ */
+const CATEGORY_ORDER = {
+
+    lv2: {
+
+        "言語知識": [
+            "文字",
+            "語彙",
+            "文法"
+        ]
+
+    },
+
+    lv3: {
+
+        "言語知識": {
+            "文字": [
+                "漢字読み",
+                "表記"
+            ],
+ 
+            "語彙": [
+                "語形成",
+                "文脈規定",
+                "言い換え類義",
+                "用法"
+            ],
+
+            "文法": [
+                "文の文法1",
+                "文の文法2",
+                "文章の文法"
+            ]
+        }
+
+
+    }
+
+};
+
+
+/**
+ * 指定されたカテゴリ順で並べ替える
+ *
+ * 順序指定にないカテゴリは末尾へ追加する。
+ */
+function sortCategoriesByOrder(
+    categories,
+    preferredOrder
+) {
+
+    const orderMap = new Map(
+
+        preferredOrder.map(
+            (category, index) => [
+                category,
+                index
+            ]
+        )
+
+    );
+
+
+    return [...categories].sort(
+        (categoryA, categoryB) => {
+
+            const orderA =
+                orderMap.has(categoryA)
+                    ? orderMap.get(categoryA)
+                    : Number.MAX_SAFE_INTEGER;
+
+            const orderB =
+                orderMap.has(categoryB)
+                    ? orderMap.get(categoryB)
+                    : Number.MAX_SAFE_INTEGER;
+
+
+            if (orderA !== orderB) {
+
+                return orderA - orderB;
+
+            }
+
+
+            return categoryA.localeCompare(
+                categoryB,
+                "ja"
+            );
+
+        }
+    );
+
+}
+
+
+/**
+ * Category Lv1 の候補を生成
+ */
+function generateCategoryLv1Options() {
+
+    const lv1Select =
+        document.getElementById(
+            "category-lv1-select"
+        );
+
+    resetCategorySelect(lv1Select);
+
+
+    const categories = originalQuizData
+        .map(q => q.category_lv1)
+        .filter(value =>
+            value !== null &&
+            value !== undefined &&
+            String(value).trim() !== ""
+        );
+
+
+    const uniqueCategories =
+        [...new Set(categories)]
+        .map(value => String(value).trim())
+        .sort();
+
+
+    uniqueCategories.forEach(category => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = category;
+        option.textContent = category;
+
+        lv1Select.appendChild(option);
+
+    });
+
+}
+
+
+/**
+ * Category Lv2 の候補を生成
+ *
+ * Lv1で選択された問題だけから
+ * Lv2候補を作る。
+ */
+function updateCategoryLv2Options() {
+
+    const lv1Select =
+        document.getElementById(
+            "category-lv1-select"
+        );
+
+    const lv2Select =
+        document.getElementById(
+            "category-lv2-select"
+        );
+
+    const lv3Select =
+        document.getElementById(
+            "category-lv3-select"
+        );
+
+
+    resetCategorySelect(lv2Select);
+    resetCategorySelect(lv3Select);
+
+
+    /*
+     * Lv1が「全カテゴリ」の場合
+     * Lv2、Lv3は選択不可
+     */
+    if (lv1Select.value === "all") {
+
+        lv2Select.disabled = true;
+        lv3Select.disabled = true;
+
+        return;
+
+    }
+
+
+    /*
+     * 選択されたLv1に属する問題だけ抽出
+     */
+    const filteredQuestions =
+        originalQuizData.filter(
+            q =>
+                String(q.category_lv1 || "") ===
+                lv1Select.value
+        );
+
+
+    const categories =
+        filteredQuestions
+            .map(q => q.category_lv2)
+            .filter(value =>
+                value !== null &&
+                value !== undefined &&
+		String(value).trim() !== ""
+            );
+
+
+    //const uniqueCategories =
+    //    [...new Set(categories)]
+    //    .map(value => String(value).trim())
+    //    .sort();
+
+    /*
+     * カテゴリ名を文字列へ統一
+     */
+    const normalizedCategories =
+        categories.map(
+            value => String(value).trim()
+        );
+
+
+    /*
+     * 選択中のLv1に対応した
+     * Lv2の表示順を取得
+     */
+    const preferredOrder =
+        CATEGORY_ORDER.lv2[
+            lv1Select.value
+        ] || [];
+
+
+    /*
+     * 重複を除去し、指定順で並べ替える
+     */
+    const uniqueCategories =
+        sortCategoriesByOrder(
+
+            [...new Set(normalizedCategories)],
+
+            preferredOrder
+
+        );
+
+
+    uniqueCategories.forEach(category => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = category;
+        option.textContent = category;
+
+        lv2Select.appendChild(option);
+
+    });
+
+
+    lv2Select.disabled = false;
+    lv3Select.disabled = true;
+
+}
+
+
+/**
+ * Category Lv3 の候補を生成
+ *
+ * Lv1 + Lv2
+ * で絞り込んで候補を作る。
+ */
+function updateCategoryLv3Options() {
+
+    const lv1Select =
+        document.getElementById(
+            "category-lv1-select"
+        );
+
+    const lv2Select =
+        document.getElementById(
+            "category-lv2-select"
+        );
+
+    const lv3Select =
+        document.getElementById(
+            "category-lv3-select"
+        );
+
+
+    resetCategorySelect(lv3Select);
+
+
+    /*
+     * Lv2が「全カテゴリ」の場合
+     */
+    if (lv2Select.value === "all") {
+
+        lv3Select.disabled = true;
+
+        return;
+
+    }
+
+
+    /*
+     * Lv1 + Lv2 で絞込
+     */
+    const filteredQuestions =
+        originalQuizData.filter(q =>
+
+            String(q.category_lv1 || "") ===
+                lv1Select.value
+
+            &&
+
+            String(q.category_lv2 || "") ===
+                lv2Select.value
+
+        );
+
+
+    const categories =
+        filteredQuestions
+            .map(q => q.category_lv3)
+            .filter(value =>
+                value !== null &&
+                value !== undefined &&
+                String(value).trim() !== ""
+            );
+
+
+    //const uniqueCategories =
+    //    [...new Set(categories)]
+    //    .map(value => String(value).trim())
+    //    .sort();
+
+    
+    /*
+     * カテゴリ名を文字列へ統一
+     */
+    const normalizedCategories =
+        categories.map(
+            value => String(value).trim()
+        );
+
+
+    /*
+     * 選択中のLv1に対応する
+     * Lv3設定を取得
+     */
+    const lv3OrderByLv2 =
+        CATEGORY_ORDER.lv3[
+            lv1Select.value
+        ] || {};
+
+
+    /*
+     * 選択中のLv2に対応した
+     * Lv3の表示順を取得
+     */
+    const preferredOrder =
+        lv3OrderByLv2[
+            lv2Select.value
+        ] || [];
+
+
+    /*
+     * 重複を除去し、指定順で並べ替える
+     */
+    const uniqueCategories =
+        sortCategoriesByOrder(
+
+            [...new Set(normalizedCategories)],
+
+            preferredOrder
+
+        );
+
+    uniqueCategories.forEach(category => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = category;
+        option.textContent = category;
+
+        lv3Select.appendChild(option);
+
+    });
+
+
+    /*
+     * Lv3データが存在するときだけ有効化
+     */
+    lv3Select.disabled =
+        uniqueCategories.length === 0;
+
+}
+
+
+/**
+ * ========================================================
+ * Category Selector 初期化
+ * ========================================================
+ */
+function initializeCategorySelectors() {
+
+    console.log(
+        "[CategorySelector] 初期化開始"
+    );
+
+    /*
+     * Lv1 の選択肢を生成
+     */
+    generateCategoryLv1Options();
+
+
+    const lv1Select =
+        document.getElementById(
+            "category-lv1-select"
+        );
+
+    const lv2Select =
+        document.getElementById(
+            "category-lv2-select"
+        );
+
+
+    /*
+     * HTML要素存在確認
+     */
+    if (!lv1Select) {
+
+        console.error(
+            "[CategorySelector] category-lv1-select が見つかりません。"
+        );
+
+        return;
+
+    }
+
+
+    if (!lv2Select) {
+
+        console.error(
+            "[CategorySelector] category-lv2-select が見つかりません。"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Lv1変更
+     *
+     * Lv1
+     * ↓
+     * Lv2候補更新
+     */
+    lv1Select.addEventListener(
+        "change",
+        function() {
+
+            updateCategoryLv2Options();
+
+        }
+    );
+
+
+    /*
+     * Lv2変更
+     *
+     * Lv2
+     * ↓
+     * Lv3候補更新
+     */
+    lv2Select.addEventListener(
+        "change",
+        function() {
+
+            updateCategoryLv3Options();
+
+        }
+    );
+
+
+    console.log(
+        "[CategorySelector] 初期化完了"
+    );
+
+}
+	
+
+
+
+/* =========================================================
+ * SECTION 04: Timing / Initialization
+ * Future split candidate: assets/js/exam-controller.js
+ * ========================================================= */
+function updateElapsedTimeForCurrentQuestion() {
+    if (quizData.length === 0 || currentQuestionIndex < 0 || qStartTime === 0) return;
+    
+    if (appConfig.mode === "mock" || (appConfig.mode === "practice" && !userAnswers[currentQuestionIndex]?.isConfirmed)) {
+        const elapsedMs = Date.now() - qStartTime;
+        
+        if (!userAnswers[currentQuestionIndex]) {
+            userAnswers[currentQuestionIndex] = { selectedOption: null, elapsedTimeMs: 0, confidence: "NULL", isConfirmed: false, answerTimestamp: null };
+        }
+        userAnswers[currentQuestionIndex].elapsedTimeMs += elapsedMs;
+    }
+    qStartTime = Date.now();
+}
+
+window.onload = async function() {
+
+    /*
+     * ==========================================
+     * Ver.2
+     * 問題JSONを起動時に読み込む
+     * ==========================================
+     */
+
+    originalQuizData =
+        await createQuestionSet();
+
+
+    console.log(
+        "[QuizEngine] 読込問題数:",
+        originalQuizData.length
+    );
+
+
+    /*
+     * 問題が読み込めなかった場合
+     */
+    if (originalQuizData.length === 0) {
+
+        document.getElementById(
+            "description-display"
+        ).innerHTML =
+            "<strong style='color:#dc2626;'>"
+            + "問題データを読み込めませんでした。"
+            + "</strong>";
+
+        return;
+
+    }
+
+
+    /*
+     * ==========================================
+     * Practice Mode
+     * ==========================================
+     */
+
+    if (appConfig.mode === "practice") {
+        updatePracticeDescription();
+
+        const confidenceCheckbox =
+            document.getElementById("use-confidence-checkbox");
+
+        if (confidenceCheckbox) {
+            confidenceCheckbox.addEventListener(
+                "change",
+                updatePracticeDescription
+            );
+        }
+
+
+        document.getElementById(
+            "timer"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "sidebar-panel"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "flag-button"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "category-select-container"
+        ).style.display = "inline-block";
+
+
+        /*
+         * Ver.2
+         * Lv1 / Lv2 / Lv3
+         */
+        initializeCategorySelectors();
+
+
+        /*
+         * 「演習終了」ボタン追加
+         */
+        const ctrlBox =
+            document.querySelector(
+                ".control-box"
+            );
+
+
+        const pBtn =
+            document.createElement(
+                "button"
+            );
+
+
+        pBtn.className =
+            "nav-btn submit-btn";
+
+
+        pBtn.innerText =
+            "演習を終了して採点";
+
+
+        pBtn.onclick =
+            function() {
+
+                submitExam(false);
+
+            };
+
+
+        ctrlBox.appendChild(pBtn);
+
+    }
+
+
+    /*
+     * ==========================================
+     * Mock Mode
+     * ==========================================
+     */
+
+    else {
+
+        document.getElementById(
+            "description-display"
+        ).innerHTML =
+            `本番模擬（Actual）形式で一括採点を行います。`
+            + `<br>`
+            + `制限時間（${appConfig.timeLimit}分）内に`
+            + `全問解答してください。`;
+
+    }
+
+};
+
+
+/* =========================================================
+ * SECTION 05: Exam Start / Question Set Construction
+ * Future split candidate: assets/js/exam-controller.js
+ * ========================================================= */
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function startExam() {
+
+    /*
+     * ==========================================
+     * 元問題データをコピー
+     * ==========================================
+     */
+
+    let allQuestions =
+        JSON.parse(
+            JSON.stringify(
+                originalQuizData
+            )
+        );
+
+
+    /*
+     * ==========================================
+     * Practice Mode
+     * Category Filter
+     * ==========================================
+     */
+
+    if (appConfig.mode === "practice") {
+
+        useConfidence =
+            document.getElementById("use-confidence-checkbox")?.checked
+            ?? true;
+
+        selectedDifficultyMode =
+            document.getElementById("difficulty-select")?.value
+            ?? "all";
+
+        const selectedLv1 =
+            document.getElementById(
+                "category-lv1-select"
+            ).value;
+
+
+        const selectedLv2 =
+            document.getElementById(
+                "category-lv2-select"
+            ).value;
+
+
+        const selectedLv3 =
+            document.getElementById(
+                "category-lv3-select"
+            ).value;
+
+
+        /*
+         * Lv1
+         */
+        if (selectedLv1 !== "all") {
+
+            allQuestions =
+                allQuestions.filter(
+                    q =>
+                        String(
+                            q.category_lv1 || ""
+                        ) === selectedLv1
+                );
+
+        }
+
+
+        /*
+         * Lv2
+         */
+        if (selectedLv2 !== "all") {
+
+            allQuestions =
+                allQuestions.filter(
+                    q =>
+                        String(
+                            q.category_lv2 || ""
+                        ) === selectedLv2
+                );
+
+        }
+
+
+        /*
+         * Lv3
+         */
+        if (selectedLv3 !== "all") {
+
+            allQuestions =
+                allQuestions.filter(
+                    q =>
+                        String(
+                            q.category_lv3 || ""
+                        ) === selectedLv3
+                );
+
+        }
+
+    }
+
+
+    /*
+     * ==========================================
+     * Difficulty Filter
+     * all  : 1-5
+     * easy : 1-3
+     * hard : 3-5
+     * ==========================================
+     */
+    if (appConfig.mode === "practice") {
+        allQuestions = filterQuestionsByDifficulty(
+            allQuestions,
+            selectedDifficultyMode
+        );
+    }
+
+
+    /*
+     * ==========================================
+     * 0問チェック
+     * ==========================================
+     */
+
+    if (allQuestions.length === 0) {
+
+        alert(
+            "指定したカテゴリ・難易度に該当する問題がありません。\n"
+            + "条件を変更してもう一度お試しください。"
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * ==========================================
+     * Random Shuffle
+     * ==========================================
+     */
+
+    shuffle(allQuestions);
+
+
+    /*
+     * ==========================================
+     * Question Count
+     * ==========================================
+     */
+
+    const countSelect =
+        document.getElementById(
+            "question-count-select"
+        ).value;
+
+
+    let targetCount =
+        allQuestions.length;
+
+
+    if (countSelect !== "all") {
+
+        targetCount =
+            Math.min(
+                parseInt(countSelect),
+                allQuestions.length
+            );
+
+    }
+
+
+    /*
+     * ==========================================
+     * Question Set
+     * ==========================================
+     */
+
+    quizData =
+        allQuestions.slice(
+            0,
+            targetCount
+        );
+
+
+    /*
+     * 選択肢もランダム化
+     */
+    quizData.forEach(
+        q => {
+
+            shuffle(q.options);
+
+        }
+    );
+
+
+    /*
+     * ==========================================
+     * ここから試験画面
+     * ==========================================
+     */
+
+    document.getElementById(
+        "start-container"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "exam-container"
+    ).style.display = "flex";
+
+
+    examStartTime =
+        Date.now();
+
+    console.log(
+        "[ExamController] 演習開始",
+        {
+            mode: appConfig.mode,
+            questionCount: quizData.length,
+            difficultyMode: selectedDifficultyMode,
+            useConfidence
+        }
+    );
+
+
+    /*
+     * Mock Mode
+     */
+    if (appConfig.mode === "mock") {
+
+        buildPalette();
+
+
+        timeRemaining =
+            appConfig.timeLimit * 60;
+
+
+        startExamTimer();
+
+    }
+
+
+    qStartTime =
+        Date.now();
+
+
+    loadQuestion();
+
+}
+
+	
+
+
+
+/* =========================================================
+ * SECTION 06: Question Rendering / Navigation
+ * Future split candidate: assets/js/question-view.js
+ * ========================================================= */
+function buildPalette() {
+    const grid = document.getElementById('palette-grid');
+    grid.innerHTML = '';
+    quizData.forEach((_, index) => {
+        const item = document.createElement('div');
+        item.className = 'palette-item';
+        item.id = `palette-${index}`;
+        item.innerText = index + 1;
+        item.onclick = () => jumpToQuestion(index);
+        grid.appendChild(item);
+    });
+}
+
+function updatePaletteStatus() {
+    if (appConfig.mode !== "mock") return;
+    quizData.forEach((_, index) => {
+        const item = document.getElementById(`palette-${index}`);
+        if (!item) return;
+        item.className = 'palette-item';
+        if (index === currentQuestionIndex) item.classList.add('current');
+        if (userAnswers[index] !== undefined && userAnswers[index].selectedOption !== null) item.classList.add('answered');
+        if (flaggedQuestions[index]) item.classList.add('flagged');
+    });
+}
+
+function loadQuestion() {
+    if (quizData.length === 0) return;
+    const currentQuestion = quizData[currentQuestionIndex];
+    document.getElementById('progress').innerText = `問題 ${currentQuestionIndex + 1} / ${quizData.length}`;
+    document.getElementById('category-display').innerText = `${currentQuestion.category || "未分類"}`;
+    document.getElementById('question-text').innerHTML = formatText(currentQuestion.question);
+    
+    const optionsContainer = document.getElementById('options-container');
+    optionsContainer.innerHTML = '';
+    optionsContainer.className = `options layout-${appConfig.layout || 'normal'}`;
+    
+    const confPanel = document.getElementById("confidence-panel");
+    const feedbackPanel = document.getElementById("instant-feedback");
+    
+    confPanel.style.display = "none";
+    feedbackPanel.style.display = "none";
+    feedbackPanel.innerHTML = "";
+    
+    const ansObj = userAnswers[currentQuestionIndex] || { selectedOption: null, elapsedTimeMs: 0, confidence: "NULL", isConfirmed: false, answerTimestamp: null };
+    const currentSelectedIdx = ansObj.selectedOption;
+    const correctOption = currentQuestion.options.find(o => o.isCorrect);
+
+    currentQuestion.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'option-btn';
+        button.innerHTML = `<span class="option-num">${index + 1}</span><div class="option-text">${formatText(option.text)}</div>`;
+        
+        if (appConfig.mode === "mock") {
+            if (currentSelectedIdx === index) button.classList.add('selected');
+            button.onclick = () => selectOption(index);
+        } else {
+            if (ansObj.isConfirmed) {
+                if (option.isCorrect) button.classList.add('correct');
+                if (currentSelectedIdx === index && !option.isCorrect) button.classList.add('incorrect');
+                button.disabled = true;
+            } else {
+                if (currentSelectedIdx === index) button.classList.add('selected');
+                button.onclick = () => selectOption(index);
+            }
+        }
+        optionsContainer.appendChild(button);
+    });
+
+    if (appConfig.mode === "practice") {
+        if (useConfidence && currentSelectedIdx !== null && !ansObj.isConfirmed) {
+            confPanel.style.display = "block";
+        } else if (ansObj.isConfirmed) {
+            const selectedOption = currentQuestion.options[currentSelectedIdx];
+            const isCorrect = selectedOption ? selectedOption.isCorrect : false;
+            const sec = (ansObj.elapsedTimeMs / 1000).toFixed(1);
+            const confidenceText =
+                useConfidence && ansObj.confidence !== "NULL"
+                    ? ` / 自信度: ${ansObj.confidence}`
+                    : "";
+
+            feedbackPanel.style.display = "block";
+            feedbackPanel.innerHTML = `<strong>${isCorrect ? "◯ 正解！" : "✕ 不正解..."} (回答時間: ${sec}秒${confidenceText})</strong><br><br><strong>解説:</strong><br>${correctOption ? formatText(correctOption.rationale) : "解説はありません。"}`;
+        }
+    }
+
+    const flagBtn = document.getElementById('flag-button');
+    if (flagBtn) {
+        if (flaggedQuestions[currentQuestionIndex]) {
+            flagBtn.classList.add('flagged');
+        } else {
+            flagBtn.classList.remove('flagged');
+        }
+    }
+    updatePaletteStatus();
+}
+
+/* =========================================================
+ * SECTION 07: Answer / Confidence Control
+ * Future split candidate: assets/js/answer-controller.js
+ * ========================================================= */
+function selectOption(selectedIndex) {
+    if (!userAnswers[currentQuestionIndex]) {
+        userAnswers[currentQuestionIndex] = { selectedOption: null, elapsedTimeMs: 0, confidence: "NULL", isConfirmed: false, answerTimestamp: null };
+    }
+    userAnswers[currentQuestionIndex].selectedOption = selectedIndex;
+    userAnswers[currentQuestionIndex].answerTimestamp = new Date().toISOString();
+
+    if (appConfig.mode === "practice" && !useConfidence) {
+        const elapsedMs = Date.now() - qStartTime;
+        userAnswers[currentQuestionIndex].elapsedTimeMs += elapsedMs;
+        userAnswers[currentQuestionIndex].confidence = "NULL";
+        userAnswers[currentQuestionIndex].isConfirmed = true;
+        userAnswers[currentQuestionIndex].answerTimestamp = new Date().toISOString();
+        qStartTime = Date.now();
+    }
+
+    if (appConfig.mode === "mock") {
+        const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach((btn, idx) => {
+            if (idx === selectedIndex) btn.classList.add('selected');
+            else btn.classList.remove('selected');
+        });
+        updatePaletteStatus();
+    } else {
+        loadQuestion();
+    }
+}
+
+function selectConfidence(level) {
+    if (!userAnswers[currentQuestionIndex]) {
+        userAnswers[currentQuestionIndex] = { selectedOption: null, elapsedTimeMs: 0, confidence: "NULL", isConfirmed: false, answerTimestamp: null };
+    }
+    
+    const elapsedMs = Date.now() - qStartTime;
+    userAnswers[currentQuestionIndex].elapsedTimeMs += elapsedMs;
+    userAnswers[currentQuestionIndex].confidence = level;
+    userAnswers[currentQuestionIndex].isConfirmed = true;
+    userAnswers[currentQuestionIndex].answerTimestamp = new Date().toISOString();
+    
+    loadQuestion();
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextQuestion() { 
+    if (currentQuestionIndex < quizData.length - 1) { 
+        updateElapsedTimeForCurrentQuestion();
+        currentQuestionIndex++;
+        qStartTime = Date.now();
+        loadQuestion(); 
+        scrollToTop();
+    } 
+}
+
+function prevQuestion() { 
+    if (currentQuestionIndex > 0) { 
+        updateElapsedTimeForCurrentQuestion();
+        currentQuestionIndex--;
+        qStartTime = Date.now();
+        loadQuestion(); 
+        scrollToTop();
+    } 
+}
+
+function jumpToQuestion(index) { 
+    updateElapsedTimeForCurrentQuestion();
+    currentQuestionIndex = index; 
+    qStartTime = Date.now();
+    loadQuestion(); 
+    scrollToTop();
+}
+
+function toggleFlag() {
+    flaggedQuestions[currentQuestionIndex] = !flaggedQuestions[currentQuestionIndex];
+    loadQuestion();
+}
+
+/* =========================================================
+ * SECTION 08: Exam Finalization / Result Construction
+ * Future split candidate: assets/js/result-controller.js
+ * ========================================================= */
+function submitExam(isAuto = false) {
+    updateElapsedTimeForCurrentQuestion();
+
+    if (!isAuto) {
+        const unansweredCount = quizData.filter((_, idx) => !userAnswers[idx] || userAnswers[idx].selectedOption === null || (appConfig.mode === "practice" && !userAnswers[idx].isConfirmed)).length;
+        let confirmMessage = "演習を終了して採点を行いますか？";
+        if (unansweredCount > 0) {
+            confirmMessage = `まだ未完了（未選択または自信度未回答）の問題が ${unansweredCount} 問あります。\n本当に演習を終了して採点を行いますか？`;
+        }
+        if (!confirm(confirmMessage)) return;
+    }
+
+    if (timerInterval) clearInterval(timerInterval);
+    
+    examEndTime = Date.now();
+    const totalElapsedMs = examEndTime - examStartTime;
+    const totalSeconds = Math.floor(totalElapsedMs / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    const totalTimeStr = `${minutes}分${seconds}秒`;
+
+    document.getElementById('exam-container').style.display = 'none';
+    document.getElementById('score-container').style.display = 'block';
+    
+    let finalScore = 0;
+    let mainCatStats = {};
+    
+    rawLogArray = [];
+    const sessionId = "SESS_" + Date.now();
+    const dateTimeStr = new Date().toLocaleString();
+
+    const reviewList = document.getElementById('review-list');
+    reviewList.innerHTML = '';
+
+    quizData.forEach((question, idx) => {
+        const rawCategory = question.category ? question.category.toString() : "未分類";
+        
+        
+        const catMatch = rawCategory.match(/【(.*?)】/);
+        const mainCat = catMatch ? catMatch[1] : rawCategory;
+
+        if (!mainCatStats[mainCat]) mainCatStats[mainCat] = { total: 0, correct: 0 };
+        mainCatStats[mainCat].total++;
+
+        const ansObj = userAnswers[idx] || { selectedOption: null, elapsedTimeMs: 0, confidence: "NULL", isConfirmed: false, answerTimestamp: new Date().toISOString() };
+        const selectedIdx = ansObj.selectedOption;
+        const correctOption = question.options.find(o => o.isCorrect);
+        const selectedOption = selectedIdx !== null ? question.options[selectedIdx] : null;
+        const isCorrect = selectedOption ? selectedOption.isCorrect : false;
+        const secStr = (ansObj.elapsedTimeMs / 1000).toFixed(1);
+        
+        if (isCorrect) {
+            finalScore++;
+            mainCatStats[mainCat].correct++;
+        }
+
+        rawLogArray.push({
+            logId: "LOG_" + Date.now() + "_" + (idx + 1),
+            sessionId: sessionId,
+            questionOrder: idx + 1,
+            questionId: question.id,
+            answer: selectedIdx !== null ? (selectedIdx + 1).toString() : "未回答",
+            correct: isCorrect ? "TRUE" : "FALSE",
+            responseTimeMs: ansObj.elapsedTimeMs,
+            answerTimeSec: parseFloat(secStr),
+            confidence: ansObj.confidence,
+            explanationComprehension: "NULL",
+            review: "FALSE",
+            answerTime: ansObj.answerTimestamp || new Date().toISOString(),
+            studentId: "STU-00123",
+            mode: appConfig.mode === "practice" ? "Drill" : "Actual",
+            category: rawCategory
+        });
+
+        const item = document.createElement('div');
+        item.className = 'review-item';
+        item.id = `review-item-${idx}`;
+        const statusClass = isCorrect ? 'review-status-correct' : 'review-status-incorrect';
+        const statusText = isCorrect ? '【正解】' : (selectedIdx === null ? '【未回答】' : '【不正解】');
+        
+        item.innerHTML = `
+            <div class="review-q">Q${idx + 1}. ${formatText(question.question)} <span class="${statusClass}">${statusText}</span></div>
+            <div class="review-ans">あなたの回答: <strong>${selectedOption ? formatText(selectedOption.text) : '（未回答）'}</strong> (思考時間: ${secStr}秒) ${appConfig.mode === "practice" && useConfidence ? `[自信度: ${ansObj.confidence}]` : ''}</div>
+            ${!isCorrect && correctOption ? `<div class="review-ans" style="color: #2b6cb0;">正しい解答: <strong>${formatText(correctOption.text)}</strong></div>` : ''}
+            <div style="margin: 10px 0; padding: 6px; background: #f0fdf4; border-radius: 4px; display: inline-block;">
+                <label style="cursor: pointer; font-size: 14px; color: #166534; font-weight: bold;">
+                    <input type="checkbox" class="review-flag-cb" data-idx="${idx}" onchange="syncReviewFlag(this)"> 🚩 この問題を後でもう一度解く (Review Flag)
+                </label>
+            </div>
+            <div class="review-rationale">
+                <strong>正解の解説:</strong><br>${correctOption ? formatText(correctOption.rationale) : '解説はありません。'}
+                
+                <div style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed #cbd5e1; font-size: 13px;">
+                    <span style="font-weight: bold; color: #475569; margin-right: 8px;">解説の理解度:</span>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-3" onclick="setComprehension(${idx}, '3')">3. 理解できた</button>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-2" onclick="setComprehension(${idx}, '2')">2. だいたい理解できた</button>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-1" onclick="setComprehension(${idx}, '1')">1. まだ少し分からない</button>
+                    <button type="button" class="comp-btn" id="comp-btn-${idx}-0" onclick="setComprehension(${idx}, '0')">0. 全然分からない</button>
+                    <span class="comp-warning-tag" id="comp-warn-${idx}">⚠️ 理解度が未選択です</span>
+                </div>
+            </div>
+        `;
+        reviewList.appendChild(item);
+    });
+
+    document.getElementById('final-score').innerText = `${finalScore} / ${quizData.length} 問正解`;
+    const scorePercent = quizData.length > 0 ? Math.round((finalScore / quizData.length) * 100) : 0;
+    const modeLabel = appConfig.mode === "mock" ? "模擬試験" : "練習ドリル";
+    
+    
+    const catSection = document.getElementById('category-score-section');
+    const catList = document.getElementById('category-score-list');
+
+    if (appConfig.showCategoryScore !== false && catSection && catList) {
+        catList.innerHTML = '';
+        for (let cat in mainCatStats) {
+            const data = mainCatStats[cat];
+            if (data.total === 0) continue;
+            
+            const rate = Math.round((data.correct / data.total) * 100);
+            const isPass = (data.correct / data.total) >= 0.3; 
+            
+            const cardClass = isPass ? 'pass' : 'warn';
+            const badgeHtml = isPass 
+                ? '<span class="badge-pass">基準達成</span>' 
+                : '<span class="badge-warn">足切り注意 (30%未満)</span>';
+
+            const cardHtml = `
+                <div class="category-score-card ${cardClass}">
+                    <div class="category-name">${formatText(cat)}</div>
+                    <div class="category-detail">
+                        ${data.correct} / ${data.total} 問 (${rate}%)
+                        ${badgeHtml}
+                    </div>
+                </div>
+            `;
+            catList.insertAdjacentHTML('beforeend', cardHtml);
+        }
+        catSection.style.display = 'block';
+    } else if (catSection) {
+        catSection.style.display = 'none';
+    }
+
+    reportBaseText = `演習モード: ${modeLabel}\n実施日時: ${dateTimeStr}\n総実施時間: ${totalTimeStr}\n総合スコア: ${scorePercent}点\n\n■ 分野別正解率\n`;
+    for (let cat in mainCatStats) {
+        let rate = mainCatStats[cat].total > 0 ? Math.round((mainCatStats[cat].correct / mainCatStats[cat].total) * 100) : 0;
+        reportBaseText += `· ${cat}: ${rate}% (${mainCatStats[cat].correct}/${mainCatStats[cat].total})\n`;
+    }
+
+    actualSummary = {
+        sessionId: sessionId,
+        studentId: "STU-00123",
+        mode: appConfig.mode === "practice" ? "Drill" : "Actual",
+        useConfidence: appConfig.mode === "practice" ? useConfidence : null,
+        difficultyMode: appConfig.mode === "practice" ? selectedDifficultyMode : "all",
+        startTime: new Date(examStartTime).toISOString(),
+        endTime: new Date(examEndTime).toISOString(),
+        totalTimeSec: Math.floor(totalElapsedMs / 1000),
+        questionCount: quizData.length,
+        score: finalScore,
+        correctCount: finalScore,
+        wrongCount: quizData.length - finalScore,
+        accuracy: scorePercent
+    };
+}
+
+/* =========================================================
+ * SECTION 09: Review / Understanding
+ * Future split candidate: assets/js/review-controller.js
+ * ========================================================= */
+function syncReviewFlag(checkbox) {
+    const idx = parseInt(checkbox.getAttribute('data-idx'));
+    if (rawLogArray[idx]) {
+        rawLogArray[idx].review = checkbox.checked ? "TRUE" : "FALSE";
+    }
+}
+
+function setComprehension(idx, level) {
+    if (!rawLogArray[idx]) return;
+
+    const strLevel = String(level);
+    if (rawLogArray[idx].explanationComprehension === strLevel) {
+        rawLogArray[idx].explanationComprehension = "NULL";
+    } else {
+        rawLogArray[idx].explanationComprehension = strLevel;
+    }
+
+    [0, 1, 2, 3].forEach(v => {
+        const btn = document.getElementById(`comp-btn-${idx}-${v}`);
+        if (btn) {
+            if (rawLogArray[idx].explanationComprehension === String(v)) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        }
+    });
+
+    
+    const reviewItem = document.getElementById(`review-item-${idx}`);
+    const warnTag = document.getElementById(`comp-warn-${idx}`);
+    if (reviewItem && warnTag) {
+        if (rawLogArray[idx].explanationComprehension !== "NULL") {
+            reviewItem.classList.remove('unentered-comprehension');
+            warnTag.style.display = "none";
+        }
+    }
+}
+
+async function finalizeAndGenerateReport() {
+    
+    const unenteredIndices = [];
+    rawLogArray.forEach((item, idx) => {
+        const reviewItem = document.getElementById(`review-item-${idx}`);
+        const warnTag = document.getElementById(`comp-warn-${idx}`);
+        
+        if (item.explanationComprehension === "NULL") {
+            unenteredIndices.push(idx + 1);
+            if (reviewItem) reviewItem.classList.add('unentered-comprehension');
+            if (warnTag) warnTag.style.display = "inline";
+        } else {
+            if (reviewItem) reviewItem.classList.remove('unentered-comprehension');
+            if (warnTag) warnTag.style.display = "none";
+        }
+    });
+
+    
+    if (unenteredIndices.length > 0) {
+        const qListStr = unenteredIndices.join(", ");
+        const proceed = confirm(
+            `【未入力の確認】\n以下の設問で「解説の理解度」が未選択です。\n\n対象: 問 ${qListStr}\n\nこのまま未入力の状態で確定・生成しますか？\n（[キャンセル] を押すと未入力の設問へ移動します）`
+        );
+
+        if (!proceed) {
+            const firstUnenteredIdx = unenteredIndices[0] - 1;
+            const targetElem = document.getElementById(`review-item-${firstUnenteredIdx}`);
+            if (targetElem) {
+                targetElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            showToast(`問 ${unenteredIndices[0]} の解説理解度を選択してください。`);
+            return; 
+        }
+    }
+
+    
+    buildReportPayloadText();
+    document.getElementById("output-section").style.display = "block";
+    showToast("レポートとログデータを確定・生成しました。");
+
+    document.getElementById("output-section").scrollIntoView({ behavior: 'smooth' });
+}
+
+/* =========================================================
+ * SECTION 10: AI Report Payload
+ * Future split candidate: assets/js/ai-report.js
+ * NOTE: Prompt redesign is planned in Phase 2.
+ * ========================================================= */
+function buildReportPayloadText() {
+    let finalPayload = `あなたは優秀なAIメンターです。以下に添付した私のCBT結果ログを、各設問の「正誤」「回答時間（思考時間）」「自信度」「解説の理解度」「出題順（集中力傾向）」の相関を含めて深く多角的に分析し、以下の3点を行ってください。\n\n`;
+    finalPayload += `【対応依頼】\n`;
+    finalPayload += `1. 私の理解のボトルネックや傾向を客観的に品評してください。単なる正誤だけでなく、「時間をかけたのに間違えた深刻な課題」や「解説を読んでも理解できていない（理解度0〜1）の項目」を抽出・整理してください。\n`;
+    finalPayload += `2. 私が間違えた問題、および解説理解度が低く（0〜1）理解が不十分な問題の解説を、専門用語の補足を含めてさらに噛み砕いてCanvas上でレビューしてください。\n`;
+    finalPayload += `3. 私の弱点傾向を分析し、その克服に最適な新しい類似問題を3問作成し、私が回答できるようにCanvas上で出題してください。\n\n`;
+    
+    let reportDetails = "";
+    rawLogArray.forEach((item, idx) => {
+        const q = quizData[idx];
+        const compMap = { "3": "3 (理解できた)", "2": "2 (だいたい理解できた)", "1": "1 (まだ少し分からない)", "0": "0 (全然分からない)", "NULL": "未入力" };
+        
+        reportDetails += `[問${idx + 1}] ${item.correct === "TRUE" ? "◯ 正解" : "✕ 不正解"}\n`;
+        reportDetails += `・カテゴリ: ${item.category}\n`;
+        reportDetails += `・問題文: ${q.question}\n`;
+        reportDetails += `・回答時間: ${item.answerTimeSec}秒\n`;
+        if (appConfig.mode === "practice" && useConfidence) {
+            reportDetails += `・自信度: ${item.confidence}\n`;
+        }
+        reportDetails += `・解説理解度: ${compMap[item.explanationComprehension] || "未入力"}\n`;
+        reportDetails += `・要復習フラグ: ${item.review}\n\n`;
+    });
+
+    finalPayload += `--- 以下、解答レポート ---\n` + reportBaseText + `\n■ 各問題の演習詳細\n` + reportDetails;
+    finalPayload += `\n\n=== SUMMARY_LOG ===\n${JSON.stringify(actualSummary)}`;
+    finalPayload += `\n\n=== DRILL_RAW_LOG ===\n${JSON.stringify(rawLogArray)}`;
+    
+    document.getElementById('report-text').value = finalPayload;
+}
+
+/* =========================================================
+ * SECTION 11: Data Export / Clipboard
+ * Future split candidate: assets/js/data-exporter.js
+ * NOTE: Session / QuestionResult redesign is planned in Phase 2.
+ * ========================================================= */
+function copyReport() {
+    const txt = document.getElementById("report-text");
+    txt.select();
+    document.execCommand("copy");
+    showToast("レポートをクリップボードにコピーしました。");
+}
+
+function downloadFile(content, fileName, mimeType) {
+    const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+    const blob = new Blob([bom, content], { type: mimeType });
+    const link = document.createElement("a");
+    
+    if (navigator.msSaveBlob) { 
+        navigator.msSaveBlob(blob, fileName);
+    } else {
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute("download", fileName);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+function downloadExcelCSV() {
+    if (rawLogArray.length === 0) return;
+    
+    let csvContent = "";
+    csvContent += "=== Session_Summary (試験サマリー) ===\r\n";
+    csvContent += "Session ID,Student ID,Mode,Start Time,End Time,Total Time (sec),Question Count,Score,Correct Count,Wrong Count,Accuracy\r\n";
+    csvContent += `"${actualSummary.sessionId}","${actualSummary.studentId}","${actualSummary.mode}","${actualSummary.startTime}","${actualSummary.endTime}",${actualSummary.totalTimeSec},${actualSummary.questionCount},${actualSummary.score},${actualSummary.correctCount},${actualSummary.wrongCount},"${actualSummary.accuracy}%"\r\n\r\n`;
+    
+    csvContent += "=== Answer_Log (問題単位詳細) ===\r\n";
+    csvContent += "Log ID,Session ID,Question Order,Question ID,Answer,Correct,Response Time (ms),Confidence,ExplanationComprehension,Review,Answer Time\r\n";
+    
+    rawLogArray.forEach(item => {
+        csvContent += `"${item.logId}","${item.sessionId}",${item.questionOrder},"${item.questionId}","${item.answer}",${item.correct},${item.responseTimeMs},${item.confidence === 'NULL' ? '' : item.confidence},${item.explanationComprehension === 'NULL' ? '' : item.explanationComprehension},"${item.review}","${item.answerTime}"\r\n`;
+    });
+    
+    downloadFile(csvContent, `CBT_LOG_${actualSummary.sessionId}.csv`, "text/csv;charset=utf-8;");
+    showToast("Excel/GAS対応の統合ログファイルをダウンロードしました。");
+}
+
+function downloadRDBAnswerLogCSV() {
+    if (rawLogArray.length === 0) return;
+    
+    let csvContent = "LogID,SessionID,QuestionOrder,QuestionID,Answer,Correct,ResponseTime,ConfidenceLevel,ExplanationComprehension,Review,AnswerTime\r\n";
+    rawLogArray.forEach(item => {
+        csvContent += `"${item.logId}","${item.sessionId}",${item.questionOrder},"${item.questionId}","${item.answer}",${item.correct},${item.responseTimeMs},${item.confidence === 'NULL' ? '' : item.confidence},${item.explanationComprehension === 'NULL' ? '' : item.explanationComprehension},"${item.review}","${item.answerTime}"\r\n`;
+    });
+    
+    downloadFile(csvContent, `AnswerLog_${actualSummary.sessionId}.csv`, "text/csv;charset=utf-8;");
+    showToast("RDB用 AnswerLog.csv をダウンロードしました。");
+}
+
+function downloadRDBSessionLogCSV() {
+    if (!actualSummary.sessionId) return;
+    
+    let csvContent = "SessionID,StudentID,Mode,StartTime,EndTime,TotalTime,QuestionCount\r\n";
+    csvContent += `"${actualSummary.sessionId}","${actualSummary.studentId}","${actualSummary.mode}","${actualSummary.startTime}","${actualSummary.endTime}",${actualSummary.totalTimeSec},${actualSummary.questionCount}\r\n`;
+    
+    downloadFile(csvContent, `SessionLog_${actualSummary.sessionId}.csv`, "text/csv;charset=utf-8;");
+    showToast("RDB用 SessionLog.csv をダウンロードしました。");
+}
+</script>
+</body>
+</html>
