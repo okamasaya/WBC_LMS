@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JLPT N2  演習システム</title>
+    <link rel="stylesheet" href="../../assets/css/drill.css">
+    <script src="./config.js"></script>
+    <script src="./questionLoader.js"></script>
+
+    <script src="../../assets/js/randomSelector.js"></script>
+    <script src="../../assets/js/contentLauncher.js"></script>
+    
+    <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+
+<!-- =========================================================
+     SECTION: Start Screen
+     ========================================================= -->
+
+<div id="toast-message" class="toast"></div>
+
+<div id="start-container" class="start-screen">
+    <div class="start-title" id="title-display">JLPT N2 言語知識 演習システム</div>
+    <div class="start-info" id="description-display"></div>
+    
+    <div style="margin-bottom: 25px; text-align: center;">
+        <div style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0; display: inline-block; text-align: left; margin: 5px;">
+            <label for="question-count-select" style="font-weight: bold; margin-right: 10px; color: #475569;">出題問題数:</label>
+            <select id="question-count-select" style="padding: 8px 16px; font-size: 15px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; cursor: pointer;">
+                <option value="10" selected>10問</option>
+                <option value="30">30問</option>
+                <option value="50">50問</option>
+            </select>
+        </div>
+        <div id="category-select-container"
+             style="
+                background: #f8fafc;
+                padding: 15px;
+                border-radius: 6px;
+                border: 1px solid #e2e8f0;
+                display: none;
+                text-align: left;
+                margin: 5px;
+             ">
+
+             <!-- Category Lv1 -->
+             <div style="margin-bottom: 10px;">
+
+                 <label for="category-lv1-select"
+                        style="
+                              display: inline-block;
+                              width: 110px;
+                              font-weight: bold;
+                              color: #475569;
+                        ">
+                     カテゴリ Lv1:
+                </label>
+
+                <select id="category-lv1-select"
+                        style="
+                            padding: 8px 16px;
+                            font-size: 15px;
+                            border-radius: 6px;
+                            border: 1px solid #cbd5e1;
+                            background: white;
+                            cursor: pointer;
+                            min-width: 220px;
+                        ">
+
+                <option value="all" selected>
+                     全カテゴリ
+                </option>
+
+             </select>
+
+          </div>
+
+
+          <!-- Category Lv2 -->
+          <div style="margin-bottom: 10px;">
+
+              <label for="category-lv2-select"
+                     style="
+                          display: inline-block;
+                          width: 110px;
+                          font-weight: bold;
+                          color: #475569;
+                     ">
+                  カテゴリ Lv2:
+              </label>
+
+              <select id="category-lv2-select"
+                      disabled
+                      style="
+                           padding: 8px 16px;
+                           font-size: 15px;
+                           border-radius: 6px;
+                           border: 1px solid #cbd5e1;
+                           background: white;
+                           cursor: pointer;
+                           min-width: 220px;
+                      ">
+
+                  <option value="all" selected>
+                      全カテゴリ
+                  </option>
+
+              </select>
+
+          </div>
+
+
+          <!-- Category Lv3 -->
+          <div>
+
+             <label for="category-lv3-select"
+                    style="
+                         display: inline-block;
+                         width: 110px;
+                         font-weight: bold;
+                         color: #475569;
+                    ">
+                  カテゴリ Lv3:
+             </label>
+
+             <select id="category-lv3-select"
+                     disabled
+                     style="
+                         padding: 8px 16px;
+                         font-size: 15px;
+                         border-radius: 6px;
+                         border: 1px solid #cbd5e1;
+                         background: white;
+                         cursor: pointer;
+                         min-width: 220px;
+                     ">
+
+                 <option value="all" selected>
+                     全カテゴリ
+                 </option>
+
+             </select>
+
+          </div>
+
+          <!-- Difficulty -->
+          <div style="margin-top: 12px; margin-bottom: 10px; padding-top: 12px; border-top: 1px solid #e2e8f0;">
+              <label for="difficulty-select"
+                     style="display: inline-block; width: 110px; font-weight: bold; color: #475569;">
+                  難易度:
+              </label>
+              <select id="difficulty-select"
+                      style="padding: 8px 16px; font-size: 15px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; cursor: pointer; min-width: 220px;">
+                  <option value="all" selected>すべて</option>
+                  <option value="easy">易しい</option>
+                  <option value="hard">難しい</option>
+              </select>
+          </div>
+
+          <!-- Confidence Check -->
+          <div style="margin-top: 10px; padding: 10px 0 2px 0;">
+              <label for="use-confidence-checkbox"
+                     style="cursor: pointer; font-weight: bold; color: #475569;">
+                  <input type="checkbox" id="use-confidence-checkbox" checked>
+                  回答時に自信度を記録する
+              </label>
+              <div style="margin-top: 6px; font-size: 12px; color: #64748b; line-height: 1.6;">
+                  チェックを外すと、回答後すぐに正解と解説を表示します。
+              </div>
+          </div>
+
+       </div>
+
+
+
+    </div>
+    <button class="nav-btn submit-btn" style="width: 100%; font-size: 18px; background-color: #1e3a8a;" onclick="startExam()">演習を開始する</button>
+</div>
+
+<!-- =========================================================
+     SECTION: Exam Screen
+     ========================================================= -->
+<div class="container" id="exam-container" style="display: none;">
+    <div class="main-panel">
+        <div class="header-area">
+            <h1 id="progress">問題 1 / --</h1>
+            <div class="timer-display" id="timer">00:00</div>
+        </div>
+
+        <div class="question-box">
+            <div id="category-display" class="category-tag">【カテゴリ】</div>
+            <div class="question" id="question-text">読み込み中...</div>
+            <div id="options-container"></div>
+            
+            <div id="confidence-panel" class="confidence-panel">
+                <div class="confidence-title">回答に対する自信度を4段階から選択してください</div>
+                <div class="confidence-grid">
+                    <button class="conf-btn" onclick="selectConfidence(1)">1. 自信がある</button>
+                    <button class="conf-btn" onclick="selectConfidence(2)">2. 少し自信がある</button>
+                    <button class="conf-btn" onclick="selectConfidence(3)">3. 怪しい</button>
+                    <button class="conf-btn" onclick="selectConfidence(4)">4. 直感！</button>
+                </div>
+            </div>
+
+            <div id="instant-feedback" class="feedback-panel"></div>
+        </div>
+
+        <div class="control-box">
+            <button class="nav-btn" onclick="prevQuestion()">前の問題へ</button>
+            <button class="flag-btn" id="flag-button" onclick="toggleFlag()">🚩 あとで確認</button>
+            <button class="nav-btn" id="next-button" onclick="nextQuestion()">次の問題へ</button>
+        </div>
+    </div>
+
+    <div class="side-panel" id="sidebar-panel">
+        <div class="palette-title">問題一覧</div>
+        <div class="palette-grid" id="palette-grid"></div>
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; width: 100%; margin: 10px 0;">
+        <button class="nav-btn submit-btn" id="finish-btn" style="width: 100%; margin: 0;" onclick="submitExam(false)">演習を終了して採点</button>
+    </div>
+</div>
+
+<!-- =========================================================
+     SECTION: Result / Review / Export Screen
+     ========================================================= -->
+<div class="container" id="score-container" style="display: none;">
+    <div class="score-screen" style="display: block;">
+        <h1>演習結果</h1>
+        <div class="score-num" id="final-score">0 / --</div>
+
+        
+        <div id="category-score-section" class="category-score-container" style="display: none;">
+            <h3 class="category-score-title">■ 分野別得点率（基準ライン: 30%）</h3>
+            <div id="category-score-list" class="category-score-list"></div>
+        </div>
+
+        <h2>正誤と解説の確認・理解度チェック</h2>
+        <p style="color: #4a5568; font-size: 14px;">解説を確認し、理解度ボタンを選択してください。</p>
+        <div id="review-list"></div>
+
+        <div style="margin-top: 40px; padding: 25px; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px;">
+            <h3 style="margin-top:0; color: #1e3a8a;">演習ログの確定とレポート出力</h3>
+            <p style="color: #4a5568; font-size: 14px; margin-bottom: 15px;">
+                解説の理解度選択が完了したら、以下のボタンを押して分析レポートおよび各種ログデータを確定生成してください。
+            </p>
+            
+            <button class="nav-btn" style="background-color: #1e3a8a; width: 100%; padding: 14px; font-size: 16px;" onclick="finalizeAndGenerateReport()">
+                📊 レポート・ログデータを確定して生成
+            </button>
+
+            <div id="output-section" style="display: none; margin-top: 25px;">
+                <div class="action-btn-group">
+                    <button class="nav-btn" style="background-color: #2b6cb0; flex: 1; min-width: 180px; padding: 12px;" onclick="copyReport()">AIレポートをコピー</button>
+                    <button class="nav-btn" style="background-color: #16a34a; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadExcelCSV()">統合Raw CSV (GAS/Excel用)</button>
+                    <button class="nav-btn" style="background-color: #0d9488; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadQuestionResultCSV()">QuestionResult.csv</button>
+                    <button class="nav-btn" style="background-color: #4f46e5; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadSessionCSV()">Session.csv</button>
+                </div>
+                
+                <textarea id="report-text" class="report-area" readonly></textarea>
+            </div>
+        </div>
+        <button
+               type="button"
+               onclick="window.location.reload();"
+               style="
+                   background-color: #CBD5E0;
+                   color: #1A202C;
+                   border: none;
+		   width: 100%;
+                   padding: 12px 24px;
+                   border-radius: 6px;
+                   cursor: pointer;
+                   "
+        >    もう一度最初から挑戦する
+        </button>
+
+    </div>
+</div>
+
+<!-- Classic scripts share state and the existing HTML onclick handlers. Keep this order. -->
+<script src="./drillConfig.js"></script>
+<script src="../../assets/js/drill/drillState.js"></script>
+<script src="../../assets/js/drill/drillUtils.js"></script>
+<script src="../../assets/js/drill/categorySelector.js"></script>
+<script src="../../assets/js/drill/examController.js"></script>
+<script src="../../assets/js/drill/questionView.js"></script>
+<script src="../../assets/js/drill/answerController.js"></script>
+<script src="../../assets/js/drill/resultController.js"></script>
+<script src="../../assets/js/drill/reviewController.js"></script>
+<script src="../../assets/js/drill/reportGenerator.js"></script>
+<script src="../../assets/js/drill/dataExporter.js"></script>
+<script src="../../assets/js/drill/app.js"></script>
+</body>
+</html>
