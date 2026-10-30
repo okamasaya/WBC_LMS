@@ -1,0 +1,74 @@
+const { chromium } = require('playwright');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const url = `${process.env.CBT_TEST_BASE_URL || 'http://127.0.0.1:8000'}/prototype/language/JLPT_N2/Actual_N2_261030.html`;
+const config = JSON.parse(fs.readFileSync(require('node:path').join(__dirname, '../../../../language/JLPT_N2/conf_JLPT_N2_LK.json')));
+(async () => {
+ const browser = await chromium.launch({executablePath:process.env.CBT_TEST_CHROMIUM || '/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+ try {
+ const page = await browser.newPage();
+ const errors = []; page.on('pageerror', e => errors.push(e.message));
+ await page.goto(url); await page.locator('#start').waitFor({state:'visible'});
+ assert.match(await page.locator('#summary').innerText(), /30問/);
+ await page.locator('#start').click();
+ assert.equal(await page.locator('#palette button').count(), 30);
+ assert.equal(await page.locator('#previous').isDisabled(), true);
+ await page.locator('input[name=answer]').nth(0).check();
+ await page.locator('input[name=confidence]').nth(1).check();
+ assert.equal(await page.locator('#reviews').innerText(), '');
+ assert.equal(await page.locator('.explanation').count(), 0);
+ await page.locator('#flag').click();
+ await page.locator('#next').click();
+ await page.locator('#palette button').nth(0).click();
+ assert.equal(await page.locator('input[name=answer]').nth(0).isChecked(), true);
+ assert.equal(await page.locator('input[name=confidence]').nth(1).isChecked(), true);
+ assert.equal(await page.locator('#flag').getAttribute('aria-pressed'), 'true');
+ await page.locator('input[name=answer]').nth(1).check();
+ assert.equal(await page.locator('input[name=confidence]:checked').count(), 0);
+ await page.locator('#clear-answer').click();
+ assert.equal(await page.locator('input[name=answer]:checked').count(), 0);
+ await page.locator('input[name=answer]').nth(0).check();
+ await page.locator('#palette button').nth(29).click();
+ assert.equal(await page.locator('#next').isDisabled(), true);
+ await page.locator('#finish').click();
+ assert.match(await page.locator('#finish-summary').innerText(), /未回答 29問.*あとで確認 1問/);
+ await page.locator('#cancel-finish').click();
+ assert.equal(await page.locator('#finish-dialog').isVisible(), false);
+ await page.locator('#finish').click(); await page.locator('#confirm-finish').click();
+ assert.equal(await page.locator('#exam-screen').isVisible(), false);
+ assert.equal(await page.locator('.review').count(), 30);
+ assert.equal(await page.locator('#category-results tr').count(), 9);
+ await page.locator('.review summary').first().click();
+ assert.equal(await page.locator('.explanation').first().isVisible(), true);
+ console.log('PASS: actual 30-question config, navigation, flags, answer/confidence retention/reset, clear, no early explanations, finish confirmation and results');
+
+ const timed = await browser.newPage(); await timed.clock.install();
+ await timed.goto(url); await timed.locator('#start').click(); await timed.locator('#finish').click();
+ await timed.clock.fastForward(40 * 60 * 1000 + 1000);
+ assert.equal(await timed.locator('#finish-dialog').isVisible(), false);
+ assert.match(await timed.locator('#finish-reason').innerText(), /自動/);
+ assert.match(await timed.locator('#score').innerText(), /0 \/ 30/);
+ console.log('PASS: time expiry during confirmation, all-unanswered score, automatic finalization');
+
+ const mobile = await browser.newPage({viewport:{width:390,height:844}});
+ await mobile.route('**/conf_JLPT_N2_LK.json', route => route.fulfill({json:{...config,recordConfidence:false}}));
+ await mobile.goto(url); await mobile.locator('#start').click();
+ assert.equal(await mobile.locator('#confidence').isVisible(), false);
+ assert.equal(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+ await mobile.locator('#palette button').nth(20).click();
+ assert.match(await mobile.locator('#progress').innerText(), /問題 21/);
+ console.log('PASS: confidence-disabled configuration and mobile layout/navigation');
+
+ const bad = await browser.newPage();
+ await bad.route('**/conf_JLPT_N2_LK.json', route => route.fulfill({json:{...config,categories:[{...config.categories[0],count:999999}]}}));
+ await bad.goto(url); await bad.locator('#error').waitFor({state:'visible'});
+ assert.match(await bad.locator('#error').innerText(), /しかありません/);
+ assert.equal(await bad.locator('#start').isVisible(), false);
+ await bad.unroute('**/conf_JLPT_N2_LK.json');
+ await bad.route('**/data/JLPT_N2_LK_Ch.json', route => route.fulfill({status:404,body:'missing'}));
+ await bad.reload(); await bad.locator('#error').waitFor({state:'visible'});
+ assert.match(await bad.locator('#error').innerText(), /404/);
+ console.log('PASS: insufficient category pool and missing bank block start');
+ assert.deepEqual(errors, []);
+ } finally { await browser.close(); }
+})().catch(e=>{console.error(e); process.exit(1)});

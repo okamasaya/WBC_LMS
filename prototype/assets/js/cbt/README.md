@@ -1,0 +1,51 @@
+# JLPT N2 CBT（開発中）
+
+起動ページ: `prototype/language/JLPT_N2/Actual_N2_261030.html`
+
+リポジトリのルートで `python3 -m http.server 8000` を実行し、上記パスをHTTP経由で開いてください。file:// ではJSONを取得できません。
+
+## 設定
+
+`prototype/language/JLPT_N2/conf_JLPT_N2_LK.json` だけで出題条件を変更できます。初期値の30問・40分とカテゴリ配分は開発用の暫定値です。公式試験の構成・尺度得点を再現するものではありません。
+
+| キー | 内容 |
+| --- | --- |
+| schemaVersion | 設定形式。現在は1 |
+| title / examId | 画面名 / 試験識別子。画面には固定の「開発中」バッジも表示 |
+| timeLimitMinutes | 制限時間（分、0より大きく1440以下。小数可） |
+| questionFiles | 問題JSON一覧。パスはconfファイルからの相対パス |
+| categories | 出題順のカテゴリ一覧。categoryLv1 / categoryLv2 / categoryLv3 は問題データと完全一致させる |
+| categories[].count | そのカテゴリからの出題数。0なら出題しない。合計が試験全体の問題数 |
+| shuffleQuestionsWithinCategory | trueならカテゴリ内から重複なしでランダム抽出。falseならデータ順の先頭から抽出 |
+| shuffleOptions | 選択肢をシャッフルするか。初期値はfalse（元の順番を維持） |
+| recordConfidence | 自信度入力を表示するか。入力は任意 |
+
+カテゴリは設定順に出題します。問題不足、設定重複、不正JSON、不正問題、問題ID重複は開始前にエラーとなり、出題数を自動で減らしません。設定の変更は再読み込み後に反映されます。
+
+## 動作と構成
+
+問題データと `questionLoader.js` の読込・検証・変換をdrill版と共用します。drillのHTML・設定・エンジンには変更を加えていません。CBT専用の `app.js` / `examCore.js` / `cbt.css` を使用します。
+
+回答は終了まで変更可能です。回答を選び直すと旧回答の自信度を消し、再入力できるようにします。未回答でも次へ移動・フラグ付け・提出できます。番号一覧では自信度入力の有無と関係なく、回答選択済みを「回答済み」とします。自信度入力後も解説は出しません。
+
+終了確認中もタイマーは動き、期限に達するとダイアログを閉じて自動採点します。バックグラウンドから戻った際も期限時刻と照合します。終了後に回答の変更はできません。各問1点でカテゴリ別の素点・正答率と全問の解説を表示します。
+
+回答はメモリ内のみで、再読み込みでは失われます。画面離脱の警告はブラウザ依存です。サーバーによる答案保存や不正防止を行う試験システムではなく、操作練習のための模擬試験です。
+
+## 検証
+
+リポジトリのルートから実行:
+
+```sh
+node prototype/assets/js/cbt/tests/examCore.test.mjs
+```
+
+実データで配分・重複防止・設定不備・問題不足・選択肢のシャッフルと採点を検証します。
+
+Playwright と Chromium が利用可能な環境では、上記のHTTPサーバー起動後にブラウザ検証も実行できます:
+
+```sh
+node prototype/assets/js/cbt/tests/browser.cjs
+```
+
+既定のChromiumは `/usr/bin/chromium`。必要なら `CBT_TEST_CHROMIUM` と `CBT_TEST_BASE_URL` で実行ファイル・サーバーURLを変更できます。回答・自信度・フラグの保持、番号移動、終了確認、時間切れ、結果、設定エラー、スマートフォン幅を検証します。

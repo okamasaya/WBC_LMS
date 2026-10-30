@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "title": "開発中",
+  "examId": "JLPT_N2_LK",
+  "timeLimitMinutes": 40,
+  "recordConfidence": true,
+  "shuffleQuestionsWithinCategory": true,
+  "shuffleOptions": false,
+  "questionFiles": [
+    "./data/JLPT_N2_LK_Ch.json",
+    "./data/JLPT_N2_LK_Vo.json",
+    "./data/JLPT_N2_LK_Gr.json"
+  ],
+  "categories": [
+    { "categoryLv1": "言語知識", "categoryLv2": "文字", "categoryLv3": "漢字読み", "count": 5 },
+    { "categoryLv1": "言語知識", "categoryLv2": "文字", "categoryLv3": "表記", "count": 3 },
+    { "categoryLv1": "言語知識", "categoryLv2": "語彙", "categoryLv3": "語形成", "count": 3 },
+    { "categoryLv1": "言語知識", "categoryLv2": "語彙", "categoryLv3": "文脈規定", "count": 5 },
+    { "categoryLv1": "言語知識", "categoryLv2": "語彙", "categoryLv3": "言い換え類義", "count": 3 },
+    { "categoryLv1": "言語知識", "categoryLv2": "語彙", "categoryLv3": "用法", "count": 3 },
+    { "categoryLv1": "言語知識", "categoryLv2": "文法", "categoryLv3": "文の文法1", "count": 4 },
+    { "categoryLv1": "言語知識", "categoryLv2": "文法", "categoryLv3": "文の文法2", "count": 2 },
+    { "categoryLv1": "言語知識", "categoryLv2": "文法", "categoryLv3": "文章の文法", "count": 2 }
+  ]
+}
