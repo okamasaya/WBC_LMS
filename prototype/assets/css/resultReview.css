@@ -6,7 +6,7 @@
         .review-status-incorrect { color: #e53e3e; font-weight: bold; }
         .review-ans { font-size: 14px; margin: 4px 0; }
         .review-rationale { font-size: 14px; background: #fff; padding: 10px; border-radius: 4px; margin-top: 8px; border-left: 3px solid #3182ce; color: #4a5568; }
-        
+
         .comp-btn { padding: 5px 10px; font-size: 12px; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff; cursor: pointer; margin-right: 4px; transition: all 0.2s; }
         .comp-btn:hover { background: #e2e8f0; }
         .comp-btn.selected { background: #2563eb; color: #fff; border-color: #1d4ed8; font-weight: bold; }
