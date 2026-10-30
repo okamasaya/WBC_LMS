@@ -50,7 +50,4 @@ dialog::backdrop { background: #142a4a88; }
 .table-scroll { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; text-align: left; }
 th, td { padding: 10px; border-bottom: 1px solid #d4deeb; }
-.review { border-top: 1px solid #d4deeb; padding: 16px 0; }
-.review summary { cursor: pointer; font-weight: 600; }
-.review .explanation { background: #f0f5fc; padding: 16px; border-left: 4px solid #3466b5; overflow-wrap: anywhere; }
 @media (max-width: 800px) { .exam-layout { grid-template-columns: 1fr; } .sidebar { position: static; } .palette { grid-template-columns: repeat(8, 1fr); } .card { padding: 20px; } main { padding: 0 12px 24px; } .confidence-options { grid-template-columns: 1fr; } .site-header { gap: 8px; } .site-header > span:last-child { width: 100%; font-size: .85rem; } }

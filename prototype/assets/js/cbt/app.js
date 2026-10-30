@@ -3,7 +3,7 @@ import { validateConfig, selectQuestions, scoreQuestions } from './examCore.js';
 const $ = id => document.getElementById(id);
 const confidenceLabels = ['自信がある', '少し自信がある', '怪しい', '直感！'];
 let config, bank, questions, answers, current = 0;
-let active = false, startedAt, deadline, interval;
+let active = false, startedAt, deadline, interval, visitedAt;
 const configURL = new URL('./conf_JLPT_N2_LK.json', window.location.href);
 
 // Keep the inline formatting used by the question bank, without accepting active HTML.
@@ -59,10 +59,11 @@ async function initialize() {
 function start() {
     if (active || !bank) return;
     questions = selectQuestions(config, bank);
-    answers = questions.map(() => ({ selected: null, confidence: null, flagged: false }));
+    answers = questions.map(() => ({ selected: null, confidence: null, flagged: false, elapsedTimeMs: 0, understandingLevel: null, understandingLabel: '未入力', reviewFlag: false }));
     current = 0;
     startedAt = Date.now();
     deadline = startedAt + config.timeLimitMinutes * 60000;
+    visitedAt = startedAt;
     active = true;
     $('start-screen').hidden = true;
     $('exam-screen').hidden = false;
@@ -92,8 +93,15 @@ function tick() {
     if (Date.now() >= deadline) finish(true);
 }
 
+function recordVisitTime() {
+    const now = Math.min(Date.now(), deadline);
+    answers[current].elapsedTimeMs += Math.max(0, now - visitedAt);
+    visitedAt = now;
+}
+
 function navigate(index) {
     if (!canInteract() || index < 0 || index >= questions.length) return;
+    recordVisitTime();
     current = index;
     renderQuestion();
 }
@@ -172,6 +180,7 @@ function renderPalette() {
 function finish(timedOut) {
     if (!active) return;
     if (!timedOut && Date.now() >= deadline) timedOut = true;
+    recordVisitTime();
     active = false;
     clearInterval(interval);
     if ($('finish-dialog').open) $('finish-dialog').close();
@@ -191,24 +200,19 @@ function finish(timedOut) {
         }
         $('category-results').append(row);
     }
-    results.forEach(({ question: q, answer, correct }, i) => {
-        const review = document.createElement('details');
-        review.className = 'review';
-        const summary = document.createElement('summary');
-        summary.textContent = `問題 ${i + 1}：${answer.selected === null ? '未回答' : correct ? '正解' : '不正解'} ／ ${q.category_lv2}・${q.category_lv3}${answer.flagged ? ' ／ ⚑ あとで確認' : ''}`;
-        const question = document.createElement('p'); formatted(question, q.question);
-        const options = document.createElement('ol');
-        q.options.forEach((option, j) => {
-            const item = document.createElement('li');
-            formatted(item, `${answer.selected === j ? '【あなたの回答】' : ''}${option.isCorrect ? '【正解】' : ''}${option.text}`);
-            options.append(item);
+    results.forEach(({ question: q, answer }, i) => {
+        const review = window.ResultReview.createItem({
+            index: i,
+            question: q,
+            selectedIndex: answer.selected,
+            responseTimeMs: answer.elapsedTimeMs,
+            confidence: answer.confidence,
+            showConfidence: config.recordConfidence,
+            duringExamFlag: answer.flagged,
+            reviewFlag: answer.reviewFlag,
+            onReviewFlagChange: checkbox => { answer.reviewFlag = checkbox.checked; },
+            onUnderstandingChange: level => window.ResultReview.toggleUnderstanding(answer, i, level)
         });
-        const confidence = document.createElement('p');
-        confidence.textContent = `自信度：${answer.confidence === null ? '未記録' : confidenceLabels[answer.confidence - 1]}`;
-        confidence.hidden = !config.recordConfidence;
-        const explanation = document.createElement('div'); explanation.className = 'explanation';
-        formatted(explanation, q.options.find(o => o.isCorrect)?.rationale || '解説は登録されていません。');
-        review.append(summary, question, options, confidence, explanation);
         $('reviews').append(review);
     });
     $('result-heading').focus();

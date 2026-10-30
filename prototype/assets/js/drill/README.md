@@ -82,3 +82,9 @@ python -m http.server 8000
 初回分割では、元の44関数の処理、採点ルール、CSV の列名・列順、データ形式（2.0.0）、ダミーの学習者IDや出題元記録の扱いを維持しています。設定形式の統一、共有状態の再設計、採点関数の細分化は、この分割版の動作確認後に扱います。
 
 新しい HTML の contentLauncher.js の参照先は、配置済みの `prototype/assets/js/contentLauncher.js` に合わせています。
+
+## 結果・解説カードの共通化（261030）
+
+終了後の解説カードと理解度の選択処理は `prototype/assets/js/shared/resultReview.js`、対応スタイルは `prototype/assets/css/resultReview.css` に切り出しました。`Actual_N2_261030.html` でも同じ部品を使用します。drill側は引き続き `resultController.js` が採点・Rawログを作成し、`reviewController.js` が理解度と復習フラグをログに反映します。レポートとCSVの列定義・生成処理は維持しています。
+
+共通スクリプトは `resultController.js` より前に読み込んでください。カード内のクリック処理はイベントリスナーで登録します。表示・ログ更新・CSVの回帰確認は `node prototype/assets/js/cbt/tests/browser.cjs` で行えます（HTTPサーバー、Playwright、Chromiumが必要）。
