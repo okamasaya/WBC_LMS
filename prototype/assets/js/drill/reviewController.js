@@ -12,35 +12,7 @@ function syncReviewFlag(checkbox) {
 function setComprehension(idx, level) {
     if (!rawLogArray[idx]) return;
 
-    const strLevel = String(level);
-    if (String(rawLogArray[idx].understandingLevel) === strLevel) {
-        rawLogArray[idx].understandingLevel = null;
-        rawLogArray[idx].understandingLabel = "未入力";
-    } else {
-        rawLogArray[idx].understandingLevel = Number(level);
-        rawLogArray[idx].understandingLabel = getUnderstandingLabel(level);
-    }
-
-    [0, 1, 2, 3].forEach(v => {
-        const btn = document.getElementById(`comp-btn-${idx}-${v}`);
-        if (btn) {
-            if (String(rawLogArray[idx].understandingLevel) === String(v)) {
-                btn.classList.add('selected');
-            } else {
-                btn.classList.remove('selected');
-            }
-        }
-    });
-
-    
-    const reviewItem = document.getElementById(`review-item-${idx}`);
-    const warnTag = document.getElementById(`comp-warn-${idx}`);
-    if (reviewItem && warnTag) {
-        if (rawLogArray[idx].understandingLevel !== null) {
-            reviewItem.classList.remove('unentered-comprehension');
-            warnTag.style.display = "none";
-        }
-    }
+    ResultReview.toggleUnderstanding(rawLogArray[idx], idx, level);
 }
 
 async function finalizeAndGenerateReport() {

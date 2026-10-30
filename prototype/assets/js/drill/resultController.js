@@ -180,35 +180,16 @@ function submitExam(isAuto = false) {
             createdAt
         });
 
-        const secStr = answerTimeSec.toFixed(1);
-        const item = document.createElement('div');
-        item.className = 'review-item';
-        item.id = `review-item-${idx}`;
-        const statusClass = isCorrect ? 'review-status-correct' : 'review-status-incorrect';
-        const statusText = isCorrect ? '【正解】' : (selectedIdx === null ? '【未回答】' : '【不正解】');
-
-        item.innerHTML = `
-            <div class="review-q">Q${idx + 1}. ${formatText(question.question)} <span class="${statusClass}">${statusText}</span></div>
-            <div class="review-ans">あなたの回答: <strong>${selectedOption ? formatText(selectedOption.text) : '（未回答）'}</strong> (思考時間: ${secStr}秒) ${appConfig.mode === "practice" && useConfidence ? `[自信度: ${ansObj.confidence}]` : ''}</div>
-            ${!isCorrect && correctOption ? `<div class="review-ans" style="color: #2b6cb0;">正しい解答: <strong>${formatText(correctOption.text)}</strong></div>` : ''}
-            <div style="margin: 10px 0; padding: 6px; background: #f0fdf4; border-radius: 4px; display: inline-block;">
-                <label style="cursor: pointer; font-size: 14px; color: #166534; font-weight: bold;">
-                    <input type="checkbox" class="review-flag-cb" data-idx="${idx}" onchange="syncReviewFlag(this)"> 🚩 この問題を後でもう一度解く (Review Flag)
-                </label>
-            </div>
-            <div class="review-rationale">
-                <strong>正解の解説:</strong><br>${correctOption ? formatText(correctOption.rationale) : '解説はありません。'}
-
-                <div style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed #cbd5e1; font-size: 13px;">
-                    <span style="font-weight: bold; color: #475569; margin-right: 8px;">解説の理解度:</span>
-                    <button type="button" class="comp-btn" id="comp-btn-${idx}-3" onclick="setComprehension(${idx}, '3')">3. 理解できた</button>
-                    <button type="button" class="comp-btn" id="comp-btn-${idx}-2" onclick="setComprehension(${idx}, '2')">2. だいたい理解できた</button>
-                    <button type="button" class="comp-btn" id="comp-btn-${idx}-1" onclick="setComprehension(${idx}, '1')">1. まだ少し分からない</button>
-                    <button type="button" class="comp-btn" id="comp-btn-${idx}-0" onclick="setComprehension(${idx}, '0')">0. 全然分からない</button>
-                    <span class="comp-warning-tag" id="comp-warn-${idx}">⚠️ 理解度が未選択です</span>
-                </div>
-            </div>
-        `;
+        const item = ResultReview.createItem({
+            index: idx,
+            question,
+            selectedIndex: selectedIdx,
+            responseTimeMs: ansObj.elapsedTimeMs,
+            confidence: ansObj.confidence,
+            showConfidence: appConfig.mode === "practice" && useConfidence,
+            onReviewFlagChange: checkbox => syncReviewFlag(checkbox),
+            onUnderstandingChange: level => setComprehension(idx, level)
+        });
         reviewList.appendChild(item);
     });
 

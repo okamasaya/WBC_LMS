@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>開発中 | JLPT N2 言語知識 CBT</title>
   <link rel="stylesheet" href="../../assets/css/cbt.css">
+  <link rel="stylesheet" href="../../assets/css/resultReview.css">
   <script src="./questionLoader.js" defer></script>
+  <script src="../../assets/js/shared/resultReview.js" defer></script>
   <script type="module" src="../../assets/js/cbt/app.js"></script>
 </head>
 <body>
@@ -53,7 +55,9 @@
       <h2 id="result-heading" tabindex="-1">試験結果</h2><p id="finish-reason"></p><p id="score" class="summary"></p><p id="elapsed"></p>
       <p class="note">各問1点の素点です。JLPT公式の尺度得点・合否判定ではありません。</p>
       <h3>カテゴリ別の結果</h3><div class="table-scroll"><table><thead><tr><th scope="col">カテゴリ</th><th scope="col">正解 / 出題</th><th scope="col">正答率</th></tr></thead><tbody id="category-results"></tbody></table></div>
-      <h3>回答・正解・解説</h3><div id="reviews"></div>
+      <h3>正誤と解説の確認・理解度チェック</h3>
+      <p>解説を確認し、理解度ボタンを選択してください。「後でもう一度解く」フラグも記録できます。</p>
+      <div id="reviews"></div>
       <button id="restart">最初からやり直す</button>
     </section>
   </main>

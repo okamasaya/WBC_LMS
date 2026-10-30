@@ -16,7 +16,7 @@ const config = JSON.parse(fs.readFileSync(require('node:path').join(__dirname, '
  await page.locator('input[name=answer]').nth(0).check();
  await page.locator('input[name=confidence]').nth(1).check();
  assert.equal(await page.locator('#reviews').innerText(), '');
- assert.equal(await page.locator('.explanation').count(), 0);
+ assert.equal(await page.locator('.review-rationale').count(), 0);
  await page.locator('#flag').click();
  await page.locator('#next').click();
  await page.locator('#palette button').nth(0).click();
@@ -36,10 +36,20 @@ const config = JSON.parse(fs.readFileSync(require('node:path').join(__dirname, '
  assert.equal(await page.locator('#finish-dialog').isVisible(), false);
  await page.locator('#finish').click(); await page.locator('#confirm-finish').click();
  assert.equal(await page.locator('#exam-screen').isVisible(), false);
- assert.equal(await page.locator('.review').count(), 30);
+ assert.equal(await page.locator('.review-item').count(), 30);
  assert.equal(await page.locator('#category-results tr').count(), 9);
- await page.locator('.review summary').first().click();
- assert.equal(await page.locator('.explanation').first().isVisible(), true);
+ assert.equal(await page.locator('.review-rationale').count(), 30);
+ await page.locator('#comp-btn-0-3').click();
+ assert.equal(await page.locator('#comp-btn-0-3').getAttribute('aria-pressed'), 'true');
+ await page.locator('#comp-btn-0-3').click();
+ assert.equal(await page.locator('#comp-btn-0-3').getAttribute('aria-pressed'), 'false');
+ await page.locator('#comp-btn-0-0').click();
+ assert.equal(await page.locator('#comp-btn-0-0').getAttribute('aria-pressed'), 'true');
+ await page.locator('.review-flag-cb').first().check();
+ assert.equal(await page.locator('.review-flag-cb').first().isChecked(), true);
+ assert.match(await page.locator('#review-item-1 .review-q').innerText(), /未回答/);
+ assert.equal(await page.locator('#review-item-1 .correct-answer').isVisible(), true);
+ assert.equal(await page.locator('.review-rationale').first().isVisible(), true);
  console.log('PASS: actual 30-question config, navigation, flags, answer/confidence retention/reset, clear, no early explanations, finish confirmation and results');
 
  const timed = await browser.newPage(); await timed.clock.install();
@@ -48,7 +58,8 @@ const config = JSON.parse(fs.readFileSync(require('node:path').join(__dirname, '
  assert.equal(await timed.locator('#finish-dialog').isVisible(), false);
  assert.match(await timed.locator('#finish-reason').innerText(), /自動/);
  assert.match(await timed.locator('#score').innerText(), /0 \/ 30/);
- console.log('PASS: time expiry during confirmation, all-unanswered score, automatic finalization');
+ assert.match(await timed.locator('#review-item-0 .review-ans').first().innerText(), /2400.0秒/);
+ console.log('PASS: time expiry during confirmation, all-unanswered score, automatic finalization, per-question time capped at deadline');
 
  const mobile = await browser.newPage({viewport:{width:390,height:844}});
  await mobile.route('**/conf_JLPT_N2_LK.json', route => route.fulfill({json:{...config,recordConfidence:false}}));
@@ -57,7 +68,11 @@ const config = JSON.parse(fs.readFileSync(require('node:path').join(__dirname, '
  assert.equal(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
  await mobile.locator('#palette button').nth(20).click();
  assert.match(await mobile.locator('#progress').innerText(), /問題 21/);
- console.log('PASS: confidence-disabled configuration and mobile layout/navigation');
+ await mobile.locator('#finish').click(); await mobile.locator('#confirm-finish').click();
+ assert.equal(await mobile.locator('#review-item-0 .review-rationale').isVisible(), true);
+ assert.equal(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+ assert.doesNotMatch(await mobile.locator('#review-item-0 .review-ans').first().innerText(), /自信度/);
+ console.log('PASS: confidence-disabled configuration and mobile layout/navigation/results');
 
  const bad = await browser.newPage();
  await bad.route('**/conf_JLPT_N2_LK.json', route => route.fulfill({json:{...config,categories:[{...config.categories[0],count:999999}]}}));
@@ -69,6 +84,40 @@ const config = JSON.parse(fs.readFileSync(require('node:path').join(__dirname, '
  await bad.reload(); await bad.locator('#error').waitFor({state:'visible'});
  assert.match(await bad.locator('#error').innerText(), /404/);
  console.log('PASS: insufficient category pool and missing bank block start');
+ // The drill page uses the same cards; its raw logs and exports must retain review edits.
+ const drill = await browser.newPage();
+ drill.on('pageerror', e => errors.push(e.message));
+ drill.on('dialog', dialog => dialog.accept());
+ await drill.goto(url.replace('Actual_N2_261030.html', 'separete_drill_261026.html'));
+ await drill.waitForFunction(() => typeof originalQuizData !== 'undefined' && originalQuizData.length > 0);
+ await drill.evaluate(() => startExam());
+ await drill.locator('.option-btn').first().click();
+ await drill.locator('.conf-btn').first().click();
+ assert.equal(await drill.locator('#instant-feedback').isVisible(), true);
+ await drill.evaluate(() => submitExam());
+ assert.equal(await drill.locator('#review-list .review-item').count(), 10);
+ assert.equal(await drill.locator('#review-list .review-rationale').first().isVisible(), true);
+ await drill.locator('#comp-btn-0-3').click();
+ await drill.locator('.review-flag-cb').first().check();
+ assert.equal(await drill.evaluate(() => rawLogArray[0].understandingLevel), 3);
+ assert.equal(await drill.evaluate(() => rawLogArray[0].reviewFlag), true);
+ await drill.locator('#comp-btn-0-3').click();
+ assert.equal(await drill.evaluate(() => rawLogArray[0].understandingLevel), null);
+ await drill.evaluate(() => finalizeAndGenerateReport());
+ assert.equal(await drill.locator('#output-section').isVisible(), true);
+ await drill.locator('#comp-btn-0-0').click();
+ await drill.evaluate(() => finalizeAndGenerateReport());
+ const report = await drill.locator('#report-text').inputValue();
+ assert.match(report, /全然分からない/);
+ assert.match(report, /要復習フラグ: TRUE/);
+ const downloadPromise = drill.waitForEvent('download');
+ await drill.evaluate(() => downloadQuestionResultCSV());
+ const download = await downloadPromise;
+ assert.match(download.suggestedFilename(), /^QuestionResult_/);
+ const csv = fs.readFileSync(await download.path(), 'utf8');
+ assert.match(csv, /UnderstandingLevel/);
+ assert.match(csv, /全然分からない/);
+ console.log('PASS: drill practice instant feedback, shared results, understanding toggle, raw log updates, report generation and CSV download');
  assert.deepEqual(errors, []);
  } finally { await browser.close(); }
 })().catch(e=>{console.error(e); process.exit(1)});
