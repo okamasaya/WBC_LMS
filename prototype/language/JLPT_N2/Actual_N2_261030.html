@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>開発中 | JLPT N2 言語知識 CBT</title>
+  <link rel="stylesheet" href="../../assets/css/cbt.css">
+  <script src="./questionLoader.js" defer></script>
+  <script type="module" src="../../assets/js/cbt/app.js"></script>
+</head>
+<body>
+  <header class="site-header"><span class="dev-badge">開発中</span><h1 id="exam-title">開発中</h1><span>JLPT N2 言語知識 CBT模擬試験</span></header>
+  <main>
+    <section id="start-screen" class="card">
+      <h2>試験を始める前に</h2>
+      <p id="load-status" role="status">設定と問題を読み込んでいます…</p>
+      <div id="error" role="alert" hidden></div>
+      <div id="exam-info" hidden>
+        <p id="summary" class="summary"></p>
+        <details><summary>出題構成</summary><ul id="category-summary"></ul></details>
+        <ul class="instructions">
+          <li>回答は終了まで変更できます。「前の問題へ」「次の問題へ」、問題番号で移動できます。</li>
+          <li>気になる問題には「あとで確認」のフラグを付けてください。</li>
+          <li id="confidence-instruction">自信度は任意です。回答・自信度を選んでも、正誤や解説は表示されません。</li>
+          <li>終了時に一括採点します。時間切れの場合は自動で終了します。</li>
+          <li>再読み込み・画面を閉じる操作で回答は失われます。一時停止はできません。</li>
+        </ul>
+        <p class="note">開発中の模擬試験です。問題数・制限時間・配分は暫定設定で、公式試験の構成や得点とは異なります。</p>
+        <button id="start" class="primary">試験開始</button>
+      </div>
+    </section>
+    <section id="exam-screen" hidden>
+      <div class="exam-toolbar"><strong id="progress"></strong><span>残り時間 <strong id="timer" role="timer"></strong></span></div>
+      <div class="exam-layout">
+        <section class="card question-panel" aria-label="問題">
+          <p id="category" class="category"></p>
+          <h2 id="question-heading" tabindex="-1">問題</h2>
+          <div id="question-text" class="question-text"></div>
+          <fieldset id="options"><legend>回答を1つ選択してください</legend><div id="option-list"></div></fieldset>
+          <button id="clear-answer" class="subtle">回答を取り消す</button>
+          <fieldset id="confidence"><legend>自信度（任意）</legend><div id="confidence-options" class="confidence-options"></div></fieldset>
+          <div class="navigation"><button id="previous">前の問題へ</button><button id="flag" aria-pressed="false">⚑ あとで確認</button><button id="next" class="primary">次の問題へ</button></div>
+        </section>
+        <aside class="card sidebar" aria-label="問題一覧">
+          <h2>問題一覧</h2><p id="counts" role="status"></p>
+          <p class="legend">白：未回答 ／ 青：回答済み<br>太枠：現在の問題 ／ ⚑：あとで確認</p>
+          <div id="palette" class="palette"></div>
+          <button id="finish" class="danger">試験を終了して採点</button>
+        </aside>
+      </div>
+    </section>
+    <section id="result-screen" class="card" hidden>
+      <h2 id="result-heading" tabindex="-1">試験結果</h2><p id="finish-reason"></p><p id="score" class="summary"></p><p id="elapsed"></p>
+      <p class="note">各問1点の素点です。JLPT公式の尺度得点・合否判定ではありません。</p>
+      <h3>カテゴリ別の結果</h3><div class="table-scroll"><table><thead><tr><th scope="col">カテゴリ</th><th scope="col">正解 / 出題</th><th scope="col">正答率</th></tr></thead><tbody id="category-results"></tbody></table></div>
+      <h3>回答・正解・解説</h3><div id="reviews"></div>
+      <button id="restart">最初からやり直す</button>
+    </section>
+  </main>
+  <dialog id="finish-dialog" aria-labelledby="finish-title"><h2 id="finish-title">試験を終了しますか？</h2><p id="finish-summary"></p><p>終了すると回答を変更できません。</p><div class="navigation"><button id="cancel-finish">戻って見直す</button><button id="confirm-finish" class="danger">終了して採点</button></div></dialog>
+</body>
+</html>
