@@ -1,25 +1,101 @@
-/* Shared learning page foundations for JSON-driven Drill and Actual. */
-:root { font-family: system-ui, "Noto Sans JP", sans-serif; color: #20304a; background: #f0f4f9; line-height: 1.7; }
+/* Shared design tokens and controls for the current learning pages.
+ * Override --learning-* on .learning-page for a different theme.
+ * Legacy pages do not load this file; shared result components have fallbacks.
+ */
+:root {
+  --learning-font-family: system-ui, "Noto Sans JP", sans-serif;
+  --learning-color-page: #f0f4f9;
+  --learning-color-surface: #fff;
+  --learning-color-text: #20304a;
+  --learning-color-muted: #4c5c70;
+  --learning-color-category: #48607e;
+  --learning-color-header: #142a4a;
+  --learning-color-on-strong: #fff;
+  --learning-color-primary: #235bc0;
+  --learning-color-primary-hover: #184693;
+  --learning-color-primary-soft: #e6efff;
+  --learning-color-surface-hover: #e9f1fb;
+  --learning-color-border: #d4deeb;
+  --learning-color-control-border: #91a3b9;
+  --learning-color-focus: #9b5100;
+  --learning-color-danger: #ab2937;
+  --learning-color-danger-hover: #86202b;
+  --learning-color-danger-soft: #fff0f0;
+  --learning-color-success: #236d40;
+  --learning-color-success-soft: #e7f7ed;
+  --learning-color-warning: #8b4200;
+  --learning-color-warning-soft: #fffbeb;
+  --learning-color-feedback: #f0f5fc;
+  --learning-color-panel: #f8fafc;
+  --learning-color-review-border: #e2e8f0;
+  --learning-color-review: #f8f9fa;
+  --learning-color-raw-export: #167e37;
+  --learning-color-question-export: #087f77;
+  --learning-color-session-export: #4f46e5;
+  --learning-content-width: 1240px;
+  --learning-start-width: 820px;
+  --learning-control-radius: 7px;
+  --learning-card-radius: 12px;
+  --learning-control-height: 44px;
+  --learning-review-control-height: 40px;
+}
+
 * { box-sizing: border-box; }
-body { margin: 0; }
+body.learning-page {
+  margin: 0;
+  font-family: var(--learning-font-family);
+  color: var(--learning-color-text);
+  background: var(--learning-color-page);
+  line-height: 1.7;
+}
 [hidden] { display: none !important; }
-.site-header { background: #142a4a; color: white; padding: 16px 4%; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-h1 { font-size: 1.5rem; margin: 0; }
-h2 { font-size: 1.25rem; margin-top: 0; }
+.learning-page h1 { font-size: 1.5rem; margin: 0; }
+.learning-page h2 { font-size: 1.25rem; margin-top: 0; }
+.learning-page main { max-width: var(--learning-content-width); margin: 24px auto; padding: 0 20px 40px; }
+.site-header { background: var(--learning-color-header); color: var(--learning-color-on-strong); padding: 16px 4%; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .dev-badge { background: #ffe082; color: #542b00; border: 2px solid #ffb300; border-radius: 6px; padding: 4px 14px; font-weight: 800; }
-main { max-width: 1240px; margin: 24px auto; padding: 0 20px 40px; }
-.card { background: white; border: 1px solid #d4deeb; border-radius: 12px; padding: 28px; box-shadow: 0 3px 12px #18345008; }
-#start-screen { max-width: 820px; margin: auto; }
+.card { background: var(--learning-color-surface); border: 1px solid var(--learning-color-border); border-radius: var(--learning-card-radius); padding: 28px; box-shadow: 0 3px 12px #18345008; }
+.learning-start { max-width: var(--learning-start-width); margin: auto; }
 .summary { font-size: 1.6rem; font-weight: 700; }
-.note, .legend { color: #4c5c70; font-size: .9rem; }
+.note, .legend { color: var(--learning-color-muted); font-size: .9rem; }
 .instructions { padding-left: 24px; }
 .instructions li { margin: 8px 0; }
-button { font: inherit; font-weight: 600; padding: 10px 16px; background: #fff; color: #20304a; border: 1px solid #91a3b9; border-radius: 7px; cursor: pointer; }
-button:hover:not(:disabled) { background: #e9f1fb; }
-button:disabled { opacity: .45; cursor: default; }
-button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid #9b5100; outline-offset: 3px; }
-.primary { background: #235bc0; border-color: #235bc0; color: white; }
-.primary:hover:not(:disabled) { background: #184693; }
-.danger { color: white; background: #ab2937; border-color: #ab2937; }
-.danger:hover:not(:disabled) { background: #86202b; }
+
+/* Low-specificity defaults leave component states and export buttons in control. */
+.learning-page :where(button) { font: inherit; font-weight: 600; min-height: var(--learning-control-height); padding: 10px 16px; background: var(--learning-color-surface); color: var(--learning-color-text); border: 1px solid var(--learning-color-control-border); border-radius: var(--learning-control-radius); cursor: pointer; }
+.learning-page :where(button:hover:not(:disabled)) { background: var(--learning-color-surface-hover); }
+.learning-page :where(button:disabled) { opacity: .45; cursor: default; }
+.learning-page :where(input) { accent-color: var(--learning-color-primary); }
+.learning-page :where(select, textarea) { font: inherit; color: var(--learning-color-text); }
+.learning-page :where(button, input, select, textarea, summary, a):focus-visible { outline: 3px solid var(--learning-color-focus); outline-offset: 3px; }
+.learning-page .primary { background: var(--learning-color-primary); border-color: var(--learning-color-primary); color: var(--learning-color-on-strong); }
+.learning-page .primary:hover:not(:disabled) { background: var(--learning-color-primary-hover); }
+.learning-page :is(.danger, .submit-btn) { background: var(--learning-color-danger); border-color: var(--learning-color-danger); color: var(--learning-color-on-strong); }
+.learning-page :is(.danger, .submit-btn):hover:not(:disabled) { background: var(--learning-color-danger-hover); }
 .subtle { font-size: .9rem; }
+.learning-page :where(fieldset) { border: 0; padding: 0; margin: 24px 0 12px; min-width: 0; }
+.learning-page :where(legend) { font-weight: 600; margin-bottom: 10px; }
+
+/* Common question / answer anatomy; HTML keeps its existing JS hooks. */
+.learning-category { color: var(--learning-color-category); margin-top: 0; }
+.learning-question { font-size: 1.35rem; margin: 16px 0 24px; overflow-wrap: anywhere; white-space: pre-wrap; }
+.learning-page :is(.choice, .option-btn) { display: flex; gap: 12px; align-items: baseline; padding: 14px; border: 1px solid var(--learning-color-control-border); border-radius: 8px; cursor: pointer; overflow-wrap: anywhere; text-align: left; width: 100%; font-weight: 400; }
+.learning-page :is(.choice:has(input:checked), .option-btn.selected) { background: var(--learning-color-primary-soft); border-color: var(--learning-color-primary); box-shadow: inset 0 0 0 1px var(--learning-color-primary); }
+.learning-confidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.learning-navigation { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; margin-top: 28px; }
+.learning-page [role="alert"] { background: var(--learning-color-danger-soft); border: 1px solid var(--learning-color-danger); color: var(--learning-color-danger); padding: 16px; white-space: pre-wrap; }
+
+/* Generic containers also work when another mode needs tables or a dialog. */
+.learning-page dialog { border: 1px solid var(--learning-color-control-border); border-radius: var(--learning-card-radius); padding: 28px; max-width: min(520px, 94vw); background: var(--learning-color-surface); color: var(--learning-color-text); }
+.learning-page dialog::backdrop { background: #142a4a88; }
+.table-scroll { overflow-x: auto; }
+.learning-page table { width: 100%; border-collapse: collapse; text-align: left; }
+.learning-page :is(th, td) { padding: 10px; border-bottom: 1px solid var(--learning-color-border); }
+
+@media (max-width: 800px) {
+  .card { padding: 20px; }
+  .learning-page main { padding: 0 12px 24px; }
+  .learning-confidence-grid { grid-template-columns: 1fr; }
+  .site-header { gap: 8px; }
+  .site-header > span:last-child { width: 100%; font-size: .85rem; }
+}

@@ -13,3 +13,4 @@
 ## 開発記録
 
 - [2026-10-30〜10-31：環境準備、Actual／Drill共通化、assets整理とToDo](DEVELOPMENT_LOG_20261030-20261031.md)
+- [2026-10-31：共通CSS・モード別表示の整理と検証](DEVELOPMENT_LOG_20261031_CSS.md)

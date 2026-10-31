@@ -1,24 +1,18 @@
-/* Shared result / explanation cards, extracted from drill.css. */
-        .review-item { background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left; font-family: Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif; transition: all 0.3s ease; }
-        .review-item.unentered-comprehension { border: 2px solid #f59e0b !important; background-color: #fffbeb !important; }
-        .review-q { font-weight: bold; margin-bottom: 8px; }
-        .review-status-correct { color: #38a169; font-weight: bold; }
-        .review-status-incorrect { color: #e53e3e; font-weight: bold; }
-        .review-ans { font-size: 14px; margin: 4px 0; }
-        .review-rationale { font-size: 14px; background: #fff; padding: 10px; border-radius: 4px; margin-top: 8px; border-left: 3px solid #3182ce; color: #4a5568; }
-
-        .comp-btn { padding: 5px 10px; font-size: 12px; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff; cursor: pointer; margin-right: 4px; transition: all 0.2s; }
-        .comp-btn:hover { background: #e2e8f0; }
-        .comp-btn.selected { background: #2563eb; color: #fff; border-color: #1d4ed8; font-weight: bold; }
-        .comp-warning-tag { color: #d97706; font-weight: bold; font-size: 13px; margin-left: 10px; display: none; }
-
-
-
-.review-item { overflow-wrap: anywhere; }
-.review-item .correct-answer { color: #2b6cb0; }
-.review-flag-control { margin: 10px 0; padding: 6px; background: #f0fdf4; border-radius: 4px; display: inline-block; }
-.review-flag-control label { cursor: pointer; font-size: 14px; color: #166534; font-weight: bold; }
-.understanding-control { margin-top: 12px; padding-top: 8px; border-top: 1px dashed #cbd5e1; font-size: 13px; }
-.understanding-title { font-weight: bold; color: #475569; margin-right: 8px; }
-.review-item .comp-btn { color: #20304a; margin-bottom: 6px; font-family: inherit; line-height: 1.7; }
-.review-item .comp-btn.selected { color: #fff; }
+/* Shared result cards. Fallbacks preserve the legacy page without learning.css. */
+.review-item { background: var(--learning-color-review, #f8f9fa); border: 1px solid var(--learning-color-review-border, #e2e8f0); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left; font-family: var(--learning-font-family, Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif); overflow-wrap: anywhere; transition: background-color .2s, border-color .2s; }
+.review-item.unentered-comprehension { border: 2px solid #f59e0b; background-color: var(--learning-color-warning-soft, #fffbeb); }
+.review-q { font-weight: bold; margin-bottom: 8px; }
+.review-status-correct { color: var(--learning-color-success, #38a169); font-weight: bold; }
+.review-status-incorrect { color: var(--learning-color-danger, #e53e3e); font-weight: bold; }
+.review-ans { font-size: 14px; margin: 4px 0; }
+.review-rationale { font-size: 14px; background: var(--learning-color-surface, #fff); padding: 10px; border-radius: 4px; margin-top: 8px; border-left: 3px solid var(--learning-color-primary, #3182ce); color: var(--learning-color-muted, #4a5568); }
+.review-item .correct-answer { color: var(--learning-color-primary, #2b6cb0); }
+.review-flag-control { margin: 10px 0; padding: 6px; background: var(--learning-color-success-soft, #f0fdf4); border-radius: 4px; display: inline-block; }
+.review-flag-control label { cursor: pointer; font-size: 14px; color: var(--learning-color-success, #166534); font-weight: bold; }
+.understanding-control { margin-top: 12px; padding-top: 8px; border-top: 1px dashed var(--learning-color-control-border, #cbd5e1); font-size: 13px; }
+.understanding-title { font-weight: bold; color: var(--learning-color-muted, #475569); margin-right: 8px; }
+.review-item .comp-btn { padding: 5px 10px; min-height: var(--learning-review-control-height, 0); font-size: 12px; border: 1px solid var(--learning-color-control-border, #cbd5e1); border-radius: 4px; background: var(--learning-color-surface, #fff); color: var(--learning-color-text, #20304a); cursor: pointer; margin: 0 4px 6px 0; font-family: inherit; line-height: 1.7; transition: background-color .2s; }
+.review-item .comp-btn:hover { background: var(--learning-color-surface-hover, #e2e8f0); }
+.review-item .comp-btn.selected { background: var(--learning-color-primary, #2563eb); color: var(--learning-color-on-strong, #fff); border-color: var(--learning-color-primary, #1d4ed8); font-weight: bold; }
+.review-item .comp-btn.selected:hover { background: var(--learning-color-primary-hover, #2563eb); }
+.comp-warning-tag { color: var(--learning-color-warning, #d97706); font-weight: bold; font-size: 13px; margin-left: 10px; display: none; }
