@@ -1,0 +1,22 @@
+.iris-dashboard { font-family: system-ui, sans-serif; color: #21314c; background: #f0f4f9; padding: 24px; min-height: 100vh; line-height: 1.6; }
+.iris-dashboard * { box-sizing: border-box; }
+.iris-dashboard header, .iris-card, .iris-kpis, .iris-chart-grid { max-width: 1440px; margin: 0 auto 20px; }
+.iris-dashboard h1 { margin: 0; font-size: 1.8rem; }
+.iris-dashboard h2 { margin: 0; font-size: 1.15rem; }
+.iris-card { padding: 24px; background: white; border: 1px solid #d4deeb; border-radius: 12px; min-width: 0; }
+.iris-card label { display: block; max-width: 480px; font-weight: 600; }
+.iris-actions, .iris-chart-heading { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+.iris-actions { margin-top: 16px; }
+.iris-chart-heading button, .iris-actions button { font: inherit; border: 1px solid #91a3b9; color: #21314c; background: white; padding: 10px 14px; border-radius: 6px; cursor: pointer; }
+.iris-actions button { background: #285caa; color: white; border-color: #285caa; }
+.iris-dashboard :is(button, summary, input):focus-visible { outline: 3px solid #9b5100; outline-offset: 3px; }
+.iris-note { font-size: .9rem; color: #56657a; }
+.iris-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.iris-kpi { background: #e2ecfa; padding: 20px; border-radius: 8px; }
+.iris-kpi span, .iris-kpi strong { display: block; }
+.iris-kpi strong { font-size: 1.8rem; }
+.iris-chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.iris-chart-grid .iris-card { width: 100%; margin-bottom: 0; }
+#selection-summary { overflow-wrap: anywhere; }
+@media (max-width: 850px) { .iris-chart-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .iris-dashboard { padding: 12px; } .iris-card { padding: 16px; } .iris-kpis { gap: 8px; } .iris-kpi { padding: 12px; } .iris-kpi span { font-size: .8rem; } .iris-kpi strong { font-size: 1.4rem; } }
