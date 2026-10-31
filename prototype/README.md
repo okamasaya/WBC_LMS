@@ -9,3 +9,7 @@
 実行手順とassetsの役割は [標準基盤の説明](../docs/standard/README.md)、開発途中のページ・プロンプト・過去データの位置は [開発資産の一覧](../docs/standard/development-assets.md) を参照してください。
 
 このフォルダには現行版と開発履歴が同居しています。現行版の既定構成で使うファイルは、リポジトリのルートから `node scripts/audit-standard-runtime.mjs --json` で確認できます。`public` への展開はまだ行っていません。
+
+## 開発記録
+
+- [2026-10-30〜10-31：環境準備、Actual／Drill共通化、assets整理とToDo](DEVELOPMENT_LOG_20261030-20261031.md)
