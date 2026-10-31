@@ -1,0 +1,39 @@
+{
+  "command": "scripts/check-standard.sh",
+  "working_directory": "repository root",
+  "tested_commit": "3fe9d051e64cf5074516ed8353b625e419098c09",
+  "started_at": "2026-10-31T12:37:15+09:00",
+  "finished_at": "2026-10-31T12:37:15+09:00",
+  "node_version": "v24.19.0",
+  "exit_code": 0,
+  "counts": {
+    "tests": 12,
+    "pass": 12,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "runtime_audit": true,
+  "browser_tests_executed": false,
+  "test_files": [
+    {
+      "path": "tests/standard/examConfig.test.mjs",
+      "sha256": "d38381f21aeffaf840e07eafc026282b7d9f87a628e9ac1d1dbccc80b35d2ec9"
+    },
+    {
+      "path": "tests/standard/examCore.test.mjs",
+      "sha256": "4d96b4386e0e97cb7e28a92864494ecac4b2181a35bbe454e011630eb137f5e1"
+    },
+    {
+      "path": "tests/standard/runtimeBoundary.test.mjs",
+      "sha256": "ca7edb758f463a5eba67650ddb3b3a6d03618a867dd4f840e169384e42dcc977"
+    },
+    {
+      "path": "tests/standard/sharedResults.test.mjs",
+      "sha256": "e0df3604b07ae71d15e9f754484f83b119c112025729b815430d139bb7f02156"
+    }
+  ],
+  "output_file": "20261031_unit_3fe9d05.log",
+  "output_sha256": "0ed2a664f254772b88a52c33d410543014f178c31fabb5cc798aecf60654292e"
+}
