@@ -151,7 +151,7 @@ function startExam() {
      * ==========================================
      */
 
-    shuffle(allQuestions);
+    if (appConfig.shuffleQuestions !== false) shuffle(allQuestions);
 
 
     /*
@@ -200,7 +200,7 @@ function startExam() {
     quizData.forEach(
         q => {
 
-            shuffle(q.options);
+            if (appConfig.shuffleOptions !== false) shuffle(q.options);
 
         }
     );

@@ -1,6 +1,6 @@
 # 終了後の共通処理（Drill / Actual）
 
-`separete_drill_261026.html` と `Actual_N2_261030.html` が同じ部品を使用します。HTMLには出力先の `<div id="result-output"></div>` だけを置き、ボタンやtextareaは共通JSが生成します。生成AIのAPIを自動で呼び出す処理はなく、レポートをコピーして渡す方式です。
+`separete_drill_261026.html`、`Drill_N2_261031.html`、`Actual_N2_261030.html` が同じ部品を使用します。HTMLには出力先の `<div id="result-output"></div>` だけを置き、ボタンやtextareaは共通JSが生成します。生成AIのAPIを自動で呼び出す処理はなく、レポートをコピーして渡す方式です。
 
 | ファイル | 管理する内容 |
 | --- | --- |
@@ -39,3 +39,5 @@ node prototype/assets/js/cbt/tests/browser.cjs
 ```
 
 共通の集計・スキーマ・AIデータ・CSVに加え、両ページの解説・確定・変更後の再生成、Actualのコピーと全CSV、未回答・時間切れ・自信度無効・モバイル表示を確認します。
+
+JSON起動の共通化については `examConfig.md` を参照してください。新DrillとActualは同じconfを読み込み、試験情報・問題データ・スキル定義を共用します。

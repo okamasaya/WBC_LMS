@@ -10,18 +10,18 @@
 
 | キー | 内容 |
 | --- | --- |
-| schemaVersion | 設定形式。現在は1 |
+| schemaVersion | 共通設定形式は2（旧Actual専用の1も読み込み可能） |
 | title / examId | 画面名 / 試験識別子。画面には固定の「開発中」バッジも表示 |
 | examType / examLevel / examTitle | レポート・CSV用の試験種別 / レベル / 試験名 |
 | categories[].skillId / skillName | レポート・CSV用のスキルID / スキル名（既存drillと同じN2の識別子） |
 | studentId | 任意の学習者ID。未設定時はCSVでは空欄 |
-| timeLimitMinutes | 制限時間（分、0より大きく1440以下。小数可） |
+| actual.timeLimitMinutes | 制限時間（分、0より大きく1440以下。小数可） |
 | questionFiles | 問題JSON一覧。パスはconfファイルからの相対パス |
 | categories | 出題順のカテゴリ一覧。categoryLv1 / categoryLv2 / categoryLv3 は問題データと完全一致させる |
-| categories[].count | そのカテゴリからの出題数。0なら出題しない。合計が試験全体の問題数 |
-| shuffleQuestionsWithinCategory | trueならカテゴリ内から重複なしでランダム抽出。falseならデータ順の先頭から抽出 |
-| shuffleOptions | 選択肢をシャッフルするか。初期値はfalse（元の順番を維持） |
-| recordConfidence | 自信度入力を表示するか。入力は任意 |
+| categories[].actualCount | そのカテゴリからの出題数。0なら出題しない。合計が試験全体の問題数 |
+| actual.shuffleQuestionsWithinCategory | trueならカテゴリ内から重複なしでランダム抽出。falseならデータ順の先頭から抽出 |
+| actual.shuffleOptions | 選択肢をシャッフルするか。初期値はfalse（元の順番を維持） |
+| actual.recordConfidence | 自信度入力を表示するか。入力は任意 |
 
 カテゴリは設定順に出題します。問題不足、設定重複、不正JSON、不正問題、問題ID重複は開始前にエラーとなり、出題数を自動で減らしません。設定の変更は再読み込み後に反映されます。
 
@@ -54,3 +54,7 @@ node prototype/assets/js/cbt/tests/browser.cjs
 既定のChromiumは `/usr/bin/chromium`。必要なら `CBT_TEST_CHROMIUM` と `CBT_TEST_BASE_URL` で実行ファイル・サーバーURLを変更できます。回答・自信度・フラグの保持、番号移動、終了確認、時間切れ、結果、設定エラー、スマートフォン幅を検証します。共通化の回帰確認として、drillの即時解説、終了後の理解度・復習フラグとログ更新、レポート生成、QuestionResult CSVも検証します。
 
 終了後の集計・解説・レポート・CSVは `../shared/README.md` にまとめた共通処理を使用します。設定を変更する場合は、`node prototype/assets/js/cbt/tests/sharedResults.test.mjs` でも出力の回帰確認ができます。
+
+## JSON設定の共用
+
+`Drill_N2_261031.html` と同じconfを使う形式に移行しました。`?conf=設定.json` で切り替えできます。共通項目とモード別の詳細は `../shared/examConfig.md` を参照してください。共通CSSは `learning.css`、Actual固有CSSは `cbt.css` です。

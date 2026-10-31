@@ -96,3 +96,7 @@ python -m http.server 8000
 `resultController.js` は共通処理にdrillの回答状態を渡すアダプターと、drill固有の得点表示を担当します。`reviewController.js` / `reportGenerator.js` / `dataExporter.js` は既存の関数名を維持するための薄いアダプターです。HTML内の出力ボタン・textareaは共通JSで生成し、表示先の `result-output` だけをHTMLに残しています。
 
 確定後に理解度・復習フラグを変更すると、古いレポートは無効になり、再生成が必要です。詳細は `../shared/README.md` を参照してください。
+
+## JSON設定の新Drillページ（261031）
+
+`prototype/language/JLPT_N2/Drill_N2_261031.html` は既存練習エンジンを再利用し、Actualと共通のconf JSONから起動します。旧HTMLと設定JSは保持しています。新ページの設定・CSS・検証手順は `../shared/examConfig.md` を参照してください。

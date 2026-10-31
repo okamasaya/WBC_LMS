@@ -5,7 +5,10 @@ import vm from 'node:vm';
 import { validateConfig, selectQuestions, scoreQuestions } from '../examCore.js';
 
 const base = new URL('../../../../language/JLPT_N2/', import.meta.url);
-const config = JSON.parse(fs.readFileSync(new URL('conf_JLPT_N2_LK.json', base)));
+const sourceConfig = JSON.parse(fs.readFileSync(new URL('conf_JLPT_N2_LK.json', base)));
+const configContext = vm.createContext({window:{},structuredClone});
+vm.runInContext(fs.readFileSync(new URL('../../shared/examConfig.js', import.meta.url), 'utf8'), configContext);
+const config = configContext.window.ExamConfig.normalize(sourceConfig, 'actual');
 const context = vm.createContext({ console });
 vm.runInContext(fs.readFileSync(new URL('questionLoader.js', base), 'utf8'), context);
 const bank = config.questionFiles.flatMap(path => JSON.parse(fs.readFileSync(new URL(path, base)))).map(context.convertQuestionFormat);
