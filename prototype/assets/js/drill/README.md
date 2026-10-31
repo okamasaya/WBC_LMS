@@ -88,3 +88,11 @@ python -m http.server 8000
 終了後の解説カードと理解度の選択処理は `prototype/assets/js/shared/resultReview.js`、対応スタイルは `prototype/assets/css/resultReview.css` に切り出しました。`Actual_N2_261030.html` でも同じ部品を使用します。drill側は引き続き `resultController.js` が採点・Rawログを作成し、`reviewController.js` が理解度と復習フラグをログに反映します。レポートとCSVの列定義・生成処理は維持しています。
 
 共通スクリプトは `resultController.js` より前に読み込んでください。カード内のクリック処理はイベントリスナーで登録します。表示・ログ更新・CSVの回帰確認は `node prototype/assets/js/cbt/tests/browser.cjs` で行えます（HTTPサーバー、Playwright、Chromiumが必要）。
+
+## レポート・ログ出力の共通化（261031）
+
+終了後の集計・Session / QuestionResult生成は `../shared/resultData.js`、AIレポートとCSVの列定義・文字列生成は `../shared/resultReport.js`、最下部の出力UI・理解度の未入力確認・確定・コピー・ダウンロードは `../shared/resultOutput.js` に移しました。Actual版も同じ処理を使用します。
+
+`resultController.js` は共通処理にdrillの回答状態を渡すアダプターと、drill固有の得点表示を担当します。`reviewController.js` / `reportGenerator.js` / `dataExporter.js` は既存の関数名を維持するための薄いアダプターです。HTML内の出力ボタン・textareaは共通JSで生成し、表示先の `result-output` だけをHTMLに残しています。
+
+確定後に理解度・復習フラグを変更すると、古いレポートは無効になり、再生成が必要です。詳細は `../shared/README.md` を参照してください。

@@ -103,9 +103,9 @@ function resolveSkillDefinition(question) {
 
 function getConfiguredQuestionSources() {
     if (typeof CONFIG === "undefined" || !CONFIG) return "";
-    if (Array.isArray(CONFIG.questionFiles)) return CONFIG.questionFiles.join(" | ");
-    if (typeof CONFIG.questionFile === "string") return CONFIG.questionFile;
-    return "";
+    const sources = CONFIG.questionFiles ?? CONFIG.questionFile;
+    if (Array.isArray(sources)) return sources.join(" | ");
+    return typeof sources === "string" ? sources : "";
 }
 
 function buildCategoryLabelFromLevels(lv1, lv2, lv3) {

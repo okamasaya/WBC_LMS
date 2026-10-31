@@ -3,6 +3,7 @@ import { validateConfig, selectQuestions, scoreQuestions } from './examCore.js';
 const $ = id => document.getElementById(id);
 const confidenceLabels = ['自信がある', '少し自信がある', '怪しい', '直感！'];
 let config, bank, questions, answers, current = 0;
+let resultData, resultOutputController;
 let active = false, startedAt, deadline, interval, visitedAt;
 const configURL = new URL('./conf_JLPT_N2_LK.json', window.location.href);
 
@@ -59,7 +60,7 @@ async function initialize() {
 function start() {
     if (active || !bank) return;
     questions = selectQuestions(config, bank);
-    answers = questions.map(() => ({ selected: null, confidence: null, flagged: false, elapsedTimeMs: 0, understandingLevel: null, understandingLabel: '未入力', reviewFlag: false }));
+    answers = questions.map(() => ({ selected: null, confidence: null, flagged: false, elapsedTimeMs: 0, answeredAt: null }));
     current = 0;
     startedAt = Date.now();
     deadline = startedAt + config.timeLimitMinutes * 60000;
@@ -129,6 +130,7 @@ function renderQuestion() {
         const choice = optionRadio('answer', i, `${i + 1}. ${option.text}`, answer.selected === i, () => {
             if (!canInteract()) return;
             answer.selected = i;
+            answer.answeredAt = new Date().toISOString();
             // Changing an answer invalidates the confidence recorded for the old answer.
             answer.confidence = null;
             renderConfidence();
@@ -186,6 +188,19 @@ function finish(timedOut) {
     if ($('finish-dialog').open) $('finish-dialog').close();
     $('exam-screen').hidden = true;
     $('result-screen').hidden = false;
+    const endedAt = Math.min(Date.now(), deadline);
+    resultData = window.ResultData.build({
+        questions, answers, startedAt, endedAt,
+        metadata: {
+            examId: config.examId, examType: config.examType || null,
+            examLevel: config.examLevel || null, examTitle: config.examTitle || config.title,
+            studentId: config.studentId ?? null, mode: 'Actual',
+            useConfidence: config.recordConfidence, difficultyMode: 'all',
+            sourceQuestionFiles: config.questionFiles.join(' | ')
+        },
+        resolveSkill: question => config.categories.find(category =>
+            category.categoryLv1 === question.category_lv1 && category.categoryLv2 === question.category_lv2 && category.categoryLv3 === question.category_lv3)
+    });
     const results = scoreQuestions(questions, answers);
     const correct = results.filter(r => r.correct).length;
     $('finish-reason').textContent = timedOut ? '制限時間になったため、自動で終了・採点しました。' : '回答を確定し、採点しました。';
@@ -201,6 +216,7 @@ function finish(timedOut) {
         $('category-results').append(row);
     }
     results.forEach(({ question: q, answer }, i) => {
+        const record = resultData.records[i];
         const review = window.ResultReview.createItem({
             index: i,
             question: q,
@@ -209,12 +225,13 @@ function finish(timedOut) {
             confidence: answer.confidence,
             showConfidence: config.recordConfidence,
             duringExamFlag: answer.flagged,
-            reviewFlag: answer.reviewFlag,
-            onReviewFlagChange: checkbox => { answer.reviewFlag = checkbox.checked; },
-            onUnderstandingChange: level => window.ResultReview.toggleUnderstanding(answer, i, level)
+            reviewFlag: record.reviewFlag,
+            onReviewFlagChange: checkbox => { record.reviewFlag = checkbox.checked; resultOutputController.invalidate(); },
+            onUnderstandingChange: level => { window.ResultReview.toggleUnderstanding(record, i, level); resultOutputController.invalidate(); }
         });
         $('reviews').append(review);
     });
+    resultOutputController = window.ResultOutput.mount({ container: $('result-output'), getData: () => resultData });
     $('result-heading').focus();
 }
 
@@ -230,7 +247,7 @@ $('flag').addEventListener('click', () => {
 });
 $('clear-answer').addEventListener('click', () => {
     if (!canInteract()) return;
-    answers[current].selected = null; answers[current].confidence = null;
+    answers[current].selected = null; answers[current].confidence = null; answers[current].answeredAt = null;
     renderQuestion();
 });
 $('finish').addEventListener('click', () => {

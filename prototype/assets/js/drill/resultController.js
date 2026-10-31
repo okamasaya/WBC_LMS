@@ -22,171 +22,43 @@ function submitExam(isAuto = false) {
     if (timerInterval) clearInterval(timerInterval);
 
     examEndTime = Date.now();
-    const totalElapsedMs = examEndTime - examStartTime;
-    const totalSeconds = Math.floor(totalElapsedMs / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    const totalTimeStr = `${minutes}分${seconds}秒`;
-
     document.getElementById('exam-container').style.display = 'none';
     document.getElementById('score-container').style.display = 'block';
-
-    let finalScore = 0;
-    let answeredCount = 0;
-    let mainCatStats = {};
-
-    rawLogArray = [];
-    const sessionId = "SESS_" + Date.now();
-    const createdAt = new Date().toISOString();
-    const dateTimeStr = new Date().toLocaleString();
-
-    const selectedCategoryLevel1 =
-        appConfig.mode === "practice"
-            ? (document.getElementById("category-lv1-select")?.value || "all")
-            : "all";
-    const selectedCategoryLevel2 =
-        appConfig.mode === "practice"
-            ? (document.getElementById("category-lv2-select")?.value || "all")
-            : "all";
-    const selectedCategoryLevel3 =
-        appConfig.mode === "practice"
-            ? (document.getElementById("category-lv3-select")?.value || "all")
-            : "all";
-
+    const isPractice = appConfig.mode === "practice";
+    const data = ResultData.build({
+        questions: quizData,
+        answers: quizData.map((_, index) => ({
+            selected: userAnswers[index]?.selectedOption ?? null,
+            elapsedTimeMs: userAnswers[index]?.elapsedTimeMs || 0,
+            confidence: userAnswers[index]?.confidence ?? null,
+            answeredAt: userAnswers[index]?.answerTimestamp || null,
+            flagged: Boolean(flaggedQuestions[index])
+        })),
+        metadata: {
+            ...EXAM_CONTEXT, studentId: "STU-00123", mode: isPractice ? "Drill" : "Actual",
+            useConfidence: isPractice ? useConfidence : null,
+            difficultyMode: isPractice ? selectedDifficultyMode : "all",
+            selectedCategoryLevel1: isPractice ? document.getElementById("category-lv1-select")?.value : "all",
+            selectedCategoryLevel2: isPractice ? document.getElementById("category-lv2-select")?.value : "all",
+            selectedCategoryLevel3: isPractice ? document.getElementById("category-lv3-select")?.value : "all",
+            sourceQuestionFiles: getConfiguredQuestionSources()
+        },
+        startedAt: examStartTime, endedAt: examEndTime, resolveSkill: resolveSkillDefinition
+    });
+    rawLogArray = data.records;
+    actualSummary = data.summary;
+    reportBaseText = data.reportBaseText;
+    const finalScore = actualSummary.correctCount;
+    const mainCatStats = data.mainCatStats;
     const reviewList = document.getElementById('review-list');
-    reviewList.innerHTML = '';
-
+    reviewList.replaceChildren();
     quizData.forEach((question, idx) => {
-        const categoryLevel1 = String(question.category_lv1 ?? "");
-        const categoryLevel2 = String(question.category_lv2 ?? "");
-        const categoryLevel3 = String(question.category_lv3 ?? "");
-        const rawCategory = question.category
-            ? question.category.toString()
-            : buildCategoryLabelFromLevels(categoryLevel1, categoryLevel2, categoryLevel3);
-
-        const catMatch = rawCategory.match(/【(.*?)】/);
-        const mainCat = catMatch ? catMatch[1] : (categoryLevel1 || rawCategory);
-
-        if (!mainCatStats[mainCat]) mainCatStats[mainCat] = { total: 0, correct: 0 };
-        mainCatStats[mainCat].total++;
-
-        // Unanswered questions must not receive a fabricated answer timestamp.
-        const ansObj = userAnswers[idx] || {
-            selectedOption: null,
-            elapsedTimeMs: 0,
-            confidence: "NULL",
-            isConfirmed: false,
-            answerTimestamp: null
-        };
-
-        const selectedIdx = ansObj.selectedOption;
-        const selectedOption = selectedIdx !== null ? question.options[selectedIdx] : null;
-        const correctOptionIndex = question.options.findIndex(o => o.isCorrect);
-        const correctOption = correctOptionIndex >= 0 ? question.options[correctOptionIndex] : null;
-        const isAnswered = selectedOption !== null;
-        const isCorrect = isAnswered ? Boolean(selectedOption.isCorrect) : false;
-        const answerTimeSec = Number((ansObj.elapsedTimeMs / 1000).toFixed(1));
-        const answeredAt = isAnswered && ansObj.answerTimestamp ? ansObj.answerTimestamp : null;
-
-        let elapsedTimeSec = null;
-        if (answeredAt) {
-            const answeredMs = new Date(answeredAt).getTime();
-            if (Number.isFinite(answeredMs) && examStartTime > 0) {
-                elapsedTimeSec = Number(Math.max(0, (answeredMs - examStartTime) / 1000).toFixed(1));
-            }
-        }
-
-        if (isAnswered) answeredCount++;
-        if (isCorrect) {
-            finalScore++;
-            mainCatStats[mainCat].correct++;
-        }
-
-        const skill = resolveSkillDefinition(question);
-        if (!skill) {
-            console.warn(
-                "[ResultController] Skill_ID を解決できませんでした。",
-                {
-                    questionId: question.question_id || question.id,
-                    examLevel: EXAM_CONTEXT.examLevel,
-                    categoryLevel1,
-                    categoryLevel2,
-                    categoryLevel3
-                }
-            );
-        }
-
-        const numericDifficulty = Number(question.difficulty);
-        const difficulty = Number.isFinite(numericDifficulty) ? numericDifficulty : null;
-        const confidenceLevel =
-            appConfig.mode === "practice"
-            && useConfidence
-            && ansObj.confidence !== "NULL"
-                ? Number(ansObj.confidence)
-                : null;
-
-        rawLogArray.push({
-            dataSchemaVersion: RAW_DATA_SCHEMA_VERSION,
-            resultId: "RESULT_" + Date.now() + "_" + (idx + 1),
-            sessionId,
-            studentId: "STU-00123",
-
-            examId: EXAM_CONTEXT.examId,
-            examType: EXAM_CONTEXT.examType,
-            examLevel: EXAM_CONTEXT.examLevel,
-            examTitle: EXAM_CONTEXT.examTitle,
-            mode: appConfig.mode === "practice" ? "Drill" : "Actual",
-            useConfidence: appConfig.mode === "practice" ? useConfidence : null,
-            difficultyMode: appConfig.mode === "practice" ? selectedDifficultyMode : "all",
-
-            questionSequence: idx + 1,
-            questionId: String(question.question_id || question.id || ""),
-            skillId: skill?.skillId || null,
-            skillName: skill?.skillName || null,
-
-            categoryLevel1,
-            categoryLevel2,
-            categoryLevel3,
-            categoryLabel: rawCategory,
-
-            difficulty,
-            difficultyLabel: getDifficultyLabel(difficulty),
-            questionText: String(question.question_text || question.question || ""),
-
-            userAnswerDisplayedPosition: isAnswered ? selectedIdx + 1 : null,
-            userAnswerText: selectedOption ? String(selectedOption.text) : null,
-            correctAnswerDisplayedPosition: correctOptionIndex >= 0 ? correctOptionIndex + 1 : null,
-            correctAnswerText: correctOption ? String(correctOption.text) : null,
-            correctAnswerSource: question.correct_answer ?? null,
-
-            isAnswered,
-            isCorrect,
-            responseTimeMs: Number(ansObj.elapsedTimeMs || 0),
-            answerTimeSec,
-            elapsedTimeSec,
-            answeredAt,
-
-            confidenceLevel,
-            confidenceLabel:
-                appConfig.mode === "practice" && useConfidence
-                    ? getConfidenceLabel(confidenceLevel)
-                    : "記録なし",
-            understandingLevel: null,
-            understandingLabel: "未入力",
-            reviewFlag: false,
-            duringExamReviewFlag: Boolean(flaggedQuestions[idx]),
-
-            explanation: String(question.explanation || correctOption?.rationale || ""),
-            createdAt
-        });
-
         const item = ResultReview.createItem({
-            index: idx,
-            question,
-            selectedIndex: selectedIdx,
-            responseTimeMs: ansObj.elapsedTimeMs,
-            confidence: ansObj.confidence,
-            showConfidence: appConfig.mode === "practice" && useConfidence,
+            index: idx, question,
+            selectedIndex: userAnswers[idx]?.selectedOption ?? null,
+            responseTimeMs: rawLogArray[idx].responseTimeMs,
+            confidence: userAnswers[idx]?.confidence,
+            showConfidence: isPractice && useConfidence,
             onReviewFlagChange: checkbox => syncReviewFlag(checkbox),
             onUnderstandingChange: level => setComprehension(idx, level)
         });
@@ -194,8 +66,6 @@ function submitExam(isAuto = false) {
     });
 
     document.getElementById('final-score').innerText = `${finalScore} / ${quizData.length} 問正解`;
-    const scorePercent = quizData.length > 0 ? Math.round((finalScore / quizData.length) * 100) : 0;
-    const modeLabel = appConfig.mode === "mock" ? "模擬試験" : "練習ドリル";
 
     const catSection = document.getElementById('category-score-section');
     const catList = document.getElementById('category-score-list');
@@ -230,49 +100,5 @@ function submitExam(isAuto = false) {
         catSection.style.display = 'none';
     }
 
-    reportBaseText = `演習モード: ${modeLabel}\n実施日時: ${dateTimeStr}\n総実施時間: ${totalTimeStr}\n総合スコア: ${scorePercent}点\n\n■ 分野別正解率\n`;
-    for (let cat in mainCatStats) {
-        let rate = mainCatStats[cat].total > 0 ? Math.round((mainCatStats[cat].correct / mainCatStats[cat].total) * 100) : 0;
-        reportBaseText += `· ${cat}: ${rate}% (${mainCatStats[cat].correct}/${mainCatStats[cat].total})\n`;
-    }
-
-    const unansweredQuestions = quizData.length - answeredCount;
-    const incorrectCount = answeredCount - finalScore;
-
-    actualSummary = {
-        dataSchemaVersion: RAW_DATA_SCHEMA_VERSION,
-        sessionId,
-        studentId: "STU-00123",
-
-        examId: EXAM_CONTEXT.examId,
-        examType: EXAM_CONTEXT.examType,
-        examLevel: EXAM_CONTEXT.examLevel,
-        examTitle: EXAM_CONTEXT.examTitle,
-        mode: appConfig.mode === "practice" ? "Drill" : "Actual",
-
-        useConfidence: appConfig.mode === "practice" ? useConfidence : null,
-        difficultyMode: appConfig.mode === "practice" ? selectedDifficultyMode : "all",
-        difficultyModeLabel: getDifficultyModeLabel(
-            appConfig.mode === "practice" ? selectedDifficultyMode : "all"
-        ),
-        selectedCategoryLevel1,
-        selectedCategoryLevel2,
-        selectedCategoryLevel3,
-
-        startAt: new Date(examStartTime).toISOString(),
-        endAt: new Date(examEndTime).toISOString(),
-        totalTimeSec: Math.floor(totalElapsedMs / 1000),
-
-        totalQuestions: quizData.length,
-        answeredQuestions: answeredCount,
-        unansweredQuestions,
-        correctCount: finalScore,
-        incorrectCount,
-        wrongCount: quizData.length - finalScore,
-        scoreRate: scorePercent,
-
-        sourceQuestionFiles: getConfiguredQuestionSources(),
-        createdAt
-    };
+    initializeResultOutput();
 }
-
