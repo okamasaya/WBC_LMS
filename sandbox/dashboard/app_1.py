@@ -1,450 +1,84 @@
-from dash import Dash, html, dcc, Input, Output
-import pandas as pd
-import plotly.express as px
+"""Iris BI exercise: clicking/brush selection links KPIs, charts and the row table."""
+from pathlib import Path
+from dash import Dash, Input, Output, State, ctx, dcc, html, dash_table, no_update
+from iris_crossfilter import load_iris, update_selection, figures, dashboard_values, SOURCES
+
+DF = load_iris()
+EMPTY_SELECTION = {"filters": {}, "revision": 0}
+app = Dash(__name__, assets_folder=str(Path(__file__).resolve().parent / "assets"), title="Iris BI Dashboard")
 
 
-
-# =========================
-# Data
-# =========================
-
-df = pd.read_csv("iris.csv")
-
-# 折れ線グラフ用のサンプル番号
-df["sample_no"] = range(1, len(df) + 1)
-
-measurement_columns = [
-    "sepal_length",
-    "sepal_width",
-    "petal_length",
-    "petal_width"
-]
+def graph_card(source, label, figure):
+    return html.Section(className="iris-card", children=[
+        html.Div(className="iris-chart-heading", children=[html.H2(label), html.Button("この選択を解除", id=f"clear-{source}")]),
+        dcc.Graph(id=f"iris-{source}", figure=figure, config={"displaylogo": False, "modeBarButtonsToAdd": ["select2d", "lasso2d"]}),
+    ])
 
 
-# =========================
-# KPI
-# =========================
+initial_figures = figures(DF, "all", EMPTY_SELECTION)
+app.layout = html.Div(className="iris-dashboard", children=[
+    dcc.Store(id="iris-selection", data=EMPTY_SELECTION),
+    html.Header([html.H1("Iris BI Dashboard"), html.P("グラフをクリック・範囲選択して、KPI・他のグラフ・データ表を絞り込みます。")]),
+    html.Section(className="iris-card", children=[
+        html.Label(["Species", dcc.Dropdown(id="species-dropdown", options=[{"label": "すべて", "value": "all"}] + [{"label": species.title(), "value": species} for species in DF["species"].unique()], value="all", clearable=False)]),
+        html.Div(className="iris-actions", children=[html.Button("すべてリセット", id="reset-iris"), html.Strong(id="selection-summary", role="status")]),
+        html.P("クリックは1点・1品種、ドラッグは複数行を選択します。同じ要素の再クリック、または各グラフのボタンで解除できます。複数の選択は共通する行へ絞り込みます。Speciesを変更するとグラフ選択はリセットされます。", className="iris-note"),
+        html.P("各グラフは自身の選択を変更できる範囲を残します。KPIと表は、すべての条件を適用した結果です。", className="iris-note"),
+    ]),
+    html.Div(className="iris-kpis", children=[html.Div(className="iris-kpi", children=[html.Span(label), html.Strong(id=identifier)]) for identifier, label in [("kpi-count", "抽出件数"), ("kpi-mean", "Sepal Length 平均"), ("kpi-std", "Sepal Length 標準偏差")]]),
+    html.Div(className="iris-chart-grid", children=[graph_card("scatter", "散布図", initial_figures[0]), graph_card("line", "折れ線", initial_figures[1])]),
+    graph_card("bar", "品種別平均", initial_figures[2]),
+    html.Section(className="iris-card", children=[
+        html.H2("抽出したデータ"),
+        dash_table.DataTable(id="iris-table", data=DF.to_dict("records"), columns=[{"id": name, "name": name, "type": "text" if name == "species" else "numeric"} for name in ["sample_no", "species", "sepal_length", "sepal_width", "petal_length", "petal_width"]], page_size=12, sort_action="native", style_table={"overflowX": "auto"}, style_cell={"fontFamily": "inherit", "textAlign": "left", "padding": "10px", "minWidth": "90px"}, style_header={"backgroundColor": "#edf2fa", "fontWeight": "bold"}),
+    ]),
+])
 
-sepal_length_mean = df["sepal_length"].mean()
-sepal_length_std = df["sepal_length"].std()
-
-
-# =========================
-# Figures
-# =========================
-
-# 散布図
-scatter_fig = px.scatter(
-    df,
-    x="sepal_length",
-    y="sepal_width",
-    color="species",
-    title="Iris Scatter Plot",
-    labels={
-        "sepal_length": "Sepal Length",
-        "sepal_width": "Sepal Width",
-        "species": "Species"
-    }
-)
-
-
-# 折れ線グラフ
-line_fig = px.line(
-    df,
-    x="sample_no",
-    y=[
-        "sepal_length",
-        "petal_length"
-    ],
-    title="Sample Measurement Trend",
-    labels={
-        "sample_no": "Sample Number",
-        "value": "Length",
-        "variable": "Measurement"
-    }
-)
-
-
-# 品種別平均値を計算
-species_mean_df = (
-    df.groupby("species")[measurement_columns]
-    .mean()
-    .reset_index()
-)
-
-# 棒グラフで扱いやすい縦長形式に変換
-species_mean_long_df = species_mean_df.melt(
-    id_vars="species",
-    value_vars=measurement_columns,
-    var_name="measurement",
-    value_name="mean_value"
-)
-
-bar_fig = px.bar(
-    species_mean_long_df,
-    x="species",
-    y="mean_value",
-    color="measurement",
-    barmode="group",
-    title="Average Measurements by Species",
-    labels={
-        "species": "Species",
-        "mean_value": "Mean Value",
-        "measurement": "Measurement"
-    }
-)
-
-
-# =========================
-# Dash App
-# =========================
-
-app = Dash(__name__)
-
-app.layout = html.Div(
-
-    style={
-        "backgroundColor": "#f4f6f9",
-        "minHeight": "100vh",
-        "padding": "24px",
-        "fontFamily": "Arial, sans-serif"
-    },
-
-    children=[
-
-        html.H1(
-            "Iris Dashboard",
-            style={
-                "textAlign": "center",
-                "color": "#2d3748"
-            }
-        ),
-
-        html.Div(
-            id="kpi-mean",
-            style={
-                "fontSize": "36px",
-                "fontWeight": "bold",
-                "color": "#3182ce"
-            }
-        ),
-
-        html.Div(
-            id="kpi-std",
-            style={
-                "fontSize": "36px",
-                "fontWeight": "bold",
-                "color": "#e53e3e"
-            }
-        ),
-
-        html.P(
-            "Dash主要コンポーネントの動作確認",
-            style={
-                "textAlign": "center",
-                "color": "#718096"
-            }
-        ),
-
-
-        html.Div(
-            style={
-                "backgroundColor": "white",
-                "padding": "20px",
-                "marginBottom": "20px",
-                "borderRadius": "10px"
-            },
-            children=[
-                html.Label(
-                    "Species",
-                    style={
-                        "fontWeight": "bold",
-                        "marginBottom": "8px",
-                        "display": "block"
-                    }
-                ),
-
-            dcc.Dropdown(
-                id="species-dropdown",
-                    options=[
-                        {"label": "すべて", "value": "all"},
-                        *[
-                            {"label": species.title(), "value": species}
-                            for species in df["species"].unique()
-                        ]
-                    ],
-                    value="all",
-                        clearable=False
-                )
-            ]
-        ),
-
-
-
-        # =====================
-        # KPI Area
-        # =====================
-
-        html.Div(
-
-            style={
-                "display": "flex",
-                "gap": "20px",
-                "marginBottom": "20px"
-            },
-
-            children=[
-
-                html.Div(
-
-                    style={
-                        "backgroundColor": "white",
-                        "padding": "20px",
-                        "borderRadius": "10px",
-                        "boxShadow": "0 2px 6px rgba(0, 0, 0, 0.1)",
-                        "flex": "1",
-                        "textAlign": "center"
-                    },
-
-                    children=[
-
-                        html.H3(
-                            "Sepal Length 平均",
-                            style={
-                                "color": "#718096",
-                                "marginBottom": "10px"
-                            }
-                        ),
-
-                        html.Div(
-                            f"{sepal_length_mean:.2f}",
-                            style={
-                                "fontSize": "36px",
-                                "fontWeight": "bold",
-                                "color": "#3182ce"
-                            }
-                        )
-                    ]
-                ),
-
-                html.Div(
-
-                    style={
-                        "backgroundColor": "white",
-                        "padding": "20px",
-                        "borderRadius": "10px",
-                        "boxShadow": "0 2px 6px rgba(0, 0, 0, 0.1)",
-                        "flex": "1",
-                        "textAlign": "center"
-                    },
-
-                    children=[
-
-                        html.H3(
-                            "Sepal Length 標準偏差",
-                            style={
-                                "color": "#718096",
-                                "marginBottom": "10px"
-                            }
-                        ),
-
-                        html.Div(
-                            f"{sepal_length_std:.2f}",
-                            style={
-                                "fontSize": "36px",
-                                "fontWeight": "bold",
-                                "color": "#e53e3e"
-                            }
-                        )
-                    ]
-                )
-            ]
-        ),
-
-        # =====================
-        # Graph Area 1
-        # =====================
-
-        html.Div(
-
-            style={
-                "display": "flex",
-                "gap": "20px",
-                "marginBottom": "20px"
-            },
-
-            children=[
-
-                html.Div(
-                    dcc.Graph(
-                        id="iris-scatter",
-                        figure=scatter_fig
-                    ),
-                    style={
-                        "backgroundColor": "white",
-                        "borderRadius": "10px",
-                        "flex": "1"
-                    }
-                ),
-
-                html.Div(
-                    dcc.Graph(
-                        id="iris-line",
-                        figure=line_fig
-                    ),
-                    style={
-                        "backgroundColor": "white",
-                        "borderRadius": "10px",
-                        "flex": "1"
-                    }
-                )
-            ]
-        ),
-
-        # =====================
-        # Graph Area 2
-        # =====================
-
-        html.Div(
-
-            style={
-                "backgroundColor": "white",
-                "borderRadius": "10px"
-            },
-
-            children=[
-
-                dcc.Graph(
-                    id="iris-bar",
-                    figure=bar_fig
-                )
-            ]
-        )
-    ]
-)
-
-# =========================
-# callback
-# =========================
+# Clear native event payloads after handling them. Stable row-ID filters in the store
+# remain authoritative and let the same point be clicked again after a reset.
+EVENT_OUTPUTS = [Output(f"iris-{source}", property) for source in SOURCES for property in ("clickData", "selectedData")]
 
 
 @app.callback(
-    Output("kpi-mean", "children"),
-    Output("kpi-std", "children"),
-    Output("iris-scatter", "figure"),
-    Output("iris-line", "figure"),
-    Output("iris-bar", "figure"),
-    Input("species-dropdown", "value")
+    Output("iris-selection", "data"), *EVENT_OUTPUTS, Output("species-dropdown", "value"),
+    *[Input(f"iris-{source}", property) for source in SOURCES for property in ("clickData", "selectedData")],
+    *[Input(f"clear-{source}", "n_clicks") for source in SOURCES], Input("reset-iris", "n_clicks"), Input("species-dropdown", "value"),
+    State("iris-selection", "data"), prevent_initial_call=True,
 )
-def update_dashboard(selected_species):
-
-    # Speciesによる絞り込み
-    if selected_species == "all":
-        filtered_df = df.copy()
-        selection_label = "すべて"
+def handle_selection(*args):
+    state = args[-1] or EMPTY_SELECTION
+    trigger = ctx.triggered_id
+    if trigger == "reset-iris":
+        return update_selection(DF, state, reset=True), *([None] * 6), "all"
+    if trigger == "species-dropdown":
+        return update_selection(DF, state, reset=True), *([None] * 6), no_update
+    if trigger and trigger.startswith("clear-"):
+        updated = update_selection(DF, state, source=trigger[6:], clear=True)
+    elif trigger and trigger.startswith("iris-"):
+        source = trigger[5:]
+        property = next(iter(ctx.triggered_prop_ids)).split(".")[-1]
+        index = SOURCES.index(source) * 2 + (1 if property == "selectedData" else 0)
+        payload = args[index]
+        if payload is None:
+            return (no_update,) * 8
+        updated = update_selection(DF, state, source=source, payload=payload, clicked=property == "clickData")
+        if updated == state:
+            return (no_update,) * 8
     else:
-        filtered_df = df[
-            df["species"] == selected_species
-        ].copy()
-
-        selection_label = selected_species.title()
-
-    # -------------------------
-    # KPI
-    # -------------------------
-
-    mean_value = filtered_df["sepal_length"].mean()
-    std_value = filtered_df["sepal_length"].std()
-
-    mean_text = f"{mean_value:.2f}"
-    std_text = f"{std_value:.2f}"
-
-    # -------------------------
-    # Scatter Plot
-    # -------------------------
-
-    scatter_fig = px.scatter(
-        filtered_df,
-        x="sepal_length",
-        y="sepal_width",
-        color="species",
-        title=f"Scatter Plot：{selection_label}",
-        labels={
-            "sepal_length": "Sepal Length",
-            "sepal_width": "Sepal Width",
-            "species": "Species"
-        }
-    )
-
-    # -------------------------
-    # Line Graph
-    # -------------------------
-
-    line_fig = px.line(
-        filtered_df,
-        x="sample_no",
-        y=[
-            "sepal_length",
-            "petal_length"
-        ],
-        title=f"Measurement Trend：{selection_label}",
-        labels={
-            "sample_no": "Sample Number",
-            "value": "Length",
-            "variable": "Measurement"
-        }
-    )
-
-    # -------------------------
-    # Bar Graph
-    # -------------------------
-
-    species_mean_df = (
-        filtered_df
-        .groupby("species")[measurement_columns]
-        .mean()
-        .reset_index()
-    )
-
-    species_mean_long_df = species_mean_df.melt(
-        id_vars="species",
-        value_vars=measurement_columns,
-        var_name="measurement",
-        value_name="mean_value"
-    )
-
-    bar_fig = px.bar(
-        species_mean_long_df,
-        x="species",
-        y="mean_value",
-        color="measurement",
-        barmode="group",
-        title=f"Average Measurements：{selection_label}",
-        labels={
-            "species": "Species",
-            "mean_value": "Mean Value",
-            "measurement": "Measurement"
-        }
-    )
-
-    return (
-        mean_text,
-        std_text,
-        scatter_fig,
-        line_fig,
-        bar_fig
-    )
+        return (no_update,) * 8
+    return updated, *([None] * 6), no_update
 
 
+@app.callback(
+    Output("kpi-count", "children"), Output("kpi-mean", "children"), Output("kpi-std", "children"), Output("selection-summary", "children"),
+    Output("iris-scatter", "figure"), Output("iris-line", "figure"), Output("iris-bar", "figure"), Output("iris-table", "data"),
+    Input("species-dropdown", "value"), Input("iris-selection", "data"),
+)
+def update_dashboard(selected_species="all", state=None):
+    count, mean, std, summary, rows = dashboard_values(DF, selected_species, state)
+    charts = figures(DF, selected_species, state)
+    return count, mean, std, summary, *charts, rows
 
-# =========================
-# Run
-# =========================
 
 if __name__ == "__main__":
-
-    app.run(
-        host="127.0.0.1",
-        port=8050,
-        debug=True
-    )
+    app.run(host="127.0.0.1", port=8050, debug=False)
