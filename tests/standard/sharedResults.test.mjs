@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const context = vm.createContext({ window: {} });
-for (const file of ['resultData.js', 'resultReport.js']) vm.runInContext(fs.readFileSync(new URL(`../../shared/${file}`, import.meta.url), 'utf8'), context);
+for (const file of ['resultData.js', 'resultReport.js']) vm.runInContext(fs.readFileSync(new URL(`../../prototype/assets/js/shared/${file}`, import.meta.url), 'utf8'), context);
 const { ResultData, ResultReport } = context.window;
 const start = Date.parse('2026-10-31T09:00:00Z');
 const questions = [0, 1, 2].map(i => ({

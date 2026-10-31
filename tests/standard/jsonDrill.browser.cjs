@@ -2,7 +2,7 @@ const {chromium}=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path');
 const base=`${process.env.CBT_TEST_BASE_URL||'http://127.0.0.1:8000'}/prototype/language/JLPT_N2/`;
-const source=JSON.parse(fs.readFileSync(path.join(__dirname,'../../../../language/JLPT_N2/conf_JLPT_N2_LK.json')));
+const source=JSON.parse(fs.readFileSync(path.join(__dirname,'../../prototype/language/JLPT_N2/conf_JLPT_N2_LK.json')));
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CBT_TEST_CHROMIUM||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
  const errors=[];

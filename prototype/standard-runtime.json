@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "description": "現行の標準4択問題を実施するページ。公開済みという意味ではなく、既定設定で実行に必要なファイルを点検するための定義です。",
+  "entries": [
+    "language/JLPT_N2/index.html",
+    "language/JLPT_N2/Actual_N2_261030.html",
+    "language/JLPT_N2/Drill_N2_261031.html"
+  ],
+  "excludedDirectories": [
+    "assets/js/cbt", "language/JLPT_N2/test_version",
+    "language/JLPT_N2/prompt", "language/JLPT_N2/data/old"
+  ],
+  "legacyFiles": [
+    "language/JLPT_N2/Edit_drill.html", "language/JLPT_N2/Edit_drill_260820.html",
+    "language/JLPT_N2/separete_drill_261026.html", "language/JLPT_N2/config.js",
+    "language/JLPT_N2/drillConfig.js", "language/JLPT_N2/questionLoader.js",
+    "language/JLPT_N2/questionLoader_old.js", "assets/css/drill.css", "assets/css/style.css",
+    "assets/js/config.js", "assets/js/randomSelector.js", "assets/js/contentLauncher.js", "assets/js/utils.js"
+  ]
+}

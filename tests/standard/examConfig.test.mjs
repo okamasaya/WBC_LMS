@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import fs from 'node:fs';
 const context = vm.createContext({window:{},structuredClone});
-vm.runInContext(fs.readFileSync(new URL('../../shared/examConfig.js',import.meta.url),'utf8'),context);
+vm.runInContext(fs.readFileSync(new URL('../../prototype/assets/js/shared/examConfig.js',import.meta.url),'utf8'),context);
 const {normalize} = context.window.ExamConfig;
-const config = JSON.parse(fs.readFileSync(new URL('../../../../language/JLPT_N2/conf_JLPT_N2_LK.json',import.meta.url)));
+const config = JSON.parse(fs.readFileSync(new URL('../../prototype/language/JLPT_N2/conf_JLPT_N2_LK.json',import.meta.url)));
 test('one config supplies independent Actual quotas and Drill options',()=>{
  const before=JSON.stringify(config);
  const actual=normalize(config,'actual'),drill=normalize(config,'drill');
