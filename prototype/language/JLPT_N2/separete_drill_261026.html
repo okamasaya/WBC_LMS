@@ -6,6 +6,7 @@
     <title>JLPT N2  演習システム</title>
     <link rel="stylesheet" href="../../assets/css/drill.css">
     <link rel="stylesheet" href="../../assets/css/resultReview.css">
+    <link rel="stylesheet" href="../../assets/css/resultOutput.css">
     <script src="./config.js"></script>
     <script src="./questionLoader.js"></script>
 
@@ -241,27 +242,7 @@
         <p style="color: #4a5568; font-size: 14px;">解説を確認し、理解度ボタンを選択してください。</p>
         <div id="review-list"></div>
 
-        <div style="margin-top: 40px; padding: 25px; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px;">
-            <h3 style="margin-top:0; color: #1e3a8a;">演習ログの確定とレポート出力</h3>
-            <p style="color: #4a5568; font-size: 14px; margin-bottom: 15px;">
-                解説の理解度選択が完了したら、以下のボタンを押して分析レポートおよび各種ログデータを確定生成してください。
-            </p>
-            
-            <button class="nav-btn" style="background-color: #1e3a8a; width: 100%; padding: 14px; font-size: 16px;" onclick="finalizeAndGenerateReport()">
-                📊 レポート・ログデータを確定して生成
-            </button>
-
-            <div id="output-section" style="display: none; margin-top: 25px;">
-                <div class="action-btn-group">
-                    <button class="nav-btn" style="background-color: #2b6cb0; flex: 1; min-width: 180px; padding: 12px;" onclick="copyReport()">AIレポートをコピー</button>
-                    <button class="nav-btn" style="background-color: #16a34a; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadExcelCSV()">統合Raw CSV (GAS/Excel用)</button>
-                    <button class="nav-btn" style="background-color: #0d9488; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadQuestionResultCSV()">QuestionResult.csv</button>
-                    <button class="nav-btn" style="background-color: #4f46e5; flex: 1; min-width: 180px; padding: 12px;" onclick="downloadSessionCSV()">Session.csv</button>
-                </div>
-                
-                <textarea id="report-text" class="report-area" readonly></textarea>
-            </div>
-        </div>
+        <div id="result-output"></div>
         <button
                type="button"
                onclick="window.location.reload();"
@@ -289,6 +270,9 @@
 <script src="../../assets/js/drill/questionView.js"></script>
 <script src="../../assets/js/drill/answerController.js"></script>
 <script src="../../assets/js/shared/resultReview.js"></script>
+<script src="../../assets/js/shared/resultData.js"></script>
+<script src="../../assets/js/shared/resultReport.js"></script>
+<script src="../../assets/js/shared/resultOutput.js"></script>
 <script src="../../assets/js/drill/resultController.js"></script>
 <script src="../../assets/js/drill/reviewController.js"></script>
 <script src="../../assets/js/drill/reportGenerator.js"></script>

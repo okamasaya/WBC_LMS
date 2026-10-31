@@ -12,14 +12,80 @@
     "./data/JLPT_N2_LK_Gr.json"
   ],
   "categories": [
-    { "categoryLv1": "言語知識", "categoryLv2": "文字", "categoryLv3": "漢字読み", "count": 5 },
-    { "categoryLv1": "言語知識", "categoryLv2": "文字", "categoryLv3": "表記", "count": 3 },
-    { "categoryLv1": "言語知識", "categoryLv2": "語彙", "categoryLv3": "語形成", "count": 3 },
-    { "categoryLv1": "言語知識", "categoryLv2": "語彙", "categoryLv3": "文脈規定", "count": 5 },
-    { "categoryLv1": "言語知識", "categoryLv2": "語彙", "categoryLv3": "言い換え類義", "count": 3 },
-    { "categoryLv1": "言語知識", "categoryLv2": "語彙", "categoryLv3": "用法", "count": 3 },
-    { "categoryLv1": "言語知識", "categoryLv2": "文法", "categoryLv3": "文の文法1", "count": 4 },
-    { "categoryLv1": "言語知識", "categoryLv2": "文法", "categoryLv3": "文の文法2", "count": 2 },
-    { "categoryLv1": "言語知識", "categoryLv2": "文法", "categoryLv3": "文章の文法", "count": 2 }
-  ]
+    {
+      "categoryLv1": "言語知識",
+      "categoryLv2": "文字",
+      "categoryLv3": "漢字読み",
+      "count": 5,
+      "skillId": "SK_JLPT_N2_LK_CH_KANJI_READING",
+      "skillName": "文字・漢字読み"
+    },
+    {
+      "categoryLv1": "言語知識",
+      "categoryLv2": "文字",
+      "categoryLv3": "表記",
+      "count": 3,
+      "skillId": "SK_JLPT_N2_LK_CH_ORTHOGRAPHY",
+      "skillName": "文字・表記"
+    },
+    {
+      "categoryLv1": "言語知識",
+      "categoryLv2": "語彙",
+      "categoryLv3": "語形成",
+      "count": 3,
+      "skillId": "SK_JLPT_N2_LK_VO_WORD_FORMATION",
+      "skillName": "語彙・語形成"
+    },
+    {
+      "categoryLv1": "言語知識",
+      "categoryLv2": "語彙",
+      "categoryLv3": "文脈規定",
+      "count": 5,
+      "skillId": "SK_JLPT_N2_LK_VO_CONTEXT",
+      "skillName": "語彙・文脈規定"
+    },
+    {
+      "categoryLv1": "言語知識",
+      "categoryLv2": "語彙",
+      "categoryLv3": "言い換え類義",
+      "count": 3,
+      "skillId": "SK_JLPT_N2_LK_VO_PARAPHRASE",
+      "skillName": "語彙・言い換え類義"
+    },
+    {
+      "categoryLv1": "言語知識",
+      "categoryLv2": "語彙",
+      "categoryLv3": "用法",
+      "count": 3,
+      "skillId": "SK_JLPT_N2_LK_VO_USAGE",
+      "skillName": "語彙・用法"
+    },
+    {
+      "categoryLv1": "言語知識",
+      "categoryLv2": "文法",
+      "categoryLv3": "文の文法1",
+      "count": 4,
+      "skillId": "SK_JLPT_N2_LK_GR_SENTENCE_1",
+      "skillName": "文法・文の文法1"
+    },
+    {
+      "categoryLv1": "言語知識",
+      "categoryLv2": "文法",
+      "categoryLv3": "文の文法2",
+      "count": 2,
+      "skillId": "SK_JLPT_N2_LK_GR_SENTENCE_2",
+      "skillName": "文法・文の文法2"
+    },
+    {
+      "categoryLv1": "言語知識",
+      "categoryLv2": "文法",
+      "categoryLv3": "文章の文法",
+      "count": 2,
+      "skillId": "SK_JLPT_N2_LK_GR_TEXT",
+      "skillName": "文法・文章の文法"
+    }
+  ],
+  "examType": "JLPT",
+  "examLevel": "N2",
+  "examTitle": "JLPT N2 言語知識"
 }

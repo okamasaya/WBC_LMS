@@ -1,0 +1,16 @@
+/* The same report / export panel is mounted in drill and Actual. */
+.result-output-panel { margin: 40px 0 24px; padding: 25px; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px; text-align: left; }
+.result-output-panel h3 { margin-top: 0; color: #1e3a8a; }
+.result-output-panel p { color: #4a5568; font-size: 14px; }
+.result-output-panel button { cursor: pointer; border: 0; border-radius: 6px; color: white; font: inherit; font-weight: bold; padding: 12px; }
+.result-output-panel .result-generate { background: #1e3a8a; width: 100%; padding: 14px; font-size: 16px; }
+.result-output-panel #output-section { margin-top: 25px; }
+.result-output-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
+.result-output-actions button { flex: 1; min-width: 180px; background: #2b6cb0; }
+.result-output-actions [data-action="raw"] { background: #167e37; }
+.result-output-actions [data-action="questions"] { background: #087f77; }
+.result-output-actions [data-action="session"] { background: #4f46e5; }
+.result-output-panel button:hover { filter: brightness(.9); }
+.result-output-panel button:focus-visible { outline: 3px solid #9b5100; outline-offset: 3px; }
+.result-output-panel .report-area { width: 100%; height: 260px; font-family: monospace; padding: 10px; box-sizing: border-box; margin-top: 8px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; }
+@media (max-width: 600px) { .result-output-panel { padding: 16px; } .result-output-actions button { min-width: 0; flex-basis: 100%; } }
