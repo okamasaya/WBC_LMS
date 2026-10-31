@@ -58,3 +58,20 @@ scripts/check-standard.sh --browser
 - [ ] 利用者による最終的な見た目の受入確認を行う。
 
 N1/N3/TOEICの実データ対応、Drill内部の共有状態整理、検証依存の再現性、理解度推定、public展開などは [前回のToDo](DEVELOPMENT_LOG_20261030-20261031.md#10-todo) を引き継ぐ。今回、優先順位や着手条件は変更していない。
+
+## 追記：単体テストとCSS描画検証の証跡（2026-10-31）
+
+CSS整理時の「単体テスト12件」は、問題実施・データ出力の回帰確認として実施したものである。CSSの見た目自体を単体テストだけで検証した、という意味ではない。
+
+| 区分 | 対象 | 結果の扱い |
+| --- | --- | --- |
+| 単体テスト | examConfig 3件、examCore 4件、runtimeBoundary 2件、sharedResults 3件 | 当時成功。今回の再確認も12件成功・失敗0・スキップ0 |
+| 依存関係の点検 | `scripts/audit-standard-runtime.mjs` | 当時と今回の再確認で、3入口・33ファイルの点検が成功 |
+| CSS描画・操作 | [styles.browser.cjs](../tests/standard/styles.browser.cjs) | CSS整理時にブラウザで成功。今回は未再実行 |
+| 問題実施・出力の操作 | entry／jsonDrill／browser の各ブラウザ検証 | CSS整理時に成功。今回は未再実行 |
+
+[テスト記録の詳細](TEST_RECORD_20261031_STANDARD.md) に、単体テストのソース・各ケースの内容と、ブラウザ検証との区別をまとめた。
+
+今回の単体テストの生出力は [20261031_unit_3fe9d05.log](test-records/20261031_unit_3fe9d05.log)、対象コミット・時刻・終了コード・ソースハッシュは [メタデータ](test-records/20261031_unit_3fe9d05.json) を参照する。
+
+再実行コマンドは `scripts/check-standard.sh`、対象はCSS整理を反映済みの `3fe9d05`、時刻は2026-10-31 12:37:15 JST。12件成功、失敗・中断・スキップ・todoはすべて0、コマンド終了コードは0だった。過去のCSS描画検証の出力を新たに作り直したものではない。
