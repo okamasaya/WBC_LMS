@@ -2,15 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import { validateConfig, selectQuestions, scoreQuestions } from '../examCore.js';
+import { validateConfig, selectQuestions, scoreQuestions } from '../../prototype/assets/js/actual/examCore.js';
 
-const base = new URL('../../../../language/JLPT_N2/', import.meta.url);
+const base = new URL('../../prototype/language/JLPT_N2/', import.meta.url);
 const sourceConfig = JSON.parse(fs.readFileSync(new URL('conf_JLPT_N2_LK.json', base)));
 const configContext = vm.createContext({window:{},structuredClone});
-vm.runInContext(fs.readFileSync(new URL('../../shared/examConfig.js', import.meta.url), 'utf8'), configContext);
+vm.runInContext(fs.readFileSync(new URL('../../prototype/assets/js/shared/examConfig.js', import.meta.url), 'utf8'), configContext);
 const config = configContext.window.ExamConfig.normalize(sourceConfig, 'actual');
 const context = vm.createContext({ console });
-vm.runInContext(fs.readFileSync(new URL('questionLoader.js', base), 'utf8'), context);
+vm.runInContext(fs.readFileSync(new URL('../../prototype/assets/js/shared/questionLoader.js', import.meta.url), 'utf8'), context);
 const bank = config.questionFiles.flatMap(path => JSON.parse(fs.readFileSync(new URL(path, base)))).map(context.convertQuestionFormat);
 
 test('real bank: exact category quotas, unique IDs, no mutation', () => {
@@ -36,4 +36,13 @@ test('unanswered / wrong answers score zero and option shuffling preserves corre
     answers[0].selected = null;
     answers[1].selected = selected[1].options.findIndex(o => !o.isCorrect);
     assert.equal(scoreQuestions(selected, answers).filter(r => r.correct).length, 28);
+});
+
+test('shared loader preserves all existing N2 question conversions', () => {
+    const legacy = vm.createContext({ console });
+    vm.runInContext(fs.readFileSync(new URL('questionLoader.js', base), 'utf8'), legacy);
+    const raw = config.questionFiles.flatMap(file => JSON.parse(fs.readFileSync(new URL(file, base))));
+    assert.equal(JSON.stringify(raw.map(context.convertQuestionFormat)), JSON.stringify(raw.map(legacy.convertQuestionFormat)));
+    assert.equal(typeof context.getConfiguredQuestionFilePaths, 'undefined');
+    assert.equal(typeof context.createQuestionSet, 'undefined');
 });
