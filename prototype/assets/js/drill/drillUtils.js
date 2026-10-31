@@ -103,7 +103,7 @@ function resolveSkillDefinition(question) {
 
 function getConfiguredQuestionSources() {
     if (typeof CONFIG === "undefined" || !CONFIG) return "";
-    const sources = CONFIG.questionFiles ?? CONFIG.questionFile;
+    const sources = CONFIG.sourceQuestionFiles ?? CONFIG.questionFiles ?? CONFIG.questionFile;
     if (Array.isArray(sources)) return sources.join(" | ");
     return typeof sources === "string" ? sources : "";
 }

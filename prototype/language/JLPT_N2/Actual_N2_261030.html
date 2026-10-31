@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-config="./conf_JLPT_N2_LK.json">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>開発中 | JLPT N2 言語知識 CBT</title>
+  <title>開発中 | Actual CBT</title>
+  <link rel="stylesheet" href="../../assets/css/learning.css">
   <link rel="stylesheet" href="../../assets/css/cbt.css">
   <link rel="stylesheet" href="../../assets/css/resultReview.css">
   <link rel="stylesheet" href="../../assets/css/resultOutput.css">
+  <script src="../../assets/js/shared/examConfig.js" defer></script>
   <script src="./questionLoader.js" defer></script>
   <script src="../../assets/js/shared/resultReview.js" defer></script>
   <script src="../../assets/js/shared/resultData.js" defer></script>
@@ -15,7 +17,7 @@
   <script type="module" src="../../assets/js/cbt/app.js"></script>
 </head>
 <body>
-  <header class="site-header"><span class="dev-badge">開発中</span><h1 id="exam-title">開発中</h1><span>JLPT N2 言語知識 CBT模擬試験</span></header>
+  <header class="site-header"><span class="dev-badge">開発中</span><h1 id="exam-title">開発中</h1><span id="exam-subtitle">CBT模擬試験</span></header>
   <main>
     <section id="start-screen" class="card">
       <h2>試験を始める前に</h2>
@@ -57,7 +59,7 @@
     </section>
     <section id="result-screen" class="card" hidden>
       <h2 id="result-heading" tabindex="-1">試験結果</h2><p id="finish-reason"></p><p id="score" class="summary"></p><p id="elapsed"></p>
-      <p class="note">各問1点の素点です。JLPT公式の尺度得点・合否判定ではありません。</p>
+      <p class="note">各問1点の素点です。公式の尺度得点・合否判定ではありません。</p>
       <h3>カテゴリ別の結果</h3><div class="table-scroll"><table><thead><tr><th scope="col">カテゴリ</th><th scope="col">正解 / 出題</th><th scope="col">正答率</th></tr></thead><tbody id="category-results"></tbody></table></div>
       <h3>正誤と解説の確認・理解度チェック</h3>
       <p>解説を確認し、理解度ボタンを選択してください。「後でもう一度解く」フラグも記録できます。</p>

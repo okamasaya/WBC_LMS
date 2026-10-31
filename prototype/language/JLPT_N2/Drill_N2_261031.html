@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja" data-config="./conf_JLPT_N2_LK.json">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>開発中 | Drill</title>
+  <link rel="stylesheet" href="../../assets/css/learning.css">
+  <link rel="stylesheet" href="../../assets/css/drillPage.css">
+  <link rel="stylesheet" href="../../assets/css/resultReview.css">
+  <link rel="stylesheet" href="../../assets/css/resultOutput.css">
+</head>
+<body>
+  <header class="site-header"><span class="dev-badge">開発中</span><h1 id="title-display">開発中</h1><span id="exam-subtitle">練習ドリル</span></header>
+  <main>
+    <section id="start-container" class="card">
+      <h2>練習を始める前に</h2>
+      <p id="description-display" role="status">設定と問題を読み込んでいます…</p>
+      <div class="settings">
+        <label>出題問題数 <select id="question-count-select"></select></label>
+        <div id="category-select-container">
+          <label>カテゴリ Lv1 <select id="category-lv1-select"><option value="all">全カテゴリ</option></select></label>
+          <label>カテゴリ Lv2 <select id="category-lv2-select" disabled><option value="all">全カテゴリ</option></select></label>
+          <label>カテゴリ Lv3 <select id="category-lv3-select" disabled><option value="all">全カテゴリ</option></select></label>
+        </div>
+        <label>難易度 <select id="difficulty-select"></select></label>
+        <label id="confidence-setting"><input type="checkbox" id="use-confidence-checkbox"> 回答時に自信度を記録する</label>
+      </div>
+      <p class="note">開発中の練習モードです。解説の確認後、理解度・復習フラグを記録してレポートを出力できます。</p>
+      <button id="start-exam" class="primary" onclick="startExam()" disabled>練習を開始する</button>
+    </section>
+    <section id="exam-container" class="container" style="display: none;">
+      <div class="card main-panel">
+        <div class="header-area"><h2 id="progress">問題</h2><span id="timer"></span></div>
+        <div id="category-display" class="category-tag"></div>
+        <div id="question-text" class="question"></div>
+        <div id="options-container"></div>
+        <fieldset id="confidence-panel" class="confidence-panel" style="display: none;">
+          <legend>回答に対する自信度を4段階から選択してください</legend>
+          <div class="confidence-grid">
+            <button class="conf-btn" onclick="selectConfidence(1)">1. 自信がある</button>
+            <button class="conf-btn" onclick="selectConfidence(2)">2. 少し自信がある</button>
+            <button class="conf-btn" onclick="selectConfidence(3)">3. 怪しい</button>
+            <button class="conf-btn" onclick="selectConfidence(4)">4. 直感！</button>
+          </div>
+        </fieldset>
+        <div id="instant-feedback" class="feedback-panel" style="display: none;"></div>
+        <div class="control-box">
+          <button class="nav-btn" onclick="prevQuestion()">前の問題へ</button>
+          <button id="flag-button" onclick="toggleFlag()">⚑ あとで確認</button>
+          <button class="nav-btn primary" onclick="nextQuestion()">次の問題へ</button>
+        </div>
+      </div>
+      <aside id="sidebar-panel" style="display: none;"><div id="palette-grid"></div></aside>
+    </section>
+    <section id="score-container" class="card" style="display: none;">
+      <h2>演習結果</h2><p id="final-score" class="summary"></p>
+      <div id="category-score-section"><h3>分野別得点率（参考ライン: 30%）</h3><div id="category-score-list"></div></div>
+      <p class="note">各問1点の素点です。公式の尺度得点・合否判定ではありません。</p>
+      <h3>正誤と解説の確認・理解度チェック</h3><p>解説を確認し、理解度ボタンを選択してください。</p>
+      <div id="review-list"></div><div id="result-output"></div>
+      <button onclick="window.location.reload()">最初からやり直す</button>
+    </section>
+  </main>
+  <div id="toast-message" class="toast" role="status"></div>
+  <!-- The adapter defines the legacy engine's settings from JSON; no config.js or drillConfig.js. -->
+  <script src="../../assets/js/shared/examConfig.js"></script>
+  <script src="./questionLoader.js"></script>
+  <script src="../../assets/js/drill/jsonConfig.js"></script>
+  <script src="../../assets/js/drill/drillState.js"></script>
+  <script src="../../assets/js/drill/drillUtils.js"></script>
+  <script src="../../assets/js/drill/categorySelector.js"></script>
+  <script src="../../assets/js/drill/examController.js"></script>
+  <script src="../../assets/js/drill/questionView.js"></script>
+  <script src="../../assets/js/drill/answerController.js"></script>
+  <script src="../../assets/js/shared/resultReview.js"></script>
+  <script src="../../assets/js/shared/resultData.js"></script>
+  <script src="../../assets/js/shared/resultReport.js"></script>
+  <script src="../../assets/js/shared/resultOutput.js"></script>
+  <script src="../../assets/js/drill/resultController.js"></script>
+  <script src="../../assets/js/drill/reviewController.js"></script>
+  <script src="../../assets/js/drill/reportGenerator.js"></script>
+  <script src="../../assets/js/drill/dataExporter.js"></script>
+  <script src="../../assets/js/drill/app.js"></script>
+</body>
+</html>

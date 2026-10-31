@@ -17,6 +17,9 @@ function updateElapsedTimeForCurrentQuestion() {
 }
 
 window.onload = async function() {
+    const startButton = document.getElementById('start-exam');
+    try {
+        if (window.DrillPageReady) await window.DrillPageReady;
 
     /*
      * ==========================================
@@ -26,7 +29,8 @@ window.onload = async function() {
      */
 
     originalQuizData =
-        await createQuestionSet();
+        await (window.loadDrillQuestionSet ? window.loadDrillQuestionSet() : createQuestionSet());
+    if (window.prepareDrillQuestions) originalQuizData = window.prepareDrillQuestions(originalQuizData);
 
 
     console.log(
@@ -47,7 +51,7 @@ window.onload = async function() {
             + "問題データを読み込めませんでした。"
             + "</strong>";
 
-        return;
+        throw new Error('設定した範囲の問題データを読み込めませんでした。');
 
     }
 
@@ -97,6 +101,7 @@ window.onload = async function() {
          * Lv1 / Lv2 / Lv3
          */
         initializeCategorySelectors();
+        window.configureDrillControls?.();
 
 
         /*
@@ -151,6 +156,14 @@ window.onload = async function() {
             + `制限時間（${appConfig.timeLimit}分）内に`
             + `全問解答してください。`;
 
+    }
+
+    if (startButton) startButton.disabled = false;
+    } catch (error) {
+        const target = document.getElementById('description-display');
+        target.textContent = `開始できません: ${error.message} 設定・問題ファイルを確認して再読み込みしてください。`;
+        target.setAttribute('role', 'alert');
+        if (startButton) startButton.disabled = true;
     }
 
 };

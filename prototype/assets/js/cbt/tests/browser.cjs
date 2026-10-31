@@ -2,7 +2,10 @@ const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const url = `${process.env.CBT_TEST_BASE_URL || 'http://127.0.0.1:8000'}/prototype/language/JLPT_N2/Actual_N2_261030.html`;
-const config = JSON.parse(fs.readFileSync(require('node:path').join(__dirname, '../../../../language/JLPT_N2/conf_JLPT_N2_LK.json')));
+const sourceConfig = JSON.parse(fs.readFileSync(require('node:path').join(__dirname, '../../../../language/JLPT_N2/conf_JLPT_N2_LK.json')));
+const configContext = require('node:vm').createContext({window:{},structuredClone});
+require('node:vm').runInContext(fs.readFileSync(require('node:path').join(__dirname,'../../shared/examConfig.js'),'utf8'), configContext);
+const config = configContext.window.ExamConfig.normalize(sourceConfig, 'actual');
 // Read RFC-style quoted CSV, including the question/explanation newlines.
 function readCsv(text) {
  const rows = []; let row = [], cell = '', quoted = false;

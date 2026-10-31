@@ -1,11 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "title": "開発中",
   "examId": "JLPT_N2_LK",
-  "timeLimitMinutes": 40,
-  "recordConfidence": true,
-  "shuffleQuestionsWithinCategory": true,
-  "shuffleOptions": false,
   "questionFiles": [
     "./data/JLPT_N2_LK_Ch.json",
     "./data/JLPT_N2_LK_Vo.json",
@@ -16,76 +12,101 @@
       "categoryLv1": "言語知識",
       "categoryLv2": "文字",
       "categoryLv3": "漢字読み",
-      "count": 5,
       "skillId": "SK_JLPT_N2_LK_CH_KANJI_READING",
-      "skillName": "文字・漢字読み"
+      "skillName": "文字・漢字読み",
+      "actualCount": 5
     },
     {
       "categoryLv1": "言語知識",
       "categoryLv2": "文字",
       "categoryLv3": "表記",
-      "count": 3,
       "skillId": "SK_JLPT_N2_LK_CH_ORTHOGRAPHY",
-      "skillName": "文字・表記"
+      "skillName": "文字・表記",
+      "actualCount": 3
     },
     {
       "categoryLv1": "言語知識",
       "categoryLv2": "語彙",
       "categoryLv3": "語形成",
-      "count": 3,
       "skillId": "SK_JLPT_N2_LK_VO_WORD_FORMATION",
-      "skillName": "語彙・語形成"
+      "skillName": "語彙・語形成",
+      "actualCount": 3
     },
     {
       "categoryLv1": "言語知識",
       "categoryLv2": "語彙",
       "categoryLv3": "文脈規定",
-      "count": 5,
       "skillId": "SK_JLPT_N2_LK_VO_CONTEXT",
-      "skillName": "語彙・文脈規定"
+      "skillName": "語彙・文脈規定",
+      "actualCount": 5
     },
     {
       "categoryLv1": "言語知識",
       "categoryLv2": "語彙",
       "categoryLv3": "言い換え類義",
-      "count": 3,
       "skillId": "SK_JLPT_N2_LK_VO_PARAPHRASE",
-      "skillName": "語彙・言い換え類義"
+      "skillName": "語彙・言い換え類義",
+      "actualCount": 3
     },
     {
       "categoryLv1": "言語知識",
       "categoryLv2": "語彙",
       "categoryLv3": "用法",
-      "count": 3,
       "skillId": "SK_JLPT_N2_LK_VO_USAGE",
-      "skillName": "語彙・用法"
+      "skillName": "語彙・用法",
+      "actualCount": 3
     },
     {
       "categoryLv1": "言語知識",
       "categoryLv2": "文法",
       "categoryLv3": "文の文法1",
-      "count": 4,
       "skillId": "SK_JLPT_N2_LK_GR_SENTENCE_1",
-      "skillName": "文法・文の文法1"
+      "skillName": "文法・文の文法1",
+      "actualCount": 4
     },
     {
       "categoryLv1": "言語知識",
       "categoryLv2": "文法",
       "categoryLv3": "文の文法2",
-      "count": 2,
       "skillId": "SK_JLPT_N2_LK_GR_SENTENCE_2",
-      "skillName": "文法・文の文法2"
+      "skillName": "文法・文の文法2",
+      "actualCount": 2
     },
     {
       "categoryLv1": "言語知識",
       "categoryLv2": "文法",
       "categoryLv3": "文章の文法",
-      "count": 2,
       "skillId": "SK_JLPT_N2_LK_GR_TEXT",
-      "skillName": "文法・文章の文法"
+      "skillName": "文法・文章の文法",
+      "actualCount": 2
     }
   ],
   "examType": "JLPT",
   "examLevel": "N2",
-  "examTitle": "JLPT N2 言語知識"
+  "examTitle": "JLPT N2 言語知識",
+  "actual": {
+    "timeLimitMinutes": 40,
+    "recordConfidence": true,
+    "shuffleQuestionsWithinCategory": true,
+    "shuffleOptions": false
+  },
+  "drill": {
+    "questionCounts": [
+      10,
+      30,
+      50
+    ],
+    "defaultQuestionCount": 10,
+    "difficultyModes": [
+      "all",
+      "easy",
+      "hard"
+    ],
+    "defaultDifficultyMode": "all",
+    "allowCategorySelection": true,
+    "recordConfidence": true,
+    "allowConfidenceToggle": true,
+    "shuffleQuestions": true,
+    "shuffleOptions": true
+  }
 }

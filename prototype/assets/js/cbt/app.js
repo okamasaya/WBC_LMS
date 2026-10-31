@@ -5,7 +5,7 @@ const confidenceLabels = ['自信がある', '少し自信がある', '怪しい
 let config, bank, questions, answers, current = 0;
 let resultData, resultOutputController;
 let active = false, startedAt, deadline, interval, visitedAt;
-const configURL = new URL('./conf_JLPT_N2_LK.json', window.location.href);
+
 
 // Keep the inline formatting used by the question bank, without accepting active HTML.
 function formatted(target, value) {
@@ -32,12 +32,11 @@ function duration(seconds) {
 
 async function initialize() {
     try {
-        const response = await fetch(configURL, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`設定ファイルを取得できません (HTTP ${response.status})。`);
-        config = validateConfig(await response.json());
+        config = validateConfig(await window.ExamConfig.load('actual', document.documentElement.dataset.config));
         $('exam-title').textContent = config.title;
-        document.title = `${config.title} | 開発中・JLPT N2 CBT`;
-        const raw = (await Promise.all(config.questionFiles.map(path => window.loadQuestionData(new URL(path, configURL).href)))).flat();
+        document.title = `${config.title} | Actual CBT`;
+        $('exam-subtitle').textContent = `${config.examTitle || config.examId} ／ CBT模擬試験`;
+        const raw = (await Promise.all(config.questionFiles.map(path => window.loadQuestionData(path)))).flat();
         // Reuse the same validation and conversion as separete_drill, without loading its practice settings.
         bank = raw.map((q, i) => window.convertQuestionFormat(q, i));
         const preview = selectQuestions(config, bank);
@@ -196,7 +195,7 @@ function finish(timedOut) {
             examLevel: config.examLevel || null, examTitle: config.examTitle || config.title,
             studentId: config.studentId ?? null, mode: 'Actual',
             useConfidence: config.recordConfidence, difficultyMode: 'all',
-            sourceQuestionFiles: config.questionFiles.join(' | ')
+            sourceQuestionFiles: config.sourceQuestionFiles.join(' | ')
         },
         resolveSkill: question => config.categories.find(category =>
             category.categoryLv1 === question.category_lv1 && category.categoryLv2 === question.category_lv2 && category.categoryLv3 === question.category_lv3)

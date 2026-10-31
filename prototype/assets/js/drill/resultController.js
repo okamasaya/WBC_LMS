@@ -35,7 +35,7 @@ function submitExam(isAuto = false) {
             flagged: Boolean(flaggedQuestions[index])
         })),
         metadata: {
-            ...EXAM_CONTEXT, studentId: "STU-00123", mode: isPractice ? "Drill" : "Actual",
+            ...EXAM_CONTEXT, studentId: Object.hasOwn(appConfig, "studentId") ? appConfig.studentId : "STU-00123", mode: isPractice ? "Drill" : "Actual",
             useConfidence: isPractice ? useConfidence : null,
             difficultyMode: isPractice ? selectedDifficultyMode : "all",
             selectedCategoryLevel1: isPractice ? document.getElementById("category-lv1-select")?.value : "all",
