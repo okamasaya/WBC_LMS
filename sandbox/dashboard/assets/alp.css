@@ -1,0 +1,30 @@
+.alp-dashboard { font-family: system-ui, sans-serif; color: #21314c; background: #f0f4f9; padding: 24px; min-height: 100vh; line-height: 1.6; }
+.alp-dashboard * { box-sizing: border-box; }
+.alp-dashboard header { max-width: 1440px; margin: 0 auto 24px; }
+.alp-dashboard h1 { margin: 8px 0; font-size: 1.8rem; }
+.alp-dashboard h2 { margin-top: 0; font-size: 1.2rem; }
+.alp-badge { background: #ffe082; border: 1px solid #e8aa20; color: #5d3900; border-radius: 6px; padding: 4px 12px; font-weight: 700; }
+.alp-card { max-width: 1440px; margin: 0 auto 20px; padding: 24px; background: white; border: 1px solid #d4deeb; border-radius: 12px; min-width: 0; }
+.alp-upload { padding: 28px; text-align: center; background: #f6f9fd; border: 2px dashed #91a3b9; border-radius: 8px; cursor: pointer; }
+.alp-upload small { display: block; color: #56657a; margin-top: 8px; }
+.alp-controls, .alp-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; margin: 16px 0; }
+.alp-dashboard label { display: block; }
+.alp-dashboard input[type="text"], .alp-dashboard input[type="number"] { display: block; width: 100%; padding: 10px; border: 1px solid #91a3b9; border-radius: 6px; font: inherit; }
+.alp-actions button { background: #285caa; color: white; border: 0; border-radius: 6px; padding: 12px 18px; font: inherit; font-weight: 600; cursor: pointer; }
+.alp-actions button:hover { background: #1d4681; }
+.alp-actions button:disabled { opacity: .45; cursor: default; }
+.alp-dashboard :is(button, input, summary):focus-visible { outline: 3px solid #9b5100; outline-offset: 3px; }
+.alp-note { color: #56657a; font-size: .9rem; }
+.alp-filter-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.alp-parameter-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.alp-kpis { max-width: 1440px; margin: 0 auto 20px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.alp-kpi { background: #e2ecfa; padding: 20px; border-radius: 8px; }
+.alp-kpi span, .alp-kpi strong { display: block; }
+.alp-kpi strong { font-size: 1.8rem; }
+.alp-chart-grid { max-width: 1440px; margin: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.alp-chart-grid .alp-card { width: 100%; }
+.alp-dashboard details { margin: 16px 0; }
+.alp-dashboard summary { cursor: pointer; font-weight: 600; }
+.alp-dashboard [role="status"] { overflow-wrap: anywhere; padding: 8px 0; }
+@media (max-width: 900px) { .alp-chart-grid, .alp-parameter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .alp-dashboard { padding: 12px; } .alp-card { padding: 16px; } .alp-chart-grid, .alp-filter-grid, .alp-parameter-grid { grid-template-columns: 1fr; } .alp-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

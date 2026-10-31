@@ -1,0 +1,6 @@
+{
+  "modelVersion": "bkt-classic-v1",
+  "parameterSource": "manual_assumption",
+  "defaults": { "p_l0": 0.2, "p_t": 0.1, "p_g": 0.25, "p_s": 0.1 },
+  "bySkill": {}
+}
