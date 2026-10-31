@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="../../assets/css/resultReview.css">
   <link rel="stylesheet" href="../../assets/css/resultOutput.css">
 </head>
-<body>
+<body class="learning-page">
   <header class="site-header"><span class="dev-badge">開発中</span><h1 id="title-display">開発中</h1><span id="exam-subtitle">練習ドリル</span></header>
   <main>
-    <section id="start-container" class="card">
+    <section id="start-container" class="card learning-start">
       <h2>練習を始める前に</h2>
       <p id="description-display" role="status">設定と問題を読み込んでいます…</p>
       <div class="settings">
@@ -31,12 +31,12 @@
     <section id="exam-container" class="container" style="display: none;">
       <div class="card main-panel">
         <div class="header-area"><h2 id="progress">問題</h2><span id="timer"></span></div>
-        <div id="category-display" class="category-tag"></div>
-        <div id="question-text" class="question"></div>
+        <div id="category-display" class="category-tag learning-category"></div>
+        <div id="question-text" class="question learning-question"></div>
         <div id="options-container"></div>
         <fieldset id="confidence-panel" class="confidence-panel" style="display: none;">
           <legend>回答に対する自信度を4段階から選択してください</legend>
-          <div class="confidence-grid">
+          <div class="confidence-grid learning-confidence-grid">
             <button class="conf-btn" onclick="selectConfidence(1)">1. 自信がある</button>
             <button class="conf-btn" onclick="selectConfidence(2)">2. 少し自信がある</button>
             <button class="conf-btn" onclick="selectConfidence(3)">3. 怪しい</button>
@@ -44,7 +44,7 @@
           </div>
         </fieldset>
         <div id="instant-feedback" class="feedback-panel" style="display: none;"></div>
-        <div class="control-box">
+        <div class="control-box learning-navigation">
           <button class="nav-btn" onclick="prevQuestion()">前の問題へ</button>
           <button id="flag-button" onclick="toggleFlag()">⚑ あとで確認</button>
           <button class="nav-btn primary" onclick="nextQuestion()">次の問題へ</button>

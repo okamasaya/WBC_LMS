@@ -15,3 +15,5 @@
 ルート直下の旧JSや `css/drill.css` / `style.css` は他のprototype・旧ページ用です。一括削除せず、使用状況を確認してください。
 
 テストは `tests/standard/`、設計・設定の説明は [docs/standard](../../docs/standard/README.md) にあります。実行対象は `prototype/standard-runtime.json` と点検コマンドで区分けします。
+
+CSSの共通部品・モード別責務と変数の変更方法は [スタイル仕様](../../docs/standard/styles.md) にまとめています。

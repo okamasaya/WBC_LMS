@@ -13,4 +13,5 @@ if [[ "${1:-}" == "--browser" ]]; then
   node tests/standard/entry.browser.cjs
   node tests/standard/jsonDrill.browser.cjs
   node tests/standard/browser.cjs
+  node tests/standard/styles.browser.cjs
 fi

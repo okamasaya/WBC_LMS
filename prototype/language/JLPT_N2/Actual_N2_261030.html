@@ -16,10 +16,10 @@
   <script src="../../assets/js/shared/resultOutput.js" defer></script>
   <script type="module" src="../../assets/js/actual/app.js"></script>
 </head>
-<body>
+<body class="learning-page">
   <header class="site-header"><span class="dev-badge">開発中</span><h1 id="exam-title">開発中</h1><span id="exam-subtitle">CBT模擬試験</span></header>
   <main>
-    <section id="start-screen" class="card">
+    <section id="start-screen" class="card learning-start">
       <h2>試験を始める前に</h2>
       <p id="load-status" role="status">設定と問題を読み込んでいます…</p>
       <div id="error" role="alert" hidden></div>
@@ -41,13 +41,13 @@
       <div class="exam-toolbar"><strong id="progress"></strong><span>残り時間 <strong id="timer" role="timer"></strong></span></div>
       <div class="exam-layout">
         <section class="card question-panel" aria-label="問題">
-          <p id="category" class="category"></p>
+          <p id="category" class="category learning-category"></p>
           <h2 id="question-heading" tabindex="-1">問題</h2>
-          <div id="question-text" class="question-text"></div>
+          <div id="question-text" class="question-text learning-question"></div>
           <fieldset id="options"><legend>回答を1つ選択してください</legend><div id="option-list"></div></fieldset>
           <button id="clear-answer" class="subtle">回答を取り消す</button>
-          <fieldset id="confidence"><legend>自信度（任意）</legend><div id="confidence-options" class="confidence-options"></div></fieldset>
-          <div class="navigation"><button id="previous">前の問題へ</button><button id="flag" aria-pressed="false">⚑ あとで確認</button><button id="next" class="primary">次の問題へ</button></div>
+          <fieldset id="confidence"><legend>自信度（任意）</legend><div id="confidence-options" class="confidence-options learning-confidence-grid"></div></fieldset>
+          <div class="navigation learning-navigation"><button id="previous">前の問題へ</button><button id="flag" aria-pressed="false">⚑ あとで確認</button><button id="next" class="primary">次の問題へ</button></div>
         </section>
         <aside class="card sidebar" aria-label="問題一覧">
           <h2>問題一覧</h2><p id="counts" role="status"></p>
@@ -68,6 +68,6 @@
       <button id="restart">最初からやり直す</button>
     </section>
   </main>
-  <dialog id="finish-dialog" aria-labelledby="finish-title"><h2 id="finish-title">試験を終了しますか？</h2><p id="finish-summary"></p><p>終了すると回答を変更できません。</p><div class="navigation"><button id="cancel-finish">戻って見直す</button><button id="confirm-finish" class="danger">終了して採点</button></div></dialog>
+  <dialog id="finish-dialog" aria-labelledby="finish-title"><h2 id="finish-title">試験を終了しますか？</h2><p id="finish-summary"></p><p>終了すると回答を変更できません。</p><div class="navigation learning-navigation"><button id="cancel-finish">戻って見直す</button><button id="confirm-finish" class="danger">終了して採点</button></div></dialog>
 </body>
 </html>

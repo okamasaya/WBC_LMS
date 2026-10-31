@@ -68,4 +68,6 @@ scripts/check-standard.sh --browser
 - 解説理解度と回答時の自信度は学習者の自己申告です。推定した理解度とは区別します。
 - 理解度推定に着手する前に、[出力データの意味](results.md#推定処理へ渡す前のデータの意味)を確認します。
 
+CSSの責務・テーマ変数・表示確認は [共通CSSとモード別CSS](styles.md) を参照してください。
+
 詳細: [設定](configuration.md) / [Actual](actual.md) / [結果・レポート](results.md) / [drillの分割経緯](drill-history.md)
