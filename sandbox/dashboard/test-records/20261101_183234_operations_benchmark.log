@@ -1,0 +1,33 @@
+{
+  "rows": 1000000,
+  "synthetic": true,
+  "scope": "aggregation functions only; repeated hourly observations, not a validated production dataset",
+  "python": "3.12.14",
+  "pandas": "3.1.0",
+  "total": 189023818,
+  "measurements": {
+    "M": {
+      "milliseconds": 46.678,
+      "buckets": 24
+    },
+    "W": {
+      "milliseconds": 37.185,
+      "buckets": 106
+    },
+    "D": {
+      "milliseconds": 37.683,
+      "buckets": 731
+    },
+    "H": {
+      "milliseconds": 30.634,
+      "buckets": 17544
+    }
+  },
+  "cache": {
+    "cold_ms": 41.648,
+    "hit_ms": 0.036,
+    "hits": 1,
+    "misses": 1
+  },
+  "threshold": null
+}

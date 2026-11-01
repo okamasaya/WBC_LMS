@@ -7,3 +7,10 @@
 .bike-dashboard :focus-visible { outline: 3px solid #a85a00; outline-offset: 2px; }
 .bike-dashboard .js-plotly-plot { min-width: 0; }
 @media (max-width: 600px) { .bike-dashboard { padding: 10px; } .bike-panel { padding: 10px; } .bike-dashboard .DateRangePickerInput { display: flex; flex-wrap: wrap; } }
+@media print {
+  .bike-dashboard .bike-panel, .bike-dashboard button, .bike-dashboard details, .bike-dashboard .modebar { display: none !important; }
+  .bike-dashboard #bike-kpi.bike-panel { display: block !important; border: 0; padding: 0; }
+  .bike-dashboard .dash-graph { break-inside: avoid; }
+  .bike-dashboard { max-width: none; color: black; padding: 0; }
+}
+@media print { .plotly-notifier { display: none !important; } }
