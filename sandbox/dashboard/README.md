@@ -159,3 +159,7 @@ node sandbox/dashboard/tests/bike_operations.browser.cjs
 ```
 
 [機能確認一覧](FEATURE_CHECKLIST.md) と [更新・出力・性能のテスト記録](TEST_RECORD_OPERATIONS_20261101.md) に対応状況をまとめています。
+
+## 開発記録
+
+- [2026-11-01：DashによるBI機能確認の経緯・実装・検証・保留事項](DEVELOPMENT_LOG_20261101.md)
