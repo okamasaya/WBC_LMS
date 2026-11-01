@@ -1,0 +1,10 @@
+﻿SkillID,SkillName,CategoryLevel1,CategoryLevel2,CategoryLevel3,QuestionsPerSession
+SK_JLPT_N2_LK_CH_KANJI_READING,文字・漢字読み,言語知識,文字,漢字読み,5
+SK_JLPT_N2_LK_CH_ORTHOGRAPHY,文字・表記,言語知識,文字,表記,3
+SK_JLPT_N2_LK_VO_WORD_FORMATION,語彙・語形成,言語知識,語彙,語形成,3
+SK_JLPT_N2_LK_VO_CONTEXT,語彙・文脈規定,言語知識,語彙,文脈規定,5
+SK_JLPT_N2_LK_VO_PARAPHRASE,語彙・言い換え類義,言語知識,語彙,言い換え類義,3
+SK_JLPT_N2_LK_VO_USAGE,語彙・用法,言語知識,語彙,用法,3
+SK_JLPT_N2_LK_GR_SENTENCE_1,文法・文の文法1,言語知識,文法,文の文法1,4
+SK_JLPT_N2_LK_GR_SENTENCE_2,文法・文の文法2,言語知識,文法,文の文法2,2
+SK_JLPT_N2_LK_GR_TEXT,文法・文章の文法,言語知識,文法,文章の文法,2

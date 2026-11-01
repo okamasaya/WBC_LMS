@@ -11,6 +11,8 @@ bkt/
 ├── model.py               # 旧bkt.py：標準BKTの計算
 ├── assisted_model.py      # 正誤中心・補助2項目の独立回答モデル
 ├── flat_app.py            # 補助モデルの確認画面（8055）
+├── mock_dataset.py        # N2のモック学習ログを再生成
+├── data/                  # CSV・辞書・manifest・SQLite案
 ├── learning_data.py       # CSV解析・正規化・除外・重複検出
 ├── demo_data.py           # 架空の学習ログ
 ├── bkt_parameters.json    # 手動設定の仮パラメータ
@@ -51,7 +53,7 @@ APIの返す正答予測、正誤観測後の習得確率、学習遷移後の�
 
 - 親のalp_app.pyは互換入口として残し、従来の`python sandbox/dashboard/alp_app.py`は8051で起動します。旧bike_app.pyと同時には起動しないでください。
 - `from bkt import BKTParameters, estimate, update`はdashboardがPythonの検索パスにある場合、パッケージの公開APIとして引き続き使えます。
-- 親のtests/test_bkt.pyとtest_dashboard.py、および追加したtest_assisted_model.pyは、bkt/tests内のテストを読み込む入口です。整理時の既存47件に今回の17件を加え、全体64件の検証を実行できます。
+- 親のtests/test_bkt.pyとtest_dashboard.py、および追加したtest_assisted_model.pyは、bkt/tests内のテストを読み込む入口です。整理時の既存47件に今回の17件を加え、全体64件を経て、モック検証10件を追加した全体74件の検証を実行できます。
 - 親のtests/browser.cjsは従来のALPポート8051へ接続する互換入口です。新しいテストの既定ポートは8054です。
 - learning_data.py、demo_data.py、dashboard_views.py、設定・CSSの実体はこのフォルダーへ移動しました。新しいコードからはパッケージ経由で参照してください。
 
@@ -62,10 +64,10 @@ APIの返す正答予測、正誤観測後の習得確率、学習遷移後の�
 サーバーを起動する前でもPythonテストは実行できます。
 
 ```sh
-# BKTだけ：30件（既存13＋補助モデル17）
+# BKTだけ：40件（整理時13＋補助モデル17＋モック10）
 /workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/bkt/tests -p 'test_*.py' -v
 
-# 既存Iris・Bikeも含む全体：64件（上の30件を含む）
+# 既存Iris・Bikeも含む全体：74件（上の40件を含む）
 /workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/tests -p 'test_*.py' -v
 
 # 8054のサーバー起動後
@@ -75,7 +77,7 @@ node sandbox/dashboard/bkt/tests/browser.cjs
 node sandbox/dashboard/bkt/tests/flat.browser.cjs
 ```
 
-30件と64件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。
+40件と74件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。
 
 今回の配置変更に対する結果は[整理のテスト記録](TEST_RECORD_REORGANIZATION_20261102.md)へ保存しています。
 
@@ -111,3 +113,12 @@ node sandbox/dashboard/bkt/tests/flat.browser.cjs
 - [数式・入力・仮定・実行方法](ASSISTED_MODEL.md)
 - [開発ログ](DEVELOPMENT_LOG_ASSISTED_20261102.md)
 - [テスト記録](TEST_RECORD_ASSISTED_20261102.md)
+
+## JLPT N2言語知識・20回分のモック
+
+[data/mock_jlpt_n2_20_sessions/](data/mock_jlpt_n2_20_sessions/README.md)に、架空学習者1人・各30問・20回の600回答をCSVで置いています。回答ファイルはQuestionResult.csv、回次別の集計はSession.csvです。列定義・合成フラグ・再生成条件・SQLite用スキーマ案も同梱しています。
+
+8055の画面で「JLPT N2・20回分のモック」を選択できます。現行モデルは各回答の独立評価のままです。永続SQLiteへの移行と、履歴をつなぐモデルはまだ実装していません。
+
+- [開発記録](DEVELOPMENT_LOG_MOCK_DATA_20261102.md)
+- [テスト記録](TEST_RECORD_MOCK_DATA_20261102.md)

@@ -1,0 +1,103 @@
+{
+  "generator_version": "jlpt-n2-mock-v1",
+  "seed": 20261102,
+  "sessions": 20,
+  "start_date": "2026-09-01",
+  "spacing_days": 3,
+  "source_sha256": {
+    "prototype/language/JLPT_N2/conf_JLPT_N2_LK.json": "c0f5c142576150b4286bcecc23f364e9ef962b5852d5968e5db7d041cb370054",
+    "prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json": "d9b1ae5c62590dbc9b337d507dc99230ecf118df6b5d7b342249b16d7825b18e",
+    "prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json": "f34b417fa5504526afe3aac83a9c6ad3b3c99f0e6f8ed71765db6bed508728b6",
+    "prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json": "3fa4cc37f664a29aaada611a36896deaf927a7571e89161f351942c9b8061ab8"
+  },
+  "dataset_id": "SYNTH_N2_571a2a307f",
+  "mock_schema_version": "1.0",
+  "is_synthetic": true,
+  "student_count": 1,
+  "rows": {
+    "Student": 1,
+    "Skill": 9,
+    "Question": 500,
+    "Session": 20,
+    "QuestionResult": 600
+  },
+  "questions_per_session": 30,
+  "all_answered": true,
+  "missing_auxiliaries": 0,
+  "confidence_direction": "1=high,4=low",
+  "understanding_direction": "0=low,3=high",
+  "source_question_definitions": "existing repository, not synthetic performance",
+  "generation_rules": {
+    "correct_probability": "clip(0.40+0.30*progress+skill_offset+session_jitter-0.055*(difficulty-3),0.15,0.90)",
+    "skill_offsets": {
+      "SK_JLPT_N2_LK_CH_KANJI_READING": 0.04,
+      "SK_JLPT_N2_LK_CH_ORTHOGRAPHY": 0.0,
+      "SK_JLPT_N2_LK_VO_WORD_FORMATION": -0.06,
+      "SK_JLPT_N2_LK_VO_CONTEXT": 0.02,
+      "SK_JLPT_N2_LK_VO_PARAPHRASE": -0.02,
+      "SK_JLPT_N2_LK_VO_USAGE": -0.05,
+      "SK_JLPT_N2_LK_GR_SENTENCE_1": 0.03,
+      "SK_JLPT_N2_LK_GR_SENTENCE_2": -0.08,
+      "SK_JLPT_N2_LK_GR_TEXT": -0.1
+    },
+    "session_jitter": "uniform(-0.07,0.07)",
+    "confidence_weights_given_correct": [
+      0.38,
+      0.32,
+      0.2,
+      0.1
+    ],
+    "confidence_weights_given_wrong": [
+      0.12,
+      0.2,
+      0.33,
+      0.35
+    ],
+    "understanding_weights_given_correct": [
+      0.06,
+      0.14,
+      0.34,
+      0.46
+    ],
+    "understanding_weights_given_wrong": [
+      0.14,
+      0.24,
+      0.36,
+      0.26
+    ],
+    "no_bkt_model_used": true
+  },
+  "summary": {
+    "correct_count": 328,
+    "high_confidence_wrong": 78,
+    "low_confidence_correct": 89,
+    "confidence_counts": {
+      "1": 156,
+      "2": 161,
+      "3": 163,
+      "4": 120
+    },
+    "understanding_counts": {
+      "0": 56,
+      "1": 115,
+      "2": 203,
+      "3": 226
+    }
+  },
+  "limitations": [
+    "synthetic observations, not evidence of model accuracy",
+    "development quota, not official complete JLPT",
+    "all explanations and understanding checks occur after exam end",
+    "v1 has no missing or unanswered observations",
+    "no persistent SQLite database is created"
+  ],
+  "files_sha256": {
+    "Student.csv": "a7b5ec8e4ffb1c8fae37a37f8abb3f960fad6ceb525209c57d86ebb41ff82e74",
+    "Skill.csv": "5c5f9fef39921d2b2f626a519442b11c735f36c32fc1046bb7a7714acd44bf81",
+    "Question.csv": "fef86d80953226e79f782337ef9bd2c90384e82328f858b50f57918f8a158055",
+    "Session.csv": "1333d784b87e26c5de97485a99fd9e740c595903a6b4ab94b1122c570e63c0c2",
+    "QuestionResult.csv": "88275fe5e0e7dcbd80ce9ec43ae407e3cdc677964166cb0a66aeb2d492108358",
+    "DataDictionary.csv": "53d55f6be167d9deacde377cd1b4af432d553de881a0a75f707e44ff2ec32b70",
+    "schema.sql": "44323396aaf5ccc105616f14d9e5bc170530bc1555f4e05004971edb67b1e802"
+  }
+}

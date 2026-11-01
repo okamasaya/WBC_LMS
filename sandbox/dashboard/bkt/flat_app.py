@@ -41,12 +41,12 @@ app.layout = html.Main(className='alp-dashboard flat-dashboard', children=[
         html.P('2種類の正誤×自信度4段階×理解度4段階。色は補助ありモデルの学習遷移後の仮の習得確率です。セルをクリックすると上の1回答へ反映します。'),
         html.Div(className='flat-heatmaps',children=[dcc.Graph(id='flat-wrong'),dcc.Graph(id='flat-right')])]),
     html.Section(className='alp-card',children=[html.H2('3. 架空データの明細と出力'),
-        picker('flat-dataset','データの種類',{'patterns':'全32パターン（合成データ）','demo':'既存の架空ログ24回答（各回答は独立に評価）'},'patterns'),
+        picker('flat-dataset','データの種類',{'patterns':'全32パターン（合成データ）','demo':'既存の架空ログ24回答（各回答は独立に評価）','n2-mock':'JLPT N2・20回分のモック'},'patterns'),
         picker('flat-filter','正誤の絞り込み',{'all':'すべて','correct':'正解','wrong':'不正解'},'all'),
         html.P(id='flat-summary',role='status'),
         dash_table.DataTable(id='flat-table',page_size=12,sort_action='native',style_table={'overflowX':'auto'},style_cell={'fontFamily':'inherit','minWidth':'100px','padding':'8px'}),
         html.Div(className='alp-actions',children=[html.Button('表示対象をCSV保存',id='flat-export',disabled=True),html.Button('モデルの仮定をJSON保存',id='flat-export-model',disabled=True)]),
-        html.P('CSVは表示ページだけでなく、選択した正誤条件に合う全行を保存します。実ファイルの取込とDjango接続は次段階です。',className='alp-note')])])
+        html.P('CSVは表示ページだけでなく、選択した正誤条件に合う全行を保存します。同梱モックはCSVから読み込みます。外部ファイルのアップロードとDjango接続は次段階です。',className='alp-note')])])
 
 
 def blank(text):
@@ -74,8 +74,13 @@ def render(correct,confidence,understanding,p_l0,p_t,p_g,p_s,dataset,selection):
         parameters=BKTParameters(p_l0,p_t,p_g,p_s)
         single=update_flat(correct==1,confidence,understanding,parameters)
         patterns=estimate_flat(combinations(),parameters)
-        result=estimate_flat(sample_records() if dataset=='demo' else combinations(),parameters)
-    except (ValueError,TypeError) as error:
+        if dataset=='n2-mock':
+            with (ROOT/'data/mock_jlpt_n2_20_sessions/QuestionResult.csv').open(encoding='utf-8-sig',newline='') as stream:
+                raw_records=list(csv.DictReader(stream))
+        else:
+            raw_records=sample_records() if dataset=='demo' else combinations()
+        result=estimate_flat(raw_records,parameters)
+    except (ValueError,TypeError,OSError,csv.Error) as error:
         chart=blank('入力パラメータを確認してください')
         return str(error),[],chart,chart,chart,'推定結果をクリアしました。',[],[],None,True,True
     stages=go.Figure()
@@ -87,7 +92,7 @@ def render(correct,confidence,understanding,p_l0,p_t,p_g,p_s,dataset,selection):
     rows=[r for r in result['records'] if selection=='all' or r['IsCorrect']==(selection=='correct')]
     columns=[{'id':key,'name':label} for key,label in [('Row','入力行'),('ResultID','回答ID'),('IsCorrect','正誤'),('ConfidenceLevel','自信度（1=高）'),('UnderstandingLevel','解説理解度（3=高）'),('ObservationWeight','自信度の重み'),('EffectiveLearning','有効P(T)'),('ClassicPosterior','標準・観測後'),('AssistedPosterior','補助・観測後'),('AssistedAfterLearning','補助・遷移後'),('NextCorrect','同一スキルを仮定した次問正答確率')]]
     status=f"各回答はP(L0)={p_l0}から独立評価。自信度の重み={single['ObservationWeight']}、解説後の有効P(T)={single['EffectiveLearning']:.4f}。未校正の仮説モデルです。"
-    source='既存の架空ログ' if dataset=='demo' else '設計用の合成32パターン'
+    source={'demo':'既存の架空ログ','n2-mock':'JLPT N2・20回分の合成ログ'}.get(dataset,'設計用の合成32パターン')
     summary=f"{source}：評価可能 {len(result['records'])}行 ／ 表示対象 {len(rows)}行 ／ 除外 {len(result['excluded'])}行。履歴による累積更新はしていません。"
     stored={**result,'records':rows,'source':source,'scope':'independent_answers_same_prior'}
     return status,kpis,stages,heatmap(patterns['records'],False),heatmap(patterns['records'],True),summary,rows,columns,stored,not bool(rows),False
