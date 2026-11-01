@@ -1,0 +1,139 @@
+{
+  "base_commit": "c8467c3e8110ad0b5e7029a603f0fc26c8e8cbc1",
+  "started_jst": "2026-11-02T05:34:46.338328+09:00",
+  "results": [
+    {
+      "name": "bkt_python",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox/dashboard/bkt/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "environment_overrides": {},
+      "exit_code": 0,
+      "seconds": 0.875,
+      "log": "test-records/20261102_203446_bkt_python.log"
+    },
+    {
+      "name": "all_python",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox/dashboard/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "environment_overrides": {},
+      "exit_code": 0,
+      "seconds": 4.044,
+      "log": "test-records/20261102_203446_all_python.log"
+    },
+    {
+      "name": "bkt_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/bkt/tests/browser.cjs"
+      ],
+      "environment_overrides": {},
+      "exit_code": 0,
+      "seconds": 3.47,
+      "log": "test-records/20261102_203446_bkt_browser.log"
+    },
+    {
+      "name": "legacy_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/tests/browser.cjs"
+      ],
+      "environment_overrides": {
+        "ALP_TEST_URL": "http://127.0.0.1:8054"
+      },
+      "exit_code": 0,
+      "seconds": 3.353,
+      "log": "test-records/20261102_203446_legacy_browser.log"
+    },
+    {
+      "name": "model_only",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-S",
+        "-c",
+        "import sys; from sandbox.dashboard.bkt import BKTParameters, update; assert 'dash' not in sys.modules and 'pandas' not in sys.modules; assert update(.2,True,BKTParameters())[0]==.38; print('PASS standard-library-only model import')"
+      ],
+      "environment_overrides": {},
+      "exit_code": 0,
+      "seconds": 0.025,
+      "log": "test-records/20261102_203446_model_only.log"
+    },
+    {
+      "name": "legacy_import",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-c",
+        "from alp_app import app; from bkt import BKTParameters; c=app.server.test_client(); assert all(c.get(p).status_code==200 for p in ['/', '/_dash-layout', '/_dash-dependencies','/assets/alp.css']); print('PASS legacy app and CSS')"
+      ],
+      "environment_overrides": {
+        "PYTHONPATH": "sandbox/dashboard"
+      },
+      "exit_code": 0,
+      "seconds": 0.677,
+      "log": "test-records/20261102_203446_legacy_import.log"
+    }
+  ],
+  "unchanged_moves": {
+    "bkt.py": {
+      "new_path": "bkt/model.py",
+      "sha256": "d96f42e54dfad4ff522eccad595e8985c928dec5b92c100c54decb9a1ad9e5eb"
+    },
+    "learning_data.py": {
+      "new_path": "bkt/learning_data.py",
+      "sha256": "e9bdd27f8c2baf20d944c0ea475f462c7b3d86589d534dea3932c9b4fd8cfee7"
+    },
+    "demo_data.py": {
+      "new_path": "bkt/demo_data.py",
+      "sha256": "b35f51c721db4566319806629b12e7623d17769113d2ec49d1c4a998703745ce"
+    },
+    "dashboard_views.py": {
+      "new_path": "bkt/dashboard_views.py",
+      "sha256": "bad7ab3fa8236cdc596ab596ee64a20d9db6d90a2f62bc957db58496d35e822a"
+    },
+    "bkt_parameters.json": {
+      "new_path": "bkt/bkt_parameters.json",
+      "sha256": "1b81d960ca7d390167888157bc0aab333a9e7279c1ea4a1c84e4cde3b7cd47a7"
+    },
+    "assets/alp.css": {
+      "new_path": "bkt/assets/alp.css",
+      "sha256": "901368df0027544a27af4e45cebd251093382114c86bda7126bfd8c4212855da"
+    }
+  },
+  "sha256": {
+    "sandbox/dashboard/bkt/alp_app.py": "e69ca8d340f4a178c3957ed348c2a64b8f94298416201eb3d2f730ee293c7a8f",
+    "sandbox/dashboard/bkt/__main__.py": "ca5d96ef583e2a7ff8ec341326d07a85188479753e7656f791b07d12f35940b3",
+    "sandbox/dashboard/bkt/__init__.py": "976888a856507664a555b5393892c2f6d50455d89e15d2545c98825ebbbf0bae",
+    "sandbox/dashboard/bkt/model.py": "d96f42e54dfad4ff522eccad595e8985c928dec5b92c100c54decb9a1ad9e5eb",
+    "sandbox/dashboard/bkt/bkt_parameters.json": "1b81d960ca7d390167888157bc0aab333a9e7279c1ea4a1c84e4cde3b7cd47a7",
+    "sandbox/dashboard/bkt/learning_data.py": "e9bdd27f8c2baf20d944c0ea475f462c7b3d86589d534dea3932c9b4fd8cfee7",
+    "sandbox/dashboard/bkt/dashboard_views.py": "bad7ab3fa8236cdc596ab596ee64a20d9db6d90a2f62bc957db58496d35e822a",
+    "sandbox/dashboard/bkt/demo_data.py": "b35f51c721db4566319806629b12e7623d17769113d2ec49d1c4a998703745ce",
+    "sandbox/dashboard/bkt/assets/alp.css": "901368df0027544a27af4e45cebd251093382114c86bda7126bfd8c4212855da",
+    "sandbox/dashboard/bkt/tests/test_bkt.py": "e1c39c2069517f3cfeba2dc77d8beea98b623234de2fbe5480ef0f29677cac59",
+    "sandbox/dashboard/bkt/tests/__init__.py": "93c1604f0c284ab959ae45580384afe3c7dcc01986e6221528eb5ce50997d020",
+    "sandbox/dashboard/bkt/tests/browser.cjs": "561dc45acfcdf0841be2382cd1d5dec05683bc13efa81b8022e78bf6076bd5cc",
+    "sandbox/dashboard/bkt/tests/test_dashboard.py": "d994788d6ab2059a3c1da507ab2ef9efb0b5d1ae9a27862060da5854b3767d2f",
+    "sandbox/dashboard/alp_app.py": "a1f0f3228bf8befe8b746251582e6f3d825e94939ec03c4f8e8da11cab455596",
+    "sandbox/dashboard/tests/test_bkt.py": "501dfc24e80930543a1d717b13481940d776c2fd8d42e93ae1eb1bf63a2012e0",
+    "sandbox/dashboard/tests/test_dashboard.py": "a11458e6e4aa25e82e6c603026a31d6ccdbc45735ff816536a941e55b638786d",
+    "sandbox/dashboard/tests/browser.cjs": "efc3a67efdffc58cc957cfb740949fec8cc567e1dfb06cc6ced85289fbf0f404"
+  },
+  "completed_jst": "2026-11-02T05:34:58.794547+09:00"
+}

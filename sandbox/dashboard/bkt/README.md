@@ -1,0 +1,94 @@
+# ALP–BKT：推定・取込・表示の作業領域
+
+2026-11-02に、dashboard直下の既存BKT試作をここへ整理しました。Iris・BikeのBI機能確認サンプルとは分けて、次のモデル検証に進むための配置です。今回の整理では数式・入力判定・仮パラメータ・推定結果の意味は変更していません。
+
+## 現在の構成
+
+```text
+bkt/
+├── __init__.py            # 推定APIの公開（Dashへ依存しない）
+├── __main__.py            # python -m sandbox.dashboard.bkt
+├── model.py               # 旧bkt.py：標準BKTの計算
+├── learning_data.py       # CSV解析・正規化・除外・重複検出
+├── demo_data.py           # 架空の学習ログ
+├── bkt_parameters.json    # 手動設定の仮パラメータ
+├── alp_app.py             # 既存Dash試作、取込と推定の接続
+├── dashboard_views.py     # 推定結果のグラフ
+├── assets/alp.css
+├── tests/                 # BKT／取込／画面のPython・ブラウザ検証
+├── test-records/           # 今回以降の実行証跡
+├── references/            # 参照資料・確認事項
+└── TEST_RECORD_REORGANIZATION_20261102.md
+```
+
+model.pyは標準ライブラリだけで利用でき、画面やファイルアップロードから独立しています。将来Django側からも同じ推定APIを呼ぶ構成を想定しています。Djangoはまだ導入していません。
+
+## 起動・推定API
+
+リポジトリルートで既存の環境を使います。依存関係は親フォルダーのrequirements.txtで管理し、今回は追加していません。
+
+```sh
+/workspace/.venvs/wbc-lms/bin/python -m sandbox.dashboard.bkt
+```
+
+新しい入口のポートは**8054**。Iris 8052、Bike 8053、旧Bike基本画面8051と分けています。dashboardフォルダーを作業ディレクトリにする場合は`python -m bkt`でも起動できます。ローカルでは利用する仮想環境のPythonへ読み替えてください。
+
+モデルだけの利用例（リポジトリルート）:
+
+```python
+from sandbox.dashboard.bkt import BKTParameters, estimate, update
+
+parameters = BKTParameters(p_l0=0.2, p_t=0.1, p_g=0.25, p_s=0.1)
+predicted, posterior, after_learning = update(0.2, True, parameters)
+# estimate(records, defaults=parameters) に正規化済みの回答履歴を渡す。
+```
+
+APIの返す正答予測、正誤観測後の習得確率、学習遷移後の習得確率は別の値です。実測正答率や自己申告の理解度と混ぜません。
+
+## 以前の入口
+
+- 親のalp_app.pyは互換入口として残し、従来の`python sandbox/dashboard/alp_app.py`は8051で起動します。旧bike_app.pyと同時には起動しないでください。
+- `from bkt import BKTParameters, estimate, update`はdashboardがPythonの検索パスにある場合、パッケージの公開APIとして引き続き使えます。
+- 親のtests/test_bkt.pyとtest_dashboard.pyは、新しいテストを読み込む互換入口です。従来の全体テスト47件を維持しています。
+- 親のtests/browser.cjsは従来のALPポート8051へ接続する互換入口です。新しいテストの既定ポートは8054です。
+- learning_data.py、demo_data.py、dashboard_views.py、設定・CSSの実体はこのフォルダーへ移動しました。新しいコードからはパッケージ経由で参照してください。
+
+過去のテスト記録・ソースハッシュ・開発ログ内のパスは、当時の配置を示す証跡として変更しません。旧配置を読む場合はGit履歴も参照してください。
+
+## 検証
+
+サーバーを起動する前でもPythonテストは実行できます。
+
+```sh
+# BKTだけ：13件
+/workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/bkt/tests -p 'test_*.py' -v
+
+# 既存Iris・Bikeも含む全体：47件（上の13件を含む）
+/workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/tests -p 'test_*.py' -v
+
+# 8054のサーバー起動後
+node sandbox/dashboard/bkt/tests/browser.cjs
+```
+
+13件と47件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。
+
+今回の配置変更に対する結果は[整理のテスト記録](TEST_RECORD_REORGANIZATION_20261102.md)へ保存しています。
+
+## 現在のモデルの位置付け
+
+- 標準的な二状態BKT。学習者×スキルごとに、回答日時順の正誤を使って更新します。
+- 初期習得確率P(L0)、学習遷移P(T)、当て推量P(G)、誤答P(S)は手動の仮設定です。4択に対応するP(G)=0.25も、実ログから校正した値ではありません。
+- 忘却やパラメータの自動学習は実装していません。自信度、解説理解度、難易度、回答時間は現在の推定入力に使っていません。
+- QuestionResult.csv／統合Raw CSVを取込可能ですが、ファイルと推定結果は永続保存せず、既存Dash試作で扱います。Djangoによる取込・保存・運用は次の段階です。
+
+## 次に進める順序
+
+1. **モデル構築・検証**：既存の式と入力・出力の意味を確認し、代表的な正誤系列で動作を検証する。必要ならmatplotlibで推移を描く。パラメータを実ログから学習するかは別に決める。
+2. **ダッシュボード化**：検証済みの同じ推定APIを使い、既存Dash試作を必要な表示へ整える。
+3. **Djangoで外部ファイル取込**：アップロード・検証・必要に応じた保存から、同じモデルと表示へ接続する。Dashとの組込方法はこの接続設計で決める。
+
+この順序は今後の方針で、今回新たにモデル構築やDjango実装へ着手したという意味ではありません。Iris・Bikeの「次の仕様として保留」はそのままです。
+
+## 資料
+
+論文が手元にないことは今回の整理を妨げません。基本文献の候補、後で確認したい情報、リポジトリ内の既存資料を[資料メモ](references/README.md)へまとめています。
