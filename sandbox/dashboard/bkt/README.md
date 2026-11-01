@@ -1,6 +1,6 @@
 # ALP–BKT：推定・取込・表示の作業領域
 
-現在地と再開時の確認は、[最新ログの現状整理・ToDo](DEVELOPMENT_LOG_CSV_CONNECTION_20261102.md#現状整理と再開用todo2026-11-02追記)を参照してください。開発側の検証は完了し、今回分の利用者自身のPCでの確認は後日の予定です。
+現在地と再開時の確認は、[SQLite追加の最新ログ・ToDo](DEVELOPMENT_LOG_SQLITE_20261102.md)を参照してください。CSV取込に加え、Gitに置いた5回分SQLiteの読込まで開発側で検証済みです。利用者自身のPCでの確認は後日の予定です。
 
 2026-11-02に、dashboard直下の既存BKT試作をここへ整理しました。Iris・BikeのBI機能確認サンプルとは分けて、次のモデル検証に進むための配置です。整理時点では数式・入力判定・仮パラメータ・推定結果の意味を変更していません。その後、標準BKTを保持したまま、[正誤中心・補助2項目のフラット試作](ASSISTED_MODEL.md)を追加しました。
 
@@ -16,6 +16,7 @@ bkt/
 ├── mock_dataset.py        # N2のモック学習ログを再生成
 ├── prototype_csv.py       # 現行prototype処理による互換CSV生成（Node.js併用）
 ├── csv_inference.py       # 実CSV→必要列→重複確認→補助モデル（画面・CLI共通）
+├── sqlite_data.py         # 5回分SQLiteの生成・読取専用アダプター
 ├── data/                  # CSV・辞書・manifest・SQLite案
 ├── learning_data.py       # CSV解析・正規化・除外・重複検出
 ├── demo_data.py           # 架空の学習ログ
@@ -57,7 +58,7 @@ APIの返す正答予測、正誤観測後の習得確率、学習遷移後の�
 
 - 親のalp_app.pyは互換入口として残し、従来の`python sandbox/dashboard/alp_app.py`は8051で起動します。旧bike_app.pyと同時には起動しないでください。
 - `from bkt import BKTParameters, estimate, update`はdashboardがPythonの検索パスにある場合、パッケージの公開APIとして引き続き使えます。
-- 親のtestsのBKT関連ファイルは、bkt/tests内のテストを読み込む入口です。整理時の既存47件に補助モデル17件、モック10件、現行CSV互換性8件、実CSV接続13件を加えた全体95件の検証を実行できます。
+- 親のtestsのBKT関連ファイルは、bkt/tests内のテストを読み込む入口です。整理時の既存47件に補助モデル17件、モック10件、現行CSV互換性8件、実CSV接続13件、SQLite10件を加えた全体105件の検証を実行できます。
 - 親のtests/browser.cjsは従来のALPポート8051へ接続する互換入口です。新しいテストの既定ポートは8054です。
 - learning_data.py、demo_data.py、dashboard_views.py、設定・CSSの実体はこのフォルダーへ移動しました。新しいコードからはパッケージ経由で参照してください。
 
@@ -68,10 +69,10 @@ APIの返す正答予測、正誤観測後の習得確率、学習遷移後の�
 サーバーを起動する前でもPythonテストは実行できます。
 
 ```sh
-# BKTだけ：61件（整理時13＋補助モデル17＋モック10＋CSV互換性8＋実CSV接続13）
+# BKTだけ：71件（整理時13＋補助モデル17＋モック10＋CSV互換性8＋実CSV接続13＋SQLite10）
 /workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/bkt/tests -p 'test_*.py' -v
 
-# 既存Iris・Bikeも含む全体：95件（上の61件を含む）
+# 既存Iris・Bikeも含む全体：105件（上の71件を含む）
 /workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/tests -p 'test_*.py' -v
 
 # 8054のサーバー起動後
@@ -80,9 +81,10 @@ node sandbox/dashboard/bkt/tests/browser.cjs
 # 8055の補助モデル画面を起動後
 node sandbox/dashboard/bkt/tests/flat.browser.cjs
 node sandbox/dashboard/bkt/tests/csv_import.browser.cjs
+node sandbox/dashboard/bkt/tests/sqlite_data.browser.cjs
 ```
 
-61件と95件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。CSV互換性テストは現行JavaScript処理を実行するためNode.jsも必要です。
+71件と105件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。CSV互換性テストは現行JavaScript処理を実行するためNode.jsも必要です。
 
 今回の配置変更に対する結果は[整理のテスト記録](TEST_RECORD_REORGANIZATION_20261102.md)へ保存しています。
 
@@ -123,7 +125,7 @@ node sandbox/dashboard/bkt/tests/csv_import.browser.cjs
 
 [data/mock_jlpt_n2_20_sessions/](data/mock_jlpt_n2_20_sessions/README.md)に、架空学習者1人・各30問・20回の600回答をCSVで置いています。回答ファイルはQuestionResult.csv、回次別の集計はSession.csvです。列定義・合成フラグ・再生成条件・SQLite用スキーマ案も同梱しています。
 
-8055の画面で「JLPT N2・20回分のモック」を選択できます。現在は現行prototypeと同じ41列の[互換版](data/mock_jlpt_n2_20_sessions/prototype_csv/README.md)を読み込みます。現行モデルは各回答の独立評価のままです。永続SQLiteへの移行と、補助モデルで履歴をつなぐ処理はまだ実装していません。
+8055の画面で「JLPT N2・20回分のモック」を選択できます。現在は現行prototypeと同じ41列の[互換版](data/mock_jlpt_n2_20_sessions/prototype_csv/README.md)を読み込みます。現行モデルは各回答の独立評価のままです。5回分の読込用SQLiteは下記に追加しました。実ログのSQLite保存・更新と、補助モデルで履歴をつなぐ処理はまだ実装していません。
 
 - [開発記録](DEVELOPMENT_LOG_MOCK_DATA_20261102.md)
 - [テスト記録](TEST_RECORD_MOCK_DATA_20261102.md)
@@ -148,7 +150,7 @@ Sessionは集計用として読み分け、同じ回答のRaw/QuestionResult重�
 
 未回答は推定せず、自信度・理解度の空欄は補助なし、理解度0は有効値です。今回添付された3ファイルは、同じ10問が全て未回答だったため、重複10行を除去して未回答10行・推定0件となりました。0点を理由に除外したものではありません。
 
-ファイルはUTF-8、1ファイル8MB、合計32MB、最大20ファイル・回答入力は重複込み50,000行まで。画面の取込データはメモリーで扱い、原本・個別結果を自動保存しません。Django連携・SQLite永続保存・履歴型の補助モデルは未実装です。
+ファイルはUTF-8、1ファイル8MB、合計32MB、最大20ファイル・回答入力は重複込み50,000行まで。画面の取込データはメモリーで扱い、原本・個別結果を自動保存しません。Django連携・実ログのSQLite保存／更新・履歴型の補助モデルは未実装です。
 
 画面と同じ処理をPythonだけで呼べます（この取込・推定APIは標準ライブラリのみ）。
 
@@ -171,3 +173,28 @@ python -m sandbox.dashboard.bkt.csv_inference QuestionResult_SESS_xxx.csv CBT_RA
 
 - [開発記録と今回の添付データの確認](DEVELOPMENT_LOG_CSV_CONNECTION_20261102.md)
 - [実行テスト・生ログ・注意点](TEST_RECORD_CSV_CONNECTION_20261102.md)
+
+## Gitに置いたSQLiteを読む
+
+Gitから取得したローカルのSQLiteファイルを、Python標準のsqlite3で読み込めます。GitHubをDBサーバーとして使う構成ではありません。追加のDBサービスやPythonパッケージは不要です。
+
+[5回分ダミーDB](data/mock_jlpt_n2_5_sessions/README.md)に架空学習者1人×5回×30問＝150回答を用意しました。8055のデータ種類で **「JLPT N2・5回分（SQLite）」** を選ぶと、既存の補助モデルで推定・正誤フィルター・結果CSV出力を確認できます。読込は読み取り専用で、Git管理下のDBを更新しません。
+
+```sh
+# リポジトリルート。画面なしでも150回答の読込・推定を確認できる
+python -m sandbox.dashboard.bkt.sqlite_data
+```
+
+```python
+from sandbox.dashboard.bkt.sqlite_data import load_database
+from sandbox.dashboard.bkt.csv_inference import estimate_import
+
+result = estimate_import(load_database())
+```
+
+今回のSQLiteは動作確認用の保存済み合成データです。CSVのDB追記・推定履歴のDB保存・Django連携・実運用スキーマの確定は別段階です。保存形式と現行CSVの全列は異なりますが、アダプターで必要14列へ変換します。
+
+利用者の依頼に基づき、先ほどの3種類の[提供CSV原本](data/prototype_exports/SESS_1793573633671/README.md)もGitへ保管しました。以前のログの「原本未保管」は当時の状態で、この依頼により更新したものです。
+
+- [SQLite追加の開発記録・次のToDo](DEVELOPMENT_LOG_SQLITE_20261102.md)
+- [SQLite・原本保管のテスト記録](TEST_RECORD_SQLITE_20261102.md)

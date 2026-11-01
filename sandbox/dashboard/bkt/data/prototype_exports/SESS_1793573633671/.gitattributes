@@ -1,0 +1,2 @@
+# Preserve the uploaded CSV bytes and line endings on every checkout.
+*.csv -text

@@ -11,6 +11,7 @@ from .assisted_model import (AuxiliaryAssumptions, CONFIDENCE_LABELS, UNDERSTAND
                              combinations, estimate_flat, update_flat)
 from .demo_data import sample_records
 from .csv_inference import import_uploads, estimate_import
+from .sqlite_data import DEFAULT_DB, load_database
 
 ROOT = Path(__file__).resolve().parent
 app = Dash(__name__, assets_folder=str(ROOT / 'assets'), title='BKT・3項目フラット試作')
@@ -49,7 +50,8 @@ app.layout = html.Main(className='alp-dashboard flat-dashboard', children=[
         html.Div(className='alp-actions', children=[html.Button('CSVを取り込む', id='flat-import'), html.Button('取込データをクリア', id='flat-clear-upload')]),
         html.P(id='flat-import-status', role='status'),
         html.P('点数は推定に使いません。未回答は除外し、RawとQuestionResultに含まれる同じ回答は一度だけ扱います。StudentIDが空欄でも各回答を独立に評価します。取込データはファイルへ保存せず、この画面のメモリーで扱います。', className='alp-note'),
-        picker('flat-dataset','データの種類',{'patterns':'全32パターン（合成データ）','demo':'既存の架空ログ24回答（各回答は独立に評価）','n2-mock':'JLPT N2・20回分のモック','uploaded':'取り込んだ実施結果CSV'},'patterns'),
+        picker('flat-dataset','データの種類',{'patterns':'全32パターン（合成データ）','demo':'既存の架空ログ24回答（各回答は独立に評価）','n2-mock':'JLPT N2・20回分のモック','n2-sqlite':'JLPT N2・5回分（SQLite）','uploaded':'取り込んだ実施結果CSV'},'patterns'),
+        html.P('「JLPT N2・5回分（SQLite）」は、同梱の合成データベースを読み取ります。5回×30問＝150回答。データベースへの書込みは行いません。', className='alp-note'),
         picker('flat-filter','正誤の絞り込み',{'all':'すべて','correct':'正解','wrong':'不正解'},'all'),
         html.P(id='flat-summary',role='status'),
         dash_table.DataTable(id='flat-table',page_size=12,sort_action='native',style_table={'overflowX':'auto'},style_cell={'fontFamily':'inherit','minWidth':'100px','padding':'8px'}),
@@ -116,6 +118,8 @@ def render(correct,confidence,understanding,p_l0,p_t,p_g,p_s,dataset,selection,u
             result=estimate_flat(raw_records,parameters)
         elif dataset=='uploaded':
             result=estimate_import(uploaded,parameters) if uploaded else estimate_flat([],parameters)
+        elif dataset=='n2-sqlite':
+            result=estimate_import(load_database(DEFAULT_DB),parameters)
         else:
             raw_records=sample_records() if dataset=='demo' else combinations()
             result=estimate_flat(raw_records,parameters)
@@ -131,7 +135,7 @@ def render(correct,confidence,understanding,p_l0,p_t,p_g,p_s,dataset,selection,u
     rows=[r for r in result['records'] if selection=='all' or r['IsCorrect']==(selection=='correct')]
     columns=[{'id':key,'name':label} for key,label in [('Row','入力行'),('SessionID','実施ID'),('QuestionSequence','問題順'),('SkillName','スキル'),('ResultID','回答ID'),('IsCorrect','正誤'),('ConfidenceLevel','自信度（1=高）'),('UnderstandingLevel','解説理解度（3=高）'),('ObservationWeight','自信度の重み'),('EffectiveLearning','有効P(T)'),('ClassicPosterior','標準・観測後'),('AssistedPosterior','補助・観測後'),('AssistedAfterLearning','補助・遷移後'),('NextCorrect','同一スキルを仮定した次問正答確率')]]
     status=f"各回答はP(L0)={p_l0}から独立評価。自信度の重み={single['ObservationWeight']}、解説後の有効P(T)={single['EffectiveLearning']:.4f}。未校正の仮説モデルです。"
-    source={'demo':'既存の架空ログ','n2-mock':'JLPT N2・20回分の合成ログ','uploaded':'取り込んだ実施結果CSV'}.get(dataset,'設計用の合成32パターン')
+    source={'demo':'既存の架空ログ','n2-mock':'JLPT N2・20回分の合成ログ','n2-sqlite':'SQLite・N2の合成ログ5回分','uploaded':'取り込んだ実施結果CSV'}.get(dataset,'設計用の合成32パターン')
     summary=f"{source}：評価可能 {len(result['records'])}行 ／ 表示対象 {len(rows)}行 ／ 除外 {len(result['excluded'])}行。履歴による累積更新はしていません。"
     if dataset=='uploaded':
         summary += f" 重複を除去 {len(result.get('duplicates',[]))}行。"

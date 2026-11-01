@@ -1,0 +1,111 @@
+{
+  "base_commit": "f1d0f2fffc01dccaa01129c14d8ad04a45534dc6",
+  "started_at": "2026-11-02T08:28:44.707341+09:00",
+  "tests": [
+    {
+      "name": "all_python",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox/dashboard/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "sqlite_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/bkt/tests/sqlite_data.browser.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "flat_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/bkt/tests/flat.browser.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "csv_import_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/bkt/tests/csv_import.browser.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "mock_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/bkt/tests/mock_data.browser.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "sqlite_stdlib_cli",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-S",
+        "-m",
+        "sandbox.dashboard.bkt.sqlite_data"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "database_sha256_before": "f61421388b873e8d1d6650eb3de0c1e0e72bd524c8967f27437307fbf5c6d592",
+  "finished_at": "2026-11-02T08:29:04.916241+09:00",
+  "database_sha256_after": "f61421388b873e8d1d6650eb3de0c1e0e72bd524c8967f27437307fbf5c6d592",
+  "database_unchanged": true,
+  "archive_sha256": {
+    "QuestionResult_SESS_1793573633671.csv": "cc0df62457632e061c20c2f58fd6a14bbfba97bea0eb45f57b963703ac09acbe",
+    "CBT_RAW_SESS_1793573633671.csv": "eb7ae45a71e365d39ee80bebfa7a8acb880fbd6e060f236ab7191e0a30afbeb2",
+    "Session_SESS_1793573633671.csv": "f1f6bf21ea5fe043a63b772a8255f97b6e027980f66b66212828fcab6cb1fbc8"
+  },
+  "source_sha256": {
+    "sandbox/dashboard/bkt/alp_app.py": "e69ca8d340f4a178c3957ed348c2a64b8f94298416201eb3d2f730ee293c7a8f",
+    "sandbox/dashboard/bkt/assisted_model.py": "f08d6da383a36920beb23ec63dbc51b3ef8b2142cd74841999a360d61b680a66",
+    "sandbox/dashboard/bkt/__main__.py": "ca5d96ef583e2a7ff8ec341326d07a85188479753e7656f791b07d12f35940b3",
+    "sandbox/dashboard/bkt/mock_dataset.py": "93cdf0051a78242c0bd5ef58a7d6fd060fb177b7d5722cf146a6d503fa13a2c6",
+    "sandbox/dashboard/bkt/__init__.py": "976888a856507664a555b5393892c2f6d50455d89e15d2545c98825ebbbf0bae",
+    "sandbox/dashboard/bkt/csv_inference.py": "c16215b2ea33323135678cbe3699b476c64f50730b2028c53425687458fbc9e7",
+    "sandbox/dashboard/bkt/prototype_csv.py": "8a6d1cac2e9e3e3081d22fe0dcadeae146ea2e7c6f50f9dd8ea1ed344c5d2330",
+    "sandbox/dashboard/bkt/sqlite_data.py": "8ffae8bc4f78d0bbba07128f2d2354e03af90beaa1aaf294f70f28f98cba186a",
+    "sandbox/dashboard/bkt/flat_app.py": "bbf96740be7938eaaf3004eda680c6c642fbb127f68239ed2aefc90c300aebe5",
+    "sandbox/dashboard/bkt/model.py": "d96f42e54dfad4ff522eccad595e8985c928dec5b92c100c54decb9a1ad9e5eb",
+    "sandbox/dashboard/bkt/learning_data.py": "e9bdd27f8c2baf20d944c0ea475f462c7b3d86589d534dea3932c9b4fd8cfee7",
+    "sandbox/dashboard/bkt/dashboard_views.py": "bad7ab3fa8236cdc596ab596ee64a20d9db6d90a2f62bc957db58496d35e822a",
+    "sandbox/dashboard/bkt/demo_data.py": "b35f51c721db4566319806629b12e7623d17769113d2ec49d1c4a998703745ce",
+    "sandbox/dashboard/bkt/tests/test_prototype_csv.py": "41431e8a06fe07c759c85af809a6c526de12c70d7544a0b5c3c91e6af250d689",
+    "sandbox/dashboard/bkt/tests/test_bkt.py": "e1c39c2069517f3cfeba2dc77d8beea98b623234de2fbe5480ef0f29677cac59",
+    "sandbox/dashboard/bkt/tests/test_assisted_model.py": "5325d6f76499712c89356f90db6f7087d2ec39e2e867b08baaa1ca8908ce9d69",
+    "sandbox/dashboard/bkt/tests/__init__.py": "93c1604f0c284ab959ae45580384afe3c7dcc01986e6221528eb5ce50997d020",
+    "sandbox/dashboard/bkt/tests/verify_prototype_exports.py": "fd9b24a57cc6becf0350ceff085f3a77b323679fb18a7b97af9c4be26df6489e",
+    "sandbox/dashboard/bkt/tests/test_mock_dataset.py": "1196fcedf43b9245d6005ebb5a685b164848bb640161d557c491df700212e285",
+    "sandbox/dashboard/bkt/tests/test_csv_inference.py": "7d42cc120187fdc0dd630d756507af592f01de94e59166c8db15399c309b9877",
+    "sandbox/dashboard/bkt/tests/test_dashboard.py": "d994788d6ab2059a3c1da507ab2ef9efb0b5d1ae9a27862060da5854b3767d2f",
+    "sandbox/dashboard/bkt/tests/test_sqlite_data.py": "78ffa9e0e65a8ec8b6b85d83db073bb7bc890f142d838fd210b287dcce522a4d",
+    "sandbox/dashboard/bkt/tools/prototype_exports.cjs": "75948c0d7a8bb9f2aa8971d718e3d4c00d3ec5fc92f727c91875e35b2c87e346",
+    "sandbox/dashboard/bkt/tests/csv_import.browser.cjs": "12719d63f565e268cbef1c7a731a7e7f20772b1b089f9667d0a769f3a746b927",
+    "sandbox/dashboard/bkt/tests/sqlite_data.browser.cjs": "fe1c5e8d9dd4c9270d8fc5376117d098e9ce32f67c9fc9906074268e811c542a",
+    "sandbox/dashboard/bkt/tests/browser.cjs": "561dc45acfcdf0841be2382cd1d5dec05683bc13efa81b8022e78bf6076bd5cc",
+    "sandbox/dashboard/bkt/tests/prototype_export.browser.cjs": "a72548fbaaac885b420eda17994bcc7c5cb6dab57dcdba30b60e444a1e9a6f43",
+    "sandbox/dashboard/bkt/tests/flat.browser.cjs": "d3b29ef4c71ecc0207026ebf7490bf28f283859e1e341707579cc209edde86a6",
+    "sandbox/dashboard/bkt/tests/mock_data.browser.cjs": "a6dd87bb61a6133ee7eee86bb422e1818fa6b49ed35e707d38a746c16c1e0d8d"
+  },
+  "logs_sha256": {
+    "sqlite_stdlib_cli.log": "4967f30e071e1c13cb82bc6325a51c51a7f141a98e14e3c7fefe3e8afcc2daf0",
+    "csv_import_browser.log": "19f381c1e8c0529c9e110ec9474b37019c9d82604df96c5935eac68576fd48ab",
+    "sqlite_browser.log": "8cb9f55dff3b15a4f21fcb40bf0ace1642b82a0e009ccdc5fd1847604aa67726",
+    "flat_browser.log": "3110074daf3616ac2680b8f272cbbb91c790128d3b48a0e4bbfe44a98b707c40",
+    "mock_browser.log": "8ea225a825b2b2b1551c9152949c832679debf47485fb54e018648da0da2d41b",
+    "all_python.log": "7ad861b981dc2d7d7dae402cfe1ab5c0f4472e9c3852e335ccfbb7b9c606a105"
+  }
+}
