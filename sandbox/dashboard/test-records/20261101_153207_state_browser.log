@@ -1,0 +1,5 @@
+PASS same-tab reload restores row selection and measurement axis
+PASS two concurrent isolated browser contexts do not share filters or axes
+PASS shared URL restores selection/axes in another context and after reload
+PASS malformed URL resets to defaults and explains the error
+PASS zero-row URL, empty KPI and recovery by reset

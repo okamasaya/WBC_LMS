@@ -1,0 +1,6 @@
+PASS real point click, linked table/KPIs, source context and same-point deselection
+PASS category bar click, intersection with point selection and independent filter clearing
+PASS Species base filter, stable row identity after regrouping, full reset
+PASS scatter range selected 70 rows
+PASS real box selection, expansion without cumulative shrinking, line selection across two series
+PASS mobile chart selection/reset and no browser errors
