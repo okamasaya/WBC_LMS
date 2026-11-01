@@ -1,0 +1,10 @@
+{
+  "started_jst": "2026-11-01T17:54:31.360678+09:00",
+  "completed_jst": "2026-11-01T17:54:37.381128+09:00",
+  "command": [
+    "node",
+    "sandbox/dashboard/tests/bike_timeseries.browser.cjs"
+  ],
+  "exit_code": 0,
+  "test_sha256": "16eb2abab041592a70f583f3589258cc2d45e3df38ab52aea8ad92b37bfc9ea1"
+}
