@@ -1,0 +1,72 @@
+{
+  "started_at": "2026-11-02T08:02:07.741805+09:00",
+  "base_commit": "912adcae83ed8a61673149832a29b33bf7eac267",
+  "tests": [
+    {
+      "name": "all_python",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox/dashboard/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "csv_import_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/bkt/tests/csv_import.browser.cjs"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "attachment_sha256": {
+    "CBT_RAW_SESS_1793573633671.csv": "eb7ae45a71e365d39ee80bebfa7a8acb880fbd6e060f236ab7191e0a30afbeb2",
+    "QuestionResult_SESS_1793573633671.csv": "cc0df62457632e061c20c2f58fd6a14bbfba97bea0eb45f57b963703ac09acbe",
+    "Session_SESS_1793573633671.csv": "f1f6bf21ea5fe043a63b772a8255f97b6e027980f66b66212828fcab6cb1fbc8"
+  },
+  "attachment_originals_committed": false,
+  "score_used": false,
+  "finished_at": "2026-11-02T08:02:17.088644+09:00",
+  "source_sha256": {
+    "sandbox/dashboard/bkt/alp_app.py": "e69ca8d340f4a178c3957ed348c2a64b8f94298416201eb3d2f730ee293c7a8f",
+    "sandbox/dashboard/bkt/assisted_model.py": "f08d6da383a36920beb23ec63dbc51b3ef8b2142cd74841999a360d61b680a66",
+    "sandbox/dashboard/bkt/__main__.py": "ca5d96ef583e2a7ff8ec341326d07a85188479753e7656f791b07d12f35940b3",
+    "sandbox/dashboard/bkt/mock_dataset.py": "93cdf0051a78242c0bd5ef58a7d6fd060fb177b7d5722cf146a6d503fa13a2c6",
+    "sandbox/dashboard/bkt/__init__.py": "976888a856507664a555b5393892c2f6d50455d89e15d2545c98825ebbbf0bae",
+    "sandbox/dashboard/bkt/csv_inference.py": "dbd958b0f1990b2e5bf2290c0e36a2f858408122f1d457ebbf3d3cb32b5ef600",
+    "sandbox/dashboard/bkt/prototype_csv.py": "8a6d1cac2e9e3e3081d22fe0dcadeae146ea2e7c6f50f9dd8ea1ed344c5d2330",
+    "sandbox/dashboard/bkt/flat_app.py": "2613812789bc31a5c8ff9d2588a6f0e85e136eb8a2db049bab487fd14655ac7c",
+    "sandbox/dashboard/bkt/model.py": "d96f42e54dfad4ff522eccad595e8985c928dec5b92c100c54decb9a1ad9e5eb",
+    "sandbox/dashboard/bkt/learning_data.py": "e9bdd27f8c2baf20d944c0ea475f462c7b3d86589d534dea3932c9b4fd8cfee7",
+    "sandbox/dashboard/bkt/dashboard_views.py": "bad7ab3fa8236cdc596ab596ee64a20d9db6d90a2f62bc957db58496d35e822a",
+    "sandbox/dashboard/bkt/demo_data.py": "b35f51c721db4566319806629b12e7623d17769113d2ec49d1c4a998703745ce",
+    "sandbox/dashboard/bkt/tests/test_prototype_csv.py": "41431e8a06fe07c759c85af809a6c526de12c70d7544a0b5c3c91e6af250d689",
+    "sandbox/dashboard/bkt/tests/test_bkt.py": "e1c39c2069517f3cfeba2dc77d8beea98b623234de2fbe5480ef0f29677cac59",
+    "sandbox/dashboard/bkt/tests/test_assisted_model.py": "5325d6f76499712c89356f90db6f7087d2ec39e2e867b08baaa1ca8908ce9d69",
+    "sandbox/dashboard/bkt/tests/__init__.py": "93c1604f0c284ab959ae45580384afe3c7dcc01986e6221528eb5ce50997d020",
+    "sandbox/dashboard/bkt/tests/verify_prototype_exports.py": "fd9b24a57cc6becf0350ceff085f3a77b323679fb18a7b97af9c4be26df6489e",
+    "sandbox/dashboard/bkt/tests/test_mock_dataset.py": "1196fcedf43b9245d6005ebb5a685b164848bb640161d557c491df700212e285",
+    "sandbox/dashboard/bkt/tests/test_csv_inference.py": "7d42cc120187fdc0dd630d756507af592f01de94e59166c8db15399c309b9877",
+    "sandbox/dashboard/bkt/tests/test_dashboard.py": "d994788d6ab2059a3c1da507ab2ef9efb0b5d1ae9a27862060da5854b3767d2f",
+    "sandbox/dashboard/bkt/tools/prototype_exports.cjs": "75948c0d7a8bb9f2aa8971d718e3d4c00d3ec5fc92f727c91875e35b2c87e346",
+    "sandbox/dashboard/bkt/tests/csv_import.browser.cjs": "9f4387dbc44df47f9721f20c24b45d7eaceee20349ded8fe1b07ac147fd601ea",
+    "sandbox/dashboard/bkt/tests/browser.cjs": "561dc45acfcdf0841be2382cd1d5dec05683bc13efa81b8022e78bf6076bd5cc",
+    "sandbox/dashboard/bkt/tests/prototype_export.browser.cjs": "a72548fbaaac885b420eda17994bcc7c5cb6dab57dcdba30b60e444a1e9a6f43",
+    "sandbox/dashboard/bkt/tests/flat.browser.cjs": "d3b29ef4c71ecc0207026ebf7490bf28f283859e1e341707579cc209edde86a6",
+    "sandbox/dashboard/bkt/tests/mock_data.browser.cjs": "a6dd87bb61a6133ee7eee86bb422e1818fa6b49ed35e707d38a746c16c1e0d8d",
+    "sandbox/dashboard/bkt/tests/fixtures/csv_import/CBT_RAW.csv": "0bc03d5c909cd70c2bf2e739c74fcc8aad08493d623846c68310e280403fd78e",
+    "sandbox/dashboard/bkt/tests/fixtures/csv_import/QuestionResult.csv": "9644bc5494b5652af6cca62d0426bb49c392092d72a96e31b96b3bb74b7b6b6e",
+    "sandbox/dashboard/bkt/tests/fixtures/csv_import/Session.csv": "a422ad0da0e694c0ebb5422036ffd57751d5af3ac2582ce966dedd773aca8d9f"
+  },
+  "artifact_sha256": {
+    "csv_import_browser.log": "738124f194bfeee18c0288bef572d3ea92e7a2b2dd4141b826bec3308706f6c9",
+    "all_python.log": "4ab30bd07bf0e9de93bffdaa38deeaace8245dc9259391499594ea319b9b1fd8"
+  }
+}

@@ -13,6 +13,7 @@ bkt/
 ├── flat_app.py            # 補助モデルの確認画面（8055）
 ├── mock_dataset.py        # N2のモック学習ログを再生成
 ├── prototype_csv.py       # 現行prototype処理による互換CSV生成（Node.js併用）
+├── csv_inference.py       # 実CSV→必要列→重複確認→補助モデル（画面・CLI共通）
 ├── data/                  # CSV・辞書・manifest・SQLite案
 ├── learning_data.py       # CSV解析・正規化・除外・重複検出
 ├── demo_data.py           # 架空の学習ログ
@@ -54,7 +55,7 @@ APIの返す正答予測、正誤観測後の習得確率、学習遷移後の�
 
 - 親のalp_app.pyは互換入口として残し、従来の`python sandbox/dashboard/alp_app.py`は8051で起動します。旧bike_app.pyと同時には起動しないでください。
 - `from bkt import BKTParameters, estimate, update`はdashboardがPythonの検索パスにある場合、パッケージの公開APIとして引き続き使えます。
-- 親のtestsのBKT関連ファイルは、bkt/tests内のテストを読み込む入口です。整理時の既存47件に補助モデル17件、モック10件、現行CSV互換性8件を加えた全体82件の検証を実行できます。
+- 親のtestsのBKT関連ファイルは、bkt/tests内のテストを読み込む入口です。整理時の既存47件に補助モデル17件、モック10件、現行CSV互換性8件、実CSV接続13件を加えた全体95件の検証を実行できます。
 - 親のtests/browser.cjsは従来のALPポート8051へ接続する互換入口です。新しいテストの既定ポートは8054です。
 - learning_data.py、demo_data.py、dashboard_views.py、設定・CSSの実体はこのフォルダーへ移動しました。新しいコードからはパッケージ経由で参照してください。
 
@@ -65,10 +66,10 @@ APIの返す正答予測、正誤観測後の習得確率、学習遷移後の�
 サーバーを起動する前でもPythonテストは実行できます。
 
 ```sh
-# BKTだけ：48件（整理時13＋補助モデル17＋モック10＋CSV互換性8）
+# BKTだけ：61件（整理時13＋補助モデル17＋モック10＋CSV互換性8＋実CSV接続13）
 /workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/bkt/tests -p 'test_*.py' -v
 
-# 既存Iris・Bikeも含む全体：82件（上の48件を含む）
+# 既存Iris・Bikeも含む全体：95件（上の61件を含む）
 /workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/tests -p 'test_*.py' -v
 
 # 8054のサーバー起動後
@@ -76,9 +77,10 @@ node sandbox/dashboard/bkt/tests/browser.cjs
 
 # 8055の補助モデル画面を起動後
 node sandbox/dashboard/bkt/tests/flat.browser.cjs
+node sandbox/dashboard/bkt/tests/csv_import.browser.cjs
 ```
 
-48件と82件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。CSV互換性テストは現行JavaScript処理を実行するためNode.jsも必要です。
+61件と95件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。CSV互換性テストは現行JavaScript処理を実行するためNode.jsも必要です。
 
 今回の配置変更に対する結果は[整理のテスト記録](TEST_RECORD_REORGANIZATION_20261102.md)へ保存しています。
 
@@ -132,3 +134,38 @@ node sandbox/dashboard/bkt/tests/flat.browser.cjs
 - [テスト記録と実ダウンロード証跡](TEST_RECORD_PROTOTYPE_CSV_20261102.md)
 
 解説後に確定したQuestionResult CSVまたは統合Raw CSVを使います。標準設定ではStudentIDが空欄になるため、履歴を使う標準BKTには利用者の明示的な対応付けが必要です。独立回答の補助モデルはIDなしでも評価できます。
+
+## 実CSVを8055画面へ読み込む
+
+1. `python -m sandbox.dashboard.bkt.flat_app`で起動し、`http://127.0.0.1:8055`を開きます。
+2. 「3. 学習ログの取込・明細と出力」で、QuestionResultまたは統合Raw CSVを選び「CSVを取り込む」を押します。Sessionを含む3種類をまとめて選んでも構いません。
+3. 自動で「取り込んだ実施結果CSV」へ切り替わり、各回答を正誤中心・自信度／理解度を補助として評価します。点数は使いません。
+4. 正誤の絞り込み、推定CSV、仮定JSON、除外・重複理由のCSVを確認できます。「取込データをクリア」で消去します。
+
+Sessionは集計用として読み分け、同じ回答のRaw/QuestionResult重複は一度だけ扱います。同一ResultIDで3項目や識別情報が違う場合は停止し、採用版の選択を求めます。失敗時には前の推定結果をクリアします。
+
+未回答は推定せず、自信度・理解度の空欄は補助なし、理解度0は有効値です。今回添付された3ファイルは、同じ10問が全て未回答だったため、重複10行を除去して未回答10行・推定0件となりました。0点を理由に除外したものではありません。
+
+ファイルはUTF-8、1ファイル8MB、合計32MB、最大20ファイル・回答入力は重複込み50,000行まで。画面の取込データはメモリーで扱い、原本・個別結果を自動保存しません。Django連携・SQLite永続保存・履歴型の補助モデルは未実装です。
+
+画面と同じ処理をPythonだけで呼べます（この取込・推定APIは標準ライブラリのみ）。
+
+```python
+from pathlib import Path
+from sandbox.dashboard.bkt.csv_inference import import_csv_texts, estimate_import
+
+paths = [Path('QuestionResult_SESS_xxx.csv'), Path('CBT_RAW_SESS_xxx.csv')]
+data = import_csv_texts([(p.name, p.read_text(encoding='utf-8-sig')) for p in paths])
+result = estimate_import(data)
+# result['records']：推定、['excluded']：未回答・不正値、['duplicates']：重複
+```
+
+```sh
+# CLIは結果・除外理由・仮定と入力ハッシュを明示した出力先へ保存する
+python -m sandbox.dashboard.bkt.csv_inference QuestionResult_SESS_xxx.csv CBT_RAW_SESS_xxx.csv Session_SESS_xxx.csv --output sandbox/dashboard/.local/bkt_results
+```
+
+`.local/`はGit対象外。実施結果の点数・問題文・解説を必要列から外し、識別情報と3項目を保持します。同じ3項目の計算を1回の推定内で再利用し、同梱モックCSVも更新がなければ再読込しません。アップロード内容を共有キャッシュへ保存しません。
+
+- [開発記録と今回の添付データの確認](DEVELOPMENT_LOG_CSV_CONNECTION_20261102.md)
+- [実行テスト・生ログ・注意点](TEST_RECORD_CSV_CONNECTION_20261102.md)
