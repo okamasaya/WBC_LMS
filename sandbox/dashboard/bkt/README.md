@@ -12,6 +12,7 @@ bkt/
 ├── assisted_model.py      # 正誤中心・補助2項目の独立回答モデル
 ├── flat_app.py            # 補助モデルの確認画面（8055）
 ├── mock_dataset.py        # N2のモック学習ログを再生成
+├── prototype_csv.py       # 現行prototype処理による互換CSV生成（Node.js併用）
 ├── data/                  # CSV・辞書・manifest・SQLite案
 ├── learning_data.py       # CSV解析・正規化・除外・重複検出
 ├── demo_data.py           # 架空の学習ログ
@@ -53,7 +54,7 @@ APIの返す正答予測、正誤観測後の習得確率、学習遷移後の�
 
 - 親のalp_app.pyは互換入口として残し、従来の`python sandbox/dashboard/alp_app.py`は8051で起動します。旧bike_app.pyと同時には起動しないでください。
 - `from bkt import BKTParameters, estimate, update`はdashboardがPythonの検索パスにある場合、パッケージの公開APIとして引き続き使えます。
-- 親のtests/test_bkt.pyとtest_dashboard.py、および追加したtest_assisted_model.pyは、bkt/tests内のテストを読み込む入口です。整理時の既存47件に今回の17件を加え、全体64件を経て、モック検証10件を追加した全体74件の検証を実行できます。
+- 親のtestsのBKT関連ファイルは、bkt/tests内のテストを読み込む入口です。整理時の既存47件に補助モデル17件、モック10件、現行CSV互換性8件を加えた全体82件の検証を実行できます。
 - 親のtests/browser.cjsは従来のALPポート8051へ接続する互換入口です。新しいテストの既定ポートは8054です。
 - learning_data.py、demo_data.py、dashboard_views.py、設定・CSSの実体はこのフォルダーへ移動しました。新しいコードからはパッケージ経由で参照してください。
 
@@ -64,10 +65,10 @@ APIの返す正答予測、正誤観測後の習得確率、学習遷移後の�
 サーバーを起動する前でもPythonテストは実行できます。
 
 ```sh
-# BKTだけ：40件（整理時13＋補助モデル17＋モック10）
+# BKTだけ：48件（整理時13＋補助モデル17＋モック10＋CSV互換性8）
 /workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/bkt/tests -p 'test_*.py' -v
 
-# 既存Iris・Bikeも含む全体：74件（上の40件を含む）
+# 既存Iris・Bikeも含む全体：82件（上の48件を含む）
 /workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/tests -p 'test_*.py' -v
 
 # 8054のサーバー起動後
@@ -77,7 +78,7 @@ node sandbox/dashboard/bkt/tests/browser.cjs
 node sandbox/dashboard/bkt/tests/flat.browser.cjs
 ```
 
-40件と74件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。
+48件と82件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。CSV互換性テストは現行JavaScript処理を実行するためNode.jsも必要です。
 
 今回の配置変更に対する結果は[整理のテスト記録](TEST_RECORD_REORGANIZATION_20261102.md)へ保存しています。
 
@@ -118,7 +119,16 @@ node sandbox/dashboard/bkt/tests/flat.browser.cjs
 
 [data/mock_jlpt_n2_20_sessions/](data/mock_jlpt_n2_20_sessions/README.md)に、架空学習者1人・各30問・20回の600回答をCSVで置いています。回答ファイルはQuestionResult.csv、回次別の集計はSession.csvです。列定義・合成フラグ・再生成条件・SQLite用スキーマ案も同梱しています。
 
-8055の画面で「JLPT N2・20回分のモック」を選択できます。現行モデルは各回答の独立評価のままです。永続SQLiteへの移行と、履歴をつなぐモデルはまだ実装していません。
+8055の画面で「JLPT N2・20回分のモック」を選択できます。現在は現行prototypeと同じ41列の[互換版](data/mock_jlpt_n2_20_sessions/prototype_csv/README.md)を読み込みます。現行モデルは各回答の独立評価のままです。永続SQLiteへの移行と、補助モデルで履歴をつなぐ処理はまだ実装していません。
 
 - [開発記録](DEVELOPMENT_LOG_MOCK_DATA_20261102.md)
 - [テスト記録](TEST_RECORD_MOCK_DATA_20261102.md)
+
+## 現行prototypeの実施結果CSVとの対応
+
+最初のモックはSQLite準備用の独自列を持ち、現行出力の全列とは一致していませんでした。現行出力処理を使う互換版を追加し、Actual・JSON版Drillの画面から実ダウンロードしたCSVでも推定接続を確認しました。
+
+- [列の相違・使うファイル・StudentID・再確定の注意](CSV_COMPATIBILITY_20261102.md)
+- [テスト記録と実ダウンロード証跡](TEST_RECORD_PROTOTYPE_CSV_20261102.md)
+
+解説後に確定したQuestionResult CSVまたは統合Raw CSVを使います。標準設定ではStudentIDが空欄になるため、履歴を使う標準BKTには利用者の明示的な対応付けが必要です。独立回答の補助モデルはIDなしでも評価できます。

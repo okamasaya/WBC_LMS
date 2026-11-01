@@ -75,7 +75,7 @@ def render(correct,confidence,understanding,p_l0,p_t,p_g,p_s,dataset,selection):
         single=update_flat(correct==1,confidence,understanding,parameters)
         patterns=estimate_flat(combinations(),parameters)
         if dataset=='n2-mock':
-            with (ROOT/'data/mock_jlpt_n2_20_sessions/QuestionResult.csv').open(encoding='utf-8-sig',newline='') as stream:
+            with (ROOT/'data/mock_jlpt_n2_20_sessions/prototype_csv/QuestionResult.csv').open(encoding='utf-8-sig',newline='') as stream:
                 raw_records=list(csv.DictReader(stream))
         else:
             raw_records=sample_records() if dataset=='demo' else combinations()

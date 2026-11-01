@@ -137,6 +137,19 @@ result = estimate_flat([
 # result['parameters'] / ['assumptions']：再現に必要な仮定
 ```
 
+現行prototypeで解説後に確定したCSVも、同じAPIで扱う。
+
+```python
+from pathlib import Path
+from sandbox.dashboard.bkt.learning_data import parse_question_csv
+
+text = Path('QuestionResult_SESS_xxx.csv').read_text(encoding='utf-8-sig')
+result = estimate_flat(parse_question_csv(text))
+# 統合Raw CSVも同じ。Session集計CSV単独は入力にしない。
+```
+
+この独立回答モデルはStudentIDが空欄でも評価する。履歴を使う標準BKT用の`normalize_records`は、補助項目の変更を重複競合として扱わないため、このAPIの前に通さない。同じResultIDの理解度が変わったCSVは、補助モデル側で競合として拒否し、採用版を確認する。[現行出力との互換性・確認結果](CSV_COMPATIBILITY_20261102.md)を参照。
+
 入力順・StudentID・SkillIDはこの初版の確率へ影響しない。結果を次の回答の事前確率へ渡さない。回答の履歴、スキルごとのパラメータ、Djangoのアップロード／保存は別の仕様として扱う。
 
 ## 7. 今後の検証候補

@@ -1,0 +1,26 @@
+[
+  {
+    "mode": "Actual",
+    "csv_rows": 30,
+    "answered": 2,
+    "unanswered_excluded": 28,
+    "session_columns": 26,
+    "question_columns": 41,
+    "flat_records": 2,
+    "standard_bkt_history_with_explicit_identity": 2,
+    "raw_and_question_csv_equal": true,
+    "report_and_csv_values_equal": true
+  },
+  {
+    "mode": "Drill",
+    "csv_rows": 10,
+    "answered": 2,
+    "unanswered_excluded": 8,
+    "session_columns": 26,
+    "question_columns": 41,
+    "flat_records": 2,
+    "standard_bkt_history_with_explicit_identity": 2,
+    "raw_and_question_csv_equal": true,
+    "report_and_csv_values_equal": true
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "mode": "Actual",
+  "is_synthetic": true,
+  "files": {
+    "session": "Session_SESS_1793572682023.csv",
+    "questions": "QuestionResult_SESS_1793572682023.csv",
+    "raw": "CBT_RAW_SESS_1793572682023.csv"
+  },
+  "report": "AI_Report.txt"
+}

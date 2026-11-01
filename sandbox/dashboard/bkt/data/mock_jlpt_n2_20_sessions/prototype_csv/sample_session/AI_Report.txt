@@ -1,0 +1,349 @@
+【AI学習レポート作成依頼】
+あなたは、CBTの学習記録を分析するAI学習メンターです。
+以下の演習結果をもとに、学習者の現在の理解状況と今後の学習方針を評価してください。
+
+【分析ルール】
+・正答率だけで判断せず、問題カテゴリ、難易度、回答時間、自信度、解説理解度、復習フラグを組み合わせて評価してください。
+・「できなかったこと」だけでなく、「できたこと」「定着してきたこと」「次に伸ばせること」を具体的なデータを根拠に示してください。
+・回答時間が長いことだけを悪い結果と判断しないでください。難易度や正誤、自信度と合わせて解釈してください。
+・不正解でも、解説確認後の理解度が高い場合は、学習が進んだ結果として考慮してください。
+・自信度が記録されていない場合は、自信度について推測しないでください。
+・1回分の結果だけから「苦手」「能力不足」などと断定しないでください。
+・追加問題の作成や出題は不要です。今回は学習結果の分析と次の学習方針の提案に専念してください。
+
+【複数回の結果をまとめて渡した場合】
+この形式のレポートが複数ある場合は、Session IDごとに1回の演習として扱い、実施日時順に比較してください。
+正答率だけでなく、難易度、カテゴリ別成績、回答時間、自信度、解説理解度の変化も見てください。
+前回より正答率が下がっていても、より難しい問題に取り組んでいる場合は、その挑戦を考慮して評価してください。
+過去データが1回分しかない場合は、存在しない学習推移を推測しないでください。
+
+【出力してほしい内容】
+1. 今回の演習の要約
+2. データから確認できる良かった点
+3. 次に確認・復習すると効果がありそうな点
+4. 複数回分がある場合は学習の変化・成長
+5. 次回の学習への具体的なアドバイス
+
+評価は前向きかつ具体的にし、根拠のない過度な称賛は避けてください。日本語学習者にも理解しやすい表現を使用してください。
+
+=== CBT_SESSION_BEGIN ===
+Session ID: SESS_1788258074000
+実施日時: 2026-09-01T10:00:00.000Z
+演習モード: Actual
+出題難易度設定: すべて
+自信度記録: あり
+
+【演習サマリー】
+演習モード: 模擬試験
+実施日時: 9/1/2026, 7:21:14 PM
+総実施時間: 21分14秒
+総合スコア: 37点
+
+■ 分野別正解率
+· 言語知識: 37% (11/30)
+
+【各問題の演習詳細】
+[問1] ○ 正解
+・カテゴリ: 【言語知識】文字 > 漢字読み
+・学習スキル: 文字・漢字読み
+・難易度: 発展
+・問題文: 事故の原因となった部材の構造上の<u>欠陥</u>が指摘された。
+・回答時間: 25秒
+・自信度: 2 (少し自信がある)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問2] × 不正解
+・カテゴリ: 【言語知識】文字 > 漢字読み
+・学習スキル: 文字・漢字読み
+・難易度: 発展
+・問題文: 長年の交渉を経て、ようやく双方の主張が<u>合致</u>した。
+・回答時間: 56秒
+・自信度: 4 (直感に近い)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問3] × 不正解
+・カテゴリ: 【言語知識】文字 > 漢字読み
+・学習スキル: 文字・漢字読み
+・難易度: 発展
+・問題文: グループ会社は経営効率化のため、子会社の<u>再編</u>を実施した。
+・回答時間: 32秒
+・自信度: 4 (直感に近い)
+・解説理解度: 3 (理解できた)
+・要復習フラグ: FALSE
+
+[問4] × 不正解
+・カテゴリ: 【言語知識】文字 > 漢字読み
+・学習スキル: 文字・漢字読み
+・難易度: 基礎
+・問題文: 明日のイベントの開始時間が<u>変更</u>になりました。
+・回答時間: 50秒
+・自信度: 2 (少し自信がある)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問5] ○ 正解
+・カテゴリ: 【言語知識】文字 > 漢字読み
+・学習スキル: 文字・漢字読み
+・難易度: 標準
+・問題文: 大雨のため、楽しみにしていた運動会は<u>延期</u>になりました。
+・回答時間: 47秒
+・自信度: 1 (自信がある)
+・解説理解度: 3 (理解できた)
+・要復習フラグ: FALSE
+
+[問6] ○ 正解
+・カテゴリ: 【言語知識】文字 > 表記
+・学習スキル: 文字・表記
+・難易度: 発展
+・問題文: 問題の根本的な解決に向けて<u>ていあん</u>を行う。
+・回答時間: 49秒
+・自信度: 2 (少し自信がある)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問7] ○ 正解
+・カテゴリ: 【言語知識】文字 > 表記
+・学習スキル: 文字・表記
+・難易度: 標準
+・問題文: 新しい製品の性能を<u>かくほ</u>する。
+・回答時間: 26秒
+・自信度: 1 (自信がある)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問8] ○ 正解
+・カテゴリ: 【言語知識】文字 > 表記
+・学習スキル: 文字・表記
+・難易度: 基礎
+・問題文: 機械の<u>てんけん</u>を行う。
+・回答時間: 42秒
+・自信度: 1 (自信がある)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問9] ○ 正解
+・カテゴリ: 【言語知識】語彙 > 語形成
+・学習スキル: 語彙・語形成
+・難易度: 基礎
+・問題文: ごみを減らす（へらす）ため、（ ______ ）利用できる製品を選ぶ。
+・回答時間: 24秒
+・自信度: 2 (少し自信がある)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問10] × 不正解
+・カテゴリ: 【言語知識】語彙 > 語形成
+・学習スキル: 語彙・語形成
+・難易度: 標準
+・問題文: この商品は厳しいテストをクリアしており、高い安全 ______ が確認されている。
+・回答時間: 26秒
+・自信度: 2 (少し自信がある)
+・解説理解度: 1 (まだ少し分からない)
+・要復習フラグ: FALSE
+
+[問11] ○ 正解
+・カテゴリ: 【言語知識】語彙 > 語形成
+・学習スキル: 語彙・語形成
+・難易度: 基礎
+・問題文: 契約（けいやく）の内容（ないよう）を変更（へんこう）する場合（ばあい）は、事前（じぜん）の______による申し出（もうしで）が必要（ひつよう）です。
+・回答時間: 35秒
+・自信度: 1 (自信がある)
+・解説理解度: 3 (理解できた)
+・要復習フラグ: FALSE
+
+[問12] × 不正解
+・カテゴリ: 【言語知識】語彙 > 文脈規定
+・学習スキル: 語彙・文脈規定
+・難易度: 標準
+・問題文: 部屋が汚れていたので、客が来る前に ______ 掃除をした。
+・回答時間: 46秒
+・自信度: 3 (やや不安)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問13] × 不正解
+・カテゴリ: 【言語知識】語彙 > 文脈規定
+・学習スキル: 語彙・文脈規定
+・難易度: 標準
+・問題文: 急な発表（はっぴょう）に______してしまい、上手（じょうず）に話せなかった。
+・回答時間: 28秒
+・自信度: 4 (直感に近い)
+・解説理解度: 3 (理解できた)
+・要復習フラグ: FALSE
+
+[問14] × 不正解
+・カテゴリ: 【言語知識】語彙 > 文脈規定
+・学習スキル: 語彙・文脈規定
+・難易度: 基礎
+・問題文: 約束の時間に（ ______ ）遅れてしまった。
+・回答時間: 41秒
+・自信度: 1 (自信がある)
+・解説理解度: 0 (全然分からない)
+・要復習フラグ: FALSE
+
+[問15] ○ 正解
+・カテゴリ: 【言語知識】語彙 > 文脈規定
+・学習スキル: 語彙・文脈規定
+・難易度: 標準
+・問題文: 友達の冗談が可笑しくて、______ 笑ってしまった。
+・回答時間: 43秒
+・自信度: 2 (少し自信がある)
+・解説理解度: 1 (まだ少し分からない)
+・要復習フラグ: FALSE
+
+[問16] ○ 正解
+・カテゴリ: 【言語知識】語彙 > 文脈規定
+・学習スキル: 語彙・文脈規定
+・難易度: 基礎
+・問題文: 長時間のプレゼンテーションを終えて、ようやく ______ とした。
+・回答時間: 42秒
+・自信度: 3 (やや不安)
+・解説理解度: 3 (理解できた)
+・要復習フラグ: FALSE
+
+[問17] × 不正解
+・カテゴリ: 【言語知識】語彙 > 言い換え類義
+・学習スキル: 語彙・言い換え類義
+・難易度: 基礎
+・問題文: 彼はいつも <u>几帳面な</u> 性格で、部屋も綺麗に整頓されている。
+・回答時間: 38秒
+・自信度: 4 (直感に近い)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問18] × 不正解
+・カテゴリ: 【言語知識】語彙 > 言い換え類義
+・学習スキル: 語彙・言い換え類義
+・難易度: 基礎
+・問題文: 彼の説明はいつも<u>簡潔</u>だ。
+・回答時間: 42秒
+・自信度: 4 (直感に近い)
+・解説理解度: 3 (理解できた)
+・要復習フラグ: FALSE
+
+[問19] × 不正解
+・カテゴリ: 【言語知識】語彙 > 言い換え類義
+・学習スキル: 語彙・言い換え類義
+・難易度: 基礎
+・問題文: 彼は非常に <u>几帳面な</u> 性格なので、デスクの周りもいつも綺麗だ。
+・回答時間: 43秒
+・自信度: 2 (少し自信がある)
+・解説理解度: 1 (まだ少し分からない)
+・要復習フラグ: FALSE
+
+[問20] × 不正解
+・カテゴリ: 【言語知識】語彙 > 用法
+・学習スキル: 語彙・用法
+・難易度: 標準
+・問題文: <u>すんなり</u>
+・回答時間: 33秒
+・自信度: 3 (やや不安)
+・解説理解度: 1 (まだ少し分からない)
+・要復習フラグ: FALSE
+
+[問21] × 不正解
+・カテゴリ: 【言語知識】語彙 > 用法
+・学習スキル: 語彙・用法
+・難易度: 基礎
+・問題文: <u>気軽</u>
+・回答時間: 41秒
+・自信度: 4 (直感に近い)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問22] × 不正解
+・カテゴリ: 【言語知識】語彙 > 用法
+・学習スキル: 語彙・用法
+・難易度: 基礎
+・問題文: <u>蓄える</u>
+・回答時間: 41秒
+・自信度: 4 (直感に近い)
+・解説理解度: 1 (まだ少し分からない)
+・要復習フラグ: FALSE
+
+[問23] × 不正解
+・カテゴリ: 【言語知識】文法 > 文の文法1
+・学習スキル: 文法・文の文法1
+・難易度: 発展
+・問題文: 彼の成功（せいこう）は、たゆまぬ努力（どりょく）の成果（せいか） ______ 。
+・回答時間: 43秒
+・自信度: 3 (やや不安)
+・解説理解度: 0 (全然分からない)
+・要復習フラグ: FALSE
+
+[問24] × 不正解
+・カテゴリ: 【言語知識】文法 > 文の文法1
+・学習スキル: 文法・文の文法1
+・難易度: 発展
+・問題文: 自分の健康を損なって ______ 、やりたい仕事を続ける必要はない。
+・回答時間: 39秒
+・自信度: 4 (直感に近い)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問25] ○ 正解
+・カテゴリ: 【言語知識】文法 > 文の文法1
+・学習スキル: 文法・文の文法1
+・難易度: 基礎
+・問題文: この映画は、実際に起きた事件 ______ 作られている。
+・回答時間: 45秒
+・自信度: 4 (直感に近い)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問26] × 不正解
+・カテゴリ: 【言語知識】文法 > 文の文法1
+・学習スキル: 文法・文の文法1
+・難易度: 発展
+・問題文: 東京公演 ______ 、彼の全国ツアーが華やかにスタートした。
+・回答時間: 42秒
+・自信度: 4 (直感に近い)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問27] × 不正解
+・カテゴリ: 【言語知識】文法 > 文の文法2
+・学習スキル: 文法・文の文法2
+・難易度: 基礎
+・問題文: この地域では、______ ______ __★__ ______ 盛んだ。
+・回答時間: 38秒
+・自信度: 2 (少し自信がある)
+・解説理解度: 3 (理解できた)
+・要復習フラグ: FALSE
+
+[問28] × 不正解
+・カテゴリ: 【言語知識】文法 > 文の文法2
+・学習スキル: 文法・文の文法2
+・難易度: 標準
+・問題文: 計画は ______ ______ __★__ ______ 進められている。
+・回答時間: 25秒
+・自信度: 3 (やや不安)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問29] ○ 正解
+・カテゴリ: 【言語知識】文法 > 文章の文法
+・学習スキル: 文法・文章の文法
+・難易度: 標準
+・問題文: 電気自動車は走行中に排気ガスを出さない。（ ______ ）、充電できる場所がまだ少ないという課題もある。
+・回答時間: 43秒
+・自信度: 1 (自信がある)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+[問30] × 不正解
+・カテゴリ: 【言語知識】文法 > 文章の文法
+・学習スキル: 文法・文章の文法
+・難易度: 標準
+・問題文: AIによる自動採点はテストの結果をすぐに知ることができる。（ ______ ）、記述式の細かい評価はまだ苦手だ。
+・回答時間: 33秒
+・自信度: 3 (やや不安)
+・解説理解度: 2 (だいたい理解できた)
+・要復習フラグ: FALSE
+
+=== CBT_SESSION_END ===
+
+=== AI_ANALYSIS_DATA_JSON ===
+{"session":{"sessionId":"SESS_1788258074000","startTime":"2026-09-01T10:00:00.000Z","mode":"Actual","difficultySetting":"すべて","confidenceRecorded":"あり","totalTimeSec":1274,"questionCount":30,"correctCount":11,"wrongCount":19,"accuracy":37},"questions":[{"questionNumber":1,"correct":true,"category":"【言語知識】文字 > 漢字読み","skillId":"SK_JLPT_N2_LK_CH_KANJI_READING","skillName":"文字・漢字読み","difficulty":"発展","answerTimeSec":25,"confidence":"2 (少し自信がある)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":2,"correct":false,"category":"【言語知識】文字 > 漢字読み","skillId":"SK_JLPT_N2_LK_CH_KANJI_READING","skillName":"文字・漢字読み","difficulty":"発展","answerTimeSec":56,"confidence":"4 (直感に近い)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":3,"correct":false,"category":"【言語知識】文字 > 漢字読み","skillId":"SK_JLPT_N2_LK_CH_KANJI_READING","skillName":"文字・漢字読み","difficulty":"発展","answerTimeSec":32,"confidence":"4 (直感に近い)","explanationUnderstanding":"3 (理解できた)","review":false},{"questionNumber":4,"correct":false,"category":"【言語知識】文字 > 漢字読み","skillId":"SK_JLPT_N2_LK_CH_KANJI_READING","skillName":"文字・漢字読み","difficulty":"基礎","answerTimeSec":50,"confidence":"2 (少し自信がある)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":5,"correct":true,"category":"【言語知識】文字 > 漢字読み","skillId":"SK_JLPT_N2_LK_CH_KANJI_READING","skillName":"文字・漢字読み","difficulty":"標準","answerTimeSec":47,"confidence":"1 (自信がある)","explanationUnderstanding":"3 (理解できた)","review":false},{"questionNumber":6,"correct":true,"category":"【言語知識】文字 > 表記","skillId":"SK_JLPT_N2_LK_CH_ORTHOGRAPHY","skillName":"文字・表記","difficulty":"発展","answerTimeSec":49,"confidence":"2 (少し自信がある)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":7,"correct":true,"category":"【言語知識】文字 > 表記","skillId":"SK_JLPT_N2_LK_CH_ORTHOGRAPHY","skillName":"文字・表記","difficulty":"標準","answerTimeSec":26,"confidence":"1 (自信がある)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":8,"correct":true,"category":"【言語知識】文字 > 表記","skillId":"SK_JLPT_N2_LK_CH_ORTHOGRAPHY","skillName":"文字・表記","difficulty":"基礎","answerTimeSec":42,"confidence":"1 (自信がある)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":9,"correct":true,"category":"【言語知識】語彙 > 語形成","skillId":"SK_JLPT_N2_LK_VO_WORD_FORMATION","skillName":"語彙・語形成","difficulty":"基礎","answerTimeSec":24,"confidence":"2 (少し自信がある)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":10,"correct":false,"category":"【言語知識】語彙 > 語形成","skillId":"SK_JLPT_N2_LK_VO_WORD_FORMATION","skillName":"語彙・語形成","difficulty":"標準","answerTimeSec":26,"confidence":"2 (少し自信がある)","explanationUnderstanding":"1 (まだ少し分からない)","review":false},{"questionNumber":11,"correct":true,"category":"【言語知識】語彙 > 語形成","skillId":"SK_JLPT_N2_LK_VO_WORD_FORMATION","skillName":"語彙・語形成","difficulty":"基礎","answerTimeSec":35,"confidence":"1 (自信がある)","explanationUnderstanding":"3 (理解できた)","review":false},{"questionNumber":12,"correct":false,"category":"【言語知識】語彙 > 文脈規定","skillId":"SK_JLPT_N2_LK_VO_CONTEXT","skillName":"語彙・文脈規定","difficulty":"標準","answerTimeSec":46,"confidence":"3 (やや不安)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":13,"correct":false,"category":"【言語知識】語彙 > 文脈規定","skillId":"SK_JLPT_N2_LK_VO_CONTEXT","skillName":"語彙・文脈規定","difficulty":"標準","answerTimeSec":28,"confidence":"4 (直感に近い)","explanationUnderstanding":"3 (理解できた)","review":false},{"questionNumber":14,"correct":false,"category":"【言語知識】語彙 > 文脈規定","skillId":"SK_JLPT_N2_LK_VO_CONTEXT","skillName":"語彙・文脈規定","difficulty":"基礎","answerTimeSec":41,"confidence":"1 (自信がある)","explanationUnderstanding":"0 (全然分からない)","review":false},{"questionNumber":15,"correct":true,"category":"【言語知識】語彙 > 文脈規定","skillId":"SK_JLPT_N2_LK_VO_CONTEXT","skillName":"語彙・文脈規定","difficulty":"標準","answerTimeSec":43,"confidence":"2 (少し自信がある)","explanationUnderstanding":"1 (まだ少し分からない)","review":false},{"questionNumber":16,"correct":true,"category":"【言語知識】語彙 > 文脈規定","skillId":"SK_JLPT_N2_LK_VO_CONTEXT","skillName":"語彙・文脈規定","difficulty":"基礎","answerTimeSec":42,"confidence":"3 (やや不安)","explanationUnderstanding":"3 (理解できた)","review":false},{"questionNumber":17,"correct":false,"category":"【言語知識】語彙 > 言い換え類義","skillId":"SK_JLPT_N2_LK_VO_PARAPHRASE","skillName":"語彙・言い換え類義","difficulty":"基礎","answerTimeSec":38,"confidence":"4 (直感に近い)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":18,"correct":false,"category":"【言語知識】語彙 > 言い換え類義","skillId":"SK_JLPT_N2_LK_VO_PARAPHRASE","skillName":"語彙・言い換え類義","difficulty":"基礎","answerTimeSec":42,"confidence":"4 (直感に近い)","explanationUnderstanding":"3 (理解できた)","review":false},{"questionNumber":19,"correct":false,"category":"【言語知識】語彙 > 言い換え類義","skillId":"SK_JLPT_N2_LK_VO_PARAPHRASE","skillName":"語彙・言い換え類義","difficulty":"基礎","answerTimeSec":43,"confidence":"2 (少し自信がある)","explanationUnderstanding":"1 (まだ少し分からない)","review":false},{"questionNumber":20,"correct":false,"category":"【言語知識】語彙 > 用法","skillId":"SK_JLPT_N2_LK_VO_USAGE","skillName":"語彙・用法","difficulty":"標準","answerTimeSec":33,"confidence":"3 (やや不安)","explanationUnderstanding":"1 (まだ少し分からない)","review":false},{"questionNumber":21,"correct":false,"category":"【言語知識】語彙 > 用法","skillId":"SK_JLPT_N2_LK_VO_USAGE","skillName":"語彙・用法","difficulty":"基礎","answerTimeSec":41,"confidence":"4 (直感に近い)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":22,"correct":false,"category":"【言語知識】語彙 > 用法","skillId":"SK_JLPT_N2_LK_VO_USAGE","skillName":"語彙・用法","difficulty":"基礎","answerTimeSec":41,"confidence":"4 (直感に近い)","explanationUnderstanding":"1 (まだ少し分からない)","review":false},{"questionNumber":23,"correct":false,"category":"【言語知識】文法 > 文の文法1","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_1","skillName":"文法・文の文法1","difficulty":"発展","answerTimeSec":43,"confidence":"3 (やや不安)","explanationUnderstanding":"0 (全然分からない)","review":false},{"questionNumber":24,"correct":false,"category":"【言語知識】文法 > 文の文法1","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_1","skillName":"文法・文の文法1","difficulty":"発展","answerTimeSec":39,"confidence":"4 (直感に近い)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":25,"correct":true,"category":"【言語知識】文法 > 文の文法1","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_1","skillName":"文法・文の文法1","difficulty":"基礎","answerTimeSec":45,"confidence":"4 (直感に近い)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":26,"correct":false,"category":"【言語知識】文法 > 文の文法1","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_1","skillName":"文法・文の文法1","difficulty":"発展","answerTimeSec":42,"confidence":"4 (直感に近い)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":27,"correct":false,"category":"【言語知識】文法 > 文の文法2","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_2","skillName":"文法・文の文法2","difficulty":"基礎","answerTimeSec":38,"confidence":"2 (少し自信がある)","explanationUnderstanding":"3 (理解できた)","review":false},{"questionNumber":28,"correct":false,"category":"【言語知識】文法 > 文の文法2","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_2","skillName":"文法・文の文法2","difficulty":"標準","answerTimeSec":25,"confidence":"3 (やや不安)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":29,"correct":true,"category":"【言語知識】文法 > 文章の文法","skillId":"SK_JLPT_N2_LK_GR_TEXT","skillName":"文法・文章の文法","difficulty":"標準","answerTimeSec":43,"confidence":"1 (自信がある)","explanationUnderstanding":"2 (だいたい理解できた)","review":false},{"questionNumber":30,"correct":false,"category":"【言語知識】文法 > 文章の文法","skillId":"SK_JLPT_N2_LK_GR_TEXT","skillName":"文法・文章の文法","difficulty":"標準","answerTimeSec":33,"confidence":"3 (やや不安)","explanationUnderstanding":"2 (だいたい理解できた)","review":false}]}
