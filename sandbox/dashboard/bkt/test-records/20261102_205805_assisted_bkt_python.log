@@ -1,0 +1,35 @@
+test_all_32_patterns_are_finite_probabilities (test_assisted_model.AssistedModelTests.test_all_32_patterns_are_finite_probabilities) ... ok
+test_confidence_direction_for_correct_and_wrong (test_assisted_model.AssistedModelTests.test_confidence_direction_for_correct_and_wrong) ... ok
+test_duplicate_features_and_conflicting_versions (test_assisted_model.AssistedModelTests.test_duplicate_features_and_conflicting_versions) ... ok
+test_extreme_priors_and_weights_are_stable (test_assisted_model.AssistedModelTests.test_extreme_priors_and_weights_are_stable) ... ok
+test_invalid_and_unanswered_rows_are_explained (test_assisted_model.AssistedModelTests.test_invalid_and_unanswered_rows_are_explained) ... ok
+test_invalid_assumptions_are_rejected (test_assisted_model.AssistedModelTests.test_invalid_assumptions_are_rejected) ... ok
+test_invalid_levels_are_rejected (test_assisted_model.AssistedModelTests.test_invalid_levels_are_rejected) ... ok
+test_missing_is_different_from_understanding_zero (test_assisted_model.AssistedModelTests.test_missing_is_different_from_understanding_zero) ... ok
+test_no_auxiliaries_reproduces_classic (test_assisted_model.AssistedModelTests.test_no_auxiliaries_reproduces_classic) ... ok
+test_no_history_or_student_skill_dependency (test_assisted_model.AssistedModelTests.test_no_history_or_student_skill_dependency) ... ok
+test_no_learning_and_input_limit (test_assisted_model.AssistedModelTests.test_no_learning_and_input_limit) ... ok
+test_power_likelihood_matches_hand_calculation (test_assisted_model.AssistedModelTests.test_power_likelihood_matches_hand_calculation) ... ok
+test_raw_input_unchanged_and_identity_not_required (test_assisted_model.AssistedModelTests.test_raw_input_unchanged_and_identity_not_required) ... ok
+test_understanding_only_changes_later_transition (test_assisted_model.AssistedModelTests.test_understanding_only_changes_later_transition) ... ok
+test_filtered_csv_and_model_assumptions_export (test_assisted_model.FlatHTTPTests.test_filtered_csv_and_model_assumptions_export) ... ok
+test_invalid_parameters_clear_outputs (test_assisted_model.FlatHTTPTests.test_invalid_parameters_clear_outputs) ... ok
+test_layout_patterns_and_cell_selection (test_assisted_model.FlatHTTPTests.test_layout_patterns_and_cell_selection) ... ok
+test_chronology_independence_no_mutation_and_traceable_parameters (test_bkt.BKTTests.test_chronology_independence_no_mutation_and_traceable_parameters) ... ok
+test_known_correct_and_incorrect_updates (test_bkt.BKTTests.test_known_correct_and_incorrect_updates) ... ok
+test_parameter_validation_and_impossible_observations (test_bkt.BKTTests.test_parameter_validation_and_impossible_observations) ... ok
+test_skill_parameters_no_learning_and_unanswered (test_bkt.BKTTests.test_skill_parameters_no_learning_and_unanswered) ... ok
+test_booleans_skips_and_identity_confirmation (test_bkt.IngestionTests.test_booleans_skips_and_identity_confirmation) ... ok
+test_duplicates_post_review_changes_and_conflicts (test_bkt.IngestionTests.test_duplicates_post_review_changes_and_conflicts) ... ok
+test_standalone_unified_bom_quotes_and_invalid_csv (test_bkt.IngestionTests.test_standalone_unified_bom_quotes_and_invalid_csv) ... ok
+test_timestamps_are_required_and_utc_normalized (test_bkt.IngestionTests.test_timestamps_are_required_and_utc_normalized) ... ok
+test_http_layout_and_sample_inference_exports (test_dashboard.DashboardTests.test_http_layout_and_sample_inference_exports) ... ok
+test_import_errors_clear_previous_data_and_clear_erases_upload (test_dashboard.DashboardTests.test_import_errors_clear_previous_data_and_clear_erases_upload) ... ok
+test_invalid_parameters_clear_estimations_and_disable_downloads (test_dashboard.DashboardTests.test_invalid_parameters_clear_estimations_and_disable_downloads) ... ok
+test_self_report_zero_is_recorded_and_missing_values_are_not (test_dashboard.DashboardTests.test_self_report_zero_is_recorded_and_missing_values_are_not) ... ok
+test_upload_identity_deduplication_and_encoding (test_dashboard.DashboardTests.test_upload_identity_deduplication_and_encoding) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.186s
+
+OK

@@ -173,3 +173,9 @@ node sandbox/dashboard/tests/bike_operations.browser.cjs
 既存の推定・CSV取込・ALP画面・設定・専用CSS・テストを [bkt/](bkt/README.md) へ整理しました。新しい入口はリポジトリルートで`python -m sandbox.dashboard.bkt`（8054）です。旧alp_app.py（8051）と従来の全体テストは互換入口として残しています。
 
 モデルだけの利用方法、資料、次の進め方は [BKT README](bkt/README.md) を参照してください。Iris・Bikeの保留事項とは別の作業です。過去のログ・ハッシュ内のパスは当時の配置として保持しています。
+
+### BKTの正誤中心・補助2項目モデル
+
+自信度と解説後の理解度を補助に使う初版を [bkt/ASSISTED_MODEL.md](bkt/ASSISTED_MODEL.md) に追加しました。各回答を同じ事前確率から独立に評価する未校正の実験モデルです。
+
+リポジトリルートで`python -m sandbox.dashboard.bkt.flat_app`（8055）。標準BKTの8054画面と分けて、32パターン、段階比較、CSV・仮定JSONを確認できます。[開発ログ](bkt/DEVELOPMENT_LOG_ASSISTED_20261102.md) と [テスト記録](bkt/TEST_RECORD_ASSISTED_20261102.md) も保存しています。

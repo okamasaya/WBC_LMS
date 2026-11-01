@@ -1,0 +1,78 @@
+{
+  "base_commit": "f10cb02b478082edb8898e1f967228b36984f097",
+  "started_jst": "2026-11-02T05:58:05.717790+09:00",
+  "model_version": "bkt-assisted-flat-v1",
+  "parameter_source": "manual_assumption",
+  "scope": "independent_answers_same_prior",
+  "results": [
+    {
+      "name": "bkt_python",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox/dashboard/bkt/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 0.87,
+      "log": "test-records/20261102_205805_assisted_bkt_python.log"
+    },
+    {
+      "name": "all_python",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox/dashboard/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 4.186,
+      "log": "test-records/20261102_205805_assisted_all_python.log"
+    },
+    {
+      "name": "flat_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/bkt/tests/flat.browser.cjs"
+      ],
+      "exit_code": 0,
+      "seconds": 4.124,
+      "log": "test-records/20261102_205805_assisted_flat_browser.log"
+    },
+    {
+      "name": "model_only",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-S",
+        "-c",
+        "import sys; from sandbox.dashboard.bkt.assisted_model import estimate_flat, combinations; r=estimate_flat(combinations()); assert len(r['records'])==32; assert 'dash' not in sys.modules and 'pandas' not in sys.modules; print('PASS 32 independent patterns with standard library only')"
+      ],
+      "exit_code": 0,
+      "seconds": 0.026,
+      "log": "test-records/20261102_205805_assisted_model_only.log"
+    }
+  ],
+  "sha256": {
+    "sandbox/dashboard/bkt/assisted_model.py": "478c45bda86761943f0de754712cd934b4669088747840c5178468f52b30175a",
+    "sandbox/dashboard/bkt/flat_app.py": "6f5288955fbec4b754fd0d356e561656883aea4cf4ad987964701b8fe63183e4",
+    "sandbox/dashboard/bkt/model.py": "d96f42e54dfad4ff522eccad595e8985c928dec5b92c100c54decb9a1ad9e5eb",
+    "sandbox/dashboard/bkt/learning_data.py": "e9bdd27f8c2baf20d944c0ea475f462c7b3d86589d534dea3932c9b4fd8cfee7",
+    "sandbox/dashboard/bkt/bkt_parameters.json": "1b81d960ca7d390167888157bc0aab333a9e7279c1ea4a1c84e4cde3b7cd47a7",
+    "sandbox/dashboard/bkt/assets/flat.css": "5b9c9bb3833724125029263c4c06d0d51f0dce83528d67a9e632a7b86f483d8f",
+    "sandbox/dashboard/bkt/tests/test_assisted_model.py": "c79e107316a792e58e9db419b2ef749edfb22e176573b3de78b3a02795c8cfb7",
+    "sandbox/dashboard/bkt/tests/flat.browser.cjs": "d3b29ef4c71ecc0207026ebf7490bf28f283859e1e341707579cc209edde86a6",
+    "sandbox/dashboard/tests/test_assisted_model.py": "3f55cd5c30eb33985632bc7f0a105398bf1ee10d37374ce9a519cc4b3819e391"
+  },
+  "classic_model_ingestion_and_parameters_unchanged": true,
+  "completed_jst": "2026-11-02T05:58:14.931057+09:00"
+}
