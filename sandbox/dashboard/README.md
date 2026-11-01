@@ -64,3 +64,21 @@ cd /workspace/WBC_LMS/sandbox/dashboard
 ```sh
 IRIS_TEST_URL=http://127.0.0.1:8052 node sandbox/dashboard/tests/iris.browser.cjs
 ```
+
+## 表示条件の復元・共有
+
+sample_dsbd_iris.pyでは、品種・測定軸・各グラフの選択条件を同じタブのsessionStorageに保持します。再読み込みしても復元され、独立したブラウザセッションへ自動的に漏れません。
+
+「現在の条件を開く・共有する」のリンクをコピーすると別のブラウザでも同じ条件を再現できます。URLにはバージョン、品種、測定軸、選択した行IDだけを含めます。データ表の並べ替え・ページ番号、グラフのズームは共有対象外です。共有URLを開いた場合やそのURLを再読み込みした場合はURLの条件が優先されます。その後操作した条件を共有したい場合は、新しいリンクをコピーしてください。
+
+URLの入力検証はiris_view_state.pyに分離しています。形式・品種・測定軸・行IDを検証し、無効なURLは説明付きで初期条件に戻します。0行の選択は無効条件とは区別して保持します。認証・アクセス制御の仕組みではありません。
+
+追加の検証コマンド（リポジトリルート、サーバー起動後）:
+
+```sh
+/workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/tests -p 'test_*.py' -v
+node sandbox/dashboard/tests/sample_iris.browser.cjs
+node sandbox/dashboard/tests/iris_state.browser.cjs
+```
+
+テストの対象・実行結果・未確認事項は [Irisのテスト記録](TEST_RECORD_IRIS_20261101.md) にまとめています。

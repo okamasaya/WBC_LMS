@@ -1,0 +1,71 @@
+{
+  "base_commit": "22624460f70383eb3a3503b54753b6159ed53699",
+  "source_state": "uncommitted changes; hashes identify tested contents",
+  "sha256": {
+    "sandbox/dashboard/sample_dsbd_iris.py": "ab1beb270dd64bb8dfd2724e428850a5090ac96ff5e711f4cd7cb1357183116a",
+    "sandbox/dashboard/iris_view_state.py": "eb50fa851fbea2f30c43ba9052f72be4a447af945af55b65708d4afeb0c3d1cd",
+    "sandbox/dashboard/iris_crossfilter.py": "8e80a7696731dd4e5b2bfaba41e7b7ebd61872489be05db69b35d5b4179436ed",
+    "sandbox/dashboard/iris.csv": "a5d95be7b26150d9a56a3ba824c59abdafae169cb505cd4cc2d1f2c8dd19e9fe",
+    "sandbox/dashboard/assets/iris.css": "18f0f0ce1863d8e684c280feacbb10839f6899b0f1ccd3bcb4a6ebb6c3930572",
+    "sandbox/dashboard/tests/browser.cjs": "3097f64ea91df07ca62e008e09baa626f4a2b35a947f4b8357aef28d1b96e1c5",
+    "sandbox/dashboard/tests/iris.browser.cjs": "cde331afd2432c252c1456d95f3bf15ba8b5be153f9ec572b0f067137f0d57a4",
+    "sandbox/dashboard/tests/iris_state.browser.cjs": "d726b205e9568c0c1cad8be0a58128f3fbd8104a075a80715a29578c69c02fc8",
+    "sandbox/dashboard/tests/sample_iris.browser.cjs": "63d6f4e71946fd7c3000740c15b979218696a9cde891d7949edac0a50e61d52a",
+    "sandbox/dashboard/tests/test_bkt.py": "2e3f54841435c9523bc4650ded6bb893b534997e0334b751ee6f1ea8e5e01305",
+    "sandbox/dashboard/tests/test_dashboard.py": "44502f2c6a6d0bc4797989d7a6731750fec867b1ba30609af8f11bd12bc57910",
+    "sandbox/dashboard/tests/test_iris_crossfilter.py": "8f92ead9437bc5586ecb13472963873f4931b5b4f4ce79ef4656bf6a13b2a756",
+    "sandbox/dashboard/tests/test_iris_view_state.py": "f2091a64a48d17ffe08929a4c6490be62e72ecba17ff718c640395c87c7fb19d"
+  },
+  "started_jst": "2026-11-01T15:32:07.915324+09:00",
+  "python": "3.12.14",
+  "results": [
+    {
+      "name": "python",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox/dashboard/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 1.829,
+      "log": "test-records/20261101_153207_python.log"
+    },
+    {
+      "name": "linked_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/tests/iris.browser.cjs"
+      ],
+      "exit_code": 0,
+      "seconds": 7.453,
+      "log": "test-records/20261101_153207_linked_browser.log"
+    },
+    {
+      "name": "sample_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/tests/sample_iris.browser.cjs"
+      ],
+      "exit_code": 0,
+      "seconds": 2.875,
+      "log": "test-records/20261101_153207_sample_browser.log"
+    },
+    {
+      "name": "state_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/tests/iris_state.browser.cjs"
+      ],
+      "exit_code": 0,
+      "seconds": 5.849,
+      "log": "test-records/20261101_153207_state_browser.log"
+    }
+  ],
+  "completed_jst": "2026-11-01T15:32:25.921786+09:00"
+}
