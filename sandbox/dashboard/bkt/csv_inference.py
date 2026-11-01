@@ -123,7 +123,7 @@ def import_uploads(contents, filenames):
 
 def estimate_import(data, parameters=None):
     result = estimate_flat(data['records'], parameters)
-    return {**result, 'source': 'uploaded', 'files': data['files'],
+    return {**result, 'source': data.get('source', 'uploaded'), 'files': data['files'],
             'duplicates': data['duplicates'], 'input_count': data['input_count'],
             'unique_input_count': data['unique_input_count'], 'scope': 'independent_answers_same_prior'}
 

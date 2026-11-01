@@ -1,0 +1,111 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE "Student" (
+  "StudentID" TEXT PRIMARY KEY NOT NULL,
+  "DisplayName" TEXT NOT NULL,
+  "IsSynthetic" INTEGER NOT NULL CHECK ("IsSynthetic" IN (0,1)),
+  "DatasetID" TEXT NOT NULL
+);
+
+CREATE TABLE "Skill" (
+  "SkillID" TEXT PRIMARY KEY NOT NULL,
+  "SkillName" TEXT NOT NULL,
+  "CategoryLevel1" TEXT NOT NULL,
+  "CategoryLevel2" TEXT NOT NULL,
+  "CategoryLevel3" TEXT NOT NULL,
+  "QuestionsPerSession" INTEGER NOT NULL
+);
+
+CREATE TABLE "Question" (
+  "QuestionID" TEXT PRIMARY KEY NOT NULL,
+  "SkillID" TEXT NOT NULL,
+  "Difficulty" INTEGER NOT NULL,
+  "QuestionText" TEXT NOT NULL,
+  "Option1" TEXT NOT NULL,
+  "Option2" TEXT NOT NULL,
+  "Option3" TEXT NOT NULL,
+  "Option4" TEXT NOT NULL,
+  "CorrectOptionPosition" INTEGER NOT NULL,
+  "SourceQuestionFile" TEXT NOT NULL,
+  FOREIGN KEY ("SkillID") REFERENCES "Skill" ("SkillID"),
+  UNIQUE (QuestionID, SkillID),
+  CHECK (Difficulty BETWEEN 1 AND 5),
+  CHECK (CorrectOptionPosition BETWEEN 1 AND 4)
+);
+
+CREATE TABLE "Session" (
+  "SessionID" TEXT PRIMARY KEY NOT NULL,
+  "StudentID" TEXT NOT NULL,
+  "SessionNumber" INTEGER NOT NULL,
+  "ExamID" TEXT NOT NULL,
+  "ExamType" TEXT NOT NULL,
+  "ExamLevel" TEXT NOT NULL,
+  "ExamTitle" TEXT NOT NULL,
+  "Mode" TEXT NOT NULL,
+  "StartAt" TEXT NOT NULL,
+  "EndAt" TEXT NOT NULL,
+  "ReviewEndAt" TEXT NOT NULL,
+  "TotalTimeSec" INTEGER NOT NULL,
+  "TotalQuestions" INTEGER NOT NULL,
+  "AnsweredQuestions" INTEGER NOT NULL,
+  "UnansweredQuestions" INTEGER NOT NULL,
+  "CorrectCount" INTEGER NOT NULL,
+  "IncorrectCount" INTEGER NOT NULL,
+  "ScoreRate" INTEGER NOT NULL,
+  "IsSynthetic" INTEGER NOT NULL CHECK ("IsSynthetic" IN (0,1)),
+  "DatasetID" TEXT NOT NULL,
+  "MockSchemaVersion" TEXT NOT NULL,
+  FOREIGN KEY ("StudentID") REFERENCES "Student" ("StudentID"),
+  UNIQUE (SessionID, StudentID),
+  UNIQUE (StudentID, SessionNumber),
+  CHECK (TotalQuestions = AnsweredQuestions + UnansweredQuestions),
+  CHECK (AnsweredQuestions = CorrectCount + IncorrectCount)
+);
+
+CREATE TABLE "QuestionResult" (
+  "ResultID" TEXT PRIMARY KEY NOT NULL,
+  "SessionID" TEXT NOT NULL,
+  "StudentID" TEXT NOT NULL,
+  "SessionNumber" INTEGER NOT NULL,
+  "ExamID" TEXT NOT NULL,
+  "ExamType" TEXT NOT NULL,
+  "ExamLevel" TEXT NOT NULL,
+  "Mode" TEXT NOT NULL,
+  "QuestionSequence" INTEGER NOT NULL,
+  "QuestionID" TEXT NOT NULL,
+  "SkillID" TEXT NOT NULL,
+  "SkillName" TEXT NOT NULL,
+  "CategoryLevel1" TEXT NOT NULL,
+  "CategoryLevel2" TEXT NOT NULL,
+  "CategoryLevel3" TEXT NOT NULL,
+  "Difficulty" INTEGER NOT NULL,
+  "UserAnswerDisplayedPosition" INTEGER NOT NULL,
+  "CorrectAnswerDisplayedPosition" INTEGER NOT NULL,
+  "IsAnswered" INTEGER NOT NULL CHECK ("IsAnswered" IN (0,1)),
+  "IsCorrect" INTEGER NOT NULL CHECK ("IsCorrect" IN (0,1)),
+  "ConfidenceLevel" INTEGER NOT NULL,
+  "ConfidenceLabel" TEXT NOT NULL,
+  "UnderstandingLevel" INTEGER NOT NULL,
+  "UnderstandingLabel" TEXT NOT NULL,
+  "ResponseTimeMs" INTEGER NOT NULL,
+  "QuestionPresentedAt" TEXT NOT NULL,
+  "AnsweredAt" TEXT NOT NULL,
+  "ConfidenceRecordedAt" TEXT NOT NULL,
+  "ExplanationViewedAt" TEXT NOT NULL,
+  "UnderstandingRecordedAt" TEXT NOT NULL,
+  "IsSynthetic" INTEGER NOT NULL CHECK ("IsSynthetic" IN (0,1)),
+  "DatasetID" TEXT NOT NULL,
+  "MockSchemaVersion" TEXT NOT NULL,
+  FOREIGN KEY ("SessionID") REFERENCES "Session" ("SessionID"),
+  FOREIGN KEY ("StudentID") REFERENCES "Student" ("StudentID"),
+  FOREIGN KEY ("QuestionID") REFERENCES "Question" ("QuestionID"),
+  FOREIGN KEY ("SkillID") REFERENCES "Skill" ("SkillID"),
+  UNIQUE (SessionID, QuestionSequence),
+  UNIQUE (SessionID, QuestionID),
+  FOREIGN KEY (SessionID, StudentID) REFERENCES Session (SessionID, StudentID),
+  FOREIGN KEY (QuestionID, SkillID) REFERENCES Question (QuestionID, SkillID),
+  CHECK (ConfidenceLevel BETWEEN 1 AND 4),
+  CHECK (UnderstandingLevel BETWEEN 0 AND 3),
+  CHECK (ResponseTimeMs > 0),
+  CHECK (IsCorrect = (UserAnswerDisplayedPosition = CorrectAnswerDisplayedPosition))
+);

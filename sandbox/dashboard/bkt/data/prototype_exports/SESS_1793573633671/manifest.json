@@ -1,0 +1,29 @@
+{
+  "user_supplied": true,
+  "archived_on_jst": "2026-11-02",
+  "purpose": "original prototype CSV reference; archived at the user request",
+  "files": [
+    {
+      "name": "CBT_RAW_SESS_1793573633671.csv",
+      "bytes": 11090,
+      "sha256": "eb7ae45a71e365d39ee80bebfa7a8acb880fbd6e060f236ab7191e0a30afbeb2"
+    },
+    {
+      "name": "QuestionResult_SESS_1793573633671.csv",
+      "bytes": 10308,
+      "sha256": "cc0df62457632e061c20c2f58fd6a14bbfba97bea0eb45f57b963703ac09acbe"
+    },
+    {
+      "name": "Session_SESS_1793573633671.csv",
+      "bytes": 742,
+      "sha256": "f1f6bf21ea5fe043a63b772a8255f97b6e027980f66b66212828fcab6cb1fbc8"
+    }
+  ],
+  "question_rows": 10,
+  "answered_rows": 0,
+  "notes": [
+    "original bytes preserved, including UTF-8 BOM and CRLF",
+    "QuestionResult and Raw refer to the same ten unanswered questions",
+    "kept separate from the synthetic five-session SQLite dataset"
+  ]
+}

@@ -1,0 +1,3 @@
+PASS synthetic answered CSVs: three-file import, deduplication, missing identity, understanding 0, filtered result CSV, and failed-import stale-result clearing
+PASS attached real three-file exports: 10 unique unanswered rows, 10 duplicate rows, zero inferred answers, disabled estimate downloads, and 20 reason rows
+PASS clear removes import/results/reasons and mobile layout without JS/HTTP errors

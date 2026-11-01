@@ -1,0 +1,59 @@
+{
+  "is_synthetic": true,
+  "purpose": "read-only SQLite -> assisted BKT -> Dash smoke test",
+  "database": "learning_logs.sqlite3",
+  "schema": "mock-storage-v1",
+  "sqlite_version": "3.53.1",
+  "seed": 20261102,
+  "sessions": 5,
+  "counts": {
+    "Student": 1,
+    "Skill": 9,
+    "Question": 144,
+    "Session": 5,
+    "QuestionResult": 150
+  },
+  "dataset_id": "SYNTH_N2_9612192539",
+  "summary": {
+    "correct_count": 81,
+    "high_confidence_wrong": 21,
+    "low_confidence_correct": 27,
+    "confidence_counts": {
+      "1": 33,
+      "2": 42,
+      "3": 36,
+      "4": 39
+    },
+    "understanding_counts": {
+      "0": 16,
+      "1": 26,
+      "2": 59,
+      "3": 49
+    }
+  },
+  "generator_settings": {
+    "generator_version": "jlpt-n2-mock-v1",
+    "seed": 20261102,
+    "sessions": 5,
+    "start_date": "2026-09-01",
+    "spacing_days": 3,
+    "source_sha256": {
+      "prototype/language/JLPT_N2/conf_JLPT_N2_LK.json": "c0f5c142576150b4286bcecc23f364e9ef962b5852d5968e5db7d041cb370054",
+      "prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json": "d9b1ae5c62590dbc9b337d507dc99230ecf118df6b5d7b342249b16d7825b18e",
+      "prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json": "f34b417fa5504526afe3aac83a9c6ad3b3c99f0e6f8ed71765db6bed508728b6",
+      "prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json": "3fa4cc37f664a29aaada611a36896deaf927a7571e89161f351942c9b8061ab8"
+    }
+  },
+  "source_sha256": {
+    "sqlite_data.py": "8ffae8bc4f78d0bbba07128f2d2354e03af90beaa1aaf294f70f28f98cba186a",
+    "mock_dataset.py": "93cdf0051a78242c0bd5ef58a7d6fd060fb177b7d5722cf146a6d503fa13a2c6"
+  },
+  "database_sha256": "f61421388b873e8d1d6650eb3de0c1e0e72bd524c8967f27437307fbf5c6d592",
+  "notes": [
+    "one synthetic learner, five sessions, thirty answered questions per session",
+    "all confidence and understanding levels are simulated, not measurements",
+    "storage tables reuse mock_dataset schema, not the 41-column export schema",
+    "DataSchemaVersion is absent in storage; the adapter leaves it null",
+    "the Dash reader never writes to the versioned database"
+  ]
+}
