@@ -1,0 +1,501 @@
+﻿QuestionID,SkillID,Difficulty,QuestionText,Option1,Option2,Option3,Option4,CorrectOptionPosition,SourceQuestionFile
+JLPT_N2_LK_Ch_002,SK_JLPT_N2_LK_CH_KANJI_READING,3,この建物は安全性を<u>維持</u>している。,いじ,いち,いちじ,いじり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_009,SK_JLPT_N2_LK_CH_KANJI_READING,3,事故の<u>原因</u>を調べている。,げんいん,げんいんん,けんいん,げんえん,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_014,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,事故の原因を<u>きゅうめい</u>する。,究明,究命,救明,求明,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_025,SK_JLPT_N2_LK_CH_KANJI_READING,3,チームは度重なる失敗を<u>克服</u>して優勝した。,こくふく,こくふくう,きょくふく,こっふく,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_026,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,新しい製品の<u>はんばい</u>を開始した。,販売,半売,販買,板売,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_030,SK_JLPT_N2_LK_CH_KANJI_READING,3,新人選手は初めての試合で<u>活躍</u>した。,かつやく,けつやく,かつやくう,けつやくう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_031,SK_JLPT_N2_LK_CH_KANJI_READING,3,新人選手は監督の期待に<u>応えて</u>、活躍した。,こたえて,おうえて,むかえて,かなえて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_041,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,会議の<u>にってい</u>を変更する。,日程,日定,日調,日程調,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_046,SK_JLPT_N2_LK_CH_KANJI_READING,3,彼はその場の空気をすばやく<u>察知</u>した。,さっち,ざっち,さっちゅう,さつち,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_054,SK_JLPT_N2_LK_CH_KANJI_READING,3,彼は先生の質問に<u>応えて</u>、丁寧に説明した。,こたえて,おうえて,むかえて,かなえて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_056,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,新しい製品の開発を<u>すいしん</u>する。,推進,推身,水進,進推,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_065,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,事故の計画的な回避策を<u>はかる</u>。,図る,測る,量る,計る,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_066,SK_JLPT_N2_LK_CH_KANJI_READING,3,若手社員は上司の信頼に<u>応えて</u>、大きな契約をまとめた。,こたえて,おうえて,むかえて,かなえて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_067,SK_JLPT_N2_LK_CH_KANJI_READING,3,彼は周囲の不評を<u>払拭</u>するために努めた。,ふっしょく,ふつのぞく,はらいのぞく,ふつのぞき,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_068,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,新しい製品の性能を<u>かくほ</u>する。,確保,確捕,格保,角保,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_070,SK_JLPT_N2_LK_CH_KANJI_READING,1,友人の成功を<u>祝う</u>。,いわう,うたう,おう,のろう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_077,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,5,議長は会議の混乱を<u>しゅうしゅう</u>しようと努めた。,収拾,収集,収執,修拾,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_090,SK_JLPT_N2_LK_CH_KANJI_READING,1,彼は<u>笑顔</u>で挨拶をした。,えがお,しょうがん,えがわ,しょうがわ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_095,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,状況の変化に<u>じゅうなん</u>に対応する。,柔軟,柔難,充軟,重軟,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_098,SK_JLPT_N2_LK_CH_KANJI_READING,2,契約の内容を<u>確認</u>する。,かくにん,がくにん,かくれん,がくれん,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_099,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,友達と<u>やくそく</u>を守る。,約束,役束,約速,役速,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_102,SK_JLPT_N2_LK_CH_KANJI_READING,3,大雨のため、楽しみにしていた運動会は<u>延期</u>になりました。,えんき,えんご,てんき,てんご,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_108,SK_JLPT_N2_LK_CH_KANJI_READING,3,新しいプロジェクトは<u>順調</u>に進んでいます。,じゅんちょう,しゅんちょう,じゅんじょう,しゅんじょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_114,SK_JLPT_N2_LK_CH_KANJI_READING,4,新しい技術が社会全体に<u>普及</u>するには時間がかかります。,ふきゅう,ふきゆ,ほきゅう,ぶきゅう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_124,SK_JLPT_N2_LK_CH_KANJI_READING,3,弱点を<u>克服</u>するために、毎日練習を重ねています。,こくふく,こくふう,こっふく,こっふう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_128,SK_JLPT_N2_LK_CH_KANJI_READING,1,来週のセミナーに<u>参加</u>することにしました。,さんか,ざんか,さんこう,ざんこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_131,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,作業を始める前に、まず<u>あんぜん</u>を確認してください。,安全,按全,案全,案然,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_140,SK_JLPT_N2_LK_CH_KANJI_READING,1,明日のイベントの開始時間が<u>変更</u>になりました。,へんこう,へんごう,へんきょう,へんぎょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_146,SK_JLPT_N2_LK_CH_KANJI_READING,5,古い契約書を破砕機で<u>破棄</u>しました。,はき,はこう,ばき,ばこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_148,SK_JLPT_N2_LK_CH_KANJI_READING,2,事業を全国に<u>拡大</u>する計画を立てています。,かくだい,こうだい,かくた,こうた,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_151,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,地震が発生したときは、あわてずに<u>こうどう</u>してください。,行動,行同,幸動,幸同,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_163,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,事故の<u>げんいん</u>を詳しく調査しています。,原因,原音,元因,元音,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_170,SK_JLPT_N2_LK_CH_KANJI_READING,1,彼は毎日<u>真面目</u>に働いています。,まじめ,ましょうぶ,しんめんぼく,しんめんもく,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_172,SK_JLPT_N2_LK_CH_KANJI_READING,3,この地域は自然環境が<u>恵</u>まれています。,めぐ,えぐ,あぐ,つぐ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_175,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,売り上げの低迷を<u>だは</u>するための作戦を練った。,打破,打波,妥破,妥波,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_196,SK_JLPT_N2_LK_CH_KANJI_READING,3,この地域は人口が<u>減少</u>しています。,げんしょう,けんしょう,げんそう,けんそう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_198,SK_JLPT_N2_LK_CH_KANJI_READING,1,明日は友達と<u>映画</u>を見に行きます。,えいが,えいか,えこう,えきょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_206,SK_JLPT_N2_LK_CH_KANJI_READING,1,休日は家族と一緒に<u>公園</u>を散歩します。,こうえん,ごうえん,こうえんじ,ごうえんじ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_212,SK_JLPT_N2_LK_CH_KANJI_READING,4,長年の研究が実を結び、<u>成就</u>の瞬間を迎えました。,じょうじゅ,じょうじゅう,しょうじゅ,しょうじゅう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_213,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,大型台風の接近により、暴風雨の<u>いりょく</u>が増しています。,威力,偉力,異力,移力,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_216,SK_JLPT_N2_LK_CH_KANJI_READING,1,この<u>公園</u>には大きな池があります。,こうえん,ごうえん,こうえんじ,ごうえんじ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_222,SK_JLPT_N2_LK_CH_KANJI_READING,4,長年の交渉を経て、ようやく協定が<u>締結</u>されました。,ていけつ,ていげつ,でいけつ,たいけつ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_224,SK_JLPT_N2_LK_CH_KANJI_READING,5,急激な環境の変化に、現場は<u>困惑</u>を隠せませんでした。,こんわく,ごんわく,こんかく,ごんかく,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_227,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,5,彼は長年の功績が称えられ、表彰状を<u>じゅしょう</u>した。,受賞,受将,授賞,授将,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_232,SK_JLPT_N2_LK_CH_KANJI_READING,4,古い法律を現代に合わせて<u>破棄</u>することに決定した。,はき,はこう,ばき,ばこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_235,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,相手の要求をそのまま<u>じゅだく</u>することはできません。,受諾,受濁,授諾,授濁,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_240,SK_JLPT_N2_LK_CH_KANJI_READING,1,日本の<u>歴史</u>について図書館で調べました。,れきし,りきし,れきじ,りきじ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_242,SK_JLPT_N2_LK_CH_KANJI_READING,3,この地域は古くから<u>綿織物</u>の生産が盛んです。,めんおりもの,わたおりもの,めんしきぶつ,わたしきぶつ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_246,SK_JLPT_N2_LK_CH_KANJI_READING,5,事故の原因となった部品の<u>欠陥</u>が見つかりました。,けっかん,けつかん,けっけん,けつけん,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_250,SK_JLPT_N2_LK_CH_KANJI_READING,2,この地域は、綺麗な水と豊かな自然に<u>恵</u>まれています。,めぐ,えぐ,あぐ,つぐ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_252,SK_JLPT_N2_LK_CH_KANJI_READING,3,今回のトラブルについては、責任の所在を明確に<u>追及</u>すべきだ。,ついきゅう,ついくう,ついきょ,ついくょ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_253,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,新商品の開発に向けて、市場のニーズを正確に<u>はあく</u>する。,把握,波握,把屋,杷握,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_272,SK_JLPT_N2_LK_CH_KANJI_READING,4,会議での発言を求めたが、あっさりと<u>拒絶</u>された。,きょぜつ,きょせつ,ぎょぜつ,ぎょせつ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_274,SK_JLPT_N2_LK_CH_KANJI_READING,5,今回の不祥事について、担当者が平身低頭して<u>謝罪</u>した。,しゃざい,しゃさい,じゃざい,じゃさい,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_289,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,問題が発生した根本的な原因を<u>きゅうめい</u>する。,究明,究命,窮明,窮命,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_290,SK_JLPT_N2_LK_CH_KANJI_READING,2,荷物の配送状況を<u>追跡</u>することができます。,ついせき,ついたち,ついさく,ついたく,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_293,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,トラブルを解決するための<u>しかけ</u>を考えました。,仕掛け,仕賭け,四掛け,四賭け,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_297,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,5,長年の研究活動が<u>けつじつ</u>し、新薬が完成した。,結実,決実,結日,結身,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_298,SK_JLPT_N2_LK_CH_KANJI_READING,3,この計画には多くのリスクが<u>潜在</u>している。,せんざい,ぜんざい,せんさい,ぜんさい,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_300,SK_JLPT_N2_LK_CH_KANJI_READING,2,この手続きを行うには、身分を<u>証明</u>する書類が必要です。,しょうめい,じょうめい,しょうみょう,じょうみょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_301,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,工事現場では必ずヘルメットを<u>ちゃくよう</u>しなければならない。,着用,着様,千用,千様,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_304,SK_JLPT_N2_LK_CH_KANJI_READING,5,過密な日程が原因で、プロジェクトの進行が<u>破綻</u>した。,はたん,はじょう,ばたん,ばじょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_314,SK_JLPT_N2_LK_CH_KANJI_READING,5,事故の原因となった部材の<u>欠陥</u>が指摘された。,けっかん,けつかん,けっけん,けつけん,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_321,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,2,事故を防ぐために機械の<u>てんけん</u>を怠らないでください。,点検,点権,転検,転権,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_328,SK_JLPT_N2_LK_CH_KANJI_READING,1,日本の<u>歴史</u>について図書館の資料を使って調べました。,れきし,りきし,れきじ,りきじ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_329,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,相手の立場に配慮しつつ、こちらの<u>しゅちょう</u>も明確に伝えた。,主張,主長,首張,首長,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_338,SK_JLPT_N2_LK_CH_KANJI_READING,2,校内で写真を撮るには先生の<u>許可</u>を得なければならない。,きょか,ぎょか,きょこう,ぎょこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_350,SK_JLPT_N2_LK_CH_KANJI_READING,2,危険ですので、作業エリアには立ち入らないよう<u>徹底</u>してください。,てってい,てっでい,ちてい,ちっでい,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_360,SK_JLPT_N2_LK_CH_KANJI_READING,1,明日は友達と映画館で<u>映画</u>を見る予定です。,えいが,えいか,えこう,えきょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_362,SK_JLPT_N2_LK_CH_KANJI_READING,4,新しい技術の導入により製品の品質が<u>飛躍</u>的に向上した。,ひやく,ひこう,とやく,とこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_364,SK_JLPT_N2_LK_CH_KANJI_READING,5,事故の原因となった部材の構造上の<u>欠陥</u>が指摘された。,けっかん,けつかん,けっけん,けつけん,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_367,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,バイクに乗るときはヘルメットの<u>ちゃくよう</u>が義務付けられている。,着用,着様,千用,千様,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_371,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,新しい技術の<u>かいはつ</u>を進めています。,開発,開初,関発,関初,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_373,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,相手の都合に配慮して日程を<u>ちょうせい</u>した。,調整,頂整,調政,頂政,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_376,SK_JLPT_N2_LK_CH_KANJI_READING,1,明日は友達と図書館で<u>勉強</u>します。,べんきょう,べんこう,めんきょう,めんこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_379,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,問題の解決に向けて具体的な<u>ていあん</u>を行った。,提案,提安,定案,定安,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_380,SK_JLPT_N2_LK_CH_KANJI_READING,2,彼は音楽の才能に<u>恵</u>まれている。,めぐ,えぐ,あぐ,つぐ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_386,SK_JLPT_N2_LK_CH_KANJI_READING,1,大学で日本の<u>歴史</u>を専攻することにした。,れきし,りきし,れきじ,りきじ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_392,SK_JLPT_N2_LK_CH_KANJI_READING,4,現場の混乱を避けるため、迅速に<u>撤収</u>した。,てっしゅう,てつしゅう,てっしゆ,てつしゆ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_401,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,消防士は出動時に必ず防火服を<u>ちゃくよう</u>する。,着用,着様,千用,千様,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_402,SK_JLPT_N2_LK_CH_KANJI_READING,5,ずさんな資金計画がたたり、事業の継続が<u>破綻</u>した。,はたん,はじょう,ばたん,ばじょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_404,SK_JLPT_N2_LK_CH_KANJI_READING,4,彼の演技力は舞台経験を重ねるごとに<u>飛躍</u>的に伸びていった。,ひやく,ひこう,とやく,とこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_427,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,新しい技術の<u>かいはつ</u>に成功し、業界で注目を集めた。,開発,開初,関発,関初,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_429,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,相手の意見をしっかりと理解した上で<u>ていあん</u>を作成した。,提案,提安,定案,定安,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_430,SK_JLPT_N2_LK_CH_KANJI_READING,1,休日は家族と一緒に<u>公園</u>へ出かけました。,こうえん,ごうえん,こうえんじ,ごうえんじ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_436,SK_JLPT_N2_LK_CH_KANJI_READING,3,この地域は豊かな水資源と自然環境に<u>恵</u>まれている。,めぐ,えぐ,あぐ,つぐ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_449,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,問題の根本的な解決に向けて<u>ていあん</u>を行う。,提案,提安,定案,定安,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_459,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,問題の根本原因を突き止めて<u>はいじょ</u>する。,排除,排徐,拝除,拝徐,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_466,SK_JLPT_N2_LK_CH_KANJI_READING,1,日本の<u>歴史</u>について詳しく調査した。,れきし,りきし,れきじ,りきじ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_469,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,相手の意見を尊重しつつ、こちらの<u>しゅちょう</u>も明確に伝えた。,主張,主長,首張,首長,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_474,SK_JLPT_N2_LK_CH_KANJI_READING,4,新しい技術の導入によって、生産効率が<u>飛躍</u>的に向上した。,ひやく,ひこう,とやく,とこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_479,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,相手の主張を尊重しつつ、こちらの<u>しゅちょう</u>も明確に伝えた。,主張,主長,首張,首長,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_483,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,交渉が行き詰まる中、若手社員が意外な<u>だかい</u>策を提案した。,打開,打解,妥開,妥解,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_490,SK_JLPT_N2_LK_CH_KANJI_READING,2,トラブルの拡大を防ぐため、速やかに<u>対応</u>した。,たいおう,だいおう,たいこう,だいこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_495,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,自分の発言には最後まで<u>せきにん</u>を持つべきです。,責任,積任,関任,責認,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_497,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,5,労使間の対立を解消するため、第三者による<u>ちょうてい</u>が行われた。,調停,長停,調低,調底,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_503,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,2,台風シーズン前に、屋根や排水溝の<u>てんけん</u>を済ませておこう。,点検,点権,転検,転権,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_506,SK_JLPT_N2_LK_CH_KANJI_READING,3,彼女はチャンスに<u>恵</u>まれ、若くして海外での活躍の場を得た。,めぐ,えぐ,あぐ,つぐ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_509,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,取引先との商談では、価格面でこちらの<u>しゅちょう</u>を丁寧に説明した。,主張,主長,首張,首長,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_516,SK_JLPT_N2_LK_CH_KANJI_READING,1,引っ越し先の近くには広い<u>公園</u>があり、子どもたちも気に入っている。,こうえん,ごうえん,こうえんじ,ごうえんじ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_517,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,5,長年の功績が認められ、業界の<u>じゅうちん</u>としてたたえられた。,重鎮,従鎮,重珍,重陳,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_522,SK_JLPT_N2_LK_CH_KANJI_READING,2,急な予定が入ったため、日程を<u>変更</u>した。,へんこう,へんきょう,ほうこう,ほうきょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_523,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,5,離婚をめぐる争いは、家庭裁判所の<u>ちょうてい</u>に委ねられた。,調停,長停,調低,調底,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_524,SK_JLPT_N2_LK_CH_KANJI_READING,3,このワイナリーは、昼夜の寒暖差が大きい気候に<u>恵</u>まれている。,めぐ,えぐ,あぐ,つぐ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_531,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,期間限定のグッズは、公式サイトのみで<u>はんばい</u>されている。,販売,販買,半売,半買,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_534,SK_JLPT_N2_LK_CH_KANJI_READING,4,市町村合併に伴い、行政区画の<u>再編</u>が行われた。,さいへん,さいべん,さへん,さべん,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_535,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,チームは劣勢を<u>だかい</u>するため、戦術を大きく変更した。,打開,打解,妥開,妥解,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_536,SK_JLPT_N2_LK_CH_KANJI_READING,1,桜の季節になると、この<u>公園</u>は多くの花見客でにぎわう。,こうえん,ごうえん,こうえんじ,ごうえんじ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_537,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,5,実験データは、この仮説が正しいことを<u>しょうめい</u>している。,証明,照明,証名,照名,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_547,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,5,発掘された遺物が、この地に古代都市があったことを<u>しょうめい</u>した。,証明,照明,証名,照名,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_551,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,交渉は双方の代表者がそろってから<u>かいし</u>された。,開始,開市,関始,関市,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_554,SK_JLPT_N2_LK_CH_KANJI_READING,4,新興国の経済成長は今後さらに<u>飛躍</u>すると予測されている。,ひやく,ひこう,とやく,とこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_560,SK_JLPT_N2_LK_CH_KANJI_READING,2,急な気候の変動により、農作物の収穫に<u>影響</u>が出た。,えいきょう,えいこう,かんきょう,かんこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_561,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,新しい健康食品が今週からドラッグストアで<u>はんばい</u>され始めた。,販売,販買,半売,半買,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_562,SK_JLPT_N2_LK_CH_KANJI_READING,4,この商品の性能は、消費者のニーズと<u>合致</u>している。,がっち,ごっち,がち,ごち,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_572,SK_JLPT_N2_LK_CH_KANJI_READING,4,長年の交渉を経て、ようやく双方の意見が<u>合致</u>した。,がっち,ごっち,がち,ごち,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_573,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,3,顧客からの要望には、できる限り柔軟に<u>たいおう</u>している。,対応,待応,帯応,対往,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_574,SK_JLPT_N2_LK_CH_KANJI_READING,5,管理体制の不備により、事業の継続が<u>危ぶ</u>まれている。,あやぶ,あやう,あやふ,あやみ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_584,SK_JLPT_N2_LK_CH_KANJI_READING,5,長引く交渉の末、両国間の合意は結局<u>破綻</u>した。,はたん,はじょう,ばたん,ばじょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_588,SK_JLPT_N2_LK_CH_KANJI_READING,3,この島は美しい珊瑚礁に<u>恵</u>まれ、観光地として人気が高い。,めぐ,えぐ,あぐ,つぐ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_604,SK_JLPT_N2_LK_CH_KANJI_READING,4,両社の経営方針は完全に<u>合致</u>しており、合併はスムーズに進んだ。,がっち,ごっち,がち,ごち,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_611,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,作業を始める前に、必ず安全を<u>かくにん</u>してください。,確認,確任,確忍,確人,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_622,SK_JLPT_N2_LK_CH_KANJI_READING,4,長年の交渉を経て、ようやく双方の主張が<u>合致</u>した。,がっち,ごっち,がち,ごち,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_626,SK_JLPT_N2_LK_CH_KANJI_READING,1,荷物の準備が整い、いよいよ引っ越し先へ<u>出発</u>した。,しゅっぱつ,しゅつはつ,じゅっぱつ,じゅつはつ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_627,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,5,国際紛争の解決に向けて、国連による<u>ちょうてい</u>が試みられている。,調停,長停,調低,調底,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_629,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,治療計画から不確実な要素を<u>はいじょ</u>し、確実な方法を選んだ。,排除,排徐,拝除,拝徐,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_631,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,契約書にサインする前に、内容を隅々まで<u>かくにん</u>する必要がある。,確認,確任,確忍,確人,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_634,SK_JLPT_N2_LK_CH_KANJI_READING,4,グループ会社は経営効率化のため、子会社の<u>再編</u>を実施した。,さいへん,さいべん,さへん,さべん,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_636,SK_JLPT_N2_LK_CH_KANJI_READING,1,早朝のフライトに合わせ、家族全員で早めに<u>出発</u>した。,しゅっぱつ,しゅつはつ,じゅっぱつ,じゅつはつ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_640,SK_JLPT_N2_LK_CH_KANJI_READING,2,会場の準備が間に合わず、開演を<u>延期</u>することになった。,えんき,えんこう,えんけい,えんきょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_644,SK_JLPT_N2_LK_CH_KANJI_READING,4,労使間で新しい労働協約が<u>締結</u>された。,ていけつ,ていげつ,でいけつ,たいけつ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_652,SK_JLPT_N2_LK_CH_KANJI_READING,3,新製品の発売に伴い、大規模な<u>販促</u>キャンペーンを展開した。,はんそく,はんぞく,ほんそく,ほんぞく,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_655,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,1,体調が悪いため、本日の会議を<u>けっせき</u>します。,欠席,決席,血席,欠籍,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_656,SK_JLPT_N2_LK_CH_KANJI_READING,2,悪天候のため、イベントの開催を<u>延期</u>することに決まった。,えんき,えんこう,えんけい,えんきょう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_670,SK_JLPT_N2_LK_CH_KANJI_READING,1,明日の天気は全国的に<u>晴れ</u>る見込みです。,はれ,され,あれ,やれ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_678,SK_JLPT_N2_LK_CH_KANJI_READING,4,若手研究者の発見が、この分野の研究を<u>飛躍</u>させた。,ひやく,ひこう,とやく,とこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_686,SK_JLPT_N2_LK_CH_KANJI_READING,1,日本の伝統的な<u>文化</u>を学ぶ。,ぶんか,ぶんこう,ふんか,ふんこう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_689,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,2,機械の<u>てんけん</u>を行う。,点検,点権,転検,転権,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_696,SK_JLPT_N2_LK_CH_KANJI_READING,1,探検隊は物資を積み込み、密林の奥地へと<u>出発</u>した。,しゅっぱつ,しゅつはつ,じゅっぱつ,じゅつはつ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_698,SK_JLPT_N2_LK_CH_KANJI_READING,3,この寺院は古くから信仰の<u>拠点</u>として栄えてきた。,きょてん,きょでん,こてん,こでん,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_708,SK_JLPT_N2_LK_CH_KANJI_READING,3,反乱軍は山岳地帯を<u>拠点</u>に勢力を拡大した。,きょてん,きょでん,こてん,こでん,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_712,SK_JLPT_N2_LK_CH_KANJI_READING,4,目撃者の証言は、現場の状況証拠と<u>合致</u>していた。,がっち,ごっち,がち,ごち,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_717,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,5,賃貸契約のトラブルは、消費者センターの<u>ちょうてい</u>で解決した。,調停,長停,調低,調底,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Ch_719,SK_JLPT_N2_LK_CH_ORTHOGRAPHY,4,組織改革では、非効率な業務プロセスを<u>はいじょ</u>することが目標だ。,排除,排徐,拝除,拝徐,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Ch.json
+JLPT_N2_LK_Gr_004,SK_JLPT_N2_LK_GR_SENTENCE_1,3,毎日しっかり練習しているのだから、次の試合は勝てる（ ______ ）。,に違いない,にすぎない,に限らない,に及ばない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_013,SK_JLPT_N2_LK_GR_SENTENCE_1,3,彼は優秀な（ ______ ）、少し謙虚さに欠けるところがある。,反面,おかげで,ついでに,にあたって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_021,SK_JLPT_N2_LK_GR_TEXT,3,インターネット通販は自宅にいながら買い物ができる。（ ______ ）、送料がかかる場合も多い。,しかし,したがって,つまり,たとえば,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_028,SK_JLPT_N2_LK_GR_SENTENCE_1,3,彼は長年練習してきた（ ______ ）、本番でも落ち着いていた。,だけに,に反して,にあたって,に際して,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_043,SK_JLPT_N2_LK_GR_SENTENCE_1,3,彼女は絵が上手な（ ______ ）、歌も得意だ。,ばかりか,かぎり,にあたって,にともなって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_045,SK_JLPT_N2_LK_GR_TEXT,3,電気自動車は走行中に排気ガスを出さない。（ ______ ）、充電できる場所がまだ少ないという課題もある。,その一方で,したがって,つまり,たとえば,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_063,SK_JLPT_N2_LK_GR_TEXT,3,セルフレジは会計を自分のペースで済ませられる。（ ______ ）、操作に戸惑う高齢者も少なくない。,その一方で,したがって,つまり,たとえば,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_069,SK_JLPT_N2_LK_GR_TEXT,3,AIによる自動採点はテストの結果をすぐに知ることができる。（ ______ ）、記述式の細かい評価はまだ苦手だ。,その一方で,したがって,つまり,たとえば,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_079,SK_JLPT_N2_LK_GR_TEXT,4,近年、地球温暖化の影響で異常気象が多発している。（ ______ ）、世界各国で環境保護活動への関心が高まっている。,これに伴い,それどころか,にもかかわらず,とはいうものの,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_080,SK_JLPT_N2_LK_GR_SENTENCE_1,1,明日は日曜日（ ______ ）、学校は休みです。,だから,なぜなら,ただし,つまり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_082,SK_JLPT_N2_LK_GR_SENTENCE_1,4,どんなに困難な状況に（ ______ ）、あきらめずに挑戦し続けたい。,直面しようとも,直面するなり,直面する反面,直面するかたわら,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_083,SK_JLPT_N2_LK_GR_SENTENCE_1,5,警察の必死の捜査（ ______ ）、犯人の足取りはいまだにつかめていない。,もむなしく,にあたって,をかわきりに,にいたっては,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_085,SK_JLPT_N2_LK_GR_SENTENCE_2,2,この料理は ______ ______ __★__ ______ 誰でも簡単に作れる。,特別な,必要がなく,技術の,材料や,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_088,SK_JLPT_N2_LK_GR_TEXT,2,最近はオンラインで買い物ができて便利になった。（ ______ ）、実物を見ずに購入することによるトラブルも増えている。,しかし,だから,なぜなら,たとえば,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_091,SK_JLPT_N2_LK_GR_SENTENCE_1,2,彼は忙しい ______、私の手伝いをしてくれた。,にもかかわらず,に沿って,に応じて,に比べて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_097,SK_JLPT_N2_LK_GR_TEXT,2,近年、電子書籍を利用する人が増えている。紙の本には手触りやめくる楽しさがある。（ ______ ）、持ち運びの便利さや場所をとらない点では電子書籍が勝っている。,しかし,だから,例えば,つまり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_101,SK_JLPT_N2_LK_GR_SENTENCE_1,3,日本の歴史 ______ 、彼の右に出る者はいない。,にかける,に沿って,に応じて,に比べて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_103,SK_JLPT_N2_LK_GR_SENTENCE_1,3,彼は1年間の留学 ______ 、多様な文化や考え方を学んだ。,を通して,をこめて,をきっかけに,をめぐって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_104,SK_JLPT_N2_LK_GR_SENTENCE_1,3,チームの代表に選ばれた ______ 、全力で大会に挑みたい。,からには,からといって,と言っても,としたら,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_110,SK_JLPT_N2_LK_GR_SENTENCE_1,2,専門家の意見 ______ 、慎重に検討を重ねた上で最終決定を下した。,を踏まえて,を皮切りに,に限って,を問わず,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_112,SK_JLPT_N2_LK_GR_SENTENCE_1,1,明日は朝早く出発する ______ 、今夜は早く寝ることにします。,ので,のに,といえば,たびに,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_118,SK_JLPT_N2_LK_GR_TEXT,4,近年、人工知能（AI）技術の進化により、自動翻訳や文章作成の精度が飛躍的に向上している。言語の壁を越えたコミュニケーションが容易になり、国際的な業務や学習のハードルが大きく下がったとされる。 [ 1 ] 、AIによる自動生成テキストの増加に伴い、情報の真偽を見極めるファクトチェックや著作権保護といった倫理的・法律的な課題が顕著になっている。技術の利便性を享受する一方で、過度な依存が人間自身の思考力や批判的精神を低下させるリスクについても慎重に議論していく必要があるだろう。<br><br>問： [ 1 ] に入る最も適切なものはどれか。,その一方で,その結果,したがって,なぜなら,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_126,SK_JLPT_N2_LK_GR_SENTENCE_2,4,地域の安全を守るためには ______ ______ __★__ ______ 協力が不可欠である。,行政の,支援のみならず,住民一人ひとりの,自主的な,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_129,SK_JLPT_N2_LK_GR_TEXT,2,近年、電子書籍の普及に伴い、紙の書籍の販売部数が減少傾向にある。スマートフォンやタブレットで手軽に本が読める環境が整ったことが大きな要因とされる。その一方で、紙の書籍には「手触りやめくる感覚」「本棚に並べる所有感」といった独自の魅力があり、根強いファンも存在する。単に利便性を追求するだけでなく、紙とデジタルのそれぞれの強みを活かした読書体験の提供が今後さらに求められる [ 2 ] 。<br><br>問： [ 2 ] に入る最も適切なものはどれか。,のではないだろうか,わけがない,にすぎない,はずがない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_132,SK_JLPT_N2_LK_GR_SENTENCE_1,1,健康のために、毎日野菜を食べる ______ している。,ように,通りに,ために,ようにして,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_144,SK_JLPT_N2_LK_GR_SENTENCE_1,4,たった一度の失敗 ______ 、これまでの努力のすべてが否定されるべきではない。,をもって,をもってしても,を契機に,をもってすれば,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_149,SK_JLPT_N2_LK_GR_TEXT,2,近年、ICT技術の発達に伴い、在宅勤務やテレワークといった多様な働き方が広まりつつある。通勤時間の削減や業務効率の向上など、働く側・雇う側の双方にとって多くのメリットがもたらされている。その一方で、対面でのコミュニケーションが減少したことで、社員同士の偶発的な意見交換や信頼関係の構築が難しくなったという課題も指摘されている。単に制度やツールを導入するだけでなく、組織の一体感をどのように維持していくかが、今後の企業の成長を左右する [ 2 ] 。<br><br>問： [ 2 ] に入る最も適切なものはどれか。,のではないだろうか,わけがない,にすぎない,はずがない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_152,SK_JLPT_N2_LK_GR_SENTENCE_1,5,どんなに困難な状況にあろうとも、最後まで希望を捨てず努力し続けた彼の姿勢は、賞賛 ______ 。,に値する,に耐えない,にすぎない,に至らない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_156,SK_JLPT_N2_LK_GR_SENTENCE_2,1,彼は ______ ______ __★__ ______ 帰っていった。,何も,言わずに,荷物を持って,家へ,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_170,SK_JLPT_N2_LK_GR_SENTENCE_1,3,長年にわたる彼の研究成果 ______ 、新しい医療技術が開発された。,に基づいて,を巡って,に反して,を限りに,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_171,SK_JLPT_N2_LK_GR_SENTENCE_1,1,風邪をひいてしまった ______ 、今日の飲み会は辞退することにした。,ので,ついでに,反面,代わりに,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_172,SK_JLPT_N2_LK_GR_SENTENCE_1,5,たとえどんなに親しい間柄 ______ 、礼儀を欠いて良い理由にはならない。,であろうとも,であるからには,であるにかかわらず,であるかのように,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_177,SK_JLPT_N2_LK_GR_SENTENCE_2,5,彼の今回の発言は ______ ______ __★__ ______ 無責任と言わざるを得ない。,立場にある,人間として,責任ある,公の場でのものとしては,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_191,SK_JLPT_N2_LK_GR_SENTENCE_1,4,今回の不祥事は、組織全体の管理体制の甘さが招いた結果 ______ 。,にほかならない,にすぎない,に当たらない,にかかわらない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_195,SK_JLPT_N2_LK_GR_SENTENCE_2,1,事故の ______ ______ __★__ ______ 交通規制が行われている。,影響で,道路が,混雑しているため,一部で,4,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_198,SK_JLPT_N2_LK_GR_TEXT,3,ワークライフバランサや働き方改革の推進に伴い、リモートワークや短時間勤務など柔軟な働き方を導入する企業が増加している。これにより、通勤時間の削減や子育て・介護との両立が容易になるなど、労働者にとって多くのメリットが生じている。 [ 1 ] 、対面でのコミュニケーション機会の減少や、業務とプライベートの境界が曖昧になることによるメンタルヘルスの悪化といった新たな課題も浮き彫りになってきた。利便性を享受しつつも、こうした副作用にどう対処していくかが今後の焦点となるだろう。<br><br>問： [ 1 ] に入る最も適切なものはどれか。,その一方で,その結果,なぜなら,つまり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_199,SK_JLPT_N2_LK_GR_TEXT,2,ワークライフバランサや働き方改革の推進に伴い、リモートワークや短時間勤務など柔軟な働き方を導入する企業が増加している。これにより、通勤時間の削減や子育て・介護との両立が容易になるなど、労働者にとって多くのメリットが生じている。その一方で、対面でのコミュニケーション機会の減少や、業務とプライベートの境界が曖昧になることによるメンタルヘルスの悪化といった新たな課題も浮き彫りになってきた。利便性を享受しつつも、こうした副作用にどう対処していくかが今後の焦点に [ 2 ] 。<br><br>問： [ 2 ] に入る最も適切なものはどれか。,なるのではないだろうか,なるわけがない,なるにすぎない,なるはずがない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_202,SK_JLPT_N2_LK_GR_SENTENCE_1,5,たとえどんなに困難な状況に ______ 、彼は最後まであきらめないだろう。,直面しようとも,直面するとしても,直面するかのように,直面するがゆえに,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_216,SK_JLPT_N2_LK_GR_SENTENCE_2,1,彼は ______ ______ __★__ ______ 英語が話せる。,毎日,努力した,おかげで,ペラペラに,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_217,SK_JLPT_N2_LK_GR_SENTENCE_2,5,長年の訓練に ______ ______ __★__ ______ 素晴らしい演技だった。,培われた,彼の技量は,存分に発揮され,観客を魅了する,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_230,SK_JLPT_N2_LK_GR_SENTENCE_1,4,長年の夢だった自分の店を持つ ______ 、準備に追われる毎日だが充実している。,こととなり,に際して,にあたって,を皮切りに,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_231,SK_JLPT_N2_LK_GR_SENTENCE_1,1,風邪をひいた ______ 、今日の部活動は休むことにした。,ため,ついでに,に反して,にかかわらず,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_235,SK_JLPT_N2_LK_GR_SENTENCE_2,5,彼の長年にわたる ______ ______ __★__ ______ 高く評価されている。,地域社会への,貢献は,称賛に,値するものとして,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_242,SK_JLPT_N2_LK_GR_SENTENCE_1,1,この映画は、実際に起きた事件 ______ 作られている。,に基づいて,に比べて,に反して,に向かって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_244,SK_JLPT_N2_LK_GR_SENTENCE_2,3,今回のプロジェクトを ______ ______ __★__ ______ チーム全員の協力のおかげだ。,無事に,成功させることが,できたのは,他でもなく,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_249,SK_JLPT_N2_LK_GR_TEXT,2,AIや自動化技術の急速な進化により、社会のさまざまな分野で作業の効率化が進んでいる。これまで人間が行ってきた定型的な業務が自動化され、短時間で正確に処理できるようになりつつある。その一方で、技術の発展に伴い、人間にしかできない高度な判断や創造的な思考の重要性がむしろ高まっている。単に技術を利用するだけでなく、人間ならではの強みをどう生かしていくかが、これからの時代を生きる鍵に [ 2 ] 。<br><br>問： [ 2 ] に入る最も適切なものはどれか。,なるのではないだろうか,なるわけがない,なるにすぎない,なるはずがない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_252,SK_JLPT_N2_LK_GR_SENTENCE_1,1,天気予報 ______ 、午後は雨が降るそうだ。,によると,について,にくらべて,に答えて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_254,SK_JLPT_N2_LK_GR_SENTENCE_2,3,この製品は ______ ______ __★__ ______ 評価されている。,デザイン性,機能性,のみならず,も高く,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_265,SK_JLPT_N2_LK_GR_SENTENCE_2,1,彼は ______ ______ __★__ ______ 会社を辞めた。,理由で,体調を,崩したという,突然,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_270,SK_JLPT_N2_LK_GR_SENTENCE_1,2,新しい事業を開始する ______ 、十分な市場調査を行った。,にあたって,に比べて,に反して,にもかかわらず,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_271,SK_JLPT_N2_LK_GR_SENTENCE_1,4,資金難のため、プロジェクトの中断 ______ 。,を余儀なくされた,を禁じえなかった,にすぎなかった,に越したことはなかった,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_276,SK_JLPT_N2_LK_GR_SENTENCE_2,4,今回の失敗は ______ ______ __★__ ______ にほかならない。,彼の,油断と,準備不足が,原因であること,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_280,SK_JLPT_N2_LK_GR_SENTENCE_1,3,新商品の発売 ______ 、関係者を集めた大規模な発表会が開かれた。,に先立って,に伴って,に応じで,に沿って,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_287,SK_JLPT_N2_LK_GR_SENTENCE_2,1,風邪を ______ ______ __★__ ______ 会社を休んだ。,引いて,高い,熱が出たため,今日は,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_290,SK_JLPT_N2_LK_GR_SENTENCE_1,2,大雨 ______ 、川の水位が急激に上昇した。,によって,に反して,に限って,に沿って,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_292,SK_JLPT_N2_LK_GR_SENTENCE_1,1,詳しい日程 ______ 、決まり次第ご連絡いたします。,については,に反して,に応じて,に向かって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_294,SK_JLPT_N2_LK_GR_SENTENCE_2,3,彼は ______ ______ __★__ ______ 見事な成果を収めた。,努力を,困難な,重ねた結果,状況にもかかわらず,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_302,SK_JLPT_N2_LK_GR_SENTENCE_1,1,係員の指示 ______ 、順番にお並びください。,にしたがって,にかけて,に反して,について,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_310,SK_JLPT_N2_LK_GR_SENTENCE_1,3,彼は長年の研究 ______ 、ついに新しいエネルギー源の開発に成功した。,のすえに,のもとに,に反して,に際して,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_312,SK_JLPT_N2_LK_GR_SENTENCE_1,5,彼のこれまでの実績や人柄を考慮すれば、今回の重要なプロジェクトのリーダーは彼 ______ だろう。,をおいてほかにいない,を限りにするべき,に越したことはない,を余儀なくされる,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_314,SK_JLPT_N2_LK_GR_SENTENCE_2,4,事故の連絡を受けて、彼女は ______ ______ __★__ ______ 。,病院へ,駆けつけた,居ても立っても,いられなくなって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_316,SK_JLPT_N2_LK_GR_SENTENCE_2,5,自身の失敗を ______ ______ __★__ ______ あってはならない。,責任転嫁するような,他人のせいにして,態度だけは,断じて,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_322,SK_JLPT_N2_LK_GR_SENTENCE_1,4,今回の新事業が成功を収めたのは、社員一人ひとりの努力の賜物 ______ 。,にほかならない,にすぎない,にかぎらない,にあたらない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_324,SK_JLPT_N2_LK_GR_SENTENCE_2,3,一度引き受けた ______ ______ __★__ ______ 責任を持つべきだ。,最後まで,仕事である,からには,しっかり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_342,SK_JLPT_N2_LK_GR_SENTENCE_1,1,料理のおいしさ ______ 、この街でこの店の右に出る店はない。,にかけては,に反して,を通して,をもとにして,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_344,SK_JLPT_N2_LK_GR_SENTENCE_2,3,このテーマパークは、______ ______ __★__ ______ 楽しめる。,問わず,年齢や,性別を,誰でも,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_351,SK_JLPT_N2_LK_GR_SENTENCE_1,1,年間 ______ 多くの観光客がこの町を訪れる。,を通して,に関して,によって,にとって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_356,SK_JLPT_N2_LK_GR_SENTENCE_2,3,計画は ______ ______ __★__ ______ 進められている。,当初の,予定通りに,方針に,沿って,4,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_359,SK_JLPT_N2_LK_GR_TEXT,4,運動が体に良いことは広く知られているが、毎日激しい運動を続けることが必ずしも健康につながるわけではない。過度な運動はかえって体に負担をかけ、怪我や体調不良を引き起こすおそれがある。自分の体力に合わせた適切な負荷をかけ、無理なく継続することこそが重要である [ 2 ] 。<br><br>問： [ 2 ] に入る最も適切なものはどれか。,と言えるだろう,と言わざるを得ない,と言わないでもない,と言えるわけがない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_362,SK_JLPT_N2_LK_GR_SENTENCE_1,1,先輩が優しくアドバイスしてくれた ______ 、プレゼンを無事に成功させることができた。,おかげで,せいで,に応じて,にしたがって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_366,SK_JLPT_N2_LK_GR_SENTENCE_2,5,この料亭では、______ ______ __★__ ______ 楽しめる。,味わいを,老舗,ならではの,深い,4,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_368,SK_JLPT_N2_LK_GR_TEXT,4,最近、ゴミの分別の重要性が叫ばれている。多くの自治体で細かなルールが作られ、住民もそれに協力している。一見すると面倒に思える作業だが、資源を再利用するためには欠かせない取り組みである。私たちが日々の生活で少し意識を変えるだけで、環境保護に大きく貢献できる [ 1 ] 。<br><br>問： [ 1 ] に入る最も適切なものはどれか。,わけだ,わけではない,わけにはいかない,わけがない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_374,SK_JLPT_N2_LK_GR_SENTENCE_2,3,彼が成功したのは、______ ______ __★__ ______ 。,地道な,努力の,積み重ね,にほかならない,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_379,SK_JLPT_N2_LK_GR_TEXT,4,企業における働き方改革が進む中、テレワークを導入する会社が増えた。通勤時間を削減でき、自分のペースで仕事ができるというメリットがある。しかし、画面越しでのやり取りが増えたことで、社員同士の雑談が減り、人間関係が薄くなっているという声もある。仕事の効率だけを追求するのではなく、対面での対話の機会を意識して作っていく必要が [ 2 ] 。<br><br>問： [ 2 ] に入る最も適切なものはどれか。,あるのではないだろうか,ないわけにはいかない,あるにすぎない,ないにちがいない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_383,SK_JLPT_N2_LK_GR_SENTENCE_1,2,足の速さ ______ 、学年で彼の右に出る者はいない。,にかけては,に反して,に応じて,に先立って,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_386,SK_JLPT_N2_LK_GR_SENTENCE_2,3,どんなに誘われても、 ______ ______ __★__ ______ 行くまい。,二度と,あのような,危険な,場所へは,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_387,SK_JLPT_N2_LK_GR_SENTENCE_2,5,遠くの ______ ______ __★__ ______ 眠ってしまった。,波の音を,聞くともなく,聞いていたら,いつの間にか,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_388,SK_JLPT_N2_LK_GR_TEXT,2,近年、若い世代を中心に読書離れが進んでいると言われている。スマートフォンで手軽に動画やSNSを楽しめるようになったことが大きな理由だろう。 [ 1 ] 、電子書籍の利用者は年々増えており、活字に触れる機会自体が減ったわけではないという見方もある。読書の形が紙からデジタルへ変化していると言えるかもしれない。<br><br>問： [ 1 ] に入る最も適切なものはどれか。,その一方で,その結果,なぜなら,たとえば,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_394,SK_JLPT_N2_LK_GR_SENTENCE_2,4,彼の情熱的な演説を聴いて、______ ______ __★__ ______ 。,誰もが,心を,動かされずには,いられなかった,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_401,SK_JLPT_N2_LK_GR_SENTENCE_1,4,自分の健康を損なって ______ 、やりたい仕事を続ける必要はない。,まで,だけ,ほど,さえ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_409,SK_JLPT_N2_LK_GR_TEXT,3,AI技術の発展により、私たちの仕事のあり方は大きく変わろうとしている。単純な作業は機械に任せられるようになり、人間はより創造的な仕事に集中できると期待されている。しかし、AIは人間の思考を完全に代行できるわけではない。あくまで過去のデータを処理している [ 2 ] 。だからこそ、人間ならではの感性や批判的思考が今まで以上に求められているのだ。<br><br>問： [ 2 ] に入る最も適切なものはどれか。,にすぎない,ほかない,わけがない,に相違ない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_410,SK_JLPT_N2_LK_GR_SENTENCE_1,1,一度約束した ______ 、最後まで責任を持って守るべきだ。,からには,からして,からといって,から見ると,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_418,SK_JLPT_N2_LK_GR_TEXT,1,最近、健康のために運動を始める人が増えている。近所の公園でも、朝早くからジョギングをする姿をよく見かける。 [ 1 ] 、無茶な運動をして体を痛めてしまう人も少なくない。運動を始めるときは、無理のない計画を立てることが大切だ。<br><br>問： [ 1 ] に入る最も適切なものはどれか。,しかし,なぜなら,だから,例えば,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_420,SK_JLPT_N2_LK_GR_SENTENCE_1,1,新しい事業を ______ 、地域のニーズをしっかり調査することが大切だ。,はじめるにあたって,はじめた途端に,はじめるとともに,はじめるわけにはいかず,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_423,SK_JLPT_N2_LK_GR_SENTENCE_1,4,計画の途中で予算がなくなってしまったため、プロジェクトを一時中断 ______ 。,されるに決まっている,せざるを得ない,するまでもない,するわけにはいかない,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_427,SK_JLPT_N2_LK_GR_SENTENCE_2,4,この研究は ______ ______ __★__ ______ のもとで、無事に終了した。,教授の,経験豊富な,適切な,指導,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_428,SK_JLPT_N2_LK_GR_TEXT,5,近年、若者の間で電子書籍（でんししょせき）を利用する人が急速に増えている。紙の本を買う人が減ったと言われることもある。 [ 1 ] 、紙の本の魅力（みりょく）が見直され、あえて紙の本を選ぶ若者も少なくないという調査結果がある。単に便利さだけではなく、本を手にする感覚を大切にしたい人が増えているようだ。<br><br>問： [ 1 ] に入る最も適切なものはどれか。,というのも,したがって,それどころか,その結果,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_434,SK_JLPT_N2_LK_GR_SENTENCE_1,3,足の速さ ______ 、学年で彼の右に出るものはいない。,にかけては,に基づいて,に即して,を通して,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_436,SK_JLPT_N2_LK_GR_SENTENCE_2,5,失敗を ______ ______ __★__ ______ 成長は望めない。,恐れる,ことなしに,人間の,大きな,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_439,SK_JLPT_N2_LK_GR_TEXT,4,地域の伝統行事は、住民同士の絆を深める役割を果たしてきた。時代の変化とともに存続が難しくなっているが、地域社会の活性化のためにも継承していく ______ 。空欄に入る最も適切なものを選びなさい。,べきであろう,にすぎないだろう,わけにはいかないだろう,はずがないだろう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_442,SK_JLPT_N2_LK_GR_SENTENCE_1,4,一人でこの難しい仕事を完成できる ______ やってみなさい。,ものなら,ことなら,わけなら,はずなら,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_452,SK_JLPT_N2_LK_GR_SENTENCE_1,1,詳しい日程が決まり ______ 、すぐにお知らせいたします。,次第,ついでに,あげく,うちに,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_460,SK_JLPT_N2_LK_GR_SENTENCE_1,2,どんなに困難な状況 ______ 、最後まで希望を捨ててはいけない。,であれ,にして,に限って,にも関わらず,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_463,SK_JLPT_N2_LK_GR_SENTENCE_1,4,親として、子供の将来を心配しないでは ______ 。,いられない,すまない,おかない,つきない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_470,SK_JLPT_N2_LK_GR_SENTENCE_1,3,皆（みな）さんのご協力 ______ 、このプロジェクトの成功（せいこう）はあり得（え）ませんでした。,抜きには,めぐっては,ともなって,もとづいて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_475,SK_JLPT_N2_LK_GR_SENTENCE_2,2,この地域では、______ ______ __★__ ______ 盛んだ。,果物の,みかんを,栽培が,はじめとする,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_480,SK_JLPT_N2_LK_GR_SENTENCE_1,3,新製品の発売 ______ 、関係者向けの発表会が行われた。,に先立って,に伴って,に反して,に際して,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_486,SK_JLPT_N2_LK_GR_SENTENCE_2,4,理由が ______ ______ __★__ ______ 変わりはない。,どうあれ,約束に,遅れたことに,重要な,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_487,SK_JLPT_N2_LK_GR_SENTENCE_2,1,雨が ______ ______ __★__ ______ 集まった。,降っている,にもかかわらず,多くの,人が,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_490,SK_JLPT_N2_LK_GR_SENTENCE_1,2,新しい事業（じぎょう）を始める ______ 、入念（にゅうねん）な計画（けいかく）を立てた。,に際して,にかげて,に応じた,に沿って,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_491,SK_JLPT_N2_LK_GR_SENTENCE_1,4,社長（しゃちょう）の決定（けってい）には、従（した）がわざる ______ 。,得ない,いかない,しかない,かねない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_494,SK_JLPT_N2_LK_GR_SENTENCE_1,5,彼は自（みずか）らの夢（ゆめ）を実現（じつげん）させ ______ 、昼夜（ちゅうや）を問わず努力（どりょく）を重ねている。,んがため,んばかりに,まじき,つつも,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_500,SK_JLPT_N2_LK_GR_SENTENCE_1,3,市の再開発（さいかいはつ）事業（じぎょう）を ______ 、この地域（ちいき）の経済（けいざい）は急速（きゅうそく）に発展（はってん）した。,を契機に,に際して,に応じて,に沿って,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_506,SK_JLPT_N2_LK_GR_SENTENCE_2,4,彼の ______ ______ __★__ ______ ありえない。,協力,ぬきでは,プロジェクトの,成功は,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_514,SK_JLPT_N2_LK_GR_SENTENCE_2,4,一度引き受けた ______ ______ __★__ ______ 責任を持って最後までやるべきだ。,仕事である,からには,自分の,途中で投げ出さず,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_516,SK_JLPT_N2_LK_GR_SENTENCE_2,5,今回の調査では ______ ______ __★__ ______ 意見が詳しく分析された。,に至るまで,子どもから,幅広い世代の,お年寄りに,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_519,SK_JLPT_N2_LK_GR_TEXT,4,近年、若者の活字離れが指摘されているが、SNSなどを通じて文章を読む機会自体はむしろ増えている。単に「本を読まない」ということだけで、現代人の読解力が低下していると結論づける ______ 。空欄に入る最も適切なものを選びなさい。,わけにはいかないだろう,にちがいないだろう,ほかないだろう,ざるを得ないだろう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_522,SK_JLPT_N2_LK_GR_SENTENCE_1,1,連絡（れんらく）先（さき）が分からないので、連絡（れんらく）の ______ 。,しようがない,しかねない,するほかない,しがちだ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_529,SK_JLPT_N2_LK_GR_TEXT,5,近年（きんねん）、環境（かんきょう）問題（もんだい）への関心（かんしん）が高まっている。一人ひとりが日常（にちじょう）生活（せいかつ）の中でできることから取り組んでいくことが求められている。地球（ちきゅう）の未来（みらい）を守るためには、私たちが行動を ______ 。空欄に入る最も適切なものを選びなさい。,起こさざるを得ないだろう,起こすにすぎないのだろう,起こすわけにはいかないのだろう,起こさないわけにはいかないだろう,4,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_533,SK_JLPT_N2_LK_GR_SENTENCE_1,4,彼の成功（せいこう）は、たゆまぬ努力（どりょく）の成果（せいか） ______ 。,にほかならない,にすぎない,にかわらない,に限らない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_538,SK_JLPT_N2_LK_GR_TEXT,4,最近（さいきん）はAI技術（ぎじゅつ）が進歩（しんぽ）し、翻訳（ほんやく）の精度（せいど）が向上（こうじょう）している。 ______ 、完璧（かんぺき）な翻訳ができるわけではなく、人間の確認（かくにん）は不可欠（ふかけつ）だ。空欄に入る最も適切なものを選びなさい。,だからといって,したがって,それどころか,その結果,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_544,SK_JLPT_N2_LK_GR_SENTENCE_1,4,最新（さいしん）のデータ ______ 、今後の計画（けいかく）を立てる。,に基づいて,に応じて,に際して,に反して,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_549,SK_JLPT_N2_LK_GR_TEXT,5,環境（かんきょう）問題への取り組みは、一企業の努力だけで解決できるものではない。一人ひとりが意識を変え、日常生活の中で持続可能な行動を実践していく必要がある。地球の未来を守るためには、私たち自身の行動 ______ と言えるだろう。,にかかっている,にすぎない,にほかならない,に決まっている,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_554,SK_JLPT_N2_LK_GR_SENTENCE_1,5,夢（ゆめ）を実現（じつげん）させ ______ 、彼（かれ）は昼夜（ちゅうや）を問（と）わず働き続けた。,んがため,まじく,ぬがゆえに,つつも,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_569,SK_JLPT_N2_LK_GR_TEXT,5,近年のAI技術の発達には目を見張るものがある。社会の便利さが増す一方で、人間の仕事が奪われる懸念（けねん）も存在する。技術の進歩をただ受け入れる ______ 、人間ならではの役割とは何かを考え直す時期に来ているのではないだろうか。,だけにとどまらず,にすぎず,に際して,のもとで,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_583,SK_JLPT_N2_LK_GR_SENTENCE_1,2,新商品の発売 ______ 、全国規模でのプロモーション活動が開始された。,に際して,に反して,に応じて,につれて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_588,SK_JLPT_N2_LK_GR_TEXT,3,近年、働き方改革の一環としてリモートワークと出社を組み合わせたハイブリッド型の勤務形態を導入する企業が増えている。通勤時間の削減や業務効率の向上といった多くのメリットが報告されている。 [ 1 ] 、対面でのコミュニケーション機会が減少したことにより、組織のエンゲージメント低下やチームの一体感の維持が課題として浮き彫りになってきた。双方の特性を理解した柔軟なマネジメント手法の確立が求められている。<br><br>問： [ 1 ] に入る最も適切なものはどれか。,その一方で,その結果,したがって,なぜなら,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_589,SK_JLPT_N2_LK_GR_TEXT,1,近年、働き方改革の一環としてリモートワークと出社を組み合わせたハイブリッド型の勤務形態を導入する企業が増えている。通勤時間の削減や業務効率の向上といった多くのメリットが報告されている。その一方で、対面でのコミュニケーション機会が減少したことにより、組織のエンゲージメント低下やチームの一体感の維持が課題として浮き彫りになってきた。双方の特性を理解した柔軟なマネジメント手法の確立が今後さらに重要に [ 2 ] 。<br><br>問： [ 2 ] に入る最も適切なものはどれか。,なるのではないだろうか,なるわけがない,なるにすぎない,なるはずがない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_590,SK_JLPT_N2_LK_GR_SENTENCE_1,2,大雨 ______ 、河川の水位が急激に上昇した。,に伴い,に先立ち,にかかって,にあたって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_594,SK_JLPT_N2_LK_GR_SENTENCE_1,3,今年度の売り上げ目標の達成に向けて、社員一丸 ______ 業務に取り組んでいる。,となって,とみられて,とすれば,といっても,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_595,SK_JLPT_N2_LK_GR_SENTENCE_2,3,彼の説明は ______ ______ __★__ ______ 分かりやすかった。,専門用語を,一切使わず,誰にでも,非常に,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_598,SK_JLPT_N2_LK_GR_TEXT,5,近年、都市部における緑地空間の保全や創出が注目を集めている。公園や街路樹の整備は、市民に安らぎを与えるだけでなく、都市熱の緩和や防災機能の向上など、多様な効果をもたらす。 [ 1 ] 、開発に伴う樹木の伐採や維持管理費用の増大など、緑地の確保には多くの現実的な課題が立ちはだかっている。持続可能な都市作りに向けて、行政と市民、企業が連携した包括的な取り組みが不可欠である。<br><br>問： [ 1 ] に入る最も適切なものはどれか。,しかしながら,その結果,したがって,なぜなら,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_599,SK_JLPT_N2_LK_GR_TEXT,2,近年、都市部における緑地空間の保全や創出が注目を集めている。公園や街路樹の整備は、市民に安らぎを与えるだけでなく、都市熱の緩和や防災機能の向上など、多様な効果をもたらす。しかしながら、開発に伴う樹木の伐採や維持管理費用の増大など、緑地の確保には多くの現実的な課題が立ちはだかっている。持続可能な都市作りに向けて、行政と市民、企業が連携した包括的な取り組みが今後さらに求められる [ 2 ] 。<br><br>問： [ 2 ] に入る最も適切なものはどれか。,のではないだろうか,わけがない,にすぎない,はずがない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_600,SK_JLPT_N2_LK_GR_SENTENCE_1,1,毎日これだけ練習したのだから、明日の試合は彼らのチームが勝つに ______ 。,きまっている,すぎない,ともなわない,かかわらない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_605,SK_JLPT_N2_LK_GR_SENTENCE_2,3,この映画は ______ ______ __★__ ______ 作られている。,起きた,に基づいて,実際に,事件,4,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_612,SK_JLPT_N2_LK_GR_SENTENCE_1,1,彼は日本に住んでまだ半年 ______ 、とても自然な日本語を話す。,にしては,にとっても,にくべて,にしたがって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_614,SK_JLPT_N2_LK_GR_SENTENCE_2,3,どんなに ______ ______ __★__ ______ べきだ。,努力する,問題であっても、,諦めずに,難しい,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_618,SK_JLPT_N2_LK_GR_TEXT,4,文章中の [ 1779 ] に入る最も適切なものを選びなさい。<br><br>【文章】<br>このように、新しい働き方にはメリットとデメリットの両面が存在する。私たちは自分の生活スタイルに合わせて、働き方を工夫して選択していかなければならない。[ 1779 ] 。,ではないだろうか,わけがない,はずがない,にすぎない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_630,SK_JLPT_N2_LK_GR_SENTENCE_1,2,開発計画の変更 ______ 、近隣の住民と自治体の間で話し合いが続いている。,をめぐって,にわたって,を通じて,をはじめ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_633,SK_JLPT_N2_LK_GR_SENTENCE_1,3,引き受けた ______ 、最後まで責任を持ってやり遂げなければならない。,からには,だけに,ばかりに,ものなら,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_637,SK_JLPT_N2_LK_GR_TEXT,1,文章中の [ 1798 ] に入る最も適切なものを選びなさい。<br><br>【文章】<br>読書は知的な好奇心を刺激し、思考力を養うために非常に効果的である。[ 1798 ] 、忙しい毎日の中で読書の時間を確保することは容易ではない。,しかし,だから,例えば,また,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_639,SK_JLPT_N2_LK_GR_TEXT,4,文章中の [ 1800 ] に入る最も適切なものを選びなさい。<br><br>【文章】<br>自分の興味のある分野から無理なく始め、少しずつ読書を習慣化していくこと [ 1800 ] 。,なのかなのではないだろうか,わけがない,はずがない,にすぎない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_641,SK_JLPT_N2_LK_GR_SENTENCE_1,4,今回の実験が成功したのは、チーム全員の地道な努力の成果 ______ 。,にほかならない,にすぎない,に相違ない,に基づいている,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_642,SK_JLPT_N2_LK_GR_SENTENCE_1,2,親切な通行人が道を教えてくれた ______ 、迷わずに目的地に着くことができた。,おかげで,せいで,せいか,あげく,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_644,SK_JLPT_N2_LK_GR_SENTENCE_2,3,今夜から ______ ______ __★__ ______ 恐れがある。,明日の朝にかけて,関東地方では,大雨が,降る,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_647,SK_JLPT_N2_LK_GR_TEXT,2,文章中の [ 1808 ] に入る最も適切なものを選びなさい。<br><br>【文章】<br>健康を維持するためには、毎日のバランスの良い食事と適度な運動が不可欠である。しかし、多忙な現代人にとって、これらを毎日実践することは容易ではない。[ 1808 ] 、生活習慣病のリスクが高まっていると言われている。,その結果,なぜなら,ただし,一方で,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_651,SK_JLPT_N2_LK_GR_SENTENCE_1,4,東京公演 ______ 、彼の全国ツアーが華やかにスタートした。,を皮切りに,を際して,を込めて,をもって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_659,SK_JLPT_N2_LK_GR_TEXT,5,文章中の [ 1820 ] に入る最も適切なものを選びなさい。<br><br>【文章】<br>日常の対話の中で、意識して「聴く態度」を身につけていく努力を重ねていくこと [ 1820 ] 。,が強く求められているのだ,にすぎないのだ,わけがないのだ,ざるを得ないのだ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_665,SK_JLPT_N2_LK_GR_SENTENCE_2,1,どんなに ______ ______ __★__ ______ ことにしている。,疲れていても、,寝る前に,必ず歯を,磨く,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_679,SK_JLPT_N2_LK_GR_TEXT,4,文章中の [ 1840 ] に入る最も適切なものを選びなさい。<br><br>【文章】<br>自分とは異なる価値観を持つ人々の意見にも耳を傾け、相互に理解を深めていく努力を継続していくこと [ 1840 ] 。,が求められているのではないだろうか,わけがないのではないだろうか,はずがないのではないだろうか,にすぎないのではないだろうか,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_682,SK_JLPT_N2_LK_GR_SENTENCE_1,1,あの旅（たび）の写真（しゃしん）を ______ たびに、楽しかった（たのしかった）思い出（おもいで）を思い出す（おもいだす）。,見る,見た,見て,見よう,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_687,SK_JLPT_N2_LK_GR_SENTENCE_2,2,明日（あした）は ______ ______ __★__ ______ 持って（もって）行った（いった）ほうがいい。,おそれがあるので,雨が（あめが）,傘を（かさを）,降る（ふる）,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_689,SK_JLPT_N2_LK_GR_TEXT,4,地域（ちいき）の伝統（でんとう）お祭りは、長年（ながねん）住民（じゅうみん）によって大切（たいせつ）に守られて（まもられて）きた。しかし、高齢化（こうれいか）が進み（すすめ）、準備（じゅんび）をする人が減って（へって）いる。このままでは、歴史（れきし）あるお祭りを続けて（つづけて）いくことが ______ 。地元の若者（わかもの）の協力（きょうりょく）が強く（つよく）求められて（もとめられて）いる。,難しく（むずかしく）なりつつある,難しく（むずかしく）なるに違いない,難しく（むずかしく）なるはずだ,難しく（むずかしく）なりっこない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Gr_699,SK_JLPT_N2_LK_GR_TEXT,5,AIの技術（ぎじゅつ）は急速に（きゅうそくに）進化（しんか）しており、私たちの生活（せいかつ）を便利（べんり）にしている。しかし、AIに頼り（たより）すぎると、人間（にんげん）の考える（かんがえる）能力（のうりょく）が低下（ていか）してしまう恐れ（おそれ）がある。AIはあくまでも人間をサポートするツールに ______ のだ。,すぎない,かねない,ほかならない,違いない,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Gr.json
+JLPT_N2_LK_Vo_001,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,彼の行動には（ ______ ）責任なところがある。,無,不,非,未,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_002,SK_JLPT_N2_LK_VO_CONTEXT,3,道路が（ ______ ）混雑していて、車が全然進まない。,びっしり,じっくり,ひっそり,めっきり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_005,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,ゴミを減らすために、ペットボトルを（ ______ ）利用する。,再,新,過,初,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_006,SK_JLPT_N2_LK_VO_CONTEXT,3,忙しくて大切な約束を（ ______ ）忘れてしまった。,うっかり,ぐっすり,こっそり,すっきり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_007,SK_JLPT_N2_LK_VO_PARAPHRASE,3,駅で<u>たまたま</u>昔の友達に会った。,偶然,突然,当然,必然,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_008,SK_JLPT_N2_LK_VO_USAGE,3,<u>あっさり</u>,難しい問題をあっさり解いてしまった。,毎日あっさりと勉強を続けている。,電車が遅れてあっさり遅刻した。,荷物が軽くてあっさりと持てた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_010,SK_JLPT_N2_LK_VO_CONTEXT,3,彼の説明はとても（ ______ ）していて、誰にでも分かりやすい。,明確,優秀,正直,活発,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_020,SK_JLPT_N2_LK_VO_USAGE,3,<u>手際</u>,彼は手際よく料理を作った。,手際がいい靴を買った。,手が冷たいので手際を温めた。,手際が広い部屋に引っ越した。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_022,SK_JLPT_N2_LK_VO_CONTEXT,3,彼は約束の時間を（ ______ ）忘れていた。,すっかり,すっきり,しっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_023,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の主張はいつも<u>一貫</u>している。,ブレない,変わる,曖昧だ,矛盾する,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_025,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,製品の安全性を高めるために、（ ______ ）加工を施す。,特殊,特有,特定,特長,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_026,SK_JLPT_N2_LK_VO_CONTEXT,3,途中で雨が降り出したが、（ ______ ）濡れずに済んだ。,幸い,あいにく,あくまて,あらかじめ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_027,SK_JLPT_N2_LK_VO_PARAPHRASE,3,古いルールを<u>廃止</u>した。,やめた,変えた,守った,増やした,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_028,SK_JLPT_N2_LK_VO_USAGE,3,<u>手軽</u>,手軽に作れる料理のレシピを探している。,この服は手軽に重くて温かい。,彼は手軽なスピードで走り抜けた。,手軽な台風が近づいているので注意が必要だ。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_033,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,この部品は（ ______ ）可能性が高く、コスト削減につながる。,再利用,再使,再用,再動,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_037,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,製品の安全基準を満たしていない（ ______ ）良品が混ざっていた。,不,無,非,未,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_038,SK_JLPT_N2_LK_VO_CONTEXT,3,会議の資料に（ ______ ）目を通して準備を整えた。,ざっと,しっかり,うっかり,びっしり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_040,SK_JLPT_N2_LK_VO_USAGE,3,<u>柔軟</u>,状況に応じて柔軟に対応することが求められる。,彼は柔軟なスピードで走って1位になった。,この建物は柔軟に高くて目立つ。,柔軟な雨が降り続いて道路が濡れた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_041,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,この商品は（ ______ ）分解が可能なため、環境にやさしい。,生分解,生分解性,生分解化,生分解感,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_042,SK_JLPT_N2_LK_VO_CONTEXT,3,熱いお茶に触れて、（ ______ ）手を引っ込めた。,思わず,うっかり,すっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_043,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の説明はいつも<u>論理的</u>だ。,筋が通っている,感覚的だ,曖昧だ,複雑だ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_044,SK_JLPT_N2_LK_VO_USAGE,3,<u>適切</u>,状況に応じて適切な判断をすることが求められる。,彼はとても適切に足が速い。,今日は適切に雨が降って寒かった。,適切に重い荷物を運んだ。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_048,SK_JLPT_N2_LK_VO_USAGE,3,<u>冷静</u>,トラブルが起きても冷静に対応することが大切だ。,彼は冷静なスピードで走って優勝した。,今日は冷静な天気が続いていて気持ちがいい。,冷静な服を着て出かけた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_049,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,この容器は（ ______ ）分解が可能な素材で作られている。,生分解,生分解性,生分解化,生分解感,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_050,SK_JLPT_N2_LK_VO_CONTEXT,3,面白い話を聞いて、（ ______ ）笑ってしまった。,思わず,うっかり,すっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_051,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の話は<u>あいまい</u>で分かりにくい。,不明確,簡潔,正確,具体的,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_055,SK_JLPT_N2_LK_VO_PARAPHRASE,3,古い制度を<u>改革</u>する。,改める,見守る,繰り返す,引き継ぐ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_056,SK_JLPT_N2_LK_VO_USAGE,3,<u>謙虚</u>,彼は実績があっても常に謙虚な態度をとっている。,謙虚な建物が新しく建った。,今日は謙虚な天気で気持ちがいい。,謙虚な荷物を一人で持ち運んだ。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_058,SK_JLPT_N2_LK_VO_CONTEXT,3,後ろから名前を呼ばれて、（ ______ ）振り返った。,思わず,うっかり,すっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_059,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の説明はいつも<u>明確</u>だ。,はっきりしている,あいまいだ,複雑だ,手短だ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_061,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,事故の防止に向けて、（ ______ ）対策を講じる。,再発,再起,再開,再来,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_067,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の行動はとても<u>柔軟</u>だ。,臨機応変だ,頑固だ,曖昧だ,大雑把だ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_070,SK_JLPT_N2_LK_VO_CONTEXT,3,大きな地震を感じて、（ ______ ）机の下に隠れた。,思わず,うっかり,すっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_072,SK_JLPT_N2_LK_VO_USAGE,3,<u>適切</u>,状況に応じて言葉遣いを適切に変えることが大切だ。,彼女は適切な速さでピアノを弾き終えた。,今朝は適切な冷え込みで布団から出たくなかった。,適切な重さのリュックを背負って山を登った。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_073,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,このストローは（ ______ ）分解が可能な植物由来の材料でできている。,生分解,生分解性,生分解化,生分解感,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_074,SK_JLPT_N2_LK_VO_CONTEXT,3,珍しい動物を見つけて、（ ______ ）カメラを構えた。,思わず,うっかり,すっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_077,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,長年の研究が実を結び、（ ______ ）革新が急速に進んだ。,技術,新技術,画期,超技術,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_078,SK_JLPT_N2_LK_VO_CONTEXT,3,試験の前に、復習を（ ______ ）行って万全の態勢を整えた。,念入りに,大雑把に,うっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_080,SK_JLPT_N2_LK_VO_USAGE,3,<u>妥当</u>,現状を考慮すると、今回の判断は妥当だと言える。,彼はとても妥当に足が速い。,今日は妥当な雨が降って寒かった。,妥当に重い荷物を一人で運んだ。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_082,SK_JLPT_N2_LK_VO_CONTEXT,3,意外な結果を知って、（ ______ ）涙が出た。,思わず,うっかり,すっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_085,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,メーカーは（ ______ ）耐久性を売りにした新製品を発表した。,高,超,再,未,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_086,SK_JLPT_N2_LK_VO_CONTEXT,3,足元で何かが動いて、（ ______ ）飛び上がった。,思わず,うっかり,すっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_087,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の説明は非常に<u>論理的</u>だった。,筋が通っていた,感覚的だった,曖昧だった,複雑だった,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_088,SK_JLPT_N2_LK_VO_USAGE,3,<u>冷静</u>,どんなトラブルが起きても冷静に対処することが求められる。,彼は冷静なスピードで走って1位になった。,今日は冷静な天気が続いていて気持ちがいい。,冷静な鞄を買ったので荷物が入る。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_090,SK_JLPT_N2_LK_VO_CONTEXT,3,冷たい風が吹いて、（ ______ ）肩をすくめた。,思わず,うっかり,すっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_092,SK_JLPT_N2_LK_VO_USAGE,3,<u>厳正</u>,試験は厳正に行われなければならない。,彼は非常に厳正なスピードで走った。,今日は厳正な雨が降って寒かった。,厳正に重い荷物を運んだ。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_095,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼の説明はいつも<u>簡潔</u>だ。,短くて分かりやすい,複雑で長い,曖昧で不十分だ,丁寧だが遅い,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_101,SK_JLPT_N2_LK_VO_CONTEXT,2,約束の時間に（ ______ ）遅れてしまった。,うっかり,思わず,すっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_104,SK_JLPT_N2_LK_VO_CONTEXT,1,友達（ともだち）に大切な本を貸してもらったので、（ ______ ）扱った。,丁寧,乱暴,適当,邪魔,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_105,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼はいつも<u>急速</u>に仕事を片付ける。,とても速く,とても慎重に,とても静かに,とても丁寧に,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_106,SK_JLPT_N2_LK_VO_USAGE,2,<u>さっぱり</u>,お風呂に入って気分がさっぱりした。,荷物が重くて手がさっぱり痛い。,彼はさっぱりした速度で走った。,今日はさっぱりした大雨が降っている。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_111,SK_JLPT_N2_LK_VO_CONTEXT,2,事故のニュースを聞いて、自分の目を（ ______ ）しまった。,疑って,信じて,忘れて,閉じて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_113,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,ごみを減らす（へらす）ため、（ ______ ）利用できる製品を選ぶ。,再,未,無,初,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_114,SK_JLPT_N2_LK_VO_CONTEXT,2,荷物が重すぎて、途中で（ ______ ）しまった。,くたびれて,あきらめて,こぼれて,はずれて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_124,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,この仕事（しごと）は安全（あんぜん）______が高（たか）いため、初心者（しょしんしゃ）でも安心（あんしん）してできます。,性,化,感,度,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_125,SK_JLPT_N2_LK_VO_CONTEXT,3,会議（かいぎ）の準備（じゅんび）に時間がかかり、予定（よてい）の時間を______オーバーしてしまった。,大幅に,大層に,大量に,大いに,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_127,SK_JLPT_N2_LK_VO_CONTEXT,3,事故（じこ）の原因（げんいん）を______調（しら）べるために、専門家（せんもんか）が集（あつ）まった。,詳しく,熱心に,急に,単に,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_128,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の説明（せつめい）はいつも<u>おおまか</u>だ。,大体だ,適当だ,複雑だ,正確だ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_132,SK_JLPT_N2_LK_VO_USAGE,3,<u>すばやい</u>,彼はすばやい判断でピンチを救った。,すばやい声で挨拶をした。,すばやい文字でメモを取った。,すばやい味の料理を作った。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_137,SK_JLPT_N2_LK_VO_CONTEXT,3,荷物（にもつ）の重（おも）さを測（はか）ったら、思（おも）っていたより______軽（かる）かった。,案外,意外,案の定,存分,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_138,SK_JLPT_N2_LK_VO_PARAPHRASE,1,その話（はなし）を聞（き）いて<u>あきれた</u>。,呆然とした,怒った,感心した,喜んだ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_140,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼はいつも<u>冷静（れいせい）だ</u>。,落ち着いている,威張っている,遠慮している,慌てている,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_142,SK_JLPT_N2_LK_VO_USAGE,3,<u>引き返す</u>,忘れ物に気づいて、途中で家に引き返した。,意見が合わずに、会議の途中で話を引き返した。,風邪をひいたので、予定を休みに引き返した。,注文した商品をキャンセルして引き返した。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_143,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,危険（きけん）なエリアへの立ち入りは______禁じられている。,固く,重く,強く,深く,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_147,SK_JLPT_N2_LK_VO_CONTEXT,3,新（あたら）しい環境（かんきょう）にも、ようやく______きた。,慣れて,慣れ慣れて,慣れ合って,言い慣れて,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_148,SK_JLPT_N2_LK_VO_PARAPHRASE,3,会議（かいぎ）の途中で<u>休憩（きゅうけい）</u>が入った。,合間,合唱,合致,合体,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_150,SK_JLPT_N2_LK_VO_PARAPHRASE,2,事態（じたい）は<u>急速（きゅうそく）に</u>変化（へんか）している。,急激に,緩やかに,一時的に,間接的に,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_155,SK_JLPT_N2_LK_VO_CONTEXT,1,図書館（としょかん）の中（なか）では、______静（しず）かにしてください。,くれぐれも,ぜひ,どうぞ,どうか,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_156,SK_JLPT_N2_LK_VO_CONTEXT,3,急（きゅう）な坂道（さかみち）を登（のぼ）ったので、息（いき）が______してしまった。,きれる,きれるように,きれて,きれた,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_158,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼（かれ）の対応（たいおう）はいつも<u>適切（てきせつ）だ</u>。,ふさわしい,大体だ,適当だ,曖昧だ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_162,SK_JLPT_N2_LK_VO_USAGE,3,<u>妨げる</u>,大声で騒ぐ行為は、他人の睡眠を妨げる。,雨が降り始めて、買い物の進行を妨げた。,勉強を頑張って、合格の可能性を妨げた。,荷物をたくさん詰めて、カバンの空間を妨げた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_165,SK_JLPT_N2_LK_VO_CONTEXT,2,約束（やくそく）の時間（じかん）に______遅（おく）れてしまい、申し訳（わけ）ありませんでした。,大変,すっかり,すっかりと,めっきり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_173,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,非常（ひじょう）の際には、この______非常口（ひじょうぐち）から外（そと）に出（で）てください。,専用,専務,専念,専修,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_175,SK_JLPT_N2_LK_VO_CONTEXT,2,友達（ともだち）の家（いえ）に長居（ながい）してしまい、______帰（かえ）りが遅（おそ）くなった。,すっかり,すんなり,しっかり,ぴったり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_177,SK_JLPT_N2_LK_VO_CONTEXT,3,道路（どうろ）が混雑（こんざつ）していて、車（くるま）が______としか進（すす）まない。,ノロノロ,テキパキ,キラキラ,ドンドン,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_179,SK_JLPT_N2_LK_VO_PARAPHRASE,3,契約（けいやく）を<u>打ち切る</u>ことにした。,中止する,延長する,変更する,開始する,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_183,SK_JLPT_N2_LK_VO_WORD_FORMATION,2,彼女（かのじょ）は______感覚（かんかく）に優（すぐ）れており、いつもおしゃれな服（ふく）を着（き）ている。,色彩,色相,色調,色彩感,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_187,SK_JLPT_N2_LK_VO_CONTEXT,3,新しく買った靴（くつ）が足に______合っていて、とても歩きやすい。,ぴったり,うっかり,しっかり,あっさり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_188,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の演技（えんぎ）は実に<u>見事（みごと）だ</u>。,素晴らしい,珍しい,面白い,怪しい,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_193,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,地震（じしん）などの______災害（さいがい）に備（そな）えて、避難（ひなん）用（よう）のリュックを用意（ようい）しておく。,自然,天然,天然性,自然性,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_197,SK_JLPT_N2_LK_VO_CONTEXT,3,急（きゅう）な予定（よてい）が入（はい）り、旅行（りょこう）を______せざるを得（え）なくなった。,延期,延長,停止,中断,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_205,SK_JLPT_N2_LK_VO_CONTEXT,2,雨（あめ）が______降（ふ）ってきたので、近くの店で雨宿り（あまやどり）をした。,急に,直ちに,早急に,至急,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_207,SK_JLPT_N2_LK_VO_CONTEXT,3,急な発表（はっぴょう）に______してしまい、適切な返答（へんとう）ができなかった。,動揺,動機,動向,動力,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_209,SK_JLPT_N2_LK_VO_PARAPHRASE,1,事故（じこ）の状況（じょうきょう）を<u>素早く</u>確認（かくにん）した。,すぐに,ゆっくり,慎重に,丁寧に,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_215,SK_JLPT_N2_LK_VO_CONTEXT,2,友達（ともだち）の冗談（じょうだん）を聞いて、______笑（わら）ってしまった。,思わず,わざと,思い切って,思いやり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_217,SK_JLPT_N2_LK_VO_CONTEXT,3,渋滞（じゅうたい）を避（さ）けるために、______を選（えら）んで運転（うんてん）した。,回りくどい,遠回りな,回り道,迂回,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_218,SK_JLPT_N2_LK_VO_PARAPHRASE,3,状況（じょうきょう）を<u>把握（はあく）する</u>。,しっかり理解する,素早く判断する,慎重に検討する,正確に記録する,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_222,SK_JLPT_N2_LK_VO_USAGE,3,<u>打ち明ける</u>,長年の悩みを友人に打ち明けた。,秘密の計画を書類に打ち明けた。,自分の意見を会議で打ち明けた。,新しいアイディアをノートに打ち明けた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_225,SK_JLPT_N2_LK_VO_CONTEXT,2,長年（ながねん）使（つか）っていたパソコンが______動（うご）かなくなった。,とうとう,そろそろ,たびたび,しばしば,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_227,SK_JLPT_N2_LK_VO_CONTEXT,3,部屋（へや）の鍵（かぎ）をかばんの底（そこ）から______見（み）つけ出した。,ようやく,すでに,かつて,あらかじめ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_228,SK_JLPT_N2_LK_VO_PARAPHRASE,3,契約（けいやく）の内容（ないよう）を<u>確かめる</u>。,確認する,変更する,検討する,決定する,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_229,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼はとても<u>几帳面（きちょうめん）だ</u>。,きちんとしている,おおざっぱだ,明るい,大人しい,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_235,SK_JLPT_N2_LK_VO_CONTEXT,2,友達（ともだち）の冗談（じょうだん）を聞いて、______笑ってしまった。,思わず,わざと,思い切って,思いがけず,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_237,SK_JLPT_N2_LK_VO_CONTEXT,3,荷物（にもつ）が軽かったので、______持ち上げることができた。,あっさり,うんざり,すっきり,きっちり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_238,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の説明（せつめい）はとても<u>明快だ</u>。,分かりやすい,複雑だ,曖昧だ,退屈だ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_243,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,大雨（おおあめ）による洪水（こうずい）を防（ふせ）ぐため、______対策（たいさく）を本格化（ほんかくか）させた。,治水,防水,利水,配水,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_247,SK_JLPT_N2_LK_VO_CONTEXT,3,急な出来事に驚いて、思わず______声をあげてしまった。,素っ頓狂な,大げさな,大層な,過剰な,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_253,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,地震（じしん）などの緊急（きんきゅう）時には、______非常口（ひじょうぐち）から外（そと）に出（で）てください。,最寄りの,最寄り,近寄りの,近寄り,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_257,SK_JLPT_N2_LK_VO_CONTEXT,3,急な発表（はっぴょう）を聞いて、______してしまい言葉が出なかった。,動揺,動機,動向,動術,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_258,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の演技（えんぎ）は実に<u>見事（みごと）だ</u>。,素晴らしい,珍しい,面白い,怪しい,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_263,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,地震（じしん）や火災（かさい）に備（そな）えて、______訓練（くんれん）に参加（さんか）した。,防災,防犯,防音,防止,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_267,SK_JLPT_N2_LK_VO_CONTEXT,3,急な発表（はっぴょう）に______してしまい、上手（じょうず）に話せなかった。,動揺,動機,動向,動術,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_268,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の説明（せつめい）はとても<u>明快だ</u>。,分かりやすい,複雑だ,曖昧だ,退屈だ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_269,SK_JLPT_N2_LK_VO_PARAPHRASE,2,古い習慣（しゅうかん）を<u>取り払う</u>。,取り除く,受け入れる,維持する,評価する,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_273,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,非常（ひじょう）の際には、この______非常口（ひじょうぐち）から避難（ひなん）してください。,専用,専務,専念,専修,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_275,SK_JLPT_N2_LK_VO_CONTEXT,2,友達（ともだち）の冗談（じょうだん）を聞いて、______笑ってしまった。,思わず,わざと,思い切って,思いがけず,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_283,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,台風（たいふう）の接近（せっきん）に伴（ともな）い、______警戒（けいかい）が必要（ひつよう）だ。,厳重,厳格,厳密,厳格性,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_287,SK_JLPT_N2_LK_VO_CONTEXT,3,道路（どうろ）工事（こうじ）のため、車は別のルートへ______せざるを得なかった。,迂回,遠回り,回り道,避難,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_292,SK_JLPT_N2_LK_VO_USAGE,3,<u>打ち明ける</u>,長年の悩みを友人に打ち明けた。,秘密の計画を書類に打ち明けた。,自分の意見を会議で打ち明けた。,新しいアイディアをノートに打ち明けた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_293,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,地震（じしん）や火事（かじ）に備（そな）えて、______対策（たいさく）をしっかり行（おこな）う。,防災,防犯,防音,防止,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_295,SK_JLPT_N2_LK_VO_CONTEXT,2,友達（ともだち）の冗談（じょうだん）を聞いて、______笑（わら）ってしまった。,思わず,わざと,思い切って,思いがけず,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_299,SK_JLPT_N2_LK_VO_PARAPHRASE,2,古い習慣（しゅうかん）を<u>取り払う</u>。,取り除く,受け入れる,維持する,評価する,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_302,SK_JLPT_N2_LK_VO_USAGE,3,<u>打ち明ける</u>,長年の悩みを友人に打ち明けた。,秘密の計画を書類に打ち明けた。,自分の意見を会議で打ち明けた。,新しいアイディアをノートに打ち明けた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_303,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,地震（じしん）などの緊急（きんきゅう）時には、______避難（ひなん）場所（ばしょ）に集（あつ）まってください。,最寄りの,最寄り,近寄りの,近寄り,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_307,SK_JLPT_N2_LK_VO_CONTEXT,3,急（きゅう）な坂道（さかみち）を登（のぼ）ったので、息（いき）が______してしまった。,きれて,きれる,きれるように,きれた,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_313,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,事故（じこ）を防（ふせ）ぐため、______確認（かくにん）を徹底（てってい）してください。,事前,直前,最前,前置,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_319,SK_JLPT_N2_LK_VO_PARAPHRASE,2,事態（じたい）を<u>収拾（しゅうしゅう）する</u>。,片付ける,拡大する,悪化させる,観察する,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_323,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,事故（じこ）を未然（みぜん）に防（ふせ）ぐため、______点検（てんけん）を実施（じっし）する。,定期,定例,定常,定格,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_325,SK_JLPT_N2_LK_VO_CONTEXT,2,約束（やくそく）の時間に遅れそうになって、______駆け込んだ。,慌てて,うっかり,すっきり,しっかり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_327,SK_JLPT_N2_LK_VO_CONTEXT,3,会議（かいぎ）の進め方について、意見（いけん）が______して結論が出ない。,対立,対抗,対照,対比,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_328,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の言葉には<u>偽り（いつわり）</u>がない。,嘘,秘密,失敗,遠慮,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_329,SK_JLPT_N2_LK_VO_PARAPHRASE,1,景気が<u>急速に</u>回復している。,あっという間に,じわじわと,だんだんと,そろそろ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_331,SK_JLPT_N2_LK_VO_USAGE,2,<u>あらかじめ</u>,到着時間をあらかじめ連絡しておいた。,あらかじめ昨日から雨が降っている。,友達の家にあらかじめ遊びに行った。,宿題をあらかじめ忘れてしまった。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_333,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,事故の原因については、まだ調べる必要があり、 ______ 解決のままだ。,不,非,未,無,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_336,SK_JLPT_N2_LK_VO_CONTEXT,3,友人のあまりにおかしい失敗談を聞いて、 ______ 吹き出してしまった。,思わず,意図的に,あらかじめ,割と,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_338,SK_JLPT_N2_LK_VO_PARAPHRASE,2,薬を飲んだおかげで、熱が <u>幾分</u> 下がってきた。,少し,大幅に,完全に,急に,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_340,SK_JLPT_N2_LK_VO_USAGE,1,<u>省く</u>,説明を長々とすると時間がかかるので、細かい部分は省きます。,予算が足りないので、旅行の計画を全部省くことにした。,太ってきたので、毎日の食事から野菜を省いた。,部屋が狭いので、いらない家具を外に省いた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_343,SK_JLPT_N2_LK_VO_WORD_FORMATION,2,現代（げんだい）の医療（いりょう）は、______度（ど）な技術（ぎじゅつ）によって多（おお）くの命（いのち）を救（すく）っている。,高,重,大,深,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_345,SK_JLPT_N2_LK_VO_CONTEXT,1,メンバーが全員 ______ から、本日のミーティングを始めます。,揃って,混ざって,重なって,固まって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_353,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,この商品は厳しいテストをクリアしており、高い安全 ______ が確認されている。,性,化,感,度,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_354,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,今年度は天候に恵まれ、お米の生産 ______ が大幅に増えた。,量,感,化,数,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_361,SK_JLPT_N2_LK_VO_USAGE,2,<u>思い切って</u>,ずっと迷っていたが、思い切って転職を決意した。,友達と遊んでいたら、時間が思い切って過ぎてしまった。,荷物が重すぎたので、途中で思い切って持った。,毎日休まず練習して、体力を思い切って使った。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_365,SK_JLPT_N2_LK_VO_CONTEXT,1,会議に必要な書類がすべて ______ から、打ち合わせを始めましょう。,整って,固まって,詰まって,混ざって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_366,SK_JLPT_N2_LK_VO_CONTEXT,3,部屋が汚れていたので、客が来る前に ______ 掃除をした。,さっと,じっくり,たっぷり,めっきり,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_370,SK_JLPT_N2_LK_VO_USAGE,1,<u>好ましい</u>,健康を維持するためには、毎日適度な運動をすることが好ましい。,今日の天気はとても好ましくて、一日中雨が降り続いていた。,荷物が多すぎて重いので、カバンを好ましく小さくした。,彼は足がとても好ましくて、100メートルを10秒で走れる。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_371,SK_JLPT_N2_LK_VO_USAGE,3,<u>引き受ける</u>,先輩から頼まれたので、来月のイベントの幹事を喜んで引き受けた。,駅のホームで電車をずっと待っていたが、なかなか引き受けなかった。,友達の家を訪問するために、事前に電話で連絡を引き受けた。,スーパーで安売りをしていたので、野菜をたくさん引き受けた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_375,SK_JLPT_N2_LK_VO_CONTEXT,1,道路で大きな工事が行われているため、車の通行が ______ されている。,妨げられ,防がれ,倒され,断られ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_376,SK_JLPT_N2_LK_VO_CONTEXT,3,寒さが厳しくなるにつれて、風邪を引く人が ______ 増えてきた。,徐々に,割と,めったに,むしろ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_380,SK_JLPT_N2_LK_VO_USAGE,1,<u>気軽</u>,分からないことがあれば、気軽に質問してください。,この服はサイズが小さすぎて、気軽に切ることができない。,毎朝早く起きるのは大変なので、気軽に続けられない。,この道は急な坂が多くて、気軽に歩くのが危険だ。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_381,SK_JLPT_N2_LK_VO_USAGE,3,<u>抑える</u>,予算を抑えるために、無駄な買い物を減らした。,友達の意見を抑えて、自分の考えを無理に通した。,濡れた服を風に当てて、水分をしっかり抑えた。,風が強くて危ないので、窓をしっかり抑えて閉めた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_383,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,彼は社会の出来事に全く ______ 関心で、テレビのニュースも全く見ない。,不,無,非,未,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_384,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,しっかり計画を立てれば、成功する可能 ______ は十分にあります。,性,感,化,率,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_390,SK_JLPT_N2_LK_VO_USAGE,1,<u>抱える</u>,彼は仕事のトラブルを一人で抱えて悩んでいる。,荷物が軽くなったので、両手で抱えて運んだ。,電車の時間を間違えて、駅のホームで30分も抱えた。,新しい車を買うために、毎月少しずつお金を抱えている。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_392,SK_JLPT_N2_LK_VO_USAGE,2,<u>心強い</u>,経験豊富な先輩が一緒に行ってくれるので、とても心強い。,このテーブルは丈夫な木で作られているので、心強い。,走って階段を上ったら、息が上がって心強い。,ずっと前から欲しかった服が買えて、心強い。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_400,SK_JLPT_N2_LK_VO_USAGE,2,<u>省略</u>,時間が足りなくなったので、最後の挨拶は省略することにした。,部屋が狭くなったので、いらない机を外に省略した。,風邪を引かないように、帰宅後は手を綺麗に省略した。,荷物が重すぎて歩けないので、車に荷物を省略した。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_406,SK_JLPT_N2_LK_VO_CONTEXT,3,疲れがたまっていたので、電車の席に座った途端に ______ してしまった。,うとうと,ぶらぶら,ぐらぐら,ふらふら,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_408,SK_JLPT_N2_LK_VO_PARAPHRASE,2,緊急の連絡が入ったため、<u>速やかに</u> 対応してください。,すぐに,慎重に,完全に,大ざっぱに,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_409,SK_JLPT_N2_LK_VO_PARAPHRASE,3,今回の事件に対する彼の処分は <u>妥当</u> だと考えられる。,適切,特別,危険,曖昧,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_410,SK_JLPT_N2_LK_VO_USAGE,1,<u>取り消す</u>,間違えて注文してしまったので、すぐに予約を取り消した。,部屋が散らかってきたので、いらない物を綺麗に取り消した。,雨が激しく降ってきたので、持っていた傘を取り消した。,約束の時間に遅れそうになったので、走って距離を取り消した。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_415,SK_JLPT_N2_LK_VO_CONTEXT,1,事故を ______ ために、安全確認を徹底して行っている。,防ぐ,倒す,迷う,逃す,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_416,SK_JLPT_N2_LK_VO_CONTEXT,3,難航すると思われた交渉だったが、相手が提案を受け入れてくれたため ______ 決まった。,すんなり,うとうと,めっきり,さっと,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_418,SK_JLPT_N2_LK_VO_PARAPHRASE,2,注文した商品が届いたので、<u>早速</u> 使ってみた。,すぐに,慎重に,完全に,たまに,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_420,SK_JLPT_N2_LK_VO_USAGE,1,<u>保つ</u>,部屋の温度を一定に保つために、エアコンをつけた。,荷物が重すぎたので、途中でカバンを保つ場所を変えた。,約束の時間に間に合うように、走ってスピードを保つことにした。,勉強が難しくなってきたので、先生に質問して保つようにした。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_423,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,事故を防ぐため、踏切の手前で ______ 停止しなければならない。,不,一時,未,非,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_425,SK_JLPT_N2_LK_VO_CONTEXT,2,台風が近づいているため、今夜は外出を ______ 方がよい。,控えた,怠った,妨げた,促した,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_426,SK_JLPT_N2_LK_VO_CONTEXT,3,急な大雨に降られて、服が ______ 濡れてしまった。,びしょびしょに,すんなり,うとうと,着々と,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_428,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼はいつも <u>大げさに</u> 話すので、少し割り引いて聞いた方がいい。,誇張して,慎重に,素直に,具体的に,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_435,SK_JLPT_N2_LK_VO_CONTEXT,1,暗くて足元が見えなかったので、階段で ______ つまずいてしまった。,危うく,思わず,うっかり,すんなり,3,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_436,SK_JLPT_N2_LK_VO_CONTEXT,3,新しくオープンしたレストランは、評判が良くて ______ 混んでいる。,常に,割と,めったに,むしろ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_438,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼はいつも <u>几帳面な</u> 性格で、部屋も綺麗に整頓されている。,きちんとした,大ざっぱな,大人しい,頑固な,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_440,SK_JLPT_N2_LK_VO_USAGE,1,<u>蓄える</u>,将来のために、若いうちからしっかり知識やお金を蓄えておくべきだ。,部屋が散らかってきたので、いらない物を箱に蓄えた。,雨が激しく降ってきたので、持っていた傘を蓄えて歩いた。,友達と仲直りをするために、プレゼントを蓄えて渡した。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_443,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,危険（きけん）な場所（ばしょ）には ______ りに入（はい）ってはいけない。,みだ,不,無,非,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_451,SK_JLPT_N2_LK_VO_USAGE,3,<u>引き受ける</u>,急に休んだ同僚の代わりに、今日のプレゼンを引き受けた。,荷物が重すぎて歩けないので、車に荷物を引き受けた。,雨が降ってきたので、持っていた傘を引き受けて差した。,友達の家を訪問するために、事前に電話を引き受けた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_456,SK_JLPT_N2_LK_VO_CONTEXT,3,急な発表で驚いたが、彼の話を聞いて ______ 納得がいった。,おおいに,ようやく,めったに,むしろ,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_459,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の提案は非常に画期的だが、少し <u>リスク</u> が高い。,危険,費用,価値,効果,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_460,SK_JLPT_N2_LK_VO_USAGE,1,<u>控える</u>,健康のために、甘いものを食べるのを少し控えている。,雨が激しく降ってきたので、持っていた傘を控えて走った。,友達の家を訪問するために、事前に電話を控えて行った。,部屋が散らかってきたので、いらない物を箱に控えた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_463,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,契約（けいやく）の内容（ないよう）を変更（へんこう）する場合（ばあい）は、事前（じぜん）の______による申し出（もうしで）が必要（ひつよう）です。,文書,文面,文体,文字,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_466,SK_JLPT_N2_LK_VO_CONTEXT,3,彼の身勝手な振る舞いに、周りのスタッフも ______ 呆れていた。,すっかり,すんなり,うとうと,着々と,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_468,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼はいつも <u>穏やかな</u> 顔つきをしていて、怒ったところを見たことがない。,大人しい,激しい,怪しい,厳しい,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_471,SK_JLPT_N2_LK_VO_USAGE,3,<u>妨げる</u>,大声で騒ぐ行為は、他人の睡眠を妨げる原因になる。,部屋が散らかってきたので、いらない家具を妨げた。,雨が激しく降ってきたので、持っていた傘を妨げて歩いた。,友達と仲直りをするために、プレゼントを妨げて渡した。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_475,SK_JLPT_N2_LK_VO_CONTEXT,2,事件の______ を解き明かすために、警察は慎重に捜査を続けている。,真相,本音,素顔,実態,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_478,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の態度は非常に <u>不快</u> だった。,いやだった,怪しかった,怖かった,悲しかった,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_480,SK_JLPT_N2_LK_VO_USAGE,1,<u>蓄える</u>,来年の受験に向けて、今からしっかり学力を蓄えておく。,部屋が狭くなってきたので、いらない机を外に蓄えた。,雨が急に降り出してきたので、傘を蓄えて走った。,友達の結婚式を祝うために、プレゼントを蓄えて渡した。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_486,SK_JLPT_N2_LK_VO_CONTEXT,3,急な計画変更にもかかわらず、チーム全員が ______ 対応してくれた。,柔軟に,頑固に,急激に,極端に,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_488,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼はとても <u>几帳面な</u> 性格で、机の上も綺麗に整理されている。,きちんとした,大ざっぱな,おとなしい,頑固な,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_491,SK_JLPT_N2_LK_VO_USAGE,3,<u>すんなり</u>,最初は心配されたが、新しいシステムはすんなり導入された。,荷物が重すぎて大変だったので、カバンをすんなり持って運んだ。,朝早く起きて運動をしたので、とてもすんなりした気分になった。,雨で服が濡れてしまったので、部屋ですんなり着替えた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_493,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,事故（じこ）を防（ふせ）ぐため、工場内（こうじょうない）では作業員（さぎょういん）の______靴（ぐつ）の着用（ちゃくよう）が義務（ぎむ）付けられている。,安全,安心,安定,安易,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_495,SK_JLPT_N2_LK_VO_CONTEXT,2,台風の接近に伴い、暴風警報が ______ された。,発令,発生,発信,発想,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_496,SK_JLPT_N2_LK_VO_CONTEXT,3,友達の冗談が可笑しくて、______ 笑ってしまった。,思わず,すんなり,めったに,むしろ,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_500,SK_JLPT_N2_LK_VO_USAGE,1,<u>蓄える</u>,将来の生活のために、毎月少しずつお金を蓄えている。,部屋が散らかってきたので、いらない物を箱に蓄えた。,雨が激しく降ってきたので、持っていた傘を蓄えて走った。,友達と仲直りするために、プレゼントを蓄えて渡した。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_505,SK_JLPT_N2_LK_VO_CONTEXT,1,道路が混雑していたため、予定していた到着時間が ______ しまった。,遅れて,早まって,深まって,固まって,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_508,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼女の明るい笑顔は、周囲の人々を <u>なごませる</u> 魅力がある。,リラックスさせる,驚かせる,混乱させる,緊張させる,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_510,SK_JLPT_N2_LK_VO_USAGE,1,<u>蓄える</u>,災害が発生した時に備えて、避難所に食料を蓄えておく。,部屋が狭くなってきたので、いらない机を外に蓄えた。,雨が急に降ってきたので、傘を蓄えて走った。,友達の結婚式を祝うために、プレゼントを蓄えて渡した。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_514,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,この商品は安全性と ______ 性に優れており、広く使われている。,実用,実利,実態,実績,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_515,SK_JLPT_N2_LK_VO_CONTEXT,2,長時間の運動で疲れた筋肉をストレッチで ______ 。,ほぐした,たたんだ,きたえた,おさえた,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_520,SK_JLPT_N2_LK_VO_USAGE,1,<u>蓄える</u>,冬の寒さに備えて、野生動物は体内に脂肪を蓄える。,部屋が散らかってきたので、いらない家具を外に蓄えた。,雨が激しく降ってきたので、持っていた傘を蓄えて走った。,友達と仲直りするために、手紙を蓄えて送った。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_521,SK_JLPT_N2_LK_VO_USAGE,3,<u>引き受ける</u>,上司から頼まれたため、新しいプロジェクトの責任者を喜んで引き受けた。,荷物が重すぎて歩けないので、車に荷物を引き受けた。,雨が降ってきたので、持っていた傘を引き受けて差した。,友達の家を訪問するために、事前に電話を引き受けた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_524,SK_JLPT_N2_LK_VO_WORD_FORMATION,3,長年の研究の成果により、この新技術の ______ 化が決定した。,実用,実利,実態,実績,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_525,SK_JLPT_N2_LK_VO_CONTEXT,2,長時間のパソコン作業で凝り固まった首を______ 。,ほぐした,たたんだ,きたえた,おさえた,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_528,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼は非常に <u>几帳面な</u> 人で、毎日の日記を欠かさず書いている。,きちんとした,大ざっぱな,おとなしい,頑固な,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_533,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,契約書の______内容を変更する場合は、事前に書面で通知してください。,記載,記述,記録,記号,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_536,SK_JLPT_N2_LK_VO_CONTEXT,3,急な仕様変更にもかかわらず、現場のスタッフは______対応してくれた。,臨機応変に,一目散に,前もって,一概に,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_538,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼はとても <u>几帳面な</u> 人なので、約束の時間を破ることは決してない。,きちんとした,大ざっぱな,おとなしい,頑固な,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_545,SK_JLPT_N2_LK_VO_CONTEXT,2,長時間の立ち仕事でパンパンに張った足を丁寧に ______ 。,ほぐした,たたんだ,きたえた,おさえた,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_550,SK_JLPT_N2_LK_VO_USAGE,1,<u>蓄える</u>,来るべき冬の寒さに備え、小動物たちは木の実を巣に蓄える。,部屋が散らかってきたので、いらない家具を外に蓄えた。,雨が激しく降ってきたので、持っていた傘を蓄えて走った。,友達と仲直りするために、手紙を蓄えて送った。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_555,SK_JLPT_N2_LK_VO_CONTEXT,2,立ち仕事でカチコチに凝ったふくらはぎをマッサージで ______ 。,ほぐした,たたんだ,きたえた,おさえた,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_560,SK_JLPT_N2_LK_VO_USAGE,1,<u>蓄える</u>,厳しい冬を乗り切るため、クマは秋のうちに体脂肪を蓄える。,部屋が散らかってきたので、いらない家具を外に蓄えた。,雨が激しく降ってきたので、持っていた傘を蓄えて走った。,友達と仲直りするために、手紙を蓄えて送った。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_561,SK_JLPT_N2_LK_VO_USAGE,3,<u>引き受ける</u>,同僚の突然の退職に伴い、彼が持っていた重要な案件を引き受けた。,荷物が重すぎて歩けないので、車に荷物を引き受けた。,雨が降ってきたので、持っていた傘を引き受けて差した。,友達の家を訪問するために、事前に電話を引き受けた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_565,SK_JLPT_N2_LK_VO_CONTEXT,2,立ち仕事でカチコチに凝った筋肉をマッサージで ______ 。,ほぐした,たたんだ,きたえた,おさえた,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_568,SK_JLPT_N2_LK_VO_PARAPHRASE,2,彼は非常に <u>几帳面な</u> 性格なので、デスクの周りもいつも綺麗だ。,きちんとした,大ざっぱな,おとなしい,頑固な,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_571,SK_JLPT_N2_LK_VO_USAGE,3,<u>引き受ける</u>,同僚が病気で倒れたため、彼が担当していた業務を引き受けた。,荷物が重すぎて歩けないので、車に荷物を引き受けた。,雨が降ってきたので、持っていた傘を引き受けて差した。,友達の家を訪問するために、事前に電話を引き受けた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_575,SK_JLPT_N2_LK_VO_CONTEXT,1,天候に恵まれたため、イベントは ______ 進行した。,スムーズに,すっかり,うとうと,着々と,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_578,SK_JLPT_N2_LK_VO_PARAPHRASE,3,彼の説得は非常に <u>効果的</u> だった。,てきめんだった,あいまいだった,強引だった,極端だった,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_581,SK_JLPT_N2_LK_VO_USAGE,2,<u>引き受ける</u>,依頼された講演会の講師を、喜んで引き受けることにした。,荷物が重すぎたので、車の中にカバンを引き受けた。,雨が急に降り出したので、持っていた傘を引き受けて差した。,友達の家を訪問するために、事前に連絡を引き受けた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_584,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,契約内容を変更する場合は、事前に ______ 契約を結ぶ必要があります。,再,未,復,過,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_586,SK_JLPT_N2_LK_VO_CONTEXT,2,長時間のプレゼンテーションを終えて、ようやく ______ とした。,ほっと,うとうと,すんなり,着々と,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_591,SK_JLPT_N2_LK_VO_USAGE,1,<u>蓄える</u>,将来の急な出費に備えて、毎月少しずつ資金を蓄えている。,部屋が散らかってきたので、いらない家具を外に蓄えた。,雨が激しく降ってきたので、持っていた傘を蓄えて走った。,友達に感謝の気持ちを伝えるため、手紙を蓄えて送った。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_594,SK_JLPT_N2_LK_VO_WORD_FORMATION,1,大雨の影響で、市内の一部の河川が ______ 水する恐れがある。,氾,増,溢,満,2,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_597,SK_JLPT_N2_LK_VO_CONTEXT,3,どんなに厳しい状況であっても、彼は決して ______ を吐かない。,弱音,本音,愚痴,皮肉,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_603,SK_JLPT_N2_LK_VO_WORD_FORMATION,2,今回の事件は、社会全体に ______ 影響を与えることとなった。,多大,多量,多数,多額,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_610,SK_JLPT_N2_LK_VO_USAGE,1,<u>蓄える</u>,来るべき冬の寒さに備えて、薪を十分蓄えておく。,部屋が汚れてきたので、いらない家具を外に蓄えた。,雨が激しく降ってきたので、持っていた傘を蓄えて走った。,友達に感謝の気持ちを伝えるため、手紙を蓄えて送った。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json
+JLPT_N2_LK_Vo_611,SK_JLPT_N2_LK_VO_USAGE,3,<u>緩和する</u>,混雑を緩和するため、入場制限を実施することにした。,壊れた椅子を緩和するために、新しいネジで固定した。,お腹が空いたので、ラーメンを食べて空腹を緩和した。,部屋を明るくするために、電気を緩和して点灯させた。,1,prototype/language/JLPT_N2/data/JLPT_N2_LK_Vo.json

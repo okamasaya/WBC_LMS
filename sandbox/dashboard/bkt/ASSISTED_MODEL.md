@@ -114,7 +114,7 @@ P(next correct) = p_after × (1 − P(S)) + (1 − p_after) × P(G)
 ## 6. 実装と画面
 
 - [assisted_model.py](assisted_model.py)：Dashに依存しない計算・入力検証・32パターン生成。
-- [flat_app.py](flat_app.py)：8055の確認画面。1回答の操作、段階比較、正誤×自信度×理解度の32パターン、架空24回答の明細、CSV、仮定JSONを表示・出力。
+- [flat_app.py](flat_app.py)：8055の確認画面。1回答の操作、段階比較、正誤×自信度×理解度の32パターン、架空24回答と同梱N2モック600回答の明細、CSV、仮定JSONを表示・出力。
 - [tests/test_assisted_model.py](tests/test_assisted_model.py)：手計算との一致、入力の向き、欠損、時点分離、独立評価、異常値、Flask HTTP、出力。
 - [tests/flat.browser.cjs](tests/flat.browser.cjs)：画面操作・出力・復帰・モバイル。
 
@@ -147,4 +147,4 @@ result = estimate_flat([
 - 予測対象を「次の同一スキルの正誤」とするなど、時点と評価指標を先に定義する。
 - 履歴接続・忘却・スキル粒度・解説閲覧の扱いは、論文と実データを確認して決める。
 
-今回は合成32パターンと既存の架空ログを使った挙動確認まで。実際の生徒の習得状態、将来正答、成績判断の妥当性を確認したものではない。
+初版では合成32パターンと既存の架空ログを使い、続いて[N2の20回分モック600回答](data/mock_jlpt_n2_20_sessions/README.md)でも挙動を確認した。実際の生徒の習得状態、将来正答、成績判断の妥当性を確認したものではない。
