@@ -1,0 +1,149 @@
+【AI学習レポート作成依頼】
+あなたは、CBTの学習記録を分析するAI学習メンターです。
+以下の演習結果をもとに、学習者の現在の理解状況と今後の学習方針を評価してください。
+
+【分析ルール】
+・正答率だけで判断せず、問題カテゴリ、難易度、回答時間、自信度、解説理解度、復習フラグを組み合わせて評価してください。
+・「できなかったこと」だけでなく、「できたこと」「定着してきたこと」「次に伸ばせること」を具体的なデータを根拠に示してください。
+・回答時間が長いことだけを悪い結果と判断しないでください。難易度や正誤、自信度と合わせて解釈してください。
+・不正解でも、解説確認後の理解度が高い場合は、学習が進んだ結果として考慮してください。
+・自信度が記録されていない場合は、自信度について推測しないでください。
+・1回分の結果だけから「苦手」「能力不足」などと断定しないでください。
+・追加問題の作成や出題は不要です。今回は学習結果の分析と次の学習方針の提案に専念してください。
+
+【複数回の結果をまとめて渡した場合】
+この形式のレポートが複数ある場合は、Session IDごとに1回の演習として扱い、実施日時順に比較してください。
+正答率だけでなく、難易度、カテゴリ別成績、回答時間、自信度、解説理解度の変化も見てください。
+前回より正答率が下がっていても、より難しい問題に取り組んでいる場合は、その挑戦を考慮して評価してください。
+過去データが1回分しかない場合は、存在しない学習推移を推測しないでください。
+
+【出力してほしい内容】
+1. 今回の演習の要約
+2. データから確認できる良かった点
+3. 次に確認・復習すると効果がありそうな点
+4. 複数回分がある場合は学習の変化・成長
+5. 次回の学習への具体的なアドバイス
+
+評価は前向きかつ具体的にし、根拠のない過度な称賛は避けてください。日本語学習者にも理解しやすい表現を使用してください。
+
+=== CBT_SESSION_BEGIN ===
+Session ID: SESS_1793572683306
+実施日時: 2026-11-01T22:38:03.007Z
+演習モード: Drill
+出題難易度設定: すべて
+自信度記録: あり
+
+【演習サマリー】
+演習モード: 練習ドリル
+実施日時: 11/1/2026, 10:38:03 PM
+総実施時間: 0分0秒
+総合スコア: 0点
+
+■ 分野別正解率
+· 言語知識: 0% (0/10)
+
+【各問題の演習詳細】
+[問1] × 不正解
+・カテゴリ: 【言語知識】文法 > 文の文法1
+・学習スキル: 文法・文の文法1
+・難易度: 基礎
+・問題文: 大事な会議に遅刻するなんて、社会人として ______ 。
+・回答時間: 0.1秒
+・自信度: 2 (少し自信がある)
+・解説理解度: 0 (全然分からない)
+・要復習フラグ: FALSE
+
+[問2] × 不正解
+・カテゴリ: 【言語知識】文法 > 文の文法1
+・学習スキル: 文法・文の文法1
+・難易度: 基礎
+・問題文: 新しい事業を開始する ______ 、地域の住民に説明会を開いた。
+・回答時間: 0.2秒
+・自信度: 4 (直感に近い)
+・解説理解度: 3 (理解できた)
+・要復習フラグ: FALSE
+
+[問3] 未回答
+・カテゴリ: 【言語知識】文字 > 漢字読み
+・学習スキル: 文字・漢字読み
+・難易度: 発展
+・問題文: トラブルが発生したときは、<u>迅速</u>な対応が求められます。
+・回答時間: 0秒
+・自信度: 未入力
+・解説理解度: 未入力
+・要復習フラグ: FALSE
+
+[問4] 未回答
+・カテゴリ: 【言語知識】文法 > 文の文法2
+・学習スキル: 文法・文の文法2
+・難易度: 基礎
+・問題文: 事故の ______ ______ __★__ ______ 交通規制が行われている。
+・回答時間: 0秒
+・自信度: 未入力
+・解説理解度: 未入力
+・要復習フラグ: FALSE
+
+[問5] 未回答
+・カテゴリ: 【言語知識】文字 > 表記
+・学習スキル: 文字・表記
+・難易度: 発展
+・問題文: 弁護士は法廷で被告の無罪を<u>しゅちょう</u>した。
+・回答時間: 0秒
+・自信度: 未入力
+・解説理解度: 未入力
+・要復習フラグ: FALSE
+
+[問6] 未回答
+・カテゴリ: 【言語知識】文法 > 文の文法1
+・学習スキル: 文法・文の文法1
+・難易度: 発展
+・問題文: 一人暮らしを始めて以来、親のありがたさを深く感ぜずには ______ 。
+・回答時間: 0秒
+・自信度: 未入力
+・解説理解度: 未入力
+・要復習フラグ: FALSE
+
+[問7] 未回答
+・カテゴリ: 【言語知識】文字 > 漢字読み
+・学習スキル: 文字・漢字読み
+・難易度: 基礎
+・問題文: 台風の接近に伴い、暴風警報が<u>発令</u>されました。
+・回答時間: 0秒
+・自信度: 未入力
+・解説理解度: 未入力
+・要復習フラグ: FALSE
+
+[問8] 未回答
+・カテゴリ: 【言語知識】文法 > 文の文法1
+・学習スキル: 文法・文の文法1
+・難易度: 発展
+・問題文: 厳しい（きびしい）情勢（じょうせい） ______ 、彼（かれ）は冷静（れいせい）さを失（うしな）わなかった。
+・回答時間: 0秒
+・自信度: 未入力
+・解説理解度: 未入力
+・要復習フラグ: FALSE
+
+[問9] 未回答
+・カテゴリ: 【言語知識】文法 > 文章の文法
+・学習スキル: 文法・文章の文法
+・難易度: 標準
+・問題文: 現代社会では、AIの技術が急速に進化している。これからの時代を生きる私たちには、新しい技術を上手に活用する能力が ______ 。
+・回答時間: 0秒
+・自信度: 未入力
+・解説理解度: 未入力
+・要復習フラグ: FALSE
+
+[問10] 未回答
+・カテゴリ: 【言語知識】文法 > 文章の文法
+・学習スキル: 文法・文章の文法
+・難易度: 標準
+・問題文: 文章中の [ 1839 ] に入る最も適切なものを選びなさい。<br><br>【文章】<br>一人の力には限界がある。しかし、他者と協力すること [ 1839 ] 、大きな困難を乗り越えることができる。
+・回答時間: 0秒
+・自信度: 未入力
+・解説理解度: 未入力
+・要復習フラグ: FALSE
+
+=== CBT_SESSION_END ===
+
+=== AI_ANALYSIS_DATA_JSON ===
+{"session":{"sessionId":"SESS_1793572683306","startTime":"2026-11-01T22:38:03.007Z","mode":"Drill","difficultySetting":"すべて","confidenceRecorded":"あり","totalTimeSec":0,"questionCount":10,"correctCount":0,"wrongCount":10,"accuracy":0},"questions":[{"questionNumber":1,"correct":false,"category":"【言語知識】文法 > 文の文法1","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_1","skillName":"文法・文の文法1","difficulty":"基礎","answerTimeSec":0.1,"confidence":"2 (少し自信がある)","explanationUnderstanding":"0 (全然分からない)","review":false},{"questionNumber":2,"correct":false,"category":"【言語知識】文法 > 文の文法1","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_1","skillName":"文法・文の文法1","difficulty":"基礎","answerTimeSec":0.2,"confidence":"4 (直感に近い)","explanationUnderstanding":"3 (理解できた)","review":false},{"questionNumber":3,"correct":false,"category":"【言語知識】文字 > 漢字読み","skillId":"SK_JLPT_N2_LK_CH_KANJI_READING","skillName":"文字・漢字読み","difficulty":"発展","answerTimeSec":0,"confidence":"未入力","explanationUnderstanding":"未入力","review":false},{"questionNumber":4,"correct":false,"category":"【言語知識】文法 > 文の文法2","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_2","skillName":"文法・文の文法2","difficulty":"基礎","answerTimeSec":0,"confidence":"未入力","explanationUnderstanding":"未入力","review":false},{"questionNumber":5,"correct":false,"category":"【言語知識】文字 > 表記","skillId":"SK_JLPT_N2_LK_CH_ORTHOGRAPHY","skillName":"文字・表記","difficulty":"発展","answerTimeSec":0,"confidence":"未入力","explanationUnderstanding":"未入力","review":false},{"questionNumber":6,"correct":false,"category":"【言語知識】文法 > 文の文法1","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_1","skillName":"文法・文の文法1","difficulty":"発展","answerTimeSec":0,"confidence":"未入力","explanationUnderstanding":"未入力","review":false},{"questionNumber":7,"correct":false,"category":"【言語知識】文字 > 漢字読み","skillId":"SK_JLPT_N2_LK_CH_KANJI_READING","skillName":"文字・漢字読み","difficulty":"基礎","answerTimeSec":0,"confidence":"未入力","explanationUnderstanding":"未入力","review":false},{"questionNumber":8,"correct":false,"category":"【言語知識】文法 > 文の文法1","skillId":"SK_JLPT_N2_LK_GR_SENTENCE_1","skillName":"文法・文の文法1","difficulty":"発展","answerTimeSec":0,"confidence":"未入力","explanationUnderstanding":"未入力","review":false},{"questionNumber":9,"correct":false,"category":"【言語知識】文法 > 文章の文法","skillId":"SK_JLPT_N2_LK_GR_TEXT","skillName":"文法・文章の文法","difficulty":"標準","answerTimeSec":0,"confidence":"未入力","explanationUnderstanding":"未入力","review":false},{"questionNumber":10,"correct":false,"category":"【言語知識】文法 > 文章の文法","skillId":"SK_JLPT_N2_LK_GR_TEXT","skillName":"文法・文章の文法","difficulty":"標準","answerTimeSec":0,"confidence":"未入力","explanationUnderstanding":"未入力","review":false}]}

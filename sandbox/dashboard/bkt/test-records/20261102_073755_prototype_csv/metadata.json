@@ -1,0 +1,104 @@
+{
+  "started_at": "2026-11-02T07:37:55.294369+09:00",
+  "base_commit": "4f7b89eb69635a15af8b5f7672d3c247ebe07436",
+  "tests": [
+    {
+      "name": "all_python",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox/dashboard/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "prototype_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/bkt/tests/prototype_export.browser.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "prototype_import",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "sandbox/dashboard/bkt/tests/verify_prototype_exports.py",
+        "/workspace/WBC_LMS/sandbox/dashboard/bkt/test-records/20261102_073755_prototype_csv/ui_exports"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "flat_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/bkt/tests/flat.browser.cjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "mock_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/bkt/tests/mock_data.browser.cjs"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "synthetic_ui_interactions": true,
+  "finished_at": "2026-11-02T07:38:11.233654+09:00",
+  "source_sha256": {
+    "sandbox/dashboard/bkt/alp_app.py": "e69ca8d340f4a178c3957ed348c2a64b8f94298416201eb3d2f730ee293c7a8f",
+    "sandbox/dashboard/bkt/assisted_model.py": "478c45bda86761943f0de754712cd934b4669088747840c5178468f52b30175a",
+    "sandbox/dashboard/bkt/__main__.py": "ca5d96ef583e2a7ff8ec341326d07a85188479753e7656f791b07d12f35940b3",
+    "sandbox/dashboard/bkt/mock_dataset.py": "93cdf0051a78242c0bd5ef58a7d6fd060fb177b7d5722cf146a6d503fa13a2c6",
+    "sandbox/dashboard/bkt/__init__.py": "976888a856507664a555b5393892c2f6d50455d89e15d2545c98825ebbbf0bae",
+    "sandbox/dashboard/bkt/prototype_csv.py": "8a6d1cac2e9e3e3081d22fe0dcadeae146ea2e7c6f50f9dd8ea1ed344c5d2330",
+    "sandbox/dashboard/bkt/flat_app.py": "2c784884bad10d86df1c66cb3a58c52d2629a5ffaf851c1a59c6725bd8f8a53d",
+    "sandbox/dashboard/bkt/model.py": "d96f42e54dfad4ff522eccad595e8985c928dec5b92c100c54decb9a1ad9e5eb",
+    "sandbox/dashboard/bkt/learning_data.py": "e9bdd27f8c2baf20d944c0ea475f462c7b3d86589d534dea3932c9b4fd8cfee7",
+    "sandbox/dashboard/bkt/dashboard_views.py": "bad7ab3fa8236cdc596ab596ee64a20d9db6d90a2f62bc957db58496d35e822a",
+    "sandbox/dashboard/bkt/demo_data.py": "b35f51c721db4566319806629b12e7623d17769113d2ec49d1c4a998703745ce",
+    "sandbox/dashboard/bkt/tests/test_prototype_csv.py": "41431e8a06fe07c759c85af809a6c526de12c70d7544a0b5c3c91e6af250d689",
+    "sandbox/dashboard/bkt/tests/test_bkt.py": "e1c39c2069517f3cfeba2dc77d8beea98b623234de2fbe5480ef0f29677cac59",
+    "sandbox/dashboard/bkt/tests/test_assisted_model.py": "c79e107316a792e58e9db419b2ef749edfb22e176573b3de78b3a02795c8cfb7",
+    "sandbox/dashboard/bkt/tests/__init__.py": "93c1604f0c284ab959ae45580384afe3c7dcc01986e6221528eb5ce50997d020",
+    "sandbox/dashboard/bkt/tests/verify_prototype_exports.py": "fd9b24a57cc6becf0350ceff085f3a77b323679fb18a7b97af9c4be26df6489e",
+    "sandbox/dashboard/bkt/tests/test_mock_dataset.py": "1196fcedf43b9245d6005ebb5a685b164848bb640161d557c491df700212e285",
+    "sandbox/dashboard/bkt/tests/test_dashboard.py": "d994788d6ab2059a3c1da507ab2ef9efb0b5d1ae9a27862060da5854b3767d2f",
+    "sandbox/dashboard/bkt/tools/prototype_exports.cjs": "75948c0d7a8bb9f2aa8971d718e3d4c00d3ec5fc92f727c91875e35b2c87e346",
+    "sandbox/dashboard/bkt/tests/browser.cjs": "561dc45acfcdf0841be2382cd1d5dec05683bc13efa81b8022e78bf6076bd5cc",
+    "sandbox/dashboard/bkt/tests/prototype_export.browser.cjs": "a72548fbaaac885b420eda17994bcc7c5cb6dab57dcdba30b60e444a1e9a6f43",
+    "sandbox/dashboard/bkt/tests/flat.browser.cjs": "d3b29ef4c71ecc0207026ebf7490bf28f283859e1e341707579cc209edde86a6",
+    "sandbox/dashboard/bkt/tests/mock_data.browser.cjs": "a6dd87bb61a6133ee7eee86bb422e1818fa6b49ed35e707d38a746c16c1e0d8d",
+    "prototype/assets/js/shared/resultData.js": "7ede9a62dd987e7ba7d8d28c1d7f269f3c94f0603f3681203d46087291b1b7bb",
+    "prototype/assets/js/shared/resultReport.js": "23445e4c89a076d5256f5ffdc91f321788523c0133574f1fa885c6dd530d2138",
+    "prototype/assets/js/shared/questionLoader.js": "fd4bac4a42126908d51f3c50225ed4ef348a72639ac63f5031c7d566e1620ea7",
+    "prototype/assets/js/shared/examConfig.js": "8595a6fe3e44ee4d03bb48da3facccd79902b092c3fb2ef10d75df5f3d194088",
+    "prototype/assets/js/shared/resultReview.js": "f29b54f3c95c17dcf7f647b93d3b25dfc430104d68c8d2733ed5588179d29fc1",
+    "prototype/assets/js/shared/resultOutput.js": "d8ce5ad00845f88a2f1d6c3d962a2855d289128d50368231bd6834fa64e46c3c"
+  },
+  "artifact_sha256": {
+    "prototype_import.log": "aee80d4f21e3e25a2ff204072527a603d85b3f45c716c4d6e7cb859a49d939f2",
+    "flat_browser.log": "3110074daf3616ac2680b8f272cbbb91c790128d3b48a0e4bbfe44a98b707c40",
+    "mock_browser.log": "8ea225a825b2b2b1551c9152949c832679debf47485fb54e018648da0da2d41b",
+    "all_python.log": "7a89890696b72064517ca8b55484b8a90be52eb5069ad15e1454758e2da3049a",
+    "prototype_browser.log": "0c9dfd8a829b3cfed263aa6327a7e302969d998950bf709ae58c67327804d64d",
+    "ui_exports/Actual/Session_SESS_1793572682023.csv": "e3363543154c3135b475c68b60de8eebc50af6148a72a356bb1f537c6d3ee9c7",
+    "ui_exports/Actual/manifest.json": "7fbcf266a19fe10c54e5f83d5449da932c78e9e3060331c49c21b5e03d03f4d7",
+    "ui_exports/Actual/AI_Report.txt": "744502e9491421a0540c200b8cc11db4cab25f5b8d5ed57faf14640edfc19270",
+    "ui_exports/Actual/CBT_RAW_SESS_1793572682023.csv": "278daf5f2f4caf61b44cdbcd436706bcd7f45982ad028a2b667d3daae4060d44",
+    "ui_exports/Actual/QuestionResult_SESS_1793572682023.csv": "ee3f3526a196c9efc7c15c81118204ffa3c1109a8144811b95ed4d1c0479577e",
+    "ui_exports/Drill/manifest.json": "46f38af5fb459aaf2cfed5460dbb4896e7afd0debb748fed18e4040b41e62cc1",
+    "ui_exports/Drill/AI_Report.txt": "b5ab0faee8782e0c7f8cf0a8a2951709e5f9531f0487400a87944bcf51ac9616",
+    "ui_exports/Drill/CBT_RAW_SESS_1793572683306.csv": "c2b5a1bb35924f40e99f1690a07df2332f67266a039c8157266be3e3fcf2d1ba",
+    "ui_exports/Drill/QuestionResult_SESS_1793572683306.csv": "2e09af971e748a46ea0a694fa6b856917de3da9816900e48478623a328e9b760",
+    "ui_exports/Drill/Session_SESS_1793572683306.csv": "fe68c14c98c2bda61cc6f5842779aa21d16e150bf5ddbdb606c3f0e0bea91c04"
+  }
+}

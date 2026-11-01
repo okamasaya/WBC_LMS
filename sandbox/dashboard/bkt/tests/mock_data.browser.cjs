@@ -16,7 +16,8 @@ async function choose(page,id,name){await page.locator('#'+id).click();await pag
   const pending=page.waitForEvent('download');await page.locator('#flat-export').click();const download=await pending;
   const stream=await download.createReadStream(),chunks=[];for await(const chunk of stream)chunks.push(chunk);
   const csv=Buffer.concat(chunks).toString('utf8');assert.equal(csv.trim().split('\n').length,273);
-  assert.ok(csv.includes('SessionNumber')&&csv.includes('UnderstandingRecordedAt'));
+  assert.ok(csv.includes('DataSchemaVersion')&&csv.includes('Explanation'));
+  assert.ok(!csv.split('\n')[0].includes('UnderstandingRecordedAt'));
   await choose(page,'flat-filter','正解');await summary(page,'表示対象 328行');
   await choose(page,'flat-filter','すべて');await summary(page,'表示対象 600行');
   await page.locator('#flat-summary').scrollIntoViewIfNeeded();

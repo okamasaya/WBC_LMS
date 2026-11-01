@@ -1,0 +1,2 @@
+PASS current Actual: answer/confidence, explanation understanding 0/3, review flag, finalized report and three real CSV downloads
+PASS current JSON Drill: finalized report and three real CSV downloads with no JS errors

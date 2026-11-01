@@ -1,0 +1,4 @@
+PASS confidence direction, explanation-only learning transition and neutral missing auxiliaries
+PASS actual 32-pattern heatmap click updates all three interactive inputs
+PASS filtered 16-row CSV and explicit model-assumption JSON download
+PASS synthetic 24-answer data, invalid-parameter clearing/recovery and mobile layout without JS/HTTP errors

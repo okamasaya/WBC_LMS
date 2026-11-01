@@ -1,0 +1,10 @@
+{
+  "mode": "Drill",
+  "is_synthetic": true,
+  "files": {
+    "session": "Session_SESS_1793572683306.csv",
+    "questions": "QuestionResult_SESS_1793572683306.csv",
+    "raw": "CBT_RAW_SESS_1793572683306.csv"
+  },
+  "report": "AI_Report.txt"
+}
