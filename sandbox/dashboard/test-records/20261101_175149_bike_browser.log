@@ -1,0 +1,7 @@
+PASS actual mouse zoom changes viewport without filtering KPI
+PASS apply zoom filters KPI/details/CSV consistently; back restores full period
+PASS real monthly point -> daily -> hourly drill, source switch and two-level back
+PASS weekly grouping, observed-row mean, metric switch, comparison and rolling chart
+Error: Expected 0 rows; actual: 抽出 366行 ｜ 登録利用 1,676,811回 ｜ 観測1日平均 4,581.45回 ｜ 表示 週別（月曜始まり）; navigation: 期間・粒度を変更しました。
+    at hasCount (/workspace/WBC_LMS/sandbox/dashboard/tests/bike_timeseries.browser.cjs:6:18)
+    at async /workspace/WBC_LMS/sandbox/dashboard/tests/bike_timeseries.browser.cjs:63:3

@@ -1,0 +1,58 @@
+{
+  "base_commit": "bc52c412c2db9877f69222267f51b3ea623d0bef",
+  "source_state": "base plus uncommitted changes; tested file hashes below",
+  "started_jst": "2026-11-01T17:51:49.027421+09:00",
+  "versions": {
+    "python": "3.12.14",
+    "dash": "4.4.1",
+    "plotly": "7.1.0",
+    "pandas": "3.1.0"
+  },
+  "sha256": {
+    "sandbox/dashboard/sample_dsbd_bike.py": "54f1c72c04824e92c6fae31b8c6baa0175b9ed96117777dc928e561c33157984",
+    "sandbox/dashboard/bike_timeseries.py": "905f4d71e2d42be32b623e92870fbaf8a133755d46b079f92f32bb291507dc8e",
+    "sandbox/dashboard/assets/bike.css": "d64bbc2bb12da6aed1f62b9b001b8c89c6cc339cf0f0cce4c634908988a09427",
+    "sandbox/dashboard/data/bike/day.csv": "a6bcf826782d3c0fbfdcbeead17cd0884185a0dafe8ff10cd48a874ee7ba18be",
+    "sandbox/dashboard/data/bike/hour.csv": "e03de4ee4ef4dc376ac6e04bf829673c6269e8eba5c60fa121640fa2f829504f",
+    "sandbox/dashboard/tests/bike_timeseries.browser.cjs": "811fe6ebb727adb357d988d7cb4b3a49d2d6b2304d3cc6653dfccbc8d9f9b045",
+    "sandbox/dashboard/tests/browser.cjs": "3097f64ea91df07ca62e008e09baa626f4a2b35a947f4b8357aef28d1b96e1c5",
+    "sandbox/dashboard/tests/iris.browser.cjs": "cde331afd2432c252c1456d95f3bf15ba8b5be153f9ec572b0f067137f0d57a4",
+    "sandbox/dashboard/tests/iris_state.browser.cjs": "d726b205e9568c0c1cad8be0a58128f3fbd8104a075a80715a29578c69c02fc8",
+    "sandbox/dashboard/tests/sample_iris.browser.cjs": "63d6f4e71946fd7c3000740c15b979218696a9cde891d7949edac0a50e61d52a",
+    "sandbox/dashboard/tests/test_bike_timeseries.py": "4554c1176857e86794dbc65222fa2101a9846da2c2e44d7d1550f9cc272da734",
+    "sandbox/dashboard/tests/test_bkt.py": "2e3f54841435c9523bc4650ded6bb893b534997e0334b751ee6f1ea8e5e01305",
+    "sandbox/dashboard/tests/test_dashboard.py": "44502f2c6a6d0bc4797989d7a6731750fec867b1ba30609af8f11bd12bc57910",
+    "sandbox/dashboard/tests/test_iris_crossfilter.py": "8f92ead9437bc5586ecb13472963873f4931b5b4f4ce79ef4656bf6a13b2a756",
+    "sandbox/dashboard/tests/test_iris_view_state.py": "f2091a64a48d17ffe08929a4c6490be62e72ecba17ff718c640395c87c7fb19d"
+  },
+  "results": [
+    {
+      "name": "python",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox/dashboard/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 1.901,
+      "log": "test-records/20261101_175149_python.log"
+    },
+    {
+      "name": "bike_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/tests/bike_timeseries.browser.cjs"
+      ],
+      "exit_code": 1,
+      "seconds": 19.771,
+      "log": "test-records/20261101_175149_bike_browser.log"
+    }
+  ],
+  "completed_jst": "2026-11-01T17:52:10.700764+09:00"
+}

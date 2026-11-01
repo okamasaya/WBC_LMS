@@ -1,0 +1,9 @@
+.bike-dashboard { font: 16px/1.6 system-ui, sans-serif; max-width: 1200px; margin: auto; padding: 20px; color: #20314b; }
+.bike-dashboard * { box-sizing: border-box; }
+.bike-panel { padding: 20px; border: 1px solid #ced8e7; border-radius: 10px; background: #f3f6fb; margin: 16px 0; }
+.bike-panel label { display: block; margin-bottom: 12px; }
+.bike-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.bike-dashboard button { padding: 10px 14px; cursor: pointer; }
+.bike-dashboard :focus-visible { outline: 3px solid #a85a00; outline-offset: 2px; }
+.bike-dashboard .js-plotly-plot { min-width: 0; }
+@media (max-width: 600px) { .bike-dashboard { padding: 10px; } .bike-panel { padding: 10px; } .bike-dashboard .DateRangePickerInput { display: flex; flex-wrap: wrap; } }

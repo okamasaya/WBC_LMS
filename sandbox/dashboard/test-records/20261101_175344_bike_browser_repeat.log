@@ -1,0 +1,6 @@
+PASS actual mouse zoom changes viewport without filtering KPI
+PASS apply zoom filters KPI/details/CSV consistently; back restores full period
+PASS real monthly point -> daily -> hourly drill, source switch and two-level back
+PASS weekly grouping, observed-row mean, metric switch, comparison and rolling chart
+PASS reset restores viewport even when filter values are unchanged
+PASS empty-filter recovery, mobile width and no JS/HTTP errors

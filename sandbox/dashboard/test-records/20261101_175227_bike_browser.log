@@ -1,0 +1,5 @@
+PASS actual mouse zoom changes viewport without filtering KPI
+PASS apply zoom filters KPI/details/CSV consistently; back restores full period
+Error: Expected 31 rows; actual: 抽出 366行 ｜ 貸出合計 2,049,576回 ｜ 観測1日平均 5,599.93回 ｜ 表示 月別; navigation: 初期表示に戻しました。
+    at hasCount (/workspace/WBC_LMS/sandbox/dashboard/tests/bike_timeseries.browser.cjs:6:18)
+    at async /workspace/WBC_LMS/sandbox/dashboard/tests/bike_timeseries.browser.cjs:39:26
