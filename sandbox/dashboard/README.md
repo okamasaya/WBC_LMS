@@ -180,6 +180,8 @@ node sandbox/dashboard/tests/bike_operations.browser.cjs
 
 リポジトリルートで`python -m sandbox.dashboard.bkt.flat_app`（8055）。標準BKTの8054画面と分けて、32パターン、段階比較、CSV・仮定JSONを確認できます。[開発ログ](bkt/DEVELOPMENT_LOG_ASSISTED_20261102.md) と [テスト記録](bkt/TEST_RECORD_ASSISTED_20261102.md) も保存しています。
 
+8055には[実CSVの取込](bkt/README.md#実csvを8055画面へ読み込む)も追加しました。現行prototypeのQuestionResult・統合Raw・Sessionをまとめて選択でき、同じ回答を二重計上せず、正誤・自信度・解説後の理解度で独立回答の補助モデルを確認できます。点数は使いません。
+
 ### JLPT N2の20回分モック
 
 [bkt/data/mock_jlpt_n2_20_sessions/](bkt/data/mock_jlpt_n2_20_sessions/README.md)に、架空学習者1人・20回・各30問の600回答をCSVで保存しています。回答はQuestionResult.csv、回次別の概要はSession.csvです。生成条件・列定義・SQLite案・[検証記録](bkt/TEST_RECORD_MOCK_DATA_20261102.md)も参照できます。8055の「JLPT N2・20回分のモック」から確認できます。

@@ -1,0 +1,12 @@
+﻿=== Session ===
+DataSchemaVersion,SessionID,StudentID,ExamID,ExamType,ExamLevel,ExamTitle,Mode,UseConfidence,DifficultyMode,DifficultyModeLabel,SelectedCategoryLevel1,SelectedCategoryLevel2,SelectedCategoryLevel3,StartAt,EndAt,TotalTimeSec,TotalQuestions,AnsweredQuestions,UnansweredQuestions,CorrectCount,IncorrectCount,WrongCount,ScoreRate,SourceQuestionFiles,CreatedAt
+2.0.0,SYNTHETIC_SESSION,,,,,,,,,,,,,2026-11-02T00:00:00Z,2026-11-02T00:00:10Z,,3,2,1,1,,,33,,
+
+=== QuestionResult ===
+DataSchemaVersion,ResultID,SessionID,StudentID,ExamID,ExamType,ExamLevel,ExamTitle,Mode,UseConfidence,DifficultyMode,QuestionSequence,QuestionID,SkillID,SkillName,CategoryLevel1,CategoryLevel2,CategoryLevel3,CategoryLabel,Difficulty,DifficultyLabel,QuestionText,UserAnswerDisplayedPosition,UserAnswerText,CorrectAnswerDisplayedPosition,CorrectAnswerText,CorrectAnswerSource,IsAnswered,IsCorrect,ResponseTimeMs,AnswerTimeSec,ElapsedTimeSec,AnsweredAt,ConfidenceLevel,ConfidenceLabel,UnderstandingLevel,UnderstandingLabel,ReviewFlag,DuringExamReviewFlag,Explanation,CreatedAt
+2.0.0,SYNTHETIC_IMPORT_1,SYNTHETIC_SESSION,,,,,,Drill,,,1,SYNTHETIC_QUESTION_1,SYNTHETIC_SKILL,合成スキル,,,,,,,取込テストの架空問題,,,,,,TRUE,TRUE,,,,2026-11-02T00:00:00Z,2,,0,,,,"合成説明です。
+改行・カンマ,引用符""の検証",
+2.0.0,SYNTHETIC_IMPORT_2,SYNTHETIC_SESSION,,,,,,Drill,,,2,SYNTHETIC_QUESTION_2,SYNTHETIC_SKILL,合成スキル,,,,,,,取込テストの架空問題,,,,,,TRUE,FALSE,,,,2026-11-02T00:00:01Z,4,,3,,,,"合成説明です。
+改行・カンマ,引用符""の検証",
+2.0.0,SYNTHETIC_IMPORT_3,SYNTHETIC_SESSION,,,,,,Drill,,,3,SYNTHETIC_QUESTION_3,SYNTHETIC_SKILL,合成スキル,,,,,,,取込テストの架空問題,,,,,,FALSE,FALSE,,,,,,,,,,,"合成説明です。
+改行・カンマ,引用符""の検証",

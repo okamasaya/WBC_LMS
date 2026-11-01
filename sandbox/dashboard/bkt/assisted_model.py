@@ -103,7 +103,7 @@ def estimate_flat(records, parameters=None, assumptions=None):
         raise ValueError(f'入力は{MAX_ROWS:,}行以下にしてください。')
     parameters = parameters or BKTParameters()
     assumptions = assumptions or AuxiliaryAssumptions()
-    rows, excluded, seen = [], [], {}
+    rows, excluded, seen, patterns = [], [], {}, {}
     for index, raw in enumerate(records, 1):
         if not isinstance(raw, dict):
             excluded.append({'Row': index, 'ResultID': '', 'Reason': '入力行は項目名を持つ辞書にしてください。'})
@@ -114,7 +114,13 @@ def estimate_flat(records, parameters=None, assumptions=None):
                 excluded.append({'Row': index, 'ResultID': result_id, 'Reason': '未回答（推定しない）'})
                 continue
             correct = boolean(raw.get('IsCorrect'))
-            result = update_flat(correct, raw.get('ConfidenceLevel'), raw.get('UnderstandingLevel'), parameters, assumptions)
+            confidence = level(raw.get('ConfidenceLevel'), range(1, 5), '自信度')
+            understanding = level(raw.get('UnderstandingLevel'), range(4), '理解度')
+            key = (correct, confidence, understanding)
+            # 独立回答では同じ3項目は同じ推定値。1回の呼出し内だけで再利用する。
+            if key not in patterns:
+                patterns[key] = update_flat(correct, confidence, understanding, parameters, assumptions)
+            result = patterns[key]
         except (ValueError, TypeError) as error:
             excluded.append({'Row': index, 'ResultID': result_id, 'Reason': str(error)})
             continue

@@ -1,0 +1,2 @@
+﻿DataSchemaVersion,SessionID,StudentID,ExamID,ExamType,ExamLevel,ExamTitle,Mode,UseConfidence,DifficultyMode,DifficultyModeLabel,SelectedCategoryLevel1,SelectedCategoryLevel2,SelectedCategoryLevel3,StartAt,EndAt,TotalTimeSec,TotalQuestions,AnsweredQuestions,UnansweredQuestions,CorrectCount,IncorrectCount,WrongCount,ScoreRate,SourceQuestionFiles,CreatedAt
+2.0.0,SYNTHETIC_SESSION,,,,,,,,,,,,,2026-11-02T00:00:00Z,2026-11-02T00:00:10Z,,3,2,1,1,,,33,,

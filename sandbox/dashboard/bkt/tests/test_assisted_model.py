@@ -128,8 +128,8 @@ class FlatHTTPTests(unittest.TestCase):
         items=outputs if multiple else [outputs]
         output_json=[{'id':item.component_id,'property':item.component_property} for item in items]
         payload={'output':key,'outputs':output_json if multiple else output_json[0],
-                 'inputs':[{**item,'value':values.get(item['id'])} for item in definition['inputs']],
-                 'state':[{**item,'value':values.get(item['id'])} for item in definition['state']],
+                 'inputs':[{**item,'value':values.get(item['id']+'.'+item['property'],values.get(item['id']))} for item in definition['inputs']],
+                 'state':[{**item,'value':values.get(item['id']+'.'+item['property'],values.get(item['id']))} for item in definition['state']],
                  'changedPropIds':[changed]}
         with app.server.test_client() as client:response=client.post('/_dash-update-component',json=payload)
         self.assertEqual(response.status_code,200,response.get_data(as_text=True))

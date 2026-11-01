@@ -1,0 +1,14 @@
+PASS synthetic answered CSVs: three-file import, deduplication, missing identity, understanding 0, filtered result CSV, and failed-import stale-result clearing
+PASS attached real three-file exports: 10 unique unanswered rows, 10 duplicate rows, zero inferred answers, disabled estimate downloads, and 20 reason rows
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(await page.locator('#flat-export-excluded').isDisabled())
+
+    at /workspace/WBC_LMS/sandbox/dashboard/bkt/tests/csv_import.browser.cjs:41:69 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
