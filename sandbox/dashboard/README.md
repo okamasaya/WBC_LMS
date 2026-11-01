@@ -119,3 +119,43 @@ node sandbox/dashboard/tests/bike_timeseries.browser.cjs
 ```
 
 [時系列機能のテスト記録](TEST_RECORD_BIKE_20261101.md) を参照してください。
+
+## ローカルでの更新・接続・出力
+
+sample_dsbd_bike.py（8053）に次の機能を追加しました。requirementsの追加は不要です。
+
+- **接続先**：CSV／SQLiteを切替。SQLiteは初回だけCSVから`.local/bike.sqlite3`を作ります。以降はDB自体を読み、CSVを自動で再取り込みしません。`.local/`はGit対象外です。
+- **更新**：「データを再読込」または「60秒ごとに再読込」。表示する時刻は読込確認時刻（JST）で、2011〜2012年のサンプルを現在の実データと誤解しないようにしています。
+- **失敗時**：必須列、整数・範囲、重複日時、回数整合性、日別と時間別の日次合計を検証。失敗時はエラーを示し、前回のデータを保持します。
+- **版管理**：内容のハッシュでデータ版を判定。同じデータの再読込では計算を再利用し、内容が変われば再集計。CSV出力も、その画面のデータ版を使います。
+- **キャッシュ**：公開サンプルの集計結果だけをプロセス内で最大16条件分保存。利用者の選択条件そのものは共有しません。「開発用の処理情報」で計算時間とhit/missを確認できます。
+- **表**：サーバーで全明細を並べ替えて、1ページ15行だけを転送。CSVには抽出された全行を含めます。
+- **PNG**：各グラフ右上のカメラボタンで日本語ラベル付きの画像を保存。
+- **印刷・PDF**：「印刷・PDF保存」でブラウザの印刷ダイアログを開く。印刷先からPDFを選んでください。表は表示中のページだけです。自動配信や全明細帳票ではありません。
+
+### SQLite更新の試し方
+
+元CSVを変更せず、ローカルDBで2012年1月1日の貸出を1回増やす例です。再読込前後のKPIを比較できます。
+
+```python
+import sqlite3
+with sqlite3.connect('sandbox/dashboard/.local/bike.sqlite3') as conn:
+    conn.execute("UPDATE day SET casual=casual+1, cnt=cnt+1 WHERE dteday='2012-01-01'")
+    conn.execute("UPDATE hour SET casual=casual+1, cnt=cnt+1 WHERE dteday='2012-01-01' AND hr=0")
+```
+
+両方を同じトランザクションで更新します。元に戻す場合は同じ条件で`+1`を`-1`へ置き換えます。片方だけ変更すると整合性検証で失敗し、前回の画面が維持されます。テストでは一時フォルダーのDBを使い、実際のCSVや`.local`のDBを変更しません。
+
+### 保存と性能の範囲
+
+このサンプルは単一Pythonプロセスでのローカル動作を対象とします。メモリー上のスナップショットは最大8版で、期限切れの画面は再読込を案内します。キャッシュ・更新時刻・履歴は永続保存や複数ワーカー間共有ではありません。DBパスはサンプル内で固定し、画面から任意のSQLは実行しません。
+
+100万行のベンチマークは集計関数だけを測る合成データです。CSV入力検証、描画、ネットワーク、複数利用者を含む100万行対応を保証するものではありません。
+
+```sh
+/workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/tests -p 'test_*.py' -v
+node sandbox/dashboard/tests/bike_operations.browser.cjs
+/workspace/.venvs/wbc-lms/bin/python sandbox/dashboard/tests/benchmark_bike.py --rows 1000000
+```
+
+[機能確認一覧](FEATURE_CHECKLIST.md) と [更新・出力・性能のテスト記録](TEST_RECORD_OPERATIONS_20261101.md) に対応状況をまとめています。

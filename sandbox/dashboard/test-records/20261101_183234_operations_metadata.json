@@ -1,0 +1,128 @@
+{
+  "base_commit": "976e22a5171a623f703dedc6108e05dbe759f49e",
+  "started_jst": "2026-11-01T18:32:34.445968+09:00",
+  "source_state": "base commit plus changes identified by SHA-256",
+  "versions": {
+    "python": "3.12.14",
+    "dash": "4.4.1",
+    "plotly": "7.1.0",
+    "pandas": "3.1.0"
+  },
+  "sha256": {
+    "sandbox/dashboard/alp_app.py": "b8b8b8e9e776c0b8bae394581290b3ab6105b254e3a00034bd850a213bdb64e6",
+    "sandbox/dashboard/app.py": "eac5b9bfc0519df4c14dba99a66bf9bd37645f8ad9de01daf647b8d7b8dfe472",
+    "sandbox/dashboard/app_1.py": "24fd4cd59cc0f97cc92e84620ae39100f4d5966c1c04e07e746d7d0ec7a07282",
+    "sandbox/dashboard/assets/alp.css": "901368df0027544a27af4e45cebd251093382114c86bda7126bfd8c4212855da",
+    "sandbox/dashboard/assets/bike.css": "3a4bb1e4872554b39f58f8be9ca348be12851e94e38e0fc8acc697d7a19c6504",
+    "sandbox/dashboard/assets/iris.css": "18f0f0ce1863d8e684c280feacbb10839f6899b0f1ccd3bcb4a6ebb6c3930572",
+    "sandbox/dashboard/bike_app.py": "60f4bcd7ca2a925fe1c8ea57c775d9f0d215b2994b3cad3f61ab57303cc2fc3e",
+    "sandbox/dashboard/bike_data_service.py": "210f63ff5a4dde9a4a2fbd3e5fdf3a44478cd073f4201e32a538b91b3148ca37",
+    "sandbox/dashboard/bike_timeseries.py": "8859a8f4e3d31c7e2c08fb27105847092b76b34237cfc1eed3407e3cca971a36",
+    "sandbox/dashboard/bkt.py": "d96f42e54dfad4ff522eccad595e8985c928dec5b92c100c54decb9a1ad9e5eb",
+    "sandbox/dashboard/dashboard_views.py": "bad7ab3fa8236cdc596ab596ee64a20d9db6d90a2f62bc957db58496d35e822a",
+    "sandbox/dashboard/demo_data.py": "b35f51c721db4566319806629b12e7623d17769113d2ec49d1c4a998703745ce",
+    "sandbox/dashboard/iris_crossfilter.py": "8e80a7696731dd4e5b2bfaba41e7b7ebd61872489be05db69b35d5b4179436ed",
+    "sandbox/dashboard/iris_view_state.py": "eb50fa851fbea2f30c43ba9052f72be4a447af945af55b65708d4afeb0c3d1cd",
+    "sandbox/dashboard/learning_data.py": "e9bdd27f8c2baf20d944c0ea475f462c7b3d86589d534dea3932c9b4fd8cfee7",
+    "sandbox/dashboard/sample_dsbd_bike.py": "10661927ec9684e947f7722a02574e7b4a14a76e7f04a08a0154640c75237fbc",
+    "sandbox/dashboard/sample_dsbd_iris.py": "ab1beb270dd64bb8dfd2724e428850a5090ac96ff5e711f4cd7cb1357183116a",
+    "sandbox/dashboard/tests/benchmark_bike.py": "d37fc9ddd945ec29349d990f1d109ad05c68547ed027e88258ed3aa6d314ae13",
+    "sandbox/dashboard/tests/bike_operations.browser.cjs": "d32c20cb4fb68a3cc522fe8bbb4e1da34f38908d738dde67e382d1751d7d0647",
+    "sandbox/dashboard/tests/bike_timeseries.browser.cjs": "16eb2abab041592a70f583f3589258cc2d45e3df38ab52aea8ad92b37bfc9ea1",
+    "sandbox/dashboard/tests/browser.cjs": "3097f64ea91df07ca62e008e09baa626f4a2b35a947f4b8357aef28d1b96e1c5",
+    "sandbox/dashboard/tests/iris.browser.cjs": "cde331afd2432c252c1456d95f3bf15ba8b5be153f9ec572b0f067137f0d57a4",
+    "sandbox/dashboard/tests/iris_state.browser.cjs": "d726b205e9568c0c1cad8be0a58128f3fbd8104a075a80715a29578c69c02fc8",
+    "sandbox/dashboard/tests/sample_iris.browser.cjs": "63d6f4e71946fd7c3000740c15b979218696a9cde891d7949edac0a50e61d52a",
+    "sandbox/dashboard/tests/test_bike_operations.py": "f81433bdc9a986b6c6ad697ce18241b7c48492b8e0839f1100dd3e49737953b9",
+    "sandbox/dashboard/tests/test_bike_timeseries.py": "4554c1176857e86794dbc65222fa2101a9846da2c2e44d7d1550f9cc272da734",
+    "sandbox/dashboard/tests/test_bkt.py": "2e3f54841435c9523bc4650ded6bb893b534997e0334b751ee6f1ea8e5e01305",
+    "sandbox/dashboard/tests/test_dashboard.py": "44502f2c6a6d0bc4797989d7a6731750fec867b1ba30609af8f11bd12bc57910",
+    "sandbox/dashboard/tests/test_iris_crossfilter.py": "8f92ead9437bc5586ecb13472963873f4931b5b4f4ce79ef4656bf6a13b2a756",
+    "sandbox/dashboard/tests/test_iris_view_state.py": "f2091a64a48d17ffe08929a4c6490be62e72ecba17ff718c640395c87c7fb19d"
+  },
+  "results": [
+    {
+      "name": "python",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox/dashboard/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 4.065,
+      "log": "test-records/20261101_183234_operations_python.log"
+    },
+    {
+      "name": "timeseries_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/tests/bike_timeseries.browser.cjs"
+      ],
+      "exit_code": 0,
+      "seconds": 6.231,
+      "log": "test-records/20261101_183234_operations_timeseries_browser.log"
+    },
+    {
+      "name": "operations_browser",
+      "command": [
+        "node",
+        "sandbox/dashboard/tests/bike_operations.browser.cjs"
+      ],
+      "exit_code": 0,
+      "seconds": 6.254,
+      "log": "test-records/20261101_183234_operations_operations_browser.log"
+    },
+    {
+      "name": "benchmark",
+      "command": [
+        "/workspace/.venvs/wbc-lms/bin/python",
+        "sandbox/dashboard/tests/benchmark_bike.py",
+        "--rows",
+        "1000000"
+      ],
+      "exit_code": 0,
+      "seconds": 0.44,
+      "log": "test-records/20261101_183234_operations_benchmark.log"
+    }
+  ],
+  "benchmark": {
+    "rows": 1000000,
+    "synthetic": true,
+    "scope": "aggregation functions only; repeated hourly observations, not a validated production dataset",
+    "python": "3.12.14",
+    "pandas": "3.1.0",
+    "total": 189023818,
+    "measurements": {
+      "M": {
+        "milliseconds": 46.678,
+        "buckets": 24
+      },
+      "W": {
+        "milliseconds": 37.185,
+        "buckets": 106
+      },
+      "D": {
+        "milliseconds": 37.683,
+        "buckets": 731
+      },
+      "H": {
+        "milliseconds": 30.634,
+        "buckets": 17544
+      }
+    },
+    "cache": {
+      "cold_ms": 41.648,
+      "hit_ms": 0.036,
+      "hits": 1,
+      "misses": 1
+    },
+    "threshold": null
+  },
+  "completed_jst": "2026-11-01T18:32:51.437329+09:00"
+}

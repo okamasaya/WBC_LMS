@@ -21,9 +21,9 @@ def bounds(start, end):
     return start.normalize(), end.normalize()
 
 
-def filter_rows(source, start, end, weather, working):
+def filter_rows(source, start, end, weather, working, frames=None):
     start, end = bounds(start, end)
-    frame = FRAMES[source]
+    frame = (FRAMES if frames is None else frames)[source]
     mask = frame.timestamp.between(start, end + pd.Timedelta(days=1), inclusive='left')
     mask &= frame.weathersit.isin(weather or [])
     if working != 'all':
@@ -50,11 +50,11 @@ def aggregate(frame, start, end, level, metric, statistic):
     return result
 
 
-def previous_year(frame, source, start, end, weather, working, metric, statistic):
+def previous_year(frame, source, start, end, weather, working, metric, statistic, frames=None):
     """同じ月日で前年を比較。前年にない2/29や未収録の2010年はNaN。"""
     start, end = bounds(start, end)
     current = aggregate(frame, start, end, 'D', metric, statistic)['value']
-    prior = filter_rows(source, start - pd.DateOffset(years=1), end - pd.DateOffset(years=1), weather, working)
+    prior = filter_rows(source, start - pd.DateOffset(years=1), end - pd.DateOffset(years=1), weather, working, frames=frames)
     prior_daily = aggregate(prior, start - pd.DateOffset(years=1), end - pd.DateOffset(years=1), 'D', metric, statistic)['value']
     aligned = []
     for date in current.index:
@@ -67,10 +67,10 @@ def previous_year(frame, source, start, end, weather, working, metric, statistic
     return pd.DataFrame({'今回': current, '前年の同月日': aligned}, index=current.index)
 
 
-def quality(start, end):
+def quality(start, end, frames=None):
     start, end = bounds(start, end)
     expected = pd.date_range(start, end + pd.Timedelta(days=1), freq='h', inclusive='left')
-    present = pd.DatetimeIndex(FRAMES['hour'].timestamp)
+    present = pd.DatetimeIndex((FRAMES if frames is None else frames)['hour'].timestamp)
     return len(expected.difference(present))
 
 

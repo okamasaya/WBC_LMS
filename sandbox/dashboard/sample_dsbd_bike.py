@@ -1,4 +1,9 @@
 """Dash入門・時系列編。起動: python sample_dsbd_bike.py（ポート8053）。"""
+from datetime import datetime, timezone, timedelta
+from math import ceil
+from time import perf_counter
+from bike_data_service import BikeDataService
+import sqlite3
 import pandas as pd
 import plotly.graph_objects as go
 from dash import Dash, Input, Output, State, ctx, dcc, html, dash_table, no_update
@@ -6,6 +11,14 @@ from bike_timeseries import (filter_rows, aggregate, previous_year, quality, bou
                              drill_period, METRICS, LEVELS, WEATHER, MIN_DATE, MAX_DATE)
 
 app = Dash(__name__, title='Bike時系列BIサンプル')
+SERVICE = BikeDataService()
+INITIAL_DATA = SERVICE.reload('csv')
+
+
+def graph(identifier):
+    return dcc.Graph(id=identifier, config={'displaylogo': False, 'scrollZoom': True,
+        'displayModeBar': True, 'toImageButtonOptions': {'format': 'png', 'filename': identifier, 'scale': 2}})
+
 
 
 def dropdown(identifier, label, options, value):
@@ -14,9 +27,18 @@ def dropdown(identifier, label, options, value):
 
 app.layout = html.Main(className='bike-dashboard', children=[
     dcc.Store(id='bike-history', data=[]),
+    dcc.Store(id='bike-data', data=INITIAL_DATA),
+    dcc.Store(id='bike-print-signal'),
+    dcc.Interval(id='bike-refresh-clock', interval=60000, disabled=True),
     html.H1('Bike時系列BIサンプル'),
     html.P('集計 → 期間指定 → 詳細確認。グラフのズームは表示だけを変え、「表示期間を全体に適用」でKPI・明細も絞り込みます。'),
     html.Section(className='bike-panel', children=[
+        dropdown('bike-backend', 'データ接続先', {'csv': 'CSV', 'sqlite': 'SQLite（ローカルDB）'}, 'csv'),
+        html.Button('データを再読込', id='bike-refresh'),
+        dcc.Checklist(id='bike-auto-refresh', options=[{'label': '60秒ごとに再読込', 'value': 'auto'}], value=[]),
+        html.P(id='bike-refresh-status', role='status'),
+        html.Button('印刷・PDF保存', id='bike-print'),
+        html.P('グラフ右上のカメラでPNG保存できます。PDFはブラウザの印刷先で選びます。印刷する表は表示中のページのみ、全明細はCSVをご利用ください。'),
         html.Label(['期間', dcc.DatePickerRange(id='bike-dates', min_date_allowed=MIN_DATE, max_date_allowed=MAX_DATE, start_date='2012-01-01', end_date=MAX_DATE, display_format='YYYY-MM-DD')]),
         dropdown('bike-source', '集計元（日別と時間別を重複加算しません）', {'day': '日別データ', 'hour': '時間別データ'}, 'day'),
         dropdown('bike-level', '表示粒度', LEVELS, 'M'),
@@ -31,15 +53,17 @@ app.layout = html.Main(className='bike-dashboard', children=[
         html.P(id='bike-kpi', className='bike-panel', role='status'),
         html.P(id='bike-quality'),
         html.P('主グラフの点をクリックすると、月・週→日→時間帯へ進みます。時間別表示は時間別CSVを使用します。戻るボタンで前の期間と粒度へ戻れます。'),
-        dcc.Graph(id='bike-series', config={'displaylogo': False, 'scrollZoom': True}),
-        dcc.Graph(id='bike-comparison'),
+        graph('bike-series'),
+        graph('bike-comparison'),
         html.P('前年は同じ月日を対応させ、同じ天候・勤務日条件を適用します。曜日は一致しません。前年に存在しない2月29日や未収録期間は空白です。'),
-        dcc.Graph(id='bike-moving'),
+        graph('bike-moving'),
         html.P('移動平均は直近7暦日がすべて観測されている場所だけを表示します。条件による除外や未観測の時間・日を0で補完しません。破線は抽出された日別値の平均です。'),
         html.H2('根拠となる明細'),
         html.Button('抽出明細をCSV保存', id='bike-export'), dcc.Download(id='bike-download'),
-        dash_table.DataTable(id='bike-table', page_size=15, sort_action='native', style_table={'overflowX': 'auto'}),
+        html.P(id='bike-export-status', role='status'),
+        dash_table.DataTable(id='bike-table', page_current=0, page_size=15, page_action='custom', page_count=0, sort_action='custom', sort_by=[], style_table={'overflowX': 'auto'}),
     ])),
+    html.Details([html.Summary('開発用の処理情報'), html.P(id='bike-processing')]),
     html.Footer('データ: Fanaee-T & Gama (2013), DOI:10.1007/s13748-013-0040-3。列定義・出典はdata/bike/Readme.txt。ズーム、凡例、表の並べ替えはKPIへ影響しません。'),
 ])
 
@@ -105,16 +129,14 @@ def figure(title):
 
 
 # 2. すべての表示とCSVが同じ抽出関数を使う。
-def selected_rows(source, start, end, weather, working, level):
-    return filter_rows('hour' if level == 'H' else source, start, end, weather, working)
+def selected_rows(source, start, end, weather, working, level, frames=None):
+    return filter_rows('hour' if level == 'H' else source, start, end, weather, working, frames=frames)
 
 
-@app.callback(Output('bike-kpi', 'children'), Output('bike-quality', 'children'), Output('bike-series', 'figure'), Output('bike-comparison', 'figure'), Output('bike-moving', 'figure'), Output('bike-table', 'data'), Output('bike-table', 'columns'),
-              Input('bike-source', 'value'), Input('bike-dates', 'start_date'), Input('bike-dates', 'end_date'), Input('bike-weather', 'value'), Input('bike-working', 'value'), Input('bike-level', 'value'), Input('bike-metric', 'value'), Input('bike-statistic', 'value'), Input('bike-reset', 'n_clicks'))
-def render(source, start, end, weather, working, level, metric, statistic, reset_count=0):
+def _render(source, start, end, weather, working, level, metric, statistic, frames):
     charts = [figure(title) for title in ['選択期間の推移', '前年同月日との比較（日別）', '日別値と7日移動平均']]
     try:
-        frame = selected_rows(source, start, end, weather, working, level)
+        frame = selected_rows(source, start, end, weather, working, level, frames=frames)
         values = aggregate(frame, start, end, level, metric, statistic)
     except (ValueError, TypeError):
         for chart in charts:
@@ -125,9 +147,9 @@ def render(source, start, end, weather, working, level, metric, statistic, reset
     mean = f'{frame[metric].mean():,.2f}' if len(frame) else '—'
     kpi = f'抽出 {len(frame):,}行 ｜ {METRICS[metric]} {frame[metric].sum():,}回 ｜ 観測1{unit}平均 {mean}回 ｜ 表示 {LEVELS[level]}'
     charts[0].add_trace(go.Scatter(x=values.index, y=values.value, mode='lines+markers', name=METRICS[metric], connectgaps=False))
-    charts[0].update_layout(dragmode='zoom', uirevision=str((start, end, level, source, metric, statistic, reset_count)), title=f'{LEVELS[level]} / {METRICS[metric]} / {"合計" if statistic == "sum" else "観測行平均"}')
+    charts[0].update_layout(dragmode='zoom', uirevision=str((start, end, level, source, metric, statistic)), title=f'{LEVELS[level]} / {METRICS[metric]} / {"合計" if statistic == "sum" else "観測行平均"}')
     charts[0].update_xaxes(type='date', rangeslider={'visible': True})
-    comparison = previous_year(frame, effective_source, start, end, weather, working, metric, statistic)
+    comparison = previous_year(frame, effective_source, start, end, weather, working, metric, statistic, frames=frames)
     for name in comparison:
         charts[1].add_trace(go.Scatter(x=comparison.index, y=comparison[name], name=name, connectgaps=False))
     if not comparison['前年の同月日'].notna().any():
@@ -142,20 +164,85 @@ def render(source, start, end, weather, working, level, metric, statistic, reset
             chart.add_annotation(text='条件に合うデータがありません。', x=.5, y=.5, xref='paper', yref='paper', showarrow=False)
     for chart in charts:
         chart.update_yaxes(title='貸出回数（平均指定時は観測行平均）')
-    missing = quality(start, end)
+    missing = quality(start, end, frames=frames)
     message = f'元の時間別CSVで未観測の時間枠：{missing:,}。天候・勤務日フィルターによる除外とは別に計算。欠損を0に置換しません。'
     rows = frame.drop(columns='timestamp').to_dict('records')
     columns = [{'id': name, 'name': name} for name in frame.columns if name != 'timestamp']
     return kpi, message, *charts, rows, columns
 
 
-@app.callback(Output('bike-download', 'data'), Input('bike-export', 'n_clicks'), State('bike-source', 'value'), State('bike-dates', 'start_date'), State('bike-dates', 'end_date'), State('bike-weather', 'value'), State('bike-working', 'value'), State('bike-level', 'value'), prevent_initial_call=True)
-def export(_, source, start, end, weather, working, level):
+# 3. データ版と条件をキャッシュキーに含める。選択状態そのものは共有しない。
+def render(source, start, end, weather, working, level, metric, statistic, reset_count=0, data_token=None):
+    token = data_token or INITIAL_DATA
+    frames = SERVICE.frames(token)
+    key = (token['version'], source, start, end, tuple(sorted(weather or [])), working, level, metric, statistic)
+    result = SERVICE.cached(key, lambda: _render(source, start, end, weather, working, level, metric, statistic, frames))
+    result[2].update_layout(uirevision=str((*key, reset_count)))
+    return result
+
+
+def page_rows(rows, current, size, sort_by):
+    frame = pd.DataFrame(rows)
+    valid = [item for item in (sort_by or []) if item.get('column_id') in frame.columns]
+    if valid:
+        frame = frame.sort_values([item['column_id'] for item in valid], ascending=[item.get('direction') != 'desc' for item in valid], kind='stable')
+    size = max(1, min(int(size or 15), 100))
+    pages = max(1, ceil(len(frame) / size))
+    current = max(0, min(int(current or 0), pages - 1))
+    return frame.iloc[current * size:(current + 1) * size].to_dict('records'), pages, current
+
+
+@app.callback(Output('bike-kpi', 'children'), Output('bike-quality', 'children'), Output('bike-series', 'figure'), Output('bike-comparison', 'figure'), Output('bike-moving', 'figure'), Output('bike-table', 'data'), Output('bike-table', 'columns'), Output('bike-table', 'page_count'), Output('bike-table', 'page_current'), Output('bike-processing', 'children'),
+              Input('bike-source', 'value'), Input('bike-dates', 'start_date'), Input('bike-dates', 'end_date'), Input('bike-weather', 'value'), Input('bike-working', 'value'), Input('bike-level', 'value'), Input('bike-metric', 'value'), Input('bike-statistic', 'value'), Input('bike-reset', 'n_clicks'), Input('bike-data', 'data'), Input('bike-table', 'page_current'), Input('bike-table', 'page_size'), Input('bike-table', 'sort_by'))
+def update_view(source, start, end, weather, working, level, metric, statistic, reset_count, token, current, size, sort_by):
+    before = perf_counter()
     try:
-        frame = selected_rows(source, start, end, weather, working, level).drop(columns='timestamp')
+        result = list(render(source, start, end, weather, working, level, metric, statistic, reset_count, token))
+    except ValueError as error:
+        charts = [figure('データの再読込が必要です') for _ in range(3)]
+        return str(error), '', *charts, [], [], 1, 0, ''
+    if ctx.triggered_id != 'bike-table':
+        current = 0
+    rows, pages, current = page_rows(result[5], current, size, sort_by)
+    result[5] = rows
+    info = f"処理 {(perf_counter() - before) * 1000:.1f} ms / キャッシュ hit={SERVICE.hits}, miss={SERVICE.misses} / データ版 {token['version'][:20]} / 表は最大{size}行ずつ転送"
+    return *result, pages, current, info
+
+
+@app.callback(Output('bike-refresh-clock', 'disabled'), Input('bike-auto-refresh', 'value'))
+def toggle_refresh(enabled):
+    return 'auto' not in (enabled or [])
+
+
+@app.callback(Output('bike-data', 'data'), Output('bike-refresh-status', 'children'),
+              Input('bike-refresh', 'n_clicks'), Input('bike-refresh-clock', 'n_intervals'), Input('bike-backend', 'value'))
+def refresh_data(clicks, ticks, backend):
+    try:
+        token = SERVICE.reload(backend)
+    except (ValueError, OSError, pd.errors.ParserError, sqlite3.Error) as error:
+        return no_update, f'再読込に失敗しました。前回のデータを保持しています。理由: {error}'
+    checked = datetime.fromisoformat(token['checked_at']).astimezone(timezone(timedelta(hours=9)))
+    return token, f"{backend.upper()} 読込確認: {checked:%Y-%m-%d %H:%M:%S} JST。内容が同じなら計算結果を再利用します。"
+
+
+app.clientside_callback("""function(clicks) { if (!clicks) return window.dash_clientside.no_update;
+    window.print(); return Date.now(); }""", Output('bike-print-signal', 'data'), Input('bike-print', 'n_clicks'), prevent_initial_call=True)
+
+
+def export(_, source, start, end, weather, working, level, data_token=None):
+    try:
+        frame = selected_rows(source, start, end, weather, working, level, frames=SERVICE.frames(data_token or INITIAL_DATA)).drop(columns='timestamp')
     except (ValueError, TypeError):
         return no_update
     return dcc.send_data_frame(frame.to_csv, 'bike_timeseries_details.csv', index=False)
+
+
+@app.callback(Output('bike-download', 'data'), Output('bike-export-status', 'children'), Input('bike-export', 'n_clicks'), State('bike-source', 'value'), State('bike-dates', 'start_date'), State('bike-dates', 'end_date'), State('bike-weather', 'value'), State('bike-working', 'value'), State('bike-level', 'value'), State('bike-data', 'data'), prevent_initial_call=True)
+def download_data(*args):
+    result = export(*args)
+    if result is no_update:
+        return no_update, 'CSVを保存できません。期間を確認し、必要ならデータを再読込してください。'
+    return result, '抽出した全明細のCSVを保存しました。'
 
 
 if __name__ == '__main__':
