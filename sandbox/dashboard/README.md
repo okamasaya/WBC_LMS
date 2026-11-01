@@ -167,3 +167,9 @@ node sandbox/dashboard/tests/bike_operations.browser.cjs
 ## 再確認記録
 
 - [2026-11-02：エラー表示の報告を受けた時系列・更新機能の再確認](TEST_RECORD_RECHECK_20261102.md)
+
+## ALP–BKTの作業領域
+
+既存の推定・CSV取込・ALP画面・設定・専用CSS・テストを [bkt/](bkt/README.md) へ整理しました。新しい入口はリポジトリルートで`python -m sandbox.dashboard.bkt`（8054）です。旧alp_app.py（8051）と従来の全体テストは互換入口として残しています。
+
+モデルだけの利用方法、資料、次の進め方は [BKT README](bkt/README.md) を参照してください。Iris・Bikeの保留事項とは別の作業です。過去のログ・ハッシュ内のパスは当時の配置として保持しています。

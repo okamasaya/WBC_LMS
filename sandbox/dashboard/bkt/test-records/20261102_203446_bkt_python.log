@@ -1,0 +1,18 @@
+test_chronology_independence_no_mutation_and_traceable_parameters (test_bkt.BKTTests.test_chronology_independence_no_mutation_and_traceable_parameters) ... ok
+test_known_correct_and_incorrect_updates (test_bkt.BKTTests.test_known_correct_and_incorrect_updates) ... ok
+test_parameter_validation_and_impossible_observations (test_bkt.BKTTests.test_parameter_validation_and_impossible_observations) ... ok
+test_skill_parameters_no_learning_and_unanswered (test_bkt.BKTTests.test_skill_parameters_no_learning_and_unanswered) ... ok
+test_booleans_skips_and_identity_confirmation (test_bkt.IngestionTests.test_booleans_skips_and_identity_confirmation) ... ok
+test_duplicates_post_review_changes_and_conflicts (test_bkt.IngestionTests.test_duplicates_post_review_changes_and_conflicts) ... ok
+test_standalone_unified_bom_quotes_and_invalid_csv (test_bkt.IngestionTests.test_standalone_unified_bom_quotes_and_invalid_csv) ... ok
+test_timestamps_are_required_and_utc_normalized (test_bkt.IngestionTests.test_timestamps_are_required_and_utc_normalized) ... ok
+test_http_layout_and_sample_inference_exports (test_dashboard.DashboardTests.test_http_layout_and_sample_inference_exports) ... ok
+test_import_errors_clear_previous_data_and_clear_erases_upload (test_dashboard.DashboardTests.test_import_errors_clear_previous_data_and_clear_erases_upload) ... ok
+test_invalid_parameters_clear_estimations_and_disable_downloads (test_dashboard.DashboardTests.test_invalid_parameters_clear_estimations_and_disable_downloads) ... ok
+test_self_report_zero_is_recorded_and_missing_values_are_not (test_dashboard.DashboardTests.test_self_report_zero_is_recorded_and_missing_values_are_not) ... ok
+test_upload_identity_deduplication_and_encoding (test_dashboard.DashboardTests.test_upload_identity_deduplication_and_encoding) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.128s
+
+OK
