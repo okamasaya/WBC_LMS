@@ -1,0 +1,5 @@
+PASS actual range-slider drag, viewport-only zoom, apply-to-all and back
+PASS CSV/SQLite switch, actual SQL-backed KPI and manual refresh reuses cached aggregation
+PASS server-side next/first page and global numeric sorting with only 15 rendered rows
+PASS automatic timer performs a real refresh (test interval shortened to 1s)
+PASS PNG download, print-button wiring and Chromium PDF generation

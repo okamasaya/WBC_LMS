@@ -163,3 +163,7 @@ node sandbox/dashboard/tests/bike_operations.browser.cjs
 ## 開発記録
 
 - [2026-11-01：DashによるBI機能確認の経緯・実装・検証・保留事項](DEVELOPMENT_LOG_20261101.md)
+
+## 再確認記録
+
+- [2026-11-02：エラー表示の報告を受けた時系列・更新機能の再確認](TEST_RECORD_RECHECK_20261102.md)
