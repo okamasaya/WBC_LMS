@@ -1,0 +1,5 @@
+.flat-dashboard .flat-kpis { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+.flat-dashboard .flat-kpis strong { font-size: 1.5rem; }
+.flat-dashboard .flat-heatmaps { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.flat-dashboard .dash-graph { min-width: 0; }
+@media (max-width: 800px) { .flat-dashboard .flat-kpis { grid-template-columns: repeat(2,minmax(0,1fr)); } .flat-dashboard .flat-heatmaps { grid-template-columns: 1fr; } }
