@@ -1,6 +1,6 @@
 # ALP–BKT：推定・取込・表示の作業領域
 
-現在地と再開時の確認は、[SQLite追加の最新ログ・ToDo](DEVELOPMENT_LOG_SQLITE_20261102.md)を参照してください。CSV取込に加え、Gitに置いた5回分SQLiteの読込まで開発側で検証済みです。利用者自身のPCでの確認は後日の予定です。
+学習結果を確認する新画面は **[学習ダッシュボード（8056）](LEARNING_DASHBOARD.md)** です。SQLiteを標準入力に、数値・大問題別正解率・理解度・サマリーを表示します。[今回のブレイクポイントとToDo](DEVELOPMENT_LOG_LEARNING_DASHBOARD_20261102.md)を記録しました。既存のモデル検証画面は8055のままです。
 
 2026-11-02に、dashboard直下の既存BKT試作をここへ整理しました。Iris・BikeのBI機能確認サンプルとは分けて、次のモデル検証に進むための配置です。整理時点では数式・入力判定・仮パラメータ・推定結果の意味を変更していません。その後、標準BKTを保持したまま、[正誤中心・補助2項目のフラット試作](ASSISTED_MODEL.md)を追加しました。
 
@@ -13,6 +13,9 @@ bkt/
 ├── model.py               # 旧bkt.py：標準BKTの計算
 ├── assisted_model.py      # 正誤中心・補助2項目の独立回答モデル
 ├── flat_app.py            # 補助モデルの確認画面（8055）
+├── learning_dashboard.py  # 学習サマリーの新画面（8056）
+├── dashboard_data.py      # SQLite／控えCSVの集計・書出し
+├── learning_assets/       # 新画面専用CSS（既存画面から分離）
 ├── mock_dataset.py        # N2のモック学習ログを再生成
 ├── prototype_csv.py       # 現行prototype処理による互換CSV生成（Node.js併用）
 ├── csv_inference.py       # 実CSV→必要列→重複確認→補助モデル（画面・CLI共通）
@@ -58,7 +61,7 @@ APIの返す正答予測、正誤観測後の習得確率、学習遷移後の�
 
 - 親のalp_app.pyは互換入口として残し、従来の`python sandbox/dashboard/alp_app.py`は8051で起動します。旧bike_app.pyと同時には起動しないでください。
 - `from bkt import BKTParameters, estimate, update`はdashboardがPythonの検索パスにある場合、パッケージの公開APIとして引き続き使えます。
-- 親のtestsのBKT関連ファイルは、bkt/tests内のテストを読み込む入口です。整理時の既存47件に補助モデル17件、モック10件、現行CSV互換性8件、実CSV接続13件、SQLite10件を加えた全体105件の検証を実行できます。
+- 親のtestsのBKT関連ファイルは、bkt/tests内のテストを読み込む入口です。整理時の既存47件に補助モデル17件、モック10件、現行CSV互換性8件、実CSV接続13件、SQLite10件、学習画面12件を加えた全体117件の検証を実行できます。
 - 親のtests/browser.cjsは従来のALPポート8051へ接続する互換入口です。新しいテストの既定ポートは8054です。
 - learning_data.py、demo_data.py、dashboard_views.py、設定・CSSの実体はこのフォルダーへ移動しました。新しいコードからはパッケージ経由で参照してください。
 
@@ -69,10 +72,10 @@ APIの返す正答予測、正誤観測後の習得確率、学習遷移後の�
 サーバーを起動する前でもPythonテストは実行できます。
 
 ```sh
-# BKTだけ：71件（整理時13＋補助モデル17＋モック10＋CSV互換性8＋実CSV接続13＋SQLite10）
+# BKTだけ：83件（整理時13＋補助モデル17＋モック10＋CSV互換性8＋実CSV接続13＋SQLite10＋学習画面12）
 /workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/bkt/tests -p 'test_*.py' -v
 
-# 既存Iris・Bikeも含む全体：105件（上の71件を含む）
+# 既存Iris・Bikeも含む全体：117件（上の83件を含む）
 /workspace/.venvs/wbc-lms/bin/python -m unittest discover -s sandbox/dashboard/tests -p 'test_*.py' -v
 
 # 8054のサーバー起動後
@@ -82,9 +85,12 @@ node sandbox/dashboard/bkt/tests/browser.cjs
 node sandbox/dashboard/bkt/tests/flat.browser.cjs
 node sandbox/dashboard/bkt/tests/csv_import.browser.cjs
 node sandbox/dashboard/bkt/tests/sqlite_data.browser.cjs
+
+# 8056の学習画面を起動後
+node sandbox/dashboard/bkt/tests/learning_dashboard.browser.cjs
 ```
 
-71件と105件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。CSV互換性テストは現行JavaScript処理を実行するためNode.jsも必要です。
+83件と117件は足し合わせません。テストの探索範囲を無差別に広げると互換入口と実体を重ねて実行し得るため、上記のどちらかのPythonコマンドを使ってください。CSV互換性テストは現行JavaScript処理を実行するためNode.jsも必要です。
 
 今回の配置変更に対する結果は[整理のテスト記録](TEST_RECORD_REORGANIZATION_20261102.md)へ保存しています。
 

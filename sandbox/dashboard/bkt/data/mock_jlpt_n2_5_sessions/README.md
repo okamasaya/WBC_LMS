@@ -41,3 +41,9 @@ python -m sandbox.dashboard.bkt.sqlite_data --create-demo
 保存形式は既存モックの5表スキーマです。QuestionResultの33列は、現行prototypeの41列CSVを丸ごと保存したものではありません。リーダーが推定に必要な14列へ変換し、保存形式にないDataSchemaVersionはNULLにします。正誤・自信度・理解度の意味は共通です。点数・本文・解説を推定へ渡しません。
 
 SQLiteのバイナリは利用するSQLite版で差が出る場合があるため、manifestに版とハッシュを残します。同じ環境の再生成で一致すること、別環境でも論理内容・件数・外部キーが一致することを確認基準にします。原本CSVは[参照用アーカイブ](../prototype_exports/SESS_1793573633671/README.md)に分離しています。
+
+## 学習サマリー画面とCSV控えの追加
+
+[8056の新しい学習画面](../../LEARNING_DASHBOARD.md)では、SQLiteが初期入力です。数値・大問題別正解率・理解度・履歴を確認できます。既存の8055はモデル検証用として保持しています。
+
+SQLiteと同じ5表・同じ150回答の[CSV控え](csv/README.md)も追加しました。`python -m sandbox.dashboard.bkt.dashboard_data --export-csv`でDBから再生成できます。

@@ -58,3 +58,7 @@ http://127.0.0.1:8055 で「データの種類」→「JLPT N2・5回分（SQLit
 - [データの説明・再生成](data/mock_jlpt_n2_5_sessions/README.md)
 - [CSV原本の保存場所](data/prototype_exports/SESS_1793573633671/README.md)
 - [前段階の現状整理とToDo](DEVELOPMENT_LOG_CSV_CONNECTION_20261102.md#現状整理と再開用todo2026-11-02追記)
+
+## 続報：学習画面の初版をブレイクポイントにする
+
+次の依頼により、SQLiteを主入力にした学習サマリー画面（8056）と同内容のCSV控えを追加した。モデル検証の8055は保持する。新画面の表示項目・指標の定義・次の仕様は[学習画面の開発記録](DEVELOPMENT_LOG_LEARNING_DASHBOARD_20261102.md)へまとめ、ここで開発を区切る。

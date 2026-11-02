@@ -187,3 +187,5 @@ node sandbox/dashboard/tests/bike_operations.browser.cjs
 ### JLPT N2の20回分モック
 
 [bkt/data/mock_jlpt_n2_20_sessions/](bkt/data/mock_jlpt_n2_20_sessions/README.md)に、架空学習者1人・20回・各30問の600回答をCSVで保存しています。回答はQuestionResult.csv、回次別の概要はSession.csvです。生成条件・列定義・SQLite案・[検証記録](bkt/TEST_RECORD_MOCK_DATA_20261102.md)も参照できます。8055の「JLPT N2・20回分のモック」から確認できます。
+
+学習結果をまとめて見る[新ダッシュボードは8056](bkt/LEARNING_DASHBOARD.md)です。SQLiteを標準とし、大問題別の正解率・自己申告理解度・モデル試算を分けて表示します。同じ5表のCSV控えも用意しました。今回はこの初版をブレイクポイントとして記録しています。
