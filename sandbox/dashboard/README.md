@@ -1,5 +1,7 @@
 # Dash機能確認
 
+N2の言語知識・読解・聴解を含む[全領域版は8057](bkt/FULL_LEARNING_DASHBOARD.md)。リポジトリルートで`python -m sandbox.dashboard.bkt.full_learning_dashboard`を実行します。架空学習者1人×15回×107問のSQLite／同内容CSVで段階的な絞り込みを確認できます。
+
 専用環境の準備（リポジトリのルートで実行）:
 
 ```sh

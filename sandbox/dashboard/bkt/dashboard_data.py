@@ -20,7 +20,7 @@ JST = timezone(timedelta(hours=9))
 # 点数・問題本文・解説は集計・モデルへ持ち込まない。
 RESULT_FIELDS = ('ResultID', 'SessionID', 'StudentID', 'SkillID', 'SkillName',
                  'QuestionID', 'QuestionSequence', 'SessionNumber', 'Mode',
-                 'CategoryLevel2', 'CategoryLevel3', 'AnsweredAt', 'IsAnswered',
+                 'CategoryLevel1', 'CategoryLevel2', 'CategoryLevel3', 'AnsweredAt', 'IsAnswered',
                  'IsCorrect', 'ConfidenceLevel', 'UnderstandingLevel', 'ResponseTimeMs')
 
 
@@ -134,11 +134,15 @@ def load_learning_data(source='sqlite', database=DEFAULT_DB, csv_folder=CSV_BACK
     return sorted(records, key=lambda r: (r['SessionDate'], r['SessionID'], r['QuestionSequence']))
 
 
-def filter_records(records, student='__all__', skill='__all__', start=None, end=None):
+def filter_records(records, student='__all__', skill='__all__', start=None, end=None,
+                   domain='__all__', group='__all__', session='__all__'):
     if start and end and start[:10] > end[:10]:
         raise ValueError('開始日は終了日以前にしてください。')
     return [r for r in records if (student == '__all__' or r['StudentID'] == student)
             and (skill == '__all__' or r['SkillID'] == skill)
+            and (domain == '__all__' or r['CategoryLevel1'] == domain)
+            and (group == '__all__' or r['CategoryLevel2'] == group)
+            and (session == '__all__' or r['SessionID'] == session)
             and (not start or r['SessionDate'] >= start[:10])
             and (not end or r['SessionDate'] <= end[:10])]
 

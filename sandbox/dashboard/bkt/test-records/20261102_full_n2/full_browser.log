@@ -1,0 +1,3 @@
+PASS 15 sessions, 19 skills, 1605 answers, three domains and full-row exports
+PASS domain -> group -> skill -> session -> nine answer details and matching CSV/model metadata
+PASS parent resets, chart drill-down, all-filter reset, SQLite/CSV parity, independent model, mobile and unchanged DB
