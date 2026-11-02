@@ -1,0 +1,3 @@
+PASS SQLite initial KPIs, nine categories, five sessions, 150-answer download and separate observed/self-report/model metrics
+PASS real bar click filters all panels/exports, reset, date range to 90 answers and model trend without invented confidence band
+PASS SQLite/CSV source parity, all summary exports, responsive desktop/mobile with scrollable tables, no JS/HTTP errors and unchanged SQLite hash

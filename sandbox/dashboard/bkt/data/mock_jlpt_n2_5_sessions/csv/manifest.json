@@ -1,0 +1,20 @@
+{
+  "is_synthetic": true,
+  "purpose": "CSV backup of the five-session SQLite fixture",
+  "source_database": "learning_logs.sqlite3",
+  "source_database_sha256": "f61421388b873e8d1d6650eb3de0c1e0e72bd524c8967f27437307fbf5c6d592",
+  "counts": {
+    "Student": 1,
+    "Skill": 9,
+    "Question": 144,
+    "Session": 5,
+    "QuestionResult": 150
+  },
+  "files_sha256": {
+    "Student.csv": "7615893921b579c5d6343cf7d359b9f64dfc6ee495e899b26ca6a7d925a22c87",
+    "Skill.csv": "5c5f9fef39921d2b2f626a519442b11c735f36c32fc1046bb7a7714acd44bf81",
+    "Question.csv": "5a4754c3f5cd48bcdbdc01a688d05df69dc163cb8fc1c8c1d4fb6d36cb24e642",
+    "Session.csv": "54a71e758382299ec243fc2fbf1a361235862f744b0df65599d956b32548e339",
+    "QuestionResult.csv": "79b7dfc484634aea23752adbcd25b77f4a711b58821691aedc4ab1805b58b7b7"
+  }
+}

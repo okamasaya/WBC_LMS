@@ -1,0 +1,1 @@
+{"InputCount": 150, "Answered": 150, "Correct": 81, "Accuracy": 0.54, "Understanding": 1.94, "UnderstandingCount": 150, "ModelMean": 0.3426943357803351, "ModelCount": 150, "AverageSeconds": 37.18, "Sessions": 5, "Unanswered": 0, "InvalidObservation": 0, "UnderstandingUnavailable": 0, "ConfidenceUnavailable": 0, "ConfidentWrong": 21, "ModelExcluded": 0}
