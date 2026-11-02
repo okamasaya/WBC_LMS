@@ -1,0 +1,36 @@
+{
+  "recorded_at_jst": "2026-11-02T17:13:47.249321+09:00",
+  "python": "3.12.14",
+  "sqlite": "3.53.1",
+  "node": "v24.19.0",
+  "chromium": "Chromium 154.0.8037.57 built on Debian GNU/Linux 13 (trixie)",
+  "base_commit": "7def8cd6b2a35b0e55cf0808e88e3fb9c6d7adef",
+  "code_sha256": {
+    "sandbox/dashboard/bkt/dashboard_data.py": "cfdc7a7daa2e80267204860e2ec335266b3ee6cd3b12aed9d05fa6a9ed99f605",
+    "sandbox/dashboard/bkt/full_mock_dataset.py": "5ee370445550f62b6abcdaf8ead2aa7d82a41d14643bf025282df2e32482c5c2",
+    "sandbox/dashboard/bkt/full_learning_dashboard.py": "7fbb2d26f4a282b533bbc484c5dfd632ebcb2eb0b388dc09d58d159d0068c45c",
+    "sandbox/dashboard/bkt/tests/test_full_mock_dataset.py": "ad3447a83c1073eb7e0fceebfd5867c43a18efbcf902c0ae21fa8ad5998f88bd",
+    "sandbox/dashboard/bkt/tests/full_learning.browser.cjs": "162a2ccf50a11d1c4a3d4cc2fccb93d5a543ad0da4f1fc8b7a0807268859c10e"
+  },
+  "database_sha256": "aa0c029b2d63afd09d87b67507338aa8663d359f134b8d1cbf409c6b51bd681a",
+  "outcomes": {
+    "python": {
+      "passed": 123,
+      "failed": 0,
+      "skipped": 0,
+      "log": "python.log"
+    },
+    "full_browser": {
+      "exit_code": 0,
+      "log": "full_browser.log"
+    },
+    "legacy_8056_browser": {
+      "exit_code": 0,
+      "log": "legacy_browser.log"
+    }
+  },
+  "screenshots": [
+    "screenshots/desktop.png",
+    "screenshots/mobile.png"
+  ]
+}

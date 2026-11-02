@@ -1,0 +1,198 @@
+{
+  "is_synthetic": true,
+  "generator_version": "n2-full-guide-v1",
+  "seed": 20261103,
+  "dataset_id": "SYNTH_N2_FULL_20261103_V1",
+  "sessions": 15,
+  "items_per_session": 107,
+  "counts": {
+    "Student": 1,
+    "Skill": 19,
+    "Question": 1605,
+    "Session": 15,
+    "QuestionResult": 1605
+  },
+  "source": {
+    "document": "JLPT_試験ガイドブック.pdf",
+    "booklet_page": 21,
+    "created_year": 2009,
+    "sha256": "e0cac8f3f693865f2de8932eadf7f7eb9acafd21fb268e1b5e659793ecd578b7",
+    "note": "小問数は目安。現行試験の固定配分とは扱わない。"
+  },
+  "blueprint": [
+    {
+      "domain": "言語知識",
+      "group": "文字・語彙",
+      "detail": "漢字読み",
+      "guide_number": 1,
+      "count": 5,
+      "skill_id": "N2_LK_01"
+    },
+    {
+      "domain": "言語知識",
+      "group": "文字・語彙",
+      "detail": "表記",
+      "guide_number": 2,
+      "count": 5,
+      "skill_id": "N2_LK_02"
+    },
+    {
+      "domain": "言語知識",
+      "group": "文字・語彙",
+      "detail": "語形成",
+      "guide_number": 3,
+      "count": 5,
+      "skill_id": "N2_LK_03"
+    },
+    {
+      "domain": "言語知識",
+      "group": "文字・語彙",
+      "detail": "文脈規定",
+      "guide_number": 4,
+      "count": 7,
+      "skill_id": "N2_LK_04"
+    },
+    {
+      "domain": "言語知識",
+      "group": "文字・語彙",
+      "detail": "言い換え類義",
+      "guide_number": 5,
+      "count": 5,
+      "skill_id": "N2_LK_05"
+    },
+    {
+      "domain": "言語知識",
+      "group": "文字・語彙",
+      "detail": "用法",
+      "guide_number": 6,
+      "count": 5,
+      "skill_id": "N2_LK_06"
+    },
+    {
+      "domain": "言語知識",
+      "group": "文法",
+      "detail": "文の文法1（文法形式の判断）",
+      "guide_number": 7,
+      "count": 12,
+      "skill_id": "N2_LK_07"
+    },
+    {
+      "domain": "言語知識",
+      "group": "文法",
+      "detail": "文の文法2（文の組み立て）",
+      "guide_number": 8,
+      "count": 5,
+      "skill_id": "N2_LK_08"
+    },
+    {
+      "domain": "言語知識",
+      "group": "文法",
+      "detail": "文章の文法",
+      "guide_number": 9,
+      "count": 5,
+      "skill_id": "N2_LK_09"
+    },
+    {
+      "domain": "読解",
+      "group": "内容理解",
+      "detail": "短文",
+      "guide_number": 10,
+      "count": 5,
+      "skill_id": "N2_RD_10"
+    },
+    {
+      "domain": "読解",
+      "group": "内容理解",
+      "detail": "中文",
+      "guide_number": 11,
+      "count": 9,
+      "skill_id": "N2_RD_11"
+    },
+    {
+      "domain": "読解",
+      "group": "統合理解",
+      "detail": "統合理解",
+      "guide_number": 12,
+      "count": 2,
+      "skill_id": "N2_RD_12"
+    },
+    {
+      "domain": "読解",
+      "group": "主張理解",
+      "detail": "長文",
+      "guide_number": 13,
+      "count": 3,
+      "skill_id": "N2_RD_13"
+    },
+    {
+      "domain": "読解",
+      "group": "情報検索",
+      "detail": "情報検索",
+      "guide_number": 14,
+      "count": 2,
+      "skill_id": "N2_RD_14"
+    },
+    {
+      "domain": "聴解",
+      "group": "課題理解",
+      "detail": "課題理解",
+      "guide_number": 1,
+      "count": 5,
+      "skill_id": "N2_LS_01"
+    },
+    {
+      "domain": "聴解",
+      "group": "ポイント理解",
+      "detail": "ポイント理解",
+      "guide_number": 2,
+      "count": 6,
+      "skill_id": "N2_LS_02"
+    },
+    {
+      "domain": "聴解",
+      "group": "概要理解",
+      "detail": "概要理解",
+      "guide_number": 3,
+      "count": 5,
+      "skill_id": "N2_LS_03"
+    },
+    {
+      "domain": "聴解",
+      "group": "即時応答",
+      "detail": "即時応答",
+      "guide_number": 4,
+      "count": 12,
+      "skill_id": "N2_LS_04"
+    },
+    {
+      "domain": "聴解",
+      "group": "統合理解",
+      "detail": "統合理解",
+      "guide_number": 5,
+      "count": 4,
+      "skill_id": "N2_LS_05"
+    }
+  ],
+  "domain_answers": {
+    "言語知識": 810,
+    "読解": 315,
+    "聴解": 480
+  },
+  "generator_sha256": "5ee370445550f62b6abcdaf8ead2aa7d82a41d14643bf025282df2e32482c5c2",
+  "files_sha256": {
+    "learning_logs.sqlite3": "aa0c029b2d63afd09d87b67507338aa8663d359f134b8d1cbf409c6b51bd681a",
+    "schema.sql": "44323396aaf5ccc105616f14d9e5bc170530bc1555f4e05004971edb67b1e802",
+    "csv/Student.csv": "e704a930fdfa835eaaec25c0af191cebf6cc5582751c18cab9807e0b16e317c2",
+    "csv/Skill.csv": "90b9fb086a9a33f858c6738112f52da60a85982b7780cba8dc5d150e0d1ec56a",
+    "csv/Question.csv": "883465b69f2bfaa36bcbebb42056b7be1851deb3845f6ecd4825f4d2956fb347",
+    "csv/Session.csv": "ea23c087fe22dbbf13e4c6d70d21011e5a910a14bea7024a5049fce68e2e4031",
+    "csv/QuestionResult.csv": "08ffb219f635562d42b3c680c1297ce7383f22ca02d35e2445f3e58dc3ae4af8"
+  },
+  "limitations": [
+    "架空学習者1人。全回答済み。問題文・本文・音声や素材共有関係は未生成。",
+    "ScoreRateは正答率を整数に丸めた値。公式尺度得点・合否判定なし。",
+    "自信度は1が高く4が低い。解説後理解度は自己申告0〜3。",
+    "時刻は合成操作ログ。聴解音源や本試験の進行を再現しない。",
+    "改善・変動は生成規則による。モデルの精度や学習効果の証拠ではない。"
+  ]
+}
