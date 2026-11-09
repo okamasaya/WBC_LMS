@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja" data-config="./conf_GenAI_Passport.json">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成AIパスポート | IT Drill</title>
+  <link rel="stylesheet" href="../../assets/css/learning.css">
+  <link rel="stylesheet" href="../../assets/css/drillPage.css">
+  <link rel="stylesheet" href="../../assets/css/resultReview.css">
+  <link rel="stylesheet" href="../../assets/css/resultOutput.css">
+  <link rel="stylesheet" href="../../assets/js/drill_IT/drill.css">
+</head>
+<body class="learning-page">
+  <header class="site-header"><span class="dev-badge">開発中</span><h1 id="title-display">生成AIパスポート</h1><span>IT 練習ドリル</span></header>
+  <main>
+    <section id="start-container" class="card learning-start">
+      <h2>練習を始める前に</h2>
+      <p id="description-display" role="status">設定と問題を読み込んでいます…</p>
+      <div class="settings">
+        <label>出題方式 <select id="mode-select">
+          <option value="appropriate">適切なものを選ぶ</option>
+          <option value="inappropriate">適切でないものを選ぶ</option>
+          <option value="mixed">混在（テーマごとにランダム）</option>
+        </select></label>
+        <label>章 <select id="chapter-select"></select></label>
+        <label>テーマ <select id="topic-select"></select></label>
+        <label>出題問題数 <select id="question-count-select"></select></label>
+        <label><input type="checkbox" id="use-confidence-checkbox" checked> 回答時に自信度を記録する</label>
+      </div>
+      <p id="available-count" role="status"></p>
+      <p class="note">開発中の練習教材です。公式の試験問題ではありません。混在は各テーマで方式を等確率に選ぶため、件数が半数ずつになるとは限りません。</p>
+      <p class="note">制限時間はありません。解説の閲覧時間は回答時間に含めません。再読み込みすると演習は失われるため、終了後にログを保存してください。</p>
+      <button id="start-exam" class="primary" disabled>練習を開始する</button>
+    </section>
+    <section id="exam-container" class="card" hidden>
+      <h2 id="progress" tabindex="-1">問題</h2>
+      <p id="category-display" class="learning-category"></p>
+      <p id="question-text" class="learning-question"></p>
+      <div id="options-container" class="options" aria-label="選択肢"></div>
+      <p id="answer-status" role="status"></p>
+      <fieldset id="confidence-panel" class="confidence-panel" hidden>
+        <legend>回答に対する自信度を選んで確定してください</legend>
+        <div class="learning-confidence-grid">
+          <button type="button" data-confidence="1">1. 自信がある</button>
+          <button type="button" data-confidence="2">2. 少し自信がある</button>
+          <button type="button" data-confidence="3">3. やや不安</button>
+          <button type="button" data-confidence="4">4. 直感に近い</button>
+        </div>
+      </fieldset>
+      <div id="instant-feedback" class="feedback-panel" hidden></div>
+      <div class="learning-navigation control-box">
+        <button id="previous-question">前の問題へ</button>
+        <button id="next-question" class="primary">次の問題へ</button>
+        <button id="finish-exam" class="danger">演習を終了して採点</button>
+      </div>
+    </section>
+    <section id="score-container" class="card" hidden>
+      <h2 id="result-heading" tabindex="-1">演習結果</h2>
+      <p id="final-score" class="summary"></p><p id="category-score-list"></p>
+      <p class="note">各問1点の素点です。公式の尺度得点・合否判定ではありません。未確定の回答は未回答として扱います。</p>
+      <h3>解説の確認・理解度チェック</h3><div id="review-list"></div>
+      <section class="result-output-panel" aria-label="レポートとログの出力">
+        <h3>レポートとログの出力</h3>
+        <p>理解度・復習フラグを確認して確定してください。IT用のログには、実際の設問・候補・表示順が含まれます。</p>
+        <button id="generate-report" class="result-generate">レポート・ログデータを確定して生成</button>
+        <p id="output-status" role="status"></p>
+        <div id="output-section" hidden>
+          <div class="result-output-actions">
+            <button id="copy-report">AIレポートをコピー</button>
+            <button data-download="json">演習スナップショット JSON</button>
+            <button data-download="questions">IT QuestionResult.csv</button>
+            <button data-download="options">IT DisplayedOptions.csv</button>
+            <button data-download="session">IT Session.csv</button>
+          </div>
+          <label for="report-text">生成AIに渡すレポート</label>
+          <textarea id="report-text" class="report-area" readonly></textarea>
+        </div>
+      </section>
+      <button id="restart">最初からやり直す</button>
+    </section>
+  </main>
+  <script src="../../assets/js/shared/resultData.js"></script>
+  <script src="../../assets/js/shared/resultReport.js"></script>
+  <script type="module" src="../../assets/js/drill_IT/app.mjs"></script>
+</body>
+</html>
