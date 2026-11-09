@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IT適切・不適切プール問題バンク v0.1",
+  "description": "教材作成用フォーマット案。既存Drillの設定JSON・問題JSONとは別形式。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "schema_version", "exam_id", "questions"],
+  "properties": {
+    "format": { "const": "it-polarity-pool" },
+    "schema_version": { "const": "0.1.0" },
+    "exam_id": { "$ref": "#/$defs/nonBlankString" },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/question" }
+    }
+  },
+  "$defs": {
+    "nonBlankString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+    },
+    "option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["option_id", "text", "explanation"],
+      "properties": {
+        "option_id": { "$ref": "#/$defs/identifier" },
+        "text": { "$ref": "#/$defs/nonBlankString" },
+        "explanation": { "$ref": "#/$defs/nonBlankString" }
+      }
+    },
+    "pool": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/option" }
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question_id", "chapter", "topic", "stems", "explanation", "pools"],
+      "properties": {
+        "question_id": { "$ref": "#/$defs/identifier" },
+        "chapter": { "type": "integer", "minimum": 1 },
+        "topic": { "$ref": "#/$defs/nonBlankString" },
+        "stems": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["appropriate", "inappropriate"],
+          "properties": {
+            "appropriate": { "$ref": "#/$defs/nonBlankString" },
+            "inappropriate": { "$ref": "#/$defs/nonBlankString" }
+          }
+        },
+        "explanation": { "$ref": "#/$defs/nonBlankString" },
+        "pools": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["appropriate", "inappropriate"],
+          "properties": {
+            "appropriate": { "$ref": "#/$defs/pool" },
+            "inappropriate": { "$ref": "#/$defs/pool" }
+          }
+        }
+      }
+    }
+  }
+}
