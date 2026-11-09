@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "title": "生成AIパスポート（サンプル教材）",
+  "examId": "GENAI_PASSPORT",
+  "bankFiles": ["./data/sample_questions.json"]
+}

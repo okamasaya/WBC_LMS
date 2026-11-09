@@ -1,0 +1,18 @@
+/* IT-specific additions; common learning and result styles remain shared. */
+.it-plain { white-space: pre-wrap; overflow-wrap: anywhere; }
+.it-explanations p { margin: 6px 0 12px; }
+.it-explanations li { margin: 18px 0; }
+.it-explanations ol { padding-left: 24px; }
+.review-item { overflow-wrap: anywhere; }
+.understanding-control { display: flex; flex-wrap: wrap; gap: 8px; }
+.understanding-control legend { width: 100%; }
+#available-count { color: var(--learning-color-category); }
+#report-text { display: block; width: 100%; min-height: 280px; }
+#output-status { white-space: pre-wrap; overflow-wrap: anywhere; }
+#restart { margin-top: 20px; }
+@media (max-width: 600px) {
+  .settings label { align-items: flex-start; flex-direction: column; }
+  .settings label:has(input) { flex-direction: row; }
+  .settings select { width: 100%; }
+  .summary { font-size: 1.2rem; }
+}
