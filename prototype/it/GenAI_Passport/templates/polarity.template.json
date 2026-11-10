@@ -1,0 +1,59 @@
+{
+  "format": "it-polarity-pool",
+  "schema_version": "0.2.0",
+  "exam_id": "GENAI_PASSPORT",
+  "questions": [
+    {
+      "question_id": "{{QUESTION_ID}}",
+      "question_type": "polarity",
+      "chapter": 1,
+      "topic": "{{TOPIC}}",
+      "question": "{{QUESTION_PREFIX_ENDING_WITH_COMMA}}",
+      "explanation": "{{COMMON_EXPLANATION}}",
+      "pools": {
+        "appropriate": [
+          {
+            "option_id": "{{APPROPRIATE_OPTION_ID_1}}",
+            "text": "{{APPROPRIATE_TEXT_1}}",
+            "explanation": "{{APPROPRIATE_EXPLANATION_1}}"
+          },
+          {
+            "option_id": "{{APPROPRIATE_OPTION_ID_2}}",
+            "text": "{{APPROPRIATE_TEXT_2}}",
+            "explanation": "{{APPROPRIATE_EXPLANATION_2}}"
+          },
+          {
+            "option_id": "{{APPROPRIATE_OPTION_ID_3}}",
+            "text": "{{APPROPRIATE_TEXT_3}}",
+            "explanation": "{{APPROPRIATE_EXPLANATION_3}}"
+          }
+        ],
+        "inappropriate": [
+          {
+            "option_id": "{{INAPPROPRIATE_OPTION_ID_1}}",
+            "text": "{{INAPPROPRIATE_TEXT_1}}",
+            "explanation": "{{INAPPROPRIATE_EXPLANATION_1}}"
+          },
+          {
+            "option_id": "{{INAPPROPRIATE_OPTION_ID_2}}",
+            "text": "{{INAPPROPRIATE_TEXT_2}}",
+            "explanation": "{{INAPPROPRIATE_EXPLANATION_2}}"
+          },
+          {
+            "option_id": "{{INAPPROPRIATE_OPTION_ID_3}}",
+            "text": "{{INAPPROPRIATE_TEXT_3}}",
+            "explanation": "{{INAPPROPRIATE_EXPLANATION_3}}"
+          }
+        ]
+      },
+      "instructions": {
+        "appropriate": [
+          "適切なものを一つ選んでください。"
+        ],
+        "inappropriate": [
+          "適切でないものを一つ選んでください。"
+        ]
+      }
+    }
+  ]
+}

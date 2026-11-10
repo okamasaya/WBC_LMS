@@ -1,0 +1,41 @@
+{
+  "format": "it-polarity-pool",
+  "schema_version": "0.2.0",
+  "exam_id": "GENAI_PASSPORT",
+  "questions": [
+    {
+      "question_id": "{{QUESTION_ID}}",
+      "question_type": "standard",
+      "chapter": 1,
+      "topic": "{{TOPIC}}",
+      "question": "{{COMPLETE_QUESTION}}",
+      "explanation": "{{COMMON_EXPLANATION}}",
+      "pools": {
+        "correct": [
+          {
+            "option_id": "{{CORRECT_OPTION_ID_1}}",
+            "text": "{{CORRECT_TEXT_1}}",
+            "explanation": "{{CORRECT_EXPLANATION_1}}"
+          }
+        ],
+        "incorrect": [
+          {
+            "option_id": "{{INCORRECT_OPTION_ID_1}}",
+            "text": "{{INCORRECT_TEXT_1}}",
+            "explanation": "{{INCORRECT_EXPLANATION_1}}"
+          },
+          {
+            "option_id": "{{INCORRECT_OPTION_ID_2}}",
+            "text": "{{INCORRECT_TEXT_2}}",
+            "explanation": "{{INCORRECT_EXPLANATION_2}}"
+          },
+          {
+            "option_id": "{{INCORRECT_OPTION_ID_3}}",
+            "text": "{{INCORRECT_TEXT_3}}",
+            "explanation": "{{INCORRECT_EXPLANATION_3}}"
+          }
+        ]
+      }
+    }
+  ]
+}
