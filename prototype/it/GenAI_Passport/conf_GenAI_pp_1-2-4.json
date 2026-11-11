@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "title": "生成AIパスポート 第1・2・4章",
+  "examId": "GENAI_PASSPORT",
+  "bankFiles": ["./data/GenAI_pp_1-2-4.json"]
+}

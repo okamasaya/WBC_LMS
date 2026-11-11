@@ -10,6 +10,13 @@
 #report-text { display: block; width: 100%; min-height: 280px; }
 #output-status { white-space: pre-wrap; overflow-wrap: anywhere; }
 #restart { margin-top: 20px; }
+.it-bank-info { padding: 12px; background: var(--learning-color-panel); border-left: 3px solid var(--learning-color-primary); overflow-wrap: anywhere; }
+.it-question-navigation { margin: 20px 0; }
+.it-question-navigation summary { cursor: pointer; font-weight: 600; }
+.it-question-palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); gap: 8px; margin-top: 12px; }
+.it-question-palette button { padding: 8px; }
+.it-question-palette .is-confirmed { background: var(--learning-color-success-soft); border-color: var(--learning-color-success); }
+.it-question-palette .is-current { box-shadow: inset 0 0 0 2px var(--learning-color-primary); font-weight: 800; }
 @media (max-width: 600px) {
   .settings label { align-items: flex-start; flex-direction: column; }
   .settings label:has(input) { flex-direction: row; }

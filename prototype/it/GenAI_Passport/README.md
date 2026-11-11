@@ -4,7 +4,20 @@
 
 最新の受領教材と修正内容は[作業ログ（2026-11-11）](WORK_LOG_20261111.md)、仕様合意とエンジン実装の引継ぎは[作業ログ（2026-11-10）](WORK_LOG_20261110.md)を参照してください。
 
-受領教材[data/GenAI_pp_1-2-4.json](data/GenAI_pp_1-2-4.json)は、第1・2・4章の59問・272候補を含むv0.2.0の通常型バンクです。内容レビュー後の修正版を保存しています。現行画面での実行には、下記のとおりエンジンのv0.2.0対応が必要です。
+受領教材[data/GenAI_pp_1-2-4.json](data/GenAI_pp_1-2-4.json)は、第1・2・4章の59問・272候補を含むv0.2.0の通常型バンクです。[Drill_GenAI-pp_261111.html](Drill_GenAI-pp_261111.html)で実行できます。
+
+## 第1・2・4章のDrillを使う
+
+リポジトリルートで`python3 -m http.server 8000 --bind 127.0.0.1`を起動し、`/prototype/it/GenAI_Passport/Drill_GenAI-pp_261111.html`を開きます。`file://`ではなくHTTPで配信してください。
+
+- 設定は[conf_GenAI_pp_1-2-4.json](conf_GenAI_pp_1-2-4.json)。`bankFiles`で指定教材を読み込みます。
+- 現在は59問です。60問へ複製補完せず、初期状態では全59問を出題します。画面にも不足1問を表示します。60問目が教材へ追加されれば、全60問または60問の指定で出題できます。
+- 章・テーマ・問題数、自信度の有無を選択できます。今回の教材は全問通常型なので、出題方式は「通常4択」に固定表示します。
+- 選択後、自信度ありなら自信度を入力して回答を確定し、正誤・共通解説・表示した4候補の理由を確認します。
+- 前後移動と「問題一覧から移動する」に対応し、戻っても問題文・候補・表示順は変わりません。
+- 終了後に理解度・復習フラグを記録し、AIレポート・JSON・3種類のIT CSVを保存できます。自動保存・再読込後の演習復元はありません。
+
+旧[index.html](index.html)は6テーマのv0.1.0サンプルとして引き続き使えます。そこから新Drillへのリンクもあります。
 
 ## 問題生成を始める手順
 
@@ -22,7 +35,18 @@ python3 scripts/validate-it-bank.py prototype/it/GenAI_Passport/examples/questio
 
 検証にはPythonと`jsonschema`（Draft 2020-12対応）が必要です。このクラウド環境の`python3`では利用できます。別環境では、利用するPythonの仮想環境へ`python -m pip install jsonschema`で導入してください。構造検証の成功と、教材内容の正しさは別に確認します。
 
-**現在の実行画面はv0.1.0対応です。** v0.2.0は今回整備した作問仕様であり、エンジンの読込・指示文抽選・通常型・出力の対応は今後の実装です。生成したv0.2.0を今の`conf_GenAI_Passport.json`へ登録しても出題できません。作問用ファイルとして保存してください。動作中の旧サンプルと設定は維持しています。
+実行エンジンはv0.1.0とv0.2.0の両方に対応しています。生成したv0.2.0も、構造と内容を確認後に設定の`bankFiles`へ登録できます。検証用の両型の完成例は`Drill_GenAI-pp_261111.html?conf=conf_examples_v02.json`のように別設定から読み込めます。設定例は以下で、問題ファイルのパスは設定の場所を基準にします。
+
+```json
+{
+  "version": 1,
+  "title": "両型の確認用",
+  "examId": "GENAI_PASSPORT",
+  "bankFiles": ["./examples/question-bank.v0.2.0.json"]
+}
+```
+
+`conf_examples_v02.json`は上記を保存する場合のファイル名例であり、収録ファイルではありません。
 
 ## 添付・コピーするファイル
 
@@ -92,7 +116,7 @@ python3 scripts/validate-it-bank.py prototype/it/GenAI_Passport/examples/questio
 
 正解候補も複数用意できますが、一度に出す正解は1件です。例えば「誤っているもの」を問う通常型では、内容が誤った候補が`correct`に入ります。この型の所属は、完成文への正解／不正解で判断します。
 
-開始画面の適切／不適切／混在の指定は、今後のv0.2.0対応では切り替え型に適用し、通常型の完成文を変更しない仕様とします。
+開始画面の適切／不適切／混在の指定は切り替え型にだけ適用し、通常型の完成文を変更しません。選択した章・テーマが通常型だけなら、方式の選択は無効になり「通常4択」と表示します。
 
 ## 品質とID
 
@@ -119,7 +143,7 @@ python3 scripts/validate-it-bank.py prototype/it/GenAI_Passport/examples/questio
 python3 -m unittest discover -s tests/drill_IT -p 'test_authoring.py' -v
 ```
 
-現行v0.1.0の動作確認は次のとおりです。
+旧サンプルと新しいDrillの動作確認は次のとおりです。
 
 ```sh
 python3 -m http.server 8000 --bind 127.0.0.1
@@ -127,6 +151,6 @@ python3 -m http.server 8000 --bind 127.0.0.1
 bash scripts/check-it-drill.sh --browser
 ```
 
-入口は[index.html](index.html)、設定は[conf_GenAI_Passport.json](conf_GenAI_Passport.json)、実行処理は[ITエンジンREADME](../../assets/js/drill_IT/README.md)を参照してください。現在は[data/sample_questions.json](data/sample_questions.json)の旧6テーマ・36候補を使います。旧サンプルは、元資料「生成AIパスポート_新シラバス対応.txt」の第1・2・4章から各2テーマを選んだものです。元資料自体と正式なシラバスの再照合は未実施です。
+旧入口は[index.html](index.html)、旧設定は[conf_GenAI_Passport.json](conf_GenAI_Passport.json)で、[data/sample_questions.json](data/sample_questions.json)の6テーマ・36候補を使います。新しい本格教材用入口は[Drill_GenAI-pp_261111.html](Drill_GenAI-pp_261111.html)です。実行処理は[ITエンジンREADME](../../assets/js/drill_IT/README.md)を参照してください。旧サンプルは、元資料「生成AIパスポート_新シラバス対応.txt」の第1・2・4章から各2テーマを選んだものです。元資料自体と正式なシラバスの再照合は未実施です。
 
-v0.2.0のエンジン対応時にも、出題した方式・末尾表現・完成文・候補IDと本文・表示順・所属・解説・選択内容を演習内で固定し、ログに記録します。現行のログ形式と接続する際の変更は、その実装時に検証します。
+出題した型・方式・末尾表現・完成文・候補IDと本文・表示順・所属・解説・選択内容を演習内で固定し、ログに記録します。出力形式は`it-polarity-result/1.1.0`です。通常型や旧版では末尾表現の選択情報はnullです。詳しい項目・検証手順はITエンジンREADMEを参照してください。

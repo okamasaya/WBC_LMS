@@ -1,4 +1,4 @@
-import { loadBanks, createExercise, MODE_LABELS } from './bank.mjs';
+import { loadBanks, createExercise, MODE_LABELS, MODES, questionType } from './bank.mjs';
 import { DrillSession } from './session.mjs';
 import { buildResults, buildReport, exportFile, UNDERSTANDING_LABELS } from './results.mjs';
 
@@ -32,9 +32,19 @@ function availableQuestions() {
         .filter(q => $('chapter-select').value === 'all' || String(q.chapter) === $('chapter-select').value);
 }
 function refreshCounts() {
-    const count = availableQuestions().filter(q => $('topic-select').value === 'all' || q.question_id === $('topic-select').value).length;
-    choices('question-count-select', [['all', `全${count}テーマ`], ...[5, 10, 20, 30].filter(n => n < count).map(n => [n, `${n}テーマ`])]);
-    $('available-count').textContent = `対象: ${count}テーマ。同じテーマは1回の演習に1問だけ出題します。`;
+    const selected = availableQuestions().filter(q => $('topic-select').value === 'all' || q.question_id === $('topic-select').value);
+    const count = selected.length;
+    choices('question-count-select', [['all', `全${count}問`], ...[5, 10, 20, 30, 40, 50, 60].filter(n => n <= count).map(n => [n, `${n}問`])]);
+    $('available-count').textContent = `対象: ${count}問。同じテーマは1回の演習に1問だけ出題します。`;
+    const versions = new Map(loaded.entries.flatMap(e => e.bank.questions.map(q => [q.question_id, e.bank.schema_version])));
+    const hasPolarity = selected.some(q => questionType(q, versions.get(q.question_id)) === 'polarity');
+    const previousMode = $('mode-select').value;
+    choices('mode-select', hasPolarity ? MODES.map(mode => [mode, MODE_LABELS[mode]]) : [['standard', '通常4択（問題文をそのまま出題）']],
+        hasPolarity ? (MODES.includes(previousMode) ? previousMode : 'appropriate') : 'standard');
+    $('mode-select').disabled = !hasPolarity;
+    if ($('mode-description')) $('mode-description').textContent = hasPolarity
+        ? '切り替え型にだけ適用します。通常型は問題文を変えません。混在は各テーマで等確率に方式を選びます。'
+        : 'この範囲は通常型です。問いの適切・不適切を反転せず、正解候補1件と不正解候補3件で出題します。';
 }
 function refreshTopics() {
     choices('topic-select', [['all', 'すべてのテーマ'], ...availableQuestions().map(q => [q.question_id, `第${q.chapter}章 / ${q.topic}`])]);
@@ -63,7 +73,10 @@ function explanations(q) {
     const list = element('ol');
     q.options.forEach(o => {
         const li = element('li');
-        li.append(element('strong', `内容は${o.pool === 'appropriate' ? '適切' : '不適切'}${o.isCorrect ? ' ／ この回に選ぶ正解' : ''}`),
+        const label = q.questionType === 'standard'
+            ? (o.isCorrect ? 'この問いに対する正解候補' : 'この問いに対する不正解候補')
+            : `内容は${o.pool === 'appropriate' ? '適切' : '不適切'}${o.isCorrect ? ' ／ この回に選ぶ正解' : ''}`;
+        li.append(element('strong', label),
             element('p', o.text, 'it-plain'), element('p', o.rationale, 'it-plain'));
         list.append(li);
     });
@@ -107,12 +120,22 @@ function renderQuestion() {
     $('answer-status').textContent = a.confirmed
         ? `回答確定${session.useConfidence ? ` ／ 自信度 ${a.confidence}` : ''}。解説を読む時間は回答時間に含みません。`
         : a.selected === null ? '選択肢を選んでください。' : '自信度を選ぶと回答が確定します。確定前は選択肢を変更できます。';
+    if ($('answered-count')) $('answered-count').textContent = `回答確定 ${session.answers.filter(answer => answer.confirmed).length} / ${session.answers.length} 問`;
+    if ($('question-palette')) $('question-palette').replaceChildren(...session.answers.map((answer, index) => {
+        const node = button(String(index + 1), () => moveTo(index));
+        node.classList.toggle('is-confirmed', answer.confirmed);
+        node.classList.toggle('is-current', session.index === index);
+        node.setAttribute('aria-current', session.index === index ? 'step' : 'false');
+        node.setAttribute('aria-label', `問${index + 1}、${answer.confirmed ? '回答済み' : '未確定'}${session.index === index ? '、表示中' : ''}`);
+        return node;
+    }));
 }
-function move(offset) {
-    session.move(session.index + offset);
+function moveTo(index) {
+    session.move(index);
     renderQuestion();
     $('progress').focus();
 }
+function move(offset) { moveTo(session.index + offset); }
 function finish() {
     if (!session?.active) return;
     // Account for the confirmation dialog time just as for the rest of the active question.
@@ -222,6 +245,15 @@ try {
     const chapters = [...new Set(loaded.entries.flatMap(e => e.bank.questions.map(q => q.chapter)))].sort((a, b) => a - b);
     choices('chapter-select', [['all', 'すべての章'], ...chapters.map(n => [n, `第${n}章`])]);
     refreshTopics();
+    if ($('bank-info')) {
+        const all = loaded.entries.flatMap(e => e.bank.questions);
+        const target = Number(document.documentElement.dataset.targetCount);
+        const breakdown = chapters.map(chapter => `第${chapter}章 ${all.filter(q => q.chapter === chapter).length}問`).join(' ／ ');
+        $('bank-info').textContent = `収録 ${all.length}問（${breakdown}）。`
+            + (Number.isSafeInteger(target) && target > all.length
+                ? `現在は${all.length}問を重複なしで出題します。${target}問構成にするにはあと${target - all.length}問必要です。`
+                : '全問を選ぶと、収録された各テーマを重複なしで出題します。');
+    }
     $('description-display').textContent = '4択の練習ドリルです。選択後（自信度ありの場合は自信度入力後）に回答を確定し、正解と各候補の解説を表示します。';
     $('start-exam').disabled = false;
 } catch (error) { showError(error); }
