@@ -1,7 +1,8 @@
 /* IT question banks: validate before filtering; never infer pool membership from IDs. */
 export const MODES = Object.freeze(['appropriate', 'inappropriate', 'mixed']);
-export const MODE_LABELS = Object.freeze({ appropriate: '適切を選ぶ', inappropriate: '不適切を選ぶ', mixed: '混在' });
+export const MODE_LABELS = Object.freeze({ appropriate: '適切を選ぶ', inappropriate: '不適切を選ぶ', mixed: '混在', standard: '通常4択' });
 const POOLS = ['appropriate', 'inappropriate'];
+export const questionType = (q, version) => version === '0.1.0' ? 'polarity' : q?.question_type;
 const fail = (path, message) => { throw new Error(`${path}: ${message}`); };
 function object(value, keys, path) {
     if (!value || typeof value !== 'object' || Array.isArray(value)) fail(path, 'オブジェクトが必要です');
@@ -27,24 +28,48 @@ export function validateBanks(entries) {
         if (sources.has(url)) fail(url, '同じファイルが重複しています');
         sources.add(url);
         object(bank, ['format', 'schema_version', 'exam_id', 'questions'], url);
-        if (bank.format !== 'it-polarity-pool' || bank.schema_version !== '0.1.0') fail(url, '未対応の問題形式・バージョンです');
+        if (bank.format !== 'it-polarity-pool' || !['0.1.0', '0.2.0'].includes(bank.schema_version)) fail(url, '未対応の問題形式・バージョンです');
         text(bank.exam_id, `${url}.exam_id`);
         if (examId !== undefined && examId !== bank.exam_id) fail(url, 'exam_id が他のバンクと一致しません');
         examId = bank.exam_id;
         if (!Array.isArray(bank.questions) || !bank.questions.length) fail(url, 'questions に1テーマ以上が必要です');
         for (const q of bank.questions) {
             const path = `${url} [${q?.question_id ?? 'IDなし'}]`;
-            object(q, ['question_id', 'chapter', 'topic', 'stems', 'explanation', 'pools'], path);
+            const legacy = bank.schema_version === '0.1.0';
+            const type = questionType(q, bank.schema_version);
+            if (!['polarity', 'standard'].includes(type)) fail(path, 'question_type はpolarityまたはstandardにしてください');
+            object(q, legacy ? ['question_id', 'chapter', 'topic', 'stems', 'explanation', 'pools']
+                : ['question_id', 'question_type', 'chapter', 'topic', 'question', 'explanation', 'pools', ...(type === 'polarity' ? ['instructions'] : [])], path);
             identifier(q.question_id, path, ids);
             if (!Number.isSafeInteger(q.chapter) || q.chapter < 1) fail(path, 'chapter は正の整数にしてください');
             text(q.topic, `${path}.topic`);
             text(q.explanation, `${path}.explanation`);
-            object(q.stems, POOLS, `${path}.stems`);
-            object(q.pools, POOLS, `${path}.pools`);
+            if (legacy) {
+                object(q.stems, POOLS, `${path}.stems`);
+                POOLS.forEach(pool => text(q.stems[pool], `${path}.stems.${pool}`));
+            } else {
+                text(q.question, `${path}.question`);
+                if (type === 'polarity') {
+                    object(q.instructions, POOLS, `${path}.instructions`);
+                    for (const pool of POOLS) {
+                        const items = q.instructions[pool];
+                        if (!Array.isArray(items) || !items.length) fail(path, `instructions.${pool} に1件以上が必要です`);
+                        const instructions = new Set();
+                        for (const item of items) {
+                            text(item, `${path}.instructions.${pool}`);
+                            const normalized = item.normalize('NFKC').trim();
+                            if (instructions.has(normalized)) fail(path, '末尾表現が重複しています');
+                            instructions.add(normalized);
+                        }
+                    }
+                }
+            }
+            const pools = type === 'polarity' ? POOLS : ['correct', 'incorrect'];
+            object(q.pools, pools, `${path}.pools`);
             const texts = new Set();
-            for (const pool of POOLS) {
-                text(q.stems[pool], `${path}.stems.${pool}`);
-                if (!Array.isArray(q.pools[pool]) || q.pools[pool].length < 3) fail(path, `${pool} の候補が3件未満です`);
+            for (const pool of pools) {
+                const minimum = pool === 'correct' ? 1 : 3;
+                if (!Array.isArray(q.pools[pool]) || q.pools[pool].length < minimum) fail(path, `${pool} の候補が${minimum}件未満です`);
                 for (const o of q.pools[pool]) {
                     const opath = `${path}.${pool} [${o?.option_id ?? 'IDなし'}]`;
                     object(o, ['option_id', 'text', 'explanation'], opath);
@@ -80,7 +105,7 @@ function freeze(value) {
 }
 export function createExercise(entries, { mode = 'appropriate', chapter = 'all', questionId = 'all', count = 'all', random = Math.random } = {}) {
     const examId = validateBanks(entries);
-    if (!MODES.includes(mode)) throw new Error('出題方式が不正です');
+    if (![...MODES, 'standard'].includes(mode)) throw new Error('出題方式が不正です');
     if (chapter !== 'all' && (!Number.isSafeInteger(chapter) || chapter < 1)) throw new Error('章の指定が不正です');
     if (count !== 'all' && (!Number.isSafeInteger(count) || count < 1)) throw new Error('問題数は正の整数またはallにしてください');
     const candidates = entries.flatMap(({ bank, url }) => bank.questions
@@ -88,21 +113,34 @@ export function createExercise(entries, { mode = 'appropriate', chapter = 'all',
         .map(q => ({ q, bank, url })));
     if (!candidates.length) throw new Error('条件に合うテーマがありません');
     if (count !== 'all' && count > candidates.length) throw new Error(`対象は${candidates.length}テーマです。問題数を減らしてください`);
+    const hasPolarity = candidates.some(({ q, bank }) => questionType(q, bank.schema_version) === 'polarity');
+    if (mode === 'standard' && hasPolarity) throw new Error('切り替え型を含む範囲では、適切・不適切・混在から方式を選んでください');
     const questions = shuffle(candidates, random).slice(0, count === 'all' ? candidates.length : count).map(({ q, bank, url }) => {
-        const questionMode = mode === 'mixed' ? (draw(random) < 0.5 ? 'appropriate' : 'inappropriate') : mode;
-        const options = POOLS.flatMap(pool => shuffle(q.pools[pool], random)
-            .slice(0, pool === questionMode ? 1 : 3)
-            .map(o => ({ optionId: o.option_id, text: o.text, rationale: o.explanation, pool, isCorrect: pool === questionMode })));
+        const type = questionType(q, bank.schema_version);
+        const questionMode = type === 'standard' ? 'standard' : mode === 'mixed' ? (draw(random) < 0.5 ? 'appropriate' : 'inappropriate') : mode;
+        const targetPool = type === 'standard' ? 'correct' : questionMode;
+        const pools = type === 'standard' ? ['correct', 'incorrect'] : POOLS;
+        let selectedInstruction = null, instructionPosition = null;
+        if (type === 'polarity' && bank.schema_version === '0.2.0') {
+            const instructions = q.instructions[questionMode];
+            instructionPosition = Math.floor(draw(random) * instructions.length) + 1;
+            selectedInstruction = instructions[instructionPosition - 1];
+        }
+        const options = pools.flatMap(pool => shuffle(q.pools[pool], random)
+            .slice(0, pool === targetPool ? 1 : 3)
+            .map(o => ({ optionId: o.option_id, text: o.text, rationale: o.explanation, pool, isCorrect: pool === targetPool })));
         return {
             id: q.question_id, chapter: q.chapter, topic: q.topic,
-            question: q.stems[questionMode], explanation: q.explanation,
+            question: bank.schema_version === '0.1.0' ? q.stems[questionMode] : q.question + (selectedInstruction ?? ''), explanation: q.explanation,
+            questionType: type, questionPrefix: selectedInstruction === null ? null : q.question,
+            selectedInstruction, instructionPosition,
             category_lv1: `第${q.chapter}章`, category_lv2: q.topic, category_lv3: '',
             category: `第${q.chapter}章 > ${q.topic}`, difficulty: null,
             bankSource: url, bankFormat: bank.format, bankSchemaVersion: bank.schema_version,
             questionMode, options: shuffle(options, random)
         };
     });
-    return freeze({ examId, requestedMode: mode, chapter, questionId, questions,
+    return freeze({ examId, requestedMode: hasPolarity ? mode : 'standard', chapter, questionId, questions,
         bankSources: entries.map(({ bank, url }) => ({ url, format: bank.format, schemaVersion: bank.schema_version })) });
 }
 

@@ -8,4 +8,5 @@ fi
 node --test tests/drill_IT/*.test.mjs
 if [[ "${1:-}" == "--browser" ]]; then
     node tests/drill_IT/browser.cjs
+    node tests/drill_IT/genai_261111.browser.cjs
 fi
