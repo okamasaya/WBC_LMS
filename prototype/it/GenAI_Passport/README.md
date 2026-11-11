@@ -6,6 +6,25 @@
 
 受領教材[data/GenAI_pp_1-2-4.json](data/GenAI_pp_1-2-4.json)は、第1・2・4章の59問・272候補を含むv0.2.0の通常型バンクです。[Drill_GenAI-pp_261111.html](Drill_GenAI-pp_261111.html)で実行できます。
 
+## 切り替え型の5問デモを使う
+
+[Drill_GenAI-pp_polarity_demo.html](Drill_GenAI-pp_polarity_demo.html)は、完成時の出題・回答・採点を体験するための専用入口です。下記のHTTPサーバーを起動し、`http://127.0.0.1:8000/prototype/it/GenAI_Passport/Drill_GenAI-pp_polarity_demo.html`を開きます。外部API・ビルドは不要です。
+
+- ダートマス会議、分類と回帰、Top-p、Transformer、APIキー管理の5問。すべてv0.2.0の`polarity`です。
+- [専用教材](data/polarity_demo_questions.json)は各テーマに適切4件・不適切4件、計40候補。旧サンプル5テーマをもとに候補を補い、両方向で選択肢の組合せが変わるようにしました。これはデモの件数であり、本格教材への件数指定ではありません。
+- 共通文と、適切側・不適切側それぞれ2種類の指示文を保存します。開始時に方式・末尾表現・4候補・順番を決め、演習中の再訪では固定します。
+- 初期設定は「混在」、全5問、自信度なし。選択直後に回答が確定します。自信度ありも選べます。「適切」「不適切」に固定すれば、同じテーマを両方向で試せます。混在は各問で独立に抽選するため、両方向が必ず含まれるとは限りません。
+- 正誤・候補ごとの理由、結果・理解度、JSON・CSV・AIレポートまで操作できます。出力の`questionMode`・`selectedInstruction`・`displayedOptions`に、実際の出題内容を残します。
+- [専用設定](conf_polarity_demo.json)から専用教材だけを読み込みます。IDには`DEMO-`を付け、本格教材や旧サンプルとの衝突を避けています。元の59問や旧サンプルは変更していません。
+- 実行JSは既存の[app.mjs](../../assets/js/drill_IT/app.mjs)と同じITエンジンを使います。本格教材も同じv0.2.0の形にすれば、この動作を利用できます。候補内容と正式シラバスの照合は別途行ってください。
+
+```sh
+python3 scripts/validate-it-bank.py prototype/it/GenAI_Passport/data/polarity_demo_questions.json
+python3 -m http.server 8000 --bind 127.0.0.1
+# 別ターミナルで。PlaywrightとChromiumが必要です。
+node tests/drill_IT/polarity_demo.browser.cjs
+```
+
 ## 第1・2・4章のDrillを使う
 
 リポジトリルートで`python3 -m http.server 8000 --bind 127.0.0.1`を起動し、`/prototype/it/GenAI_Passport/Drill_GenAI-pp_261111.html`を開きます。`file://`ではなくHTTPで配信してください。

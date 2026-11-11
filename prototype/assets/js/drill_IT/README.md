@@ -1,6 +1,7 @@
 # IT用プール型Drill
 
 本格教材の入口は[Drill_GenAI-pp_261111.html](../../../it/GenAI_Passport/Drill_GenAI-pp_261111.html)。旧サンプルの[index.html](../../../it/GenAI_Passport/index.html)も維持しています。
+v0.2.0の切り替えを体験する[5問デモ](../../../it/GenAI_Passport/Drill_GenAI-pp_polarity_demo.html)も同じJSで動作します。専用設定・専用教材を使い、全問polarity、初期方式は混在、自信度なしです。
 教材の型に応じたプールから、その回の4択を作る練習エンジンです。JavaScriptと専用CSSはこのディレクトリに置き、N2用の`drill/`・`shared/`は変更していません。
 
 | ファイル | 役割 |
@@ -75,3 +76,5 @@ bash scripts/check-standard.sh --browser
 ```
 
 `CBT_TEST_BASE_URL`・`CBT_TEST_CHROMIUM`でサーバーURL・Chromiumを変更できます。旧版ブラウザテストの画像・ダウンロードは`IT_DRILL_TEST_DIR`（既定`/tmp/it-drill-browser`）、新Drillのものは`GENAI_DRILL_TEST_DIR`（既定`/tmp/genai-drill-261111`）へ保存します。ユニットテストは21件。ブラウザ検証は旧版と新Drillの両方を実行し、新Drillでは実データ59問の全回答・採点・出力、両型、再訪、異常系、狭い画面、テスト専用60問構成を確認します。
+
+`node tests/drill_IT/polarity_demo.browser.cjs`で5問デモの適切・不適切・混在、両方向のプール構成・正誤・再訪・JSON記録・モバイル表示を確認できます。画像とログは`POLARITY_DEMO_TEST_DIR`（既定`/tmp/genai-polarity-demo`）へ保存します。
