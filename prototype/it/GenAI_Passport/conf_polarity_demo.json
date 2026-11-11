@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "title": "生成AIパスポート 切り替え型5問デモ",
+  "examId": "GENAI_PASSPORT",
+  "bankFiles": ["./data/polarity_demo_questions.json"]
+}
